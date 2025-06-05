@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Chicken Breast",
+    "category": "Meat",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "Brown Rice",
+    "category": "Grains",
+    "base_unit": "g",
+    "calories": 1.12,
+    "protein": 0.023,
+    "carbs": 0.23,
+    "fats": 0.009
+  },
+  {
+    "name": "Quinoa",
+    "category": "Grains",
+    "base_unit": "g",
+    "calories": 1.2,
+    "protein": 0.04,
+    "carbs": 0.21,
+    "fats": 0.019
+  },
+  {
+    "name": "Salmon Fillet",
+    "category": "Fish",
+    "base_unit": "g",
+    "calories": 2.08,
+    "protein": 0.22,
+    "carbs": 0,
+    "fats": 0.13
+  },
+  {
+    "name": "Spinach",
+    "category": "Vegetables",
+    "base_unit": "g",
+    "calories": 0.23,
+    "protein": 0.029,
+    "carbs": 0.036,
+    "fats": 0.003
+  },
+  {
+    "name": "Sweet Potato",
+    "category": "Vegetables",
+    "base_unit": "g",
+    "calories": 0.86,
+    "protein": 0.016,
+    "carbs": 0.201,
+    "fats": 0.001
+  },
+  {
+    "name": "Greek Yogurt",
+    "category": "Dairy",
+    "base_unit": "g",
+    "calories": 0.59,
+    "protein": 0.09,
+    "carbs": 0.039,
+    "fats": 0.015
+  },
+  {
+    "name": "Oats",
+    "category": "Grains",
+    "base_unit": "g",
+    "calories": 3.89,
+    "protein": 0.165,
+    "carbs": 0.677,
+    "fats": 0.069
+  },
+  {
+    "name": "Banana",
+    "category": "Fruits",
+    "base_unit": "g",
+    "calories": 0.89,
+    "protein": 0.011,
+    "carbs": 0.228,
+    "fats": 0.003
+  },
+  {
+    "name": "Honey",
+    "category": "Condiments",
+    "base_unit": "g",
+    "calories": 3.04,
+    "protein": 0.003,
+    "carbs": 0.824,
+    "fats": 0
+  }
+]

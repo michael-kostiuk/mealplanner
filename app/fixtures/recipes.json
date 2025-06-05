@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Overnight Oats with Banana",
+    "servings": 1,
+    "prep_time": 10,
+    "cook_time": 0,
+    "instructions": "1. Mix oats with Greek yogurt\n2. Add honey for sweetness\n3. Top with sliced banana\n4. Refrigerate overnight",
+    "category": "Breakfast",
+    "dietary_tags": ["vegetarian", "high_protein"],
+    "calories": 385,
+    "protein": 15,
+    "carbs": 65,
+    "fats": 8,
+    "breakfast_weight": 1.0,
+    "lunch_weight": 0.2,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {"name": "Oats", "quantity": 50, "unit": "g"},
+      {"name": "Greek Yogurt", "quantity": 150, "unit": "g"},
+      {"name": "Banana", "quantity": 100, "unit": "g"},
+      {"name": "Honey", "quantity": 15, "unit": "g"}
+    ]
+  },
+  {
+    "name": "Grilled Chicken Quinoa Bowl",
+    "servings": 2,
+    "prep_time": 15,
+    "cook_time": 25,
+    "instructions": "1. Cook quinoa according to package instructions\n2. Grill chicken breast\n3. Steam sweet potato\n4. Combine all ingredients in a bowl",
+    "category": "Main Course",
+    "dietary_tags": ["high_protein", "gluten_free"],
+    "calories": 450,
+    "protein": 35,
+    "carbs": 48,
+    "fats": 12,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.9,
+    "dinner_weight": 0.9,
+    "ingredients": [
+      {"name": "Chicken Breast", "quantity": 150, "unit": "g"},
+      {"name": "Quinoa", "quantity": 75, "unit": "g"},
+      {"name": "Sweet Potato", "quantity": 100, "unit": "g"},
+      {"name": "Spinach", "quantity": 50, "unit": "g"}
+    ]
+  },
+  {
+    "name": "Salmon Rice Bowl",
+    "servings": 2,
+    "prep_time": 10,
+    "cook_time": 20,
+    "instructions": "1. Cook brown rice\n2. Pan-sear salmon\n3. Steam spinach\n4. Assemble in bowl",
+    "category": "Main Course",
+    "dietary_tags": ["high_protein", "omega_3"],
+    "calories": 520,
+    "protein": 32,
+    "carbs": 55,
+    "fats": 22,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.8,
+    "dinner_weight": 1.0,
+    "ingredients": [
+      {"name": "Salmon Fillet", "quantity": 150, "unit": "g"},
+      {"name": "Brown Rice", "quantity": 100, "unit": "g"},
+      {"name": "Spinach", "quantity": 75, "unit": "g"}
+    ]
+  }
+]
