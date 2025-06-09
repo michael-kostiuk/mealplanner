@@ -1,0 +1,1852 @@
+[
+  {
+    "name": "Ліниві вареники з вишнею",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "sweet",
+      "dessert",
+      "fruit"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Творог 5%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вишня",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно цільнозернове",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно цільнозернове для обкатки",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПХ наполеон",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "baked",
+      "sweet"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.2,
+    "lunch_weight": 0.7,
+    "dinner_weight": 0.6,
+    "ingredients": [
+      {
+        "name": "Лаваш вірменський",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "Крохмаль",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Молоко 2.5%",
+        "quantity": 100.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Мед",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Шарлотка",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "fruit"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Яблуко",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "Молоко",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Крохмаль",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Лаваш",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кориця",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Шоколадна ковбаса",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "chocolate"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "Банан",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Волоський горіх",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Какао",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "8 шт",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Чіа-пудинг з бананом",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "light",
+      "healthy",
+      "dessert"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "Молоко 2,5%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Насіння чіа",
+        "quantity": 45.0,
+        "unit": "g"
+      },
+      {
+        "name": "Мед",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Лінива вівсянка",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "quick",
+      "vegetarian",
+      "healthy"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Вівсяні пластівці",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Молоко 2.5%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Йогурт натуральний 2%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Мед",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Кекс в мікрохвильовій печі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "sweet",
+      "quick",
+      "dessert"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Вівсяні пластівці",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Какао",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Мед",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Молоко 2.5%",
+        "quantity": 100.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Яйця",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Ягідний десерт",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "fruit"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.5,
+    "ingredients": [
+      {
+        "name": "Грецький йогурт",
+        "quantity": 170.0,
+        "unit": "g"
+      },
+      {
+        "name": "Желатин швидкорозчинний",
+        "quantity": 7.0,
+        "unit": "g"
+      },
+      {
+        "name": "Ягоди свіжі або морожені",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вода тепла",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цукрозамінник",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Сирні булочки",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "pastry",
+      "sweet",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Творог 5%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно цільнозернове",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кунжут",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Лінивий хачапурі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "baked",
+      "cheesy",
+      "comfort_food"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Творог 5%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Моцарела",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно цільнозернове",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Тост з яйцем",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "quick",
+      "simple",
+      "vegetarian"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Хліб",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Овоч (перець, помідор)",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 20.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Фріттата",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "eggs",
+      "vegetarian",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Йогурт 2%",
+        "quantity": 50.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 3.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Овочі",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Вірменська ека",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "soup",
+      "vegetables",
+      "comfort_food"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.2,
+    "lunch_weight": 0.7,
+    "dinner_weight": 0.8,
+    "ingredients": [
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Лаваш",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Оладки з начинкою",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "sweet",
+      "filling",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Куряча шинка",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно ц/з",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сметана 15%",
+        "quantity": 110.0,
+        "unit": "g"
+      },
+      {
+        "name": "Розпушувач",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Зелень, сіль, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Крем-суп з цвітної капусти",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "light",
+      "smooth"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Цвітна капуста",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Морква",
+        "quantity": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кеш’ю",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вершки 20%",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "Зелень, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Гарбузовий крем-суп",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "smooth",
+      "autumn"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Гарбуз",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Морква",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Картопля",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Вершки 10%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цибуля",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Вода",
+        "quantity": 300.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сіль, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Олія",
+        "quantity": 7.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Грибний крем-суп",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "soup",
+      "vegetarian",
+      "comfort food"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.5,
+    "ingredients": [
+      {
+        "name": "Шампіньйони",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цибуля",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Борошно цільнозернове",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Вершки 10%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вода",
+        "quantity": 100.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сіль, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Сирний крем-суп",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "creamy",
+      "light"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Морква",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цибуля",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Картопля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Вершки 10%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вода",
+        "quantity": 200.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сіль, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Плавлений сир",
+        "quantity": 60.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Рибні фрикадельки",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "protein",
+      "comfort_food",
+      "savory"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.7,
+    "dinner_weight": 0.4,
+    "ingredients": [
+      {
+        "name": "Риба (хек)",
+        "quantity": 120.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цибуля",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Мелена вівсянка",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вершки 10%",
+        "quantity": 150.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Броколі",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 35.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Баклажановий рулет",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "side_dish",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.5,
+    "ingredients": [
+      {
+        "name": "Фарш з яловичої вирізки",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Баклажан",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Зелень та спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Овочі: помідор, перець",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Конвертики з куркою та грибами",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "poultry",
+      "vegetarian",
+      "comfort food"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.0,
+    "lunch_weight": 0.7,
+    "dinner_weight": 0.8,
+    "ingredients": [
+      {
+        "name": "Лаваш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 25.0,
+        "unit": "g"
+      },
+      {
+        "name": "Гриби",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Томатна паста",
+        "quantity": 25.0,
+        "unit": "g"
+      },
+      {
+        "name": "Томат",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Кекси з сирном'ясною начинкою",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "Куряча шинка",
+        "quantity": 45.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Борошно ц/з",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сметана 15%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Вершкове масло",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "Розпушувач",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Зелень, сіль, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Тайський рис",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "carbohydrate",
+      "side-dish"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.7,
+    "ingredients": [
+      {
+        "name": "Куряче філе (сире)",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кунжут",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Соєвий соус",
+        "quantity": 3.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Рис (готовий)",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Овочі (рекомендую перець червоний, помідор, цибуля)",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Рибні котлети з булгуром",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "protein",
+      "comfort food",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.8,
+    "dinner_weight": 0.6,
+    "ingredients": [
+      {
+        "name": "Хек (сирий)",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Морква",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Булгур (суха вага)",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "М'ясні рулетики",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "protein",
+      "baked",
+      "comfort_food"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.8,
+    "ingredients": [
+      {
+        "name": "Лаваш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Шинка",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Творог 5%",
+        "quantity": 180.0,
+        "unit": "g"
+      },
+      {
+        "name": "Зелень, овочі, спеції",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Піца з лаваша",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "carb",
+      "snack",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.8,
+    "dinner_weight": 0.6,
+    "ingredients": [
+      {
+        "name": "Куряче філе готове",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Лаваш",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Печериці",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "Йогурт грецький",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кетчуп",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "Зелень, сіль, спеції, овочі",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Бургер",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "fast_food",
+      "comfort_food",
+      "protein"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.8,
+    "dinner_weight": 0.6,
+    "ingredients": [
+      {
+        "name": "Куряче філе (сире)",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Булочка для бургера",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Томатна паста",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "Овочі (рекомендую салат, помідор, цибуля, огірок)",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Оладки з цукіні та шпинату",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "light",
+      "vegetables"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Цукіні",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Шпинат свіжий",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Борошно ц/з",
+        "quantity": 25.0,
+        "unit": "g"
+      },
+      {
+        "name": "Зелень, спеції, сіль",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Запіканка з броколі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "comfort food",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.5,
+    "ingredients": [
+      {
+        "name": "Броколі",
+        "quantity": 75.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Молоко 2,5%",
+        "quantity": 25.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Сир твердий",
+        "quantity": 25.0,
+        "unit": "g"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Зелень, спеції, сіль",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ПХморозиво",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "refreshing"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.3,
+    "dinner_weight": 0.5,
+    "ingredients": [
+      {
+        "name": "Грецький йогурт",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Ягоди",
+        "quantity": 250.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Кокосове печиво",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "sweet",
+      "dessert",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.7,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "Яєчний білок",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Кокосова стружка",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цукрозамінник (стевія)",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Творожний зефір",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "sweet",
+      "vegetarian"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Желатин",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Творог 5%",
+        "quantity": 400.0,
+        "unit": "g"
+      },
+      {
+        "name": "Молоко 2,5%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "Цукрозамінник стевія",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Печене яблуко",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "dessert",
+      "vegetarian",
+      "fruit"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Яблуко",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "Волоський горіх",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Мед",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Кориця",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Чипси з лаваша",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "snack",
+      "crispy",
+      "salty"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Олія",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Лаваш",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Лаваш з моцарелою",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "vegetarian",
+      "snack",
+      "baked"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.1,
+    "lunch_weight": 0.6,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Лаваш",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Моцарела",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "Зелень",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Цільнозерновий хліб",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "fiber",
+      "grain",
+      "healthy"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.3,
+    "ingredients": [
+      {
+        "name": "Борошно цільнозернове",
+        "quantity": 210.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кефір 2,5%",
+        "quantity": 180.0,
+        "unit": "g"
+      },
+      {
+        "name": "Яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Розпушувач",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "Насіння соняшникове",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "Насіння льону",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "Кунжут",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "Сіль",
+        "quantity": 0.1,
+        "unit": "unit"
+      },
+      {
+        "name": "Рослинна олія",
+        "quantity": 7.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "Ягідний смузі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "fruit",
+      "sweet",
+      "smoothie"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Суміш заморожених ягід",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "Йогурт",
+        "quantity": 200.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Авокадо смузі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "smoothie",
+      "healthy",
+      "vegan"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Авокадо",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "Молоко 2,5%",
+        "quantity": 200.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Банан",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Банановогрушевий смузі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "fruit",
+      "vegan",
+      "smoothie"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Груша",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "Шпинатний смузі",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "",
+    "category": "Breakfast",
+    "dietary_tags": [
+      "healthy",
+      "vegetarian",
+      "smoothie"
+    ],
+    "calories": 0,
+    "protein": 0,
+    "carbs": 0,
+    "fats": 0,
+    "breakfast_weight": 0.9,
+    "lunch_weight": 0.4,
+    "dinner_weight": 0.1,
+    "ingredients": [
+      {
+        "name": "Шпинат",
+        "quantity": 15.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Вода",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "Лимон",
+        "quantity": 0.1,
+        "unit": "unit"
+      }
+    ]
+  }
+]

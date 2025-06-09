@@ -5,12 +5,16 @@ services:
     build: .
     ports:
       - "8000:8000"
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     # depends_on:
     #   - db
     volumes:
       - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # networks:
+    #   - host
 
 #   db:
 #     image: postgres:15
