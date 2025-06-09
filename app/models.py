@@ -31,8 +31,8 @@ class Recipe(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     
-    ingredients = relationship('RecipeIngredient', back_populates='recipe')
-    meal_plan_entries = relationship('MealPlanEntry', back_populates='recipe')
+    ingredients = relationship('RecipeIngredient', back_populates='recipe', cascade="all, delete")
+    meal_plan_entries = relationship('MealPlanEntry', back_populates='recipe', cascade="all, delete")
 
 class Ingredient(Base):
     __tablename__ = 'ingredients'
@@ -48,24 +48,24 @@ class Ingredient(Base):
     carbs = Column(Float)
     fats = Column(Float)
     
-    recipes = relationship('RecipeIngredient', back_populates='ingredient')
+    recipes = relationship('RecipeIngredient', back_populates='ingredient', cascade="all, delete")
 
 class RecipeIngredient(Base):
     __tablename__ = 'recipe_ingredients'
     
-    recipe_id = Column(Integer, ForeignKey('recipes.id'), primary_key=True)
-    ingredient_id = Column(Integer, ForeignKey('ingredients.id'), primary_key=True)
+    recipe_id = Column(Integer, ForeignKey('recipes.id', ondelete="CASCADE"), primary_key=True)
+    ingredient_id = Column(Integer, ForeignKey('ingredients.id', ondelete="CASCADE"), primary_key=True)
     quantity = Column(Float, nullable=False)
     unit = Column(String(50), nullable=False)
     
-    recipe = relationship('Recipe', back_populates='ingredients')
-    ingredient = relationship('Ingredient', back_populates='recipes')
+    recipe = relationship('Recipe', back_populates='ingredients', cascade="all, delete")
+    ingredient = relationship('Ingredient', back_populates='recipes', cascade="all, delete")
 
 class MealPlan(Base):
     __tablename__ = 'meal_plans'
     
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"))
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     people_count = Column(Integer, default=1)
@@ -73,48 +73,48 @@ class MealPlan(Base):
     dietary_preferences = Column(JSON)  # Array of dietary preferences
     created_at = Column(DateTime, default=datetime.utcnow)
     
-    entries = relationship('MealPlanEntry', back_populates='meal_plan')
-    shopping_lists = relationship('ShoppingList', back_populates='meal_plan')
-    user = relationship('User', back_populates='meal_plans')
+    entries = relationship('MealPlanEntry', back_populates='meal_plan', cascade="all, delete")
+    shopping_lists = relationship('ShoppingList', back_populates='meal_plan', cascade="all, delete")
+    user = relationship('User', back_populates='meal_plans', cascade="all, delete")
 
 class MealPlanEntry(Base):
     __tablename__ = 'meal_plan_entries'
     
     id = Column(Integer, primary_key=True)
-    meal_plan_id = Column(Integer, ForeignKey('meal_plans.id'))
-    recipe_id = Column(Integer, ForeignKey('recipes.id'))
+    meal_plan_id = Column(Integer, ForeignKey('meal_plans.id', ondelete="CASCADE"))
+    recipe_id = Column(Integer, ForeignKey('recipes.id', ondelete="CASCADE"))
     date = Column(DateTime, nullable=False)
     meal_type = Column(String(50))  # breakfast, lunch, dinner
     servings = Column(Integer, default=1)
     
-    meal_plan = relationship('MealPlan', back_populates='entries')
-    recipe = relationship('Recipe', back_populates='meal_plan_entries')
+    meal_plan = relationship('MealPlan', back_populates='entries', cascade="all, delete")
+    recipe = relationship('Recipe', back_populates='meal_plan_entries', cascade="all, delete")
 
 class ShoppingList(Base):
     __tablename__ = 'shopping_lists'
     
     id = Column(Integer, primary_key=True)
-    meal_plan_id = Column(Integer, ForeignKey('meal_plans.id'))
+    meal_plan_id = Column(Integer, ForeignKey('meal_plans.id', ondelete="CASCADE"))
     created_at = Column(DateTime, default=datetime.utcnow)
     status = Column(String(50), default='active')  # active, exported, completed
     export_format = Column(String(50))  # ios_reminders, pdf, etc.
     
-    items = relationship('ShoppingListItem', back_populates='shopping_list')
-    meal_plan = relationship('MealPlan', back_populates='shopping_lists')
+    items = relationship('ShoppingListItem', back_populates='shopping_list', cascade="all, delete")
+    meal_plan = relationship('MealPlan', back_populates='shopping_lists', cascade="all, delete")
 
 class ShoppingListItem(Base):
     __tablename__ = 'shopping_list_items'
     
     id = Column(Integer, primary_key=True)
-    shopping_list_id = Column(Integer, ForeignKey('shopping_lists.id'))
-    ingredient_id = Column(Integer, ForeignKey('ingredients.id'))
+    shopping_list_id = Column(Integer, ForeignKey('shopping_lists.id', ondelete="CASCADE"))
+    ingredient_id = Column(Integer, ForeignKey('ingredients.id', ondelete="CASCADE"))
     quantity = Column(Float)
     unit = Column(String(50))
     category = Column(String(100))  # inherited from ingredient for organization
     status = Column(String(50), default='pending')  # pending, purchased
     
-    shopping_list = relationship('ShoppingList', back_populates='items')
-    ingredient = relationship('Ingredient')
+    shopping_list = relationship('ShoppingList', back_populates='items', cascade="all, delete")
+    ingredient = relationship('Ingredient', cascade="all, delete")
 
 class User(Base):
     __tablename__ = 'users'
@@ -124,4 +124,4 @@ class User(Base):
     calorie_target = Column(Integer)
     dietary_preferences = Column(String)
     
-    meal_plans = relationship('MealPlan', back_populates='user')
+    meal_plans = relationship('MealPlan', back_populates='user', cascade="all, delete")

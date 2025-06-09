@@ -19,7 +19,7 @@ def parse_recipe_text(text):
     # name = name_match.group(1).strip() if name_match else "Unknown Recipe"
     
     # Extract KBZV values (calories/protein/carbs/fats)
-    kbzv_match = re.search(r'КБЖВ.*?(\d+)/(\d+)/(\d+)/(\d+)', text)
+    kbzv_match = re.search(r'\n(\d+)/(\d+)/(\d+)/(\d+)\n', text)
     if kbzv_match:
         calories = int(kbzv_match.group(1))
         protein = int(kbzv_match.group(2))
@@ -62,13 +62,16 @@ def parse_recipe_text(text):
         })
     
     # Extract cooking instructions
-    instructions_match = re.search(r'Як готувати\?\s+(.*?)\*\*', text, re.DOTALL)
-    instructions = ""
-    if instructions_match:
-        instructions_text = instructions_match.group(1).strip()
-        # Clean up and format instructions
-        instructions_lines = re.findall(r'\d+\.\s+([^0-9]+?)(?=\d+\.|$)', instructions_text)
-        instructions = "\n".join([f"{i+1}. {line.strip()}" for i, line in enumerate(instructions_lines)])
+    # instructions_match = re.search(r'Як готувати\?\s+(.*?)\*\*', text, re.DOTALL)
+    __, instructions = text.split("Як готувати?")
+    instructions = instructions.strip()
+    # if not instructions_match:
+    #     raise ValueError("Instructions not found")
+    # if instructions_match:
+    #     instructions_text = instructions_match.group(1).strip()
+    #     # Clean up and format instructions
+    #     instructions_lines = re.findall(r'\d+\.\s+([^0-9]+?)(?=\d+\.|$)', instructions_text)
+    #     instructions = "\n".join([f"{i+1}. {line.strip()}" for i, line in enumerate(instructions_lines)])
     
     # Create JSON structure
     recipe_json = {
@@ -123,7 +126,7 @@ example = """
 class OllamaClient:
     """Client for interacting with Ollama local LLM"""
     #host.docker.internal
-    def __init__(self, base_url: str = "http://localhost:11434", model: str = "codellama:7b"):
+    def __init__(self, base_url: str = "http://host.docker.internal:11434", model: str = "codellama:7b"):
         self.base_url = base_url
         self.model = model
         
@@ -220,7 +223,8 @@ output format - json:
         except Exception as e:
             # raise e
             err += 1
-            print(f"failed \n\n {e} \n\n {dpart[:20]}\n\n")
+            repr = dpart.replace('\n', ' ')[:20]
+            print(f"failed \n\n {e} \n\n {repr}\n\n")
         else:
             suc += 1
             recipes.append(recipe)

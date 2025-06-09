@@ -685,7 +685,7 @@
   },
   {
     "name": "Олія",
-    "category": "Other",
+    "category": "Condiments",
     "base_unit": "g",
     "calories": 1.65,
     "protein": 0.31,
@@ -1423,7 +1423,7 @@
   },
   {
     "name": "Кокосова стружка",
-    "category": "Other",
+    "category": "Fruits",
     "base_unit": "g",
     "calories": 1.65,
     "protein": 0.31,
@@ -1441,7 +1441,7 @@
   },
   {
     "name": "Желатин",
-    "category": "Other",
+    "category": "Meat",
     "base_unit": "g",
     "calories": 1.65,
     "protein": 0.31,
@@ -1504,7 +1504,7 @@
   },
   {
     "name": "Кориця",
-    "category": "Other",
+    "category": "Condiments",
     "base_unit": "unit",
     "calories": 1.65,
     "protein": 0.31,
