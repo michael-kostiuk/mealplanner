@@ -11,8 +11,8 @@ router = APIRouter(
 )
 
 @router.get("/", response_model=List[schemas.Ingredient])
-async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query()):
-    db_query =  db.query(models.Ingredient).all()
+async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query(default=None)):
+    db_query = db.query(models.Ingredient)
     if name:
         name = unquote(name)
         db_query = db_query.filter(models.Ingredient.name.ilike(f"%{name}%"))
