@@ -1,17 +1,22 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 from ..database import get_db
 from .. import models, schemas
+from urllib.parse import unquote
 
 router = APIRouter(
     prefix="/ingredients",
-    tags=["ingredients"]
+    tags=["ingredients"],
 )
 
 @router.get("/", response_model=List[schemas.Ingredient])
-async def list_ingredients(db: Session = Depends(get_db)):
-    return db.query(models.Ingredient).all()
+async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query()):
+    db_query =  db.query(models.Ingredient).all()
+    if name:
+        name = unquote(name)
+        db_query = db_query.filter(models.Ingredient.name.ilike(f"%{name}%"))
+    return db_query.all()
 
 @router.post("/", response_model=schemas.Ingredient)
 async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = Depends(get_db)):

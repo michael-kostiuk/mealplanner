@@ -31,8 +31,8 @@ class Recipe(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     
-    ingredients = relationship('RecipeIngredient', back_populates='recipe', cascade="all, delete")
-    meal_plan_entries = relationship('MealPlanEntry', back_populates='recipe', cascade="all, delete")
+    ingredients = relationship('RecipeIngredient', back_populates='recipe')
+    meal_plan_entries = relationship('MealPlanEntry', back_populates='recipe')
 
 class Ingredient(Base):
     __tablename__ = 'ingredients'
@@ -48,7 +48,7 @@ class Ingredient(Base):
     carbs = Column(Float)
     fats = Column(Float)
     
-    recipes = relationship('RecipeIngredient', back_populates='ingredient', cascade="all, delete")
+    recipes = relationship('RecipeIngredient', back_populates='ingredient')
 
 class RecipeIngredient(Base):
     __tablename__ = 'recipe_ingredients'
@@ -58,8 +58,8 @@ class RecipeIngredient(Base):
     quantity = Column(Float, nullable=False)
     unit = Column(String(50), nullable=False)
     
-    recipe = relationship('Recipe', back_populates='ingredients', cascade="all, delete")
-    ingredient = relationship('Ingredient', back_populates='recipes', cascade="all, delete")
+    recipe = relationship('Recipe', back_populates='ingredients')
+    ingredient = relationship('Ingredient', back_populates='recipes')
 
 class MealPlan(Base):
     __tablename__ = 'meal_plans'
@@ -73,9 +73,9 @@ class MealPlan(Base):
     dietary_preferences = Column(JSON)  # Array of dietary preferences
     created_at = Column(DateTime, default=datetime.utcnow)
     
-    entries = relationship('MealPlanEntry', back_populates='meal_plan', cascade="all, delete")
-    shopping_lists = relationship('ShoppingList', back_populates='meal_plan', cascade="all, delete")
-    user = relationship('User', back_populates='meal_plans', cascade="all, delete")
+    entries = relationship('MealPlanEntry', back_populates='meal_plan')
+    shopping_lists = relationship('ShoppingList', back_populates='meal_plan')
+    user = relationship('User', back_populates='meal_plans')
 
 class MealPlanEntry(Base):
     __tablename__ = 'meal_plan_entries'
@@ -87,8 +87,8 @@ class MealPlanEntry(Base):
     meal_type = Column(String(50))  # breakfast, lunch, dinner
     servings = Column(Integer, default=1)
     
-    meal_plan = relationship('MealPlan', back_populates='entries', cascade="all, delete")
-    recipe = relationship('Recipe', back_populates='meal_plan_entries', cascade="all, delete")
+    meal_plan = relationship('MealPlan', back_populates='entries')
+    recipe = relationship('Recipe', back_populates='meal_plan_entries')
 
 class ShoppingList(Base):
     __tablename__ = 'shopping_lists'
@@ -99,8 +99,8 @@ class ShoppingList(Base):
     status = Column(String(50), default='active')  # active, exported, completed
     export_format = Column(String(50))  # ios_reminders, pdf, etc.
     
-    items = relationship('ShoppingListItem', back_populates='shopping_list', cascade="all, delete")
-    meal_plan = relationship('MealPlan', back_populates='shopping_lists', cascade="all, delete")
+    items = relationship('ShoppingListItem', back_populates='shopping_list')
+    meal_plan = relationship('MealPlan', back_populates='shopping_lists')
 
 class ShoppingListItem(Base):
     __tablename__ = 'shopping_list_items'
@@ -113,8 +113,8 @@ class ShoppingListItem(Base):
     category = Column(String(100))  # inherited from ingredient for organization
     status = Column(String(50), default='pending')  # pending, purchased
     
-    shopping_list = relationship('ShoppingList', back_populates='items', cascade="all, delete")
-    ingredient = relationship('Ingredient', cascade="all, delete")
+    shopping_list = relationship('ShoppingList', back_populates='items')
+    ingredient = relationship('Ingredient')
 
 class User(Base):
     __tablename__ = 'users'
@@ -124,4 +124,4 @@ class User(Base):
     calorie_target = Column(Integer)
     dietary_preferences = Column(String)
     
-    meal_plans = relationship('MealPlan', back_populates='user', cascade="all, delete")
+    meal_plans = relationship('MealPlan', back_populates='user')

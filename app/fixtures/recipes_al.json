@@ -15,9 +15,9 @@
     "protein": 41,
     "carbs": 45,
     "fats": 15,
-    "breakfast_weight": 0.5,
-    "lunch_weight": 0.7,
-    "dinner_weight": 0.3,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
         "name": "Яйце",
@@ -63,8 +63,8 @@
     "carbs": 41,
     "fats": 3,
     "breakfast_weight": 0.5,
-    "lunch_weight": 0.7,
-    "dinner_weight": 0.4,
+    "lunch_weight": 0,
+    "dinner_weight": 0.1,
     "ingredients": [
       {
         "name": "Лаваш вірменський",
@@ -105,8 +105,8 @@
     "carbs": 0,
     "fats": 0,
     "breakfast_weight": 0.8,
-    "lunch_weight": 0.3,
-    "dinner_weight": 0.1,
+    "lunch_weight": 0,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
         "name": "Яблуко",
@@ -152,7 +152,7 @@
     "carbs": 110,
     "fats": 24,
     "breakfast_weight": 0.3,
-    "lunch_weight": 0.4,
+    "lunch_weight": 0,
     "dinner_weight": 0.1,
     "ingredients": [
       {
@@ -194,8 +194,8 @@
     "carbs": 65,
     "fats": 19,
     "breakfast_weight": 0.9,
-    "lunch_weight": 0.4,
-    "dinner_weight": 0.2,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Молоко 2,5%",
@@ -236,8 +236,8 @@
     "carbs": 45,
     "fats": 6,
     "breakfast_weight": 0.9,
-    "lunch_weight": 0.4,
-    "dinner_weight": 0.1,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Вівсяні пластівці",
@@ -278,8 +278,8 @@
     "carbs": 60,
     "fats": 15,
     "breakfast_weight": 0.8,
-    "lunch_weight": 0.3,
-    "dinner_weight": 0.1,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Вівсяні пластівці",
@@ -329,9 +329,9 @@
     "protein": 7,
     "carbs": 17,
     "fats": 16,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.3,
-    "dinner_weight": 0.6,
+    "breakfast_weight": 0.7,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Грецький йогурт",
@@ -376,9 +376,9 @@
     "protein": 58,
     "carbs": 41,
     "fats": 33,
-    "breakfast_weight": 0.9,
-    "lunch_weight": 0.3,
-    "dinner_weight": 0.1,
+    "breakfast_weight": 0.8,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Яйце",
@@ -423,9 +423,9 @@
     "protein": 32,
     "carbs": 39,
     "fats": 40,
-    "breakfast_weight": 0.8,
-    "lunch_weight": 0.6,
-    "dinner_weight": 0.3,
+    "breakfast_weight": 1,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Яйце",
@@ -465,9 +465,9 @@
     "protein": 20,
     "carbs": 38,
     "fats": 15,
-    "breakfast_weight": 0.9,
-    "lunch_weight": 0.3,
-    "dinner_weight": 0.1,
+    "breakfast_weight": 0.95,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Хліб",
@@ -507,7 +507,7 @@
     "protein": 19,
     "carbs": 4,
     "fats": 27,
-    "breakfast_weight": 0.9,
+    "breakfast_weight": 0.4,
     "lunch_weight": 0.4,
     "dinner_weight": 0.3,
     "ingredients": [
@@ -549,9 +549,9 @@
     "protein": 17,
     "carbs": 28,
     "fats": 14,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.6,
-    "dinner_weight": 0.7,
+    "breakfast_weight": 1.0,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Яйце",
@@ -643,9 +643,9 @@
     "protein": 11,
     "carbs": 22,
     "fats": 34,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.4,
-    "dinner_weight": 0.3,
+    "breakfast_weight": 0,
+    "lunch_weight": 0.8,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Цвітна капуста",
@@ -690,9 +690,9 @@
     "protein": 10,
     "carbs": 82,
     "fats": 23,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.7,
-    "dinner_weight": 0.5,
+    "breakfast_weight": 0,
+    "lunch_weight": 0.9,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Гарбуз",
@@ -752,9 +752,9 @@
     "protein": 12,
     "carbs": 21,
     "fats": 25,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.6,
-    "dinner_weight": 0.2,
+    "breakfast_weight": 0,
+    "lunch_weight": 0.9,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Шампіньйони",
@@ -809,9 +809,9 @@
     "protein": 11,
     "carbs": 36,
     "fats": 27,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.5,
-    "dinner_weight": 0.3,
+    "breakfast_weight": 0,
+    "lunch_weight": 0.95,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Морква",
@@ -871,7 +871,7 @@
     "protein": 38,
     "carbs": 21,
     "fats": 27,
-    "breakfast_weight": 0.1,
+    "breakfast_weight": 0,
     "lunch_weight": 0.6,
     "dinner_weight": 0.3,
     "ingredients": [
@@ -924,8 +924,8 @@
     "carbs": 0,
     "fats": 13,
     "breakfast_weight": 0.0,
-    "lunch_weight": 0.6,
-    "dinner_weight": 0.7,
+    "lunch_weight": 0,
+    "dinner_weight": 0.1,
     "ingredients": [
       {
         "name": "Фарш з яловичої вирізки",
@@ -1075,11 +1075,11 @@
       "side dish",
       "carbohydrate"
     ],
-    "calories": 0,
+    "calories": 600,
     "protein": 0,
     "carbs": 0,
     "fats": 0,
-    "breakfast_weight": 0.1,
+    "breakfast_weight": 0,
     "lunch_weight": 0.6,
     "dinner_weight": 0.7,
     "ingredients": [
@@ -1126,7 +1126,7 @@
     "protein": 48,
     "carbs": 36,
     "fats": 12,
-    "breakfast_weight": 0.1,
+    "breakfast_weight": 0.0,
     "lunch_weight": 0.5,
     "dinner_weight": 0.4,
     "ingredients": [
@@ -1173,7 +1173,7 @@
     "protein": 0,
     "carbs": 0,
     "fats": 0,
-    "breakfast_weight": 0.1,
+    "breakfast_weight": 0.0,
     "lunch_weight": 0.3,
     "dinner_weight": 0.8,
     "ingredients": [
@@ -1225,7 +1225,7 @@
     "protein": 53,
     "carbs": 36,
     "fats": 31,
-    "breakfast_weight": 0.1,
+    "breakfast_weight": 0.0,
     "lunch_weight": 0.8,
     "dinner_weight": 0.7,
     "ingredients": [
@@ -1282,9 +1282,9 @@
     "protein": 51,
     "carbs": 68,
     "fats": 6,
-    "breakfast_weight": 0.2,
-    "lunch_weight": 0.8,
-    "dinner_weight": 0.5,
+    "breakfast_weight": 0.0,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.8,
     "ingredients": [
       {
         "name": "Куряче філе (сире)",
@@ -1461,8 +1461,8 @@
     "carbs": 0,
     "fats": 0,
     "breakfast_weight": 0.7,
-    "lunch_weight": 0.4,
-    "dinner_weight": 0.1,
+    "lunch_weight": 0,
+    "dinner_weight": 0,
     "ingredients": [
       {
         "name": "Яєчний білок",
@@ -1618,8 +1618,8 @@
     "protein": 14,
     "carbs": 30,
     "fats": 10,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.6,
+    "breakfast_weight": 0.6,
+    "lunch_weight": 0.2,
     "dinner_weight": 0.3,
     "ingredients": [
       {
