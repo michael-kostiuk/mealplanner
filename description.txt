@@ -1,0 +1,209 @@
+Meal Planning Application - High Level Overview
+Application Purpose
+A comprehensive digital meal planning solution that automates weekly meal preparation, recipe management, and grocery shopping workflows for individuals and families.
+Core Value Proposition
+
+Time Savings: Eliminate weekly meal planning decisions through intelligent automation
+Cost Efficiency: Optimize grocery shopping through ingredient consolidation and waste reduction
+Health Management: Meet dietary goals through calorie tracking and nutritional balance
+Convenience: Streamline the entire meal-to-table process from planning to shopping
+
+Primary User Workflows
+1. Recipe Management
+
+Create and store detailed recipes with ingredients, instructions, and nutritional information
+Categorize recipes by meal type and dietary preferences
+Bulk import/export recipe collections
+Search and filter recipe library
+
+2. Intelligent Meal Planning
+
+Auto-generate balanced weekly meal plans based on:
+
+Daily calorie targets
+Dietary restrictions and preferences
+Recipe popularity and variety
+Ingredient optimization
+Preparation time constraints
+
+
+Manual customization through drag-and-drop interface
+Real-time nutritional tracking and calorie distribution
+
+3. Smart Shopping Lists
+
+Automatically generate consolidated shopping lists from meal plans
+Organize ingredients by store categories
+Export to mobile-friendly formats (iOS Reminders compatible)
+Quantity optimization and unit conversions
+
+Key Differentiators
+
+Recipe Weighting System: Smart algorithm assigns recipes to appropriate meal slots based on suitability scores
+Ingredient Intelligence: Prioritizes recipes with shared ingredients to minimize shopping complexity
+Calorie-Conscious Planning: Distributes daily calories appropriately across meals (25% breakfast, 35% lunch, 40% dinner)
+Popularity Learning: Tracks recipe usage to suggest preferred meals more frequently
+
+Technical Architecture
+
+Frontend: React-based single-page application with responsive design
+Backend: FastAPI RESTful service with PostgreSQL database
+Data Management: Sophisticated relational schema handling recipes, meal plans, and shopping lists
+Algorithm Engine: Custom meal planning optimization considering multiple constraints
+
+Target Users
+
+Busy Professionals: Seeking efficient meal planning without decision fatigue
+Health-Conscious Individuals: Requiring calorie and nutritional tracking
+Families: Managing multiple dietary preferences and meal variety
+Meal Prep Enthusiasts: Optimizing grocery shopping and ingredient usage
+
+Business Impact
+
+Reduces meal planning time from hours to minutes
+Minimizes food waste through strategic ingredient reuse
+Supports dietary goal achievement through automated nutritional balance
+Simplifies grocery shopping with organized, consolidated lists
+Scales from individual use to family meal coordination
+
+This application transforms meal planning from a weekly chore into an automated, intelligent system that adapts to user preferences while optimizing for health, convenience, and efficiency.
+
+
+
+
+Database Schema Design
+Core Models
+
+Recipe Model: Store recipe details with fields for name, servings, prep/cook time, instructions, category, dietary tags, calorie count(including fats,carb,etc), and meal type weights (breakfast/lunch/dinner weights 0-1)
+Ingredient Model: Separate ingredient entities with name, category, unit measurements, and nutritional information
+RecipeIngredient Junction: Many-to-many relationship linking recipes to ingredients with specific quantities and units
+MealPlan Model: Weekly meal plan structure with metadata like creation date, dietary preferences, target calories, and number of people
+MealPlanEntry Model: Individual meal entries linking recipes to specific days/meal times within a meal plan
+ShoppingList Model: Generated from meal plans with consolidation logic and export capabilities
+
+Supporting Models
+
+User Preferences: Store default dietary restrictions, calorie targets, prep time limits, excluded ingredients
+Recipe Categories: Standardized categories (breakfast, lunch, dinner, snack) with metadata
+Dietary Tags: Standardized tags (vegetarian, vegan, gluten-free, etc.) with descriptions
+
+API Endpoints Structure
+Recipe Management Endpoints
+
+GET /recipes: List all recipes with filtering (category, dietary tags, prep time, calories) and pagination
+POST /recipes: Create new recipe with ingredient associations and validation
+GET /recipes/{id}: Retrieve single recipe with full ingredient details
+PUT /recipes/{id}: Update recipe including ingredient modifications
+DELETE /recipes/{id}: Remove recipe with cascade handling
+POST /recipes/bulk-import: Import multiple recipes from JSON with validation
+GET /recipes/export: Export all recipes to JSON format
+GET /recipes/search: Advanced search with text matching and filters
+
+Meal Planning Endpoints
+
+GET /meal-plans: List user's meal plans with summary information
+POST /meal-plans: Create new meal plan with manual recipe selection
+POST /meal-plans/auto-generate: Auto-generate meal plan based on preferences and constraints
+GET /meal-plans/{id}: Retrieve complete meal plan with all meals and recipes
+PUT /meal-plans/{id}: Update meal plan (swap recipes, adjust portions)
+DELETE /meal-plans/{id}: Remove meal plan with confirmation
+PUT /meal-plans/{id}/meals/{meal_id}: Update individual meal within plan
+
+Shopping List Endpoints
+
+GET /meal-plans/{id}/shopping-list: Generate shopping list from meal plan
+GET /shopping-lists/{id}: Retrieve saved shopping list
+GET /shopping-lists: List all shopping lists with categories
+GET /shopping-lists/{id}/export: Export shopping list in iOS Reminders format
+DELETE /shopping-lists/{id}: Remove shopping list
+
+Ingredient Management Endpoints
+
+GET /ingredients: List all ingredients with categories
+POST /ingredients: Add new ingredient to database
+
+Business Logic Implementation
+Auto-Generation Algorithm
+Implement sophisticated meal plan generation considering:
+
+Calorie Distribution: Calculate target calories per meal (25% breakfast, 35% lunch, 40% dinner)
+Recipe Weighting: Use breakfast/lunch/dinner weights to appropriately assign recipes to meal slots
+Popularity Tracking: Track recipe usage frequency and prefer popular recipes
+Ingredient Optimization: Prioritize recipes sharing common ingredients to reduce shopping complexity
+Dietary Constraint Filtering: Respect user's dietary restrictions and excluded ingredients
+Variety Optimization: Prevent excessive repetition while allowing multi-dish meals
+Prep Time Balancing: Distribute cooking complexity throughout the week
+
+Shopping List Consolidation Logic
+
+Quantity Aggregation: Combine same ingredients across multiple recipes
+Unit Conversion: Standardize measurements (convert between cups, ounces, grams, etc.)
+Category Grouping: Organize ingredients by store sections (produce, dairy, meat, pantry)
+Smart Consolidation: Combine small quantities into practical shopping amounts
+Export Formatting: Generate plain text format compatible with iOS Reminders app
+
+Nutritional Calculations
+
+Calorie Tracking: Calculate per-serving and total calories for recipes and meal plans
+Macro Distribution: Track protein, carbs, and fat percentages
+Daily Totals: Aggregate nutritional information across entire meal plans
+Target Matching: Score meal plans based on how well they meet calorie goals
+
+Data Validation and Processing
+Recipe Validation
+
+Required fields validation (name, ingredients, instructions)
+Numerical constraints (servings > 0, times >= 0, weights 0-1)
+Ingredient quantity and unit validation
+Calorie calculation verification
+
+Import/Export Processing
+
+JSON Schema Validation: Strict validation of imported recipe structure
+Data Sanitization: Clean and normalize imported data
+Duplicate Detection: Identify and handle duplicate recipes during import
+Error Reporting: Detailed feedback on validation failures
+Batch Processing: Handle large recipe imports efficiently
+
+Meal Plan Validation
+
+Recipe Availability: Ensure selected recipes exist and are accessible
+Calorie Constraints: Validate that generated plans meet minimum/maximum calorie requirements
+Dietary Compliance: Verify all recipes match specified dietary restrictions
+Serving Calculations: Adjust recipe quantities based on number of people
+
+Performance Optimizations
+Database Optimizations
+
+Indexing Strategy: Index frequently queried fields (recipe names, categories, dietary tags)
+Query Optimization: Use efficient joins for recipe-ingredient relationships
+Caching Layer: Cache frequently accessed recipes and meal plans
+Pagination: Implement efficient pagination for large recipe collections
+
+Algorithm Optimizations
+
+Recipe Selection Caching: Cache filtered recipe sets for common dietary preferences
+Nutritional Calculations: Pre-calculate and store nutritional summaries
+Ingredient Consolidation: Optimize shopping list generation algorithms
+Auto-Generation Speed: Implement efficient constraint satisfaction for meal planning
+
+API Response Formats
+Standardized Response Structure
+
+Consistent JSON response format with data, metadata, and pagination info
+Error responses with detailed error codes and user-friendly messages
+Success responses with appropriate HTTP status codes
+
+Data Transfer Objects
+
+Recipe DTOs: Full recipe details vs. summary views for listings
+Meal Plan DTOs: Complete meal plans vs. summary information
+Shopping List DTOs: Organized by categories with consolidation details
+Nutritional DTOs: Calorie and macro information formatted for display
+
+External Integration Considerations
+File Handling
+
+Recipe Import: Process JSON files with robust error handling
+Export Generation: Create downloadable files in various formats
+Image Storage: Handle recipe images if needed in future versions

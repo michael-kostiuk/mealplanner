@@ -17,6 +17,7 @@ async def list_recipes(
     skip: int = 0,
     limit: int = 100,
     category: Optional[str] = None,
+    name: Optional[str] = None,
     dietary_tags: Optional[List[str]] = Query(None),
     max_prep_time: Optional[int] = None,
     min_calories: Optional[int] = None,
@@ -25,6 +26,8 @@ async def list_recipes(
 ):
     query = db.query(models.Recipe)
     
+    if name:
+        query = query.filter(models.Recipe.name.ilike(f"%{name}%"))
     if category:
         query = query.filter(models.Recipe.category == category)
     if dietary_tags:
