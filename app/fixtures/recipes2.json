@@ -1,1690 +1,3957 @@
 [
   {
-    "name": "Ліниві вареники з вишнею",
+    "name": "ОМЛЕТ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Збиваємо яйця, додаємо молоко, перемішуємо і виливаємо на сковорідку.\n2. Поки смажиться млинець, тим часом нарізаємо слайсами помідор, шинку і моцарелу.\n3. Коли млинець буде наполовину готовий, викладаємо на одну половинку млинця помідор, шинку і сир.\n4. Іншою половинкою млинця накриваємо зверху.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 40,
+    "carbs": 5,
+    "fats": 25,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Творог 5%",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вишня",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно цільнозернове",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно цільнозернове для обкатки",
-        "quantity": 10.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "ПХ наполеон",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Лаваш вірменський",
-        "quantity": 40.0,
-        "unit": "g"
-      },
-      {
-        "name": "Крохмаль",
-        "quantity": 10.0,
-        "unit": "g"
-      },
-      {
-        "name": "Молоко 2.5%",
-        "quantity": 100.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Мед",
-        "quantity": 10.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Шарлотка",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яблуко",
-        "quantity": 300.0,
-        "unit": "g"
-      },
-      {
-        "name": "Молоко",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Крохмаль",
-        "quantity": 10.0,
-        "unit": "g"
-      },
-      {
-        "name": "Лаваш",
-        "quantity": 40.0,
-        "unit": "g"
-      },
-      {
-        "name": "Кориця",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Шоколадна ковбаса",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Банан",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Волоський горіх",
-        "quantity": 30.0,
-        "unit": "g"
-      },
-      {
-        "name": "Какао",
-        "quantity": 15.0,
-        "unit": "g"
-      },
-      {
-        "name": "8 шт",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Чіа-пудинг з бананом",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Молоко 2,5%",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Насіння чіа",
-        "quantity": 45.0,
-        "unit": "g"
-      },
-      {
-        "name": "Мед",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Банан",
-        "quantity": 1.0,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Лінива вівсянка",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Вівсяні пластівці",
-        "quantity": 30.0,
-        "unit": "g"
-      },
-      {
-        "name": "Молоко 2.5%",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Йогурт натуральний 2%",
+        "name": "моцарела",
         "quantity": 50.0,
         "unit": "g"
       },
       {
-        "name": "Мед",
-        "quantity": 1.0,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Кекс в мікрохвильовій печі",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Вівсяні пластівці",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Какао",
+        "name": "помідор",
         "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Рослинна олія",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Мед",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Молоко 2.5%",
-        "quantity": 100.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Яйця",
-        "quantity": 1.0,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Ягідний десерт",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Грецький йогурт",
-        "quantity": 170.0,
-        "unit": "g"
-      },
-      {
-        "name": "Желатин швидкорозчинний",
-        "quantity": 7.0,
-        "unit": "g"
-      },
-      {
-        "name": "Ягоди свіжі або морожені",
-        "quantity": 70.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вода тепла",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Цукрозамінник",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Сирні булочки",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Творог 5%",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно цільнозернове",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Кунжут",
-        "quantity": 10.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Лінивий хачапурі",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Творог 5%",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Моцарела",
-        "quantity": 40.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно цільнозернове",
-        "quantity": 30.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Тост з яйцем",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Хліб",
-        "quantity": 70.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
+        "name": "яйця",
         "quantity": 2.0,
         "unit": "unit"
       },
       {
-        "name": "Овоч (перець, помідор)",
-        "quantity": 0.1,
-        "unit": "unit"
+        "name": "шинка",
+        "quantity": 50.0,
+        "unit": "g"
       },
       {
-        "name": "Сир твердий",
-        "quantity": 20.0,
+        "name": "молоко 1%",
+        "quantity": 50.0,
         "unit": "g"
       }
     ]
   },
   {
-    "name": "Фріттата",
+    "name": "ОМЛЕТ БЕЗ ОЛІЇ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Взбиваємо яйця з молоком, додаємо сіль та спеції за смаком.\n2. Виливаємо яєчну масу в целофановий пакетик, міцно завʼязуємо і ставимо в киплячу воду.\n3. Варимо 15 хвилин.\n4. По готовності виймаємо з води, розрізаємо пакетик і викладаємо омлет на тарілку.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 15,
+    "carbs": 3,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Йогурт 2%",
-        "quantity": 50.0,
+        "name": "2 яйця",
+        "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Яйце",
+        "name": "4 ст.л. молока",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль/спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "СИРНИКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Натираємо моцарелу, додаємо до кисломолочного сиру, нарізаний дрібно кріп, петрушку та шпинат теж додаємо до маси, розбираємо яйце, спеції та змішуємо.\n2. Розігріваємо сковорідку, робимо форму сирників, обмокуємо в борошні та смажимо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 55,
+    "carbs": 25,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "моцарела",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "кріп, петрушка, шпинат",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "борошно",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПРОТЕЇНОВИЙ МЛИНЕЦЬ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Збиваємо яєчні білки.\n2. Розчиняємо протеїн в кокосовому молоці, додаємо до збитих білків.\n3. Змішуємо до однорідності і заливаємо на розігріту сковорідку.\n4. Смажимо на олії з двох сторін.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 3,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "протеїн",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "яєчні білки",
         "quantity": 3.0,
         "unit": "unit"
       },
       {
-        "name": "Рослинна олія",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
+        "name": "кокосове молоко",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "КИСЛОМОЛОЧНИЙ СИР",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До сиру додаємо дрібно нарізані ягоди, йогурт і цукрозамінник.\n2. Перемішуємо і зверху посипаємо горішками.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 25,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
       {
-        "name": "Овочі",
+        "name": "ягоди",
         "quantity": 100.0,
         "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Вірменська ека",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
       },
       {
-        "name": "Сир твердий",
-        "quantity": 30.0,
+        "name": "горіхи",
+        "quantity": 20.0,
         "unit": "g"
       },
       {
-        "name": "Лаваш",
-        "quantity": 50.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Оладки з начинкою",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Куряча шинка",
-        "quantity": 10.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 10.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно ц/з",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Сметана 15%",
-        "quantity": 110.0,
-        "unit": "g"
-      },
-      {
-        "name": "Розпушувач",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Зелень, сіль, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Крем-суп з цвітної капусти",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Цвітна капуста",
+        "name": "сир кисломолочний (нежирний) 0.2%",
         "quantity": 200.0,
         "unit": "g"
       },
       {
-        "name": "Морква",
-        "quantity": 75.0,
+        "name": "йогурт 1,6%",
+        "quantity": 100.0,
         "unit": "g"
       },
       {
-        "name": "Кеш’ю",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вершки 20%",
-        "quantity": 60.0,
-        "unit": "g"
-      },
-      {
-        "name": "Зелень, спеції",
-        "quantity": 0.1,
+        "name": "цукрозамінник (стевія)",
+        "quantity": 1.0,
         "unit": "unit"
       }
     ]
   },
   {
-    "name": "Гарбузовий крем-суп",
+    "name": "ВІВСЯНКА",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Відварюємо вівсянку, після цього додаємо тунець, перемішуємо, нарізаємо авокадо та викладаємо зверху, зверху посипаємо пармезаном.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 40,
+    "carbs": 35,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Гарбуз",
+        "name": "вівсянка",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "тунець у власному соку",
         "quantity": 150.0,
         "unit": "g"
       },
       {
-        "name": "Морква",
-        "quantity": 0.1,
+        "name": "авокадо",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "пармезан",
+        "quantity": 20.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ВІВСЯНОМЛИНЕЦЬ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Вівсяні пластівці трішки заливаємо окропом, щоб вода лише покрила пластівці.\n2. Вони мають розбухнути і стати мʼякими.\n3. Потім додаємо 1 яйце, 1 скуп протеїну і перемішуємо до однорідності.\n4. *якщо у вас немає протеїну, його можна замінити кисломолочним сиром, перебийте його в блендері до стану сиркової маси і намажте його в якості намазки на готовий млинець.\n5. Смажимо млинець на розігрітій сковорідці без олії, з двох сторін.\n6. Готовий вівсяномлинець прикрашаємо ягодами (полуниця, малина, чорниця) і поливаємо безкалорійним солодким соусом zero (його можна знайти в будь-якому спортмагазині).",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 60,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "фрукти / ягоди",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "соус zero (безкалорійний)",
+        "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Картопля",
+        "name": "вівсяні пластівці",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "протеїн 1 скуп ()",
+        "quantity": 20.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "РИСОВИЙ МЛИНЕЦЬ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо рис, до нього додаємо 1 яйце (сире) і добре перемішуємо.\n2. На розігрітій сковорідці формуємо млинець і смажимо з обох сторін.\n3. На готовий млинець додаємо намазку, викладаємо зверху червону рибку і тоненько нарізані огірок з помідором.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 55,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "намазка (10-12%)",
+        "quantity": 30.0,
+        "unit": "unit"
+      },
+      {
+        "name": "огірок",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "рис",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "слабосолена риба",
+        "quantity": 70.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "КУКУРУДЗЯНА КАША",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Змішуємо кисломолочний сир зі сметаною, нарізаємо кріп, солимо та перемішуємо.\n2. Відварюємо кукурудзяну крупу, весь час помішуючи, та вкінці додаємо пів столової ложки сметани 10%.\n3. Варимо яйця та розрізаємо їх.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 35,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кукурудзяна крупа",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир кисломолочний 0,2%",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
         "quantity": 2.0,
         "unit": "unit"
       },
       {
-        "name": "Вершки 10%",
-        "quantity": 100.0,
+        "name": "сметана 10%",
+        "quantity": 15.0,
         "unit": "g"
       },
       {
-        "name": "Цибуля",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Вода",
-        "quantity": 300.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Сіль, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Олія",
-        "quantity": 7.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Грибний крем-суп",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Шампіньйони",
-        "quantity": 250.0,
-        "unit": "g"
-      },
-      {
-        "name": "Цибуля",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Борошно цільнозернове",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Вершки 10%",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вода",
-        "quantity": 100.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Сіль, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Рослинна олія",
+        "name": "кріп, сіль",
         "quantity": 1.0,
         "unit": "unit"
       }
     ]
   },
   {
-    "name": "Сирний крем-суп",
+    "name": "ВІВСЯНІ ПАНКЕЙКИ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Заливаємо вівсянку окропом, щоб набухла і розмʼякла.\n2. Розминаємо виделкою банан до стану каші, додаємо його і 1 яйце до вівсянки.\n3. Перемішуємо до однорідності.\n4. Отриману масу викладаємо на розігріту сковорідку без олії.\n5. Смажимо панкейки з обох сторін до готовності.\n6. Окремо до йогурту 1,6% додаємо 1 скуп протеїну (30г), добре перемішуємо і поливаємо панкейки, прикрашаємо ягодами.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 35,
+    "carbs": 60,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Морква",
+        "name": "йогурт 1,6%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "протеїн",
         "quantity": 30.0,
         "unit": "g"
       },
       {
-        "name": "Цибуля",
-        "quantity": 30.0,
+        "name": "ягоди",
+        "quantity": 50.0,
         "unit": "g"
       },
       {
-        "name": "Картопля",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Вершки 10%",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вода",
-        "quantity": 200.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Сіль, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Рослинна олія",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Плавлений сир",
+        "name": "вівсянка",
         "quantity": 60.0,
         "unit": "g"
+      },
+      {
+        "name": "банан",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
       }
     ]
   },
   {
-    "name": "Рибні фрикадельки",
+    "name": "ЗАПІКАНКА",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Картоплю натираємо на терці, нарізаємо маленькими шматочками курку, перемішуємо з яйцем та додаємо йогурт, перемішуємо.\n2. Ставимо суміш в силіконову форму в духовку 180 градусів на 30 хв.\n3. За 5 хв перед тим, як діставати страву, зверху натираємо сир.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 50,
+    "carbs": 40,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Риба (хек)",
+        "name": "картопля",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "філе куряче",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир твердий",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БУТЕРБРОДИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Спершу відварюємо яйце.\n2. Потім підсмажуємо цільнозерновий хліб на сухій сковорідці (без олії).\n3. Відварене яйце передавлюємо виделкою, додаємо тунець у власному соку і нарізаний дрібним кубиком перець.\n4. Заправляємо йогуртом 1,6% і додаємо спеції.\n5. Отриману суміш викладаємо на підсмежений хліб і насолоджуємося.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 40,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "цільнозерновий хліб",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "тунець у власному соку",
         "quantity": 120.0,
         "unit": "g"
       },
       {
-        "name": "Цибуля",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Мелена вівсянка",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Вершки 10%",
-        "quantity": 150.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Броколі",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 35.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Баклажановий рулет",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Фарш з яловичої вирізки",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Баклажан",
+        "name": "перець свіжий",
         "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Зелень та спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Овочі: помідор, перець",
-        "quantity": 0.1,
-        "unit": "unit"
+        "name": "йогурт 1,6%",
+        "quantity": 50.0,
+        "unit": "g"
       }
     ]
   },
   {
-    "name": "Конвертики з куркою та грибами",
+    "name": "КАНАПКИ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Нарізаємо цільнозерновий хліб, підсмажуємо на сковорідці без олії.\n2. Сирі креветки очищуємо, додаємо спеції та підсмажуємо теж без олії, або беремо вже готові креветки.\n3. Окремо готуємо гуакамоле: помідор нарізаємо дрібненьким кубиком, виделкою передавлюємо авокадо, додаємо спеції і змішуємо разом з помідором.\n4. Викладаємо отриману масу на цільнозерновий хліб, зверху кладемо креветки.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 25,
+    "carbs": 40,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Лаваш",
+        "name": "цільнозерновий хліб",
         "quantity": 100.0,
         "unit": "g"
       },
       {
-        "name": "Куряче філе",
+        "name": "креветки сирі / варені",
         "quantity": 100.0,
         "unit": "g"
       },
       {
-        "name": "Сир твердий",
-        "quantity": 25.0,
+        "name": "авокадо",
+        "quantity": 70.0,
         "unit": "g"
       },
       {
-        "name": "Гриби",
-        "quantity": 100.0,
-        "unit": "g"
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
       },
       {
-        "name": "Томатна паста",
-        "quantity": 25.0,
-        "unit": "g"
-      },
-      {
-        "name": "Томат",
+        "name": "спеції",
         "quantity": 1.0,
         "unit": "unit"
       }
     ]
   },
   {
-    "name": "Кекси з сирном'ясною начинкою",
+    "name": "БУТЕРБРОДИ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Хліб обсмажуємо на сковорідці без олії.\n2. Тим часом готуємо гуакамоле (передавлюємо виделкою авокадо і змішуємо з дрібно нарізаними чері).\n3. До гуакамоле додаємо кукурудзу і тунець, перемішуємо і викладаємо на підсмажені грінки хліба.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 25,
+    "carbs": 45,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Куряча шинка",
-        "quantity": 45.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Борошно ц/з",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
+        "name": "помідори чері",
         "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Сметана 15%",
+        "name": "тунець консервований y власному соку",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "хліб цільнозерновий",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "авокадо",
         "quantity": 50.0,
         "unit": "g"
       },
       {
-        "name": "Вершкове масло",
+        "name": "кукурудза",
+        "quantity": 40.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "САЛАТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. На дно тарілки викладаємо салат айсберг.\n2. Зверху викладаємо нарізане кубиками авокадо.\n3. помідори чері (нарізані начетверо), та морський коктейль.\n4. Готуємо соус, поливаємо ним салат і зверху посипаємо тертим пармезаном.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 0,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "морський коктейль в розсолі",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "салат айсберг",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "авокадо",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир пармезан тертий",
         "quantity": 15.0,
         "unit": "g"
       },
       {
-        "name": "Розпушувач",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Зелень, сіль, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Тайський рис",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Куряче філе (сире)",
-        "quantity": 100.0,
+        "name": "оливкова олія",
+        "quantity": 5.0,
         "unit": "g"
       },
       {
-        "name": "Кунжут",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Соєвий соус",
-        "quantity": 3.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Рис (готовий)",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Овочі (рекомендую перець червоний, помідор, цибуля)",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Рибні котлети з булгуром",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Хек (сирий)",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Морква",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Цибуля",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Булгур (суха вага)",
-        "quantity": 50.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "М'ясні рулетики",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Лаваш",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Шинка",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Творог 5%",
-        "quantity": 180.0,
-        "unit": "g"
-      },
-      {
-        "name": "Зелень, овочі, спеції",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Піца з лаваша",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Куряче філе готове",
-        "quantity": 80.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Лаваш",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Печериці",
-        "quantity": 40.0,
-        "unit": "g"
-      },
-      {
-        "name": "Йогурт грецький",
+        "name": "соєвий соус",
         "quantity": 10.0,
         "unit": "g"
       },
       {
-        "name": "Кетчуп",
-        "quantity": 5.0,
-        "unit": "g"
-      },
-      {
-        "name": "Зелень, сіль, спеції, овочі",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Бургер",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Куряче філе (сире)",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Булочка для бургера",
-        "quantity": 100.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Томатна паста",
-        "quantity": 30.0,
-        "unit": "g"
-      },
-      {
-        "name": "Овочі (рекомендую салат, помідор, цибуля, огірок)",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Оладки з цукіні та шпинату",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Цукіні",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Шпинат свіжий",
-        "quantity": 0.1,
-        "unit": "unit"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Борошно ц/з",
-        "quantity": 25.0,
-        "unit": "g"
-      },
-      {
-        "name": "Зелень, спеції, сіль",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Запіканка з броколі",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Броколі",
-        "quantity": 75.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 2.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Молоко 2,5%",
-        "quantity": 25.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Сир твердий",
-        "quantity": 25.0,
-        "unit": "g"
-      },
-      {
-        "name": "Рослинна олія",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Зелень, спеції, сіль",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "ПХморозиво",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Грецький йогурт",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Ягоди",
-        "quantity": 250.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Кокосове печиво",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яєчний білок",
-        "quantity": 2.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Кокосова стружка",
-        "quantity": 80.0,
-        "unit": "g"
-      },
-      {
-        "name": "Цукрозамінник (стевія)",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Творожний зефір",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Желатин",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Творог 5%",
-        "quantity": 400.0,
-        "unit": "g"
-      },
-      {
-        "name": "Молоко 2,5%",
-        "quantity": 200.0,
-        "unit": "g"
-      },
-      {
-        "name": "Цукрозамінник стевія",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Печене яблуко",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Яблуко",
-        "quantity": 150.0,
-        "unit": "g"
-      },
-      {
-        "name": "Волоський горіх",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Мед",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Кориця",
-        "quantity": 0.1,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Чипси з лаваша",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Олія",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Спеції",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Лаваш",
-        "quantity": 100.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Лаваш з моцарелою",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Лаваш",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Моцарела",
-        "quantity": 50.0,
-        "unit": "g"
-      },
-      {
-        "name": "Зелень",
-        "quantity": 30.0,
-        "unit": "g"
-      }
-    ]
-  },
-  {
-    "name": "Цільнозерновий хліб",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Борошно цільнозернове",
-        "quantity": 210.0,
-        "unit": "g"
-      },
-      {
-        "name": "Кефір 2,5%",
-        "quantity": 180.0,
-        "unit": "g"
-      },
-      {
-        "name": "Яйце",
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      {
-        "name": "Розпушувач",
+        "name": "французька гірчиця",
         "quantity": 10.0,
         "unit": "g"
       },
       {
-        "name": "Насіння соняшникове",
-        "quantity": 20.0,
-        "unit": "g"
-      },
-      {
-        "name": "Насіння льону",
-        "quantity": 5.0,
-        "unit": "g"
-      },
-      {
-        "name": "Кунжут",
-        "quantity": 5.0,
-        "unit": "g"
-      },
-      {
-        "name": "Сіль",
-        "quantity": 0.1,
+        "name": "лимонний сік",
+        "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Рослинна олія",
-        "quantity": 7.0,
+        "name": "мед 0,5 ч.л",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сухий часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ТЕПЛИЙ САЛАТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Маринуємо мʼясо з додаванням солі, перцю та паприки.\n2. Якщо є час - залишаємо маринуватись на 1 годинку в холодильнику.\n3. Обсмажуємо нарізані солодкі перці (посолити).\n4. Смажимо телятину.\n5. Заправка: соєвий соус, гірчиця, олія, перемішуємо.\n6. Викладаємо салат, помідори, зверху перець , телятину та заправку.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 15,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "листя салату",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "перець болгарський",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "соєвий соус (від Торчин)",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "телятина",
+        "quantity": 100.0,
+        "unit": "unit"
+      },
+      {
+        "name": "гірчиця французька",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
         "unit": "g"
       }
     ]
   },
   {
-    "name": "Ягідний смузі",
+    "name": "ПРОТЕЇНОВИЙ САЛАТ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Огірок чистимо, нарізаємо кубиком, додаємо квасолю, кукурудзу, видавлюємо зубчик часнику, додаємо петрушку та спеції.\n2. Заправляємо йогуртом, перемішуємо і смакуємо.",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 15,
+    "carbs": 50,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Суміш заморожених ягід",
+        "name": "грецький йогурт 10%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "петрушка (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кукурудза",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "червона квасоля",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "огірок",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "зубчик часника",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "САЛАТ “ЦЕЗАР”",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Обсмажуємо куряче філе (або філе індички) та відварюємо яйця.\n2. Чері нарізаємо навпіл, яйця нарізаємо начетверо.\n3. На дно тарілки викладаємо листя салату, яйця, чері, смажене філе.\n4. Перемішуємо і поливаємо соусом (замішуємо йогурт з гірчицею і лимонним соком).\n5. Посипаємо спеціями і тертим пармезаном.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 5,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "лимонний сік",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "гірчиця французька",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "салат айсберг",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "куряче філе / філе індички",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "пармезан",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "САЛАТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Окремо відварюємо курячі сердечка і яйця до готовності.\n2. Тим часом нарізаємо цибулю півкільцями, додаємо трішки олії і заливаємо кипʼятком (хай промаринується 10-15 хв).\n3. Сир сулугуні натираємо на терці.\n4. Готові сердечка розрізаємо навпіл, а яйця кубиками.\n5. Дрібно нарізаємо кріп і петрушку.\n6. Викладаємо всі інгредієнти в глибоку тарілку, заправляємо сметаною з гірчицею і спеціями.\n7. Добре перемішуємо.\n8. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 5,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "сметана 10%",
         "quantity": 60.0,
         "unit": "g"
       },
       {
-        "name": "Йогурт",
-        "quantity": 200.0,
-        "unit": "unit"
+        "name": "гірчиця франзуцька",
+        "quantity": 15.0,
+        "unit": "g"
       },
       {
-        "name": "Банан",
-        "quantity": 1.0,
-        "unit": "unit"
-      }
-    ]
-  },
-  {
-    "name": "Авокадо смузі",
-    "servings": 1,
-    "prep_time": 15,
-    "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
-    "dietary_tags": [],
-    "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
-    "ingredients": [
-      {
-        "name": "Авокадо",
+        "name": "курячі серця",
         "quantity": 100.0,
         "unit": "g"
       },
       {
-        "name": "Молоко 2,5%",
+        "name": "фіолетова цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир сулугуні",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "кріп/петрушка (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "САЛАТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Перець розрізаємо навпіл, ставимо в духовку на 180℃ до готовності (приблизно 30хв).\n2. Даємо перцю охолонути, знімаємо шкірку.\n3. Відварюємо буряк і яйця.\n4. На дно тарілки викладаємо руколу і шпинат, нарізаний дольками буряк та перець.\n5. Поливаємо соком лимона, солимо, перчимо.\n6. В кінці викладаємо яйця (нарізані начетверо) і кубики фети.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 10,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "буряк",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сік лимона",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "рукола",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "шпинат",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "перець болгарський",
         "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир фета",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БІЛКОВИЙ САЛАТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Яйця відварюємо і нарізаємо кубиками.\n2. Філе курки відварюємо і теж нарізаємо кубиками, потім додаємо шампіньйони та кукурудзу.\n3. Готуємо соус: йогурт 1,6%, соєвий соус та гірчиця.\n4. Всі інгредієнти перемішуємо та заправляємо соусом, зверху посипаємо зеленою цибулькою.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 15,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "куряче філе",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
         "unit": "unit"
       },
       {
-        "name": "Банан",
-        "quantity": 0.1,
+        "name": "кукурудза консервована",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "шампіньйони консервовані",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "соєвий соус",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "гірчиця",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля зелена",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль, перець та спеції",
+        "quantity": 1.0,
         "unit": "unit"
       }
     ]
   },
   {
-    "name": "Банановогрушевий смузі",
+    "name": "ЗЕЛЕНИЙ СУП",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Куряче стегно кладемо в каструлю з холодною водою і доводимо до кипіння.\n2. Як тільки вода закипає — зливаємо її.\n3. Заливаємо чисту холодну воду і вже відварюємо стегно до готовності.\n4. Коли мʼясо буде готове — дістаємо його.\n5. В каструлю з бульйоном закидаємо нарізану кубиками картоплю, цибулю і подрібнену моркву.\n6. Варимо. Щоб було смачніше, можна додати приправу «10 овочів».\n7. Тим часом подрібнюємо мʼясо і забираємо все зайве (шкіра, кістки і всілякі прожилки).\n8. Додаємо в бульйон, коли овочі будуть майже готові.\n9. Попередньо відварене яйце нарізаємо кубиками і теж додаємо в суп.\n10. За кілька хвилин до готовності, додаємо дрібну вермішель для супів, накриваємо кришкою.\n11. В самому кінці додаємо дрібно нарізану петрушку, сметану.\n12. КБЖВ на 1 порцію:",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 25,
+    "carbs": 25,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Банан",
+        "name": "стегно куряче",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця .",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цибуля",
         "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Груша",
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "петрушка",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "макарони",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "картопля",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сметана 10%",
+        "quantity": 70.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "АРАБСЬКИЙ СУП",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В розігрітий казанок вливаємо олію і смажимо телятину (попередньо нарізану невеличкими шматочками).\n2. Просмажуємо мʼясо на великому вогні, коли трішки підсмажиться, додаємо подрібнену цибулю і зменшуємо вогонь.\n3. На помідорі зверху робимо хрестоподібний надріз і ставимо в окріп, щоб легко зняти шкірку.\n4. Через кілька хвилин дістаємо помідор, знімаємо шкірку і перетираємо на терці, отримуємо таку кашку.\n5. Перетертий помідор додаємо до мʼяса, тушкуємо до готовності.\n6. Коли мʼясо протушкується, заливаємо кипʼяток, додаємо рис, нут і сочевицю.\n7. Солимо, перчимо, накриваємо кришкою і варимо, доки не зготується крупа.\n8. */ нут купуємо готовий консервований або сирий **/ якщо нут сирий, то його попередньо потрібно замочити у воді на цілу ніч, щоб він швидше зварився.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 25,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "нут",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "рис",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "сочевиця",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "теляча вирізка",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
         "quantity": 1.0,
         "unit": "unit"
       }
     ]
   },
   {
-    "name": "Шпинатний смузі",
+    "name": "БОРЩ",
     "servings": 1,
     "prep_time": 15,
     "cook_time": 5,
-    "instructions": "",
-    "category": "Breakfast",
+    "instructions": "1. Нарізаємо картоплю, 1 цілу цибулину надрізаємо хрестиком, так само зубчики часнику.\n2. Заливаємо холодною водою і ставимо на плиту до закипання.\n3. Нарізаємо телятину невеличкими шматочками і просмажуємо на сковорідці.\n4. Додаємо трішки води, щоб мʼясо протушкувалося.\n5. Коли мʼясо протушкується, солимо його і перчимо.\n6. Коли картопля закипить, додаємо телятину, заправку до борщу з болгарським перцем (або томатну пасту), готовий натертий буряк, оцет, цукор, засмажку з моркви та цибулі.\n7. Варимо до готовності.\n8. Вкінці виймаємо цілу цибулину і часник, додаємо подрібнену зелень та спеції, накриваємо кришкою для настоювання.\n9. КБЖВ на 1 порцію:",
+    "category": "Main",
     "dietary_tags": [],
     "calories": 0,
-    "protein": 0,
-    "carbs": 0,
-    "fats": 0,
-    "breakfast_weight": 0.1,
-    "lunch_weight": 0.2,
-    "dinner_weight": 0.1,
+    "protein": 15,
+    "carbs": 30,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
     "ingredients": [
       {
-        "name": "Шпинат",
+        "name": "картопля",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "теляча вирізка",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "капуста молода",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "заправка з болгарським перцем",
+        "quantity": 100.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "оцет",
+        "quantity": 10.0,
+        "unit": "мл"
+      },
+      {
+        "name": "цукор",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "зелень",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "КАРТОПЛЯ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Цибулю обсмажуємо на олії і відкладаємо в сторону.\n2. Обсмажуємо печінку з кожного боку по приблизно 5 хв, щоб не витікала кров (без олії).\n3. Додаємо обсмажену цибулю, 2 ст.\n4. ложки йогурту 1,6% та спеції.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 45,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "печінка куряча",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "картопля",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПЛОВ З КУРКОЮ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Обсмажуємо курку разом з цибулею, після додаємо нарізану тоненькими скибочками моркву, додаємо спеції.\n2. Даємо протушитись 7 хвилин, після чого засипаємо в сковорідку рис та заливаємо водою, щоб вона повністю покрила всі інгредієнти та накриваємо кришкою.\n3. Тушкуємо на маленькому вогні до готовності.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 60,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "рис басматі",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "філе куряче або індички",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля, часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції (куркума, паприка,",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "зіра (кумін)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПАСТА БОЛОНЄЗЕ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. На сковорідці обсмажуємо цибулю з морквою (попередньо перетертою на терці).\n2. Через кілька хвилин додаємо фарш.\n3. Потім додаємо помідор, нарізаний маленькими кубиками.\n4. Додаємо спеції і томатну пасту.\n5. Тушкуємо до готовності.\n6. Окремо відварюємо спагеті.\n7. Додаємо їх до фаршу, перемішуємо, посипаємо подрібненою петрушкою.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 50,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "петрушка",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "спагеті",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "фарш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "томатна паста",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЗАПІКАНКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. На терці подрібнюємо кабачок, додаємо 1 яйце, дрібно нарізаний помідор і попередньо відварені макарони.\n2. Добре перемішуємо.\n3. У форму для випікання викладаємо першим шаром філе, зверху кабачкову масу з макаронами.\n4. Так само накладаємо другий шар.\n5. Зверху викладаємо кукурудзу.\n6. Запікаємо в духовці 50хв.\n7. при 180℃. Вкінці посипаємо тертим сиром і запікаємо ще 10хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 50,
+    "carbs": 50,
+    "fats": 30,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кукурудза",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "кабачок",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "макарони",
+        "quantity": 60.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПШЕНИЧНА КАША",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо пшеничну крупу до готовності, додаємо тунець, зверху посипаємо фетою.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 40,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "пшенична крупа",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "тунець у власному соку",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир фета",
+        "quantity": 40.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ДОМАШНЯ ШАУРМА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Філе маленькими кубиками обсмажуємо на сухій сковорідці, відкладаємо в тарілку.\n2. Додаємо кукурудзу, нарізаний помідор та перець маленькими кубиками, сир на терці та змішуємо кетчупом або томатною пастою, додаємо спеції та викладаємо на лаваш.\n3. Ставимо на гарячу сковорідку та накриваємо кришкою або кладемо на гриль.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 40,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "перець болгарський",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир твердий",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "кетчуп або томатна паста",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "лаваш 1шт ()",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "філе куряче",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "кукурудза",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "МАКАРОНИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо макарони, кубиками обсмажуємо філе з цибулею.\n2. Змішуємо це все зі сметаною.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 45,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "спагеті",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "індичка або куряче філе",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "сметана 10%",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "КУРЯЧІ КОТЛЕТИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В блендері збиваємо куряче філе, цибулю і яйце.\n2. На терці перетираємо кабачок і моркву.\n3. Змішуємо все в однорідний фарш і формуємо котлетки.\n4. Сковорідку змащуємо краплею олії.\n5. Котлети смажимо по кілька хвилин з обох сторін до готовності.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 0,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кабачок",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія  (для смаження)",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ФІЛЕ ЧЕРВОНОЇ РИБИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До філе червоної риби додаємо спеції, олію не додаємо.\n2. Окремо нарізаємо батат з овочами, перемішуємо зі спеціями без олії.\n3. Викладаємо на сковорідку на пергамент і ставимо в духовку на 180℃ на 20-30хв (до готовності).",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 35,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "запечені овочі",
+        "quantity": 250.0,
+        "unit": "unit"
+      },
+      {
+        "name": "філе червоної риби",
+        "quantity": 150.0,
+        "unit": "unit"
+      },
+      {
+        "name": "батат",
+        "quantity": 200.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ЧОВНИК",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Розрізаємо баклажани навпіл і робимо глибокі надрізи сіточкою.\n2. Запікаємо в духовці 20хв при 180℃.\n3. Далі ложкою розминаємо мʼякоть баклажана, щоб вона стала подібною до каші або пюре.\n4. Солимо, перчимо за смаком.\n5. Окремо дрібно нарізаємо чері, філе індички, моцарелу і викладаємо це все в баклажанові човники.\n6. Запікаємо ще 20-30хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 45,
+    "carbs": 15,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "моцарела",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "філе індички",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "баклажан великий",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЗАПЕЧЕНЕ ДОРАДО",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. На рибці робимо надрізи, посипаємо спеціями, натираємо (без олії) і залишаємо маринуватись.\n2. Окремо нарізаємо картоплю дольками, додаємо спеції (без олії), перемішуємо і виставляємо у форму на пергамент разом з рибкою.\n3. Запікаємо в духовці 30хв.\n4. при 180℃. Тим часом готуємо салат.\n5. До міксу салату, додаємо авокадо, спеції і трішки лимонного соку.\n6. Акуратно перемішуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 45,
+    "carbs": 40,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "мікс зелені",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "авокадо",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "лимон",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "дорадо",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "картопля",
+        "quantity": 200.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "РИБА ХЕК",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Заморожену рибу нарізаємо на шматки і закидаємо в кипʼяток на 5 хв, далі розрізаємо, вичищуємо хребет щоб отримати філе.\n2. Окремо смажимо цибулю з тертою морквою до готовності.\n3. Додаємо трішки рибного бульйону, спеції і чайну ложку борошна.\n4. Ретельно перемішуємо, щоб маса була однорідною.\n5. Потім додаємо сметану, перемішуємо.\n6. Зверху викладаємо рибу, накриваємо кришкою і тушкуємо до 5хв.\n7. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 5,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "заморожений хек",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сметана 10%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "борошно",
         "quantity": 15.0,
-        "unit": "unit"
+        "unit": "g"
       },
       {
-        "name": "Вода",
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ТУНЕЦЬ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Тунець розморожуємо, натираємо спеціями і ставимо на гриль або на суху сковорідку.\n2. Обсмажуємо до готовності.\n3. Тим часом квасолю пару хвилин проварюємо.\n4. На розігріту сковорідку вливаємо трішки олії і обсмажуємо проварену квасолю разом з помідорами чері, додаємо спеції.\n5. Після цього викладаємо овочі на тарілку та зверху викладаємо тунець і поливаємо лимонним соком.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 10,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сік лимону",
         "quantity": 1.0,
         "unit": "unit"
       },
       {
-        "name": "Лимон",
-        "quantity": 0.1,
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "заморожений тунець",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "стручкова квасоля",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "КУРЯЧІ ГОМІЛКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Промиваємо гомілки, заливаємо соєвим соусом, додаємо спеції (сіль, перець, паприка, приправа до курки) і ще додаємо мед та цибулю (нарізану кільцями).\n2. Перемішуємо, накриваємо плівкою та залишаємо маринуватись на 1-2 год.\n3. Промариновані гомілки ставимо в розігріту духовку на 180℃ до готовності (приблизно на 40хв.\n4. ). Тим часом відварюємо будь-який гарнір та подаємо з гомілками.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 50,
+    "fats": 11,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "гарнір (крупи)",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "курячі гомілки",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "соєвий соус (від Торчин)",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "мед",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЛІНИВІ ВАРЕНИКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До сиру додаємо кокосову стружку, цукрозамінник, мак і борошно.\n2. Перемішуємо до однорідності, формуємо кульки.\n3. Закидаємо кульки в киплячу воду, варимо приблизно 3 хв.\n4. Викладаємо ліниві варенички в тарілку і поливаємо йогуртом.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 20,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир кисломолочний 5%",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "кокосова стружка",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "цукрозамінник (стевія)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "борошно",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "СПАГЕТІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо спагеті.\n2. Креветки (готові або заморожені) обсмажуємо на сковорідці зі спеціями (без олії).\n3. На цю ж сковорідку до креветок додаємо спагеті, сметану і нарізаний кубиками авокадо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 45,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сметана 10%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спагеті",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "креветки",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "авокадо",
+        "quantity": 80.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ЛАВАШ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Змішуємо два сири, додаємо стевію, мак і перемішуємо до однорідності.\n2. Сирну масу викладаємо на лаваш, скручуємо і підсмажуємо на сухій сковорідці (без олії) з обох сторін.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 25,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "лаваш",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир кисломолочний",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "(нежирний) 0.2%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир кисломолочний 5%",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "стевія (підсолоджувач)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "мак",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "КУРЯЧІ КЕКСИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Куряче філе, помідори і моцарелу дрібно нарізаємо.\n2. Додаємо яйце, сіль, спеції, борошно і добре перемішуємо.\n3. Виливаємо суміш у форму для кексів силіконову (щоб не прилипало).\n4. Ставимо кекси в розігріту духовку на 20-30хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 20,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "борошно ц/з",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "моцарела",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПЕЧІНКОВИЙ ПАШТЕТ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Всі інгредієнти ставимо в форму для запікання і в розігріту духовку до 180℃ на 50хв.\n2. (орієнтуйтеся по своїй духовці).\n3. По готовності виймаємо з духовки, перемелюємо в блендері до однорідності.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 10,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "оливкова олія",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "куряча печінка",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "морква",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ШАШЛИК НА ШПАЖКАХ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Куряче філе нарізаємо невеликими шматочками.\n2. Одну половину цибулі натираємо на дрібну терку.\n3. Другу половину нарізаємо кільцями.\n4. Солимо, додаємо спеції та лавровий лист.\n5. Все разом перемішуємо і лишаємо маринуватися на 30-60 хвилин.\n6. Нанизуємо на шпажки мясо, гриби та перець.\n7. Ставимо в духовку на 180℃ на 30хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 0,
+    "fats": 2,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "італійські трави",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "приправа до курки",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "лавровий лист",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "гриби",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "перець болгарський",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль, перець",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "паприка",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сушений часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "БІЛКОВИЙ ПИРІГ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Натираємо сир на терці, нарізаємо дрібними кубиками цибулю та перець.\n2. Окремо збиваємо яйця, до них нарізаємо дрібними квадратиками лаваш, дрібно нарізану курку.\n3. Додаємо тертий сир, перець, цибулю, зелень та спеції.\n4. Форму для запікання застеляємо пергаментом, виливаємо суміш та ставимо в розігріту духовку на 20-30хв при 180℃.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 60,
+    "carbs": 25,
+    "fats": 25,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир сулугуні",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "перець болгарський",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "відварене куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "лаваш",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "зелень",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ФАРШИРОВАНІ ПЕРЦІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Перці розрізаємо навпіл, виймаємо серцевину та ставимо в духовку на 180℃ на 25хв.\n2. Тим часом мілко нарізаємо цибулю і натираємо моркву, смажимо.\n3. До засмажки додаємо курячий фарш і томатну пасту зі спеціями.\n4. Тушкуємо до готовності.\n5. Виймаємо перець з духовки, накладаємо фарш.\n6. Зверху посипаємо тертим сиром і знову в духовку на 200℃ на 1015хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 10,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "томатна паста",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "болгарський перець",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "курячий фарш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "СОКОВИТА КУРКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Грудинку надрізаємо вздовж, але не до кінця розрізаємо.\n2. Натираємо сіллю зі спеціями.\n3. На одну половину грудинки викладаємо шпинат, дольки помідори та сиру.\n4. Накриваємо зверху другою половинкою і скріплюємо зубочистками.\n5. Запікаємо в духовці 40хв при 180℃.\n6. По готовності виймаємо та смакуємо.\n7. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 0,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "куряче філе",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир моцарела",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "шпинат",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "МЛИНЦІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Яйця змішуємо з підсолоджувачем, додаємо 200г води кімнатної температури, перемішуємо.\n2. Через сито просіюємо борошно, перемішуємо так, щоб не було комочків.\n3. Додаємо склянку гарячої води і решту борошна.\n4. Добре перемішуємо, тісто має бути однорідне.\n5. Перед першим млинцем змащуємо сковорідку олією, далі смажимо без олії.\n6. Для начинки до кисломолочного сиру додаємо 2 ст.\n7. л. йогурту 1,6% і цукрозамінник.\n8. Перемішуємо та розподіляємо начинку по млинцях і закручуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 45,
+    "carbs": 65,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "борошно",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "вода",
+        "quantity": 400.0,
+        "unit": "мл"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "стевія (цукрозамінник)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "йогурт 1,6%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "кисломолочний сир нежирний 0.2%",
+        "quantity": 200.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "МЛИНЦІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Перебиваємо яйця, додаємо склянку води кімнатної температури, перемішуємо.\n2. Через сито просіюємо борошно, перемішуємо, так щоб не було комочків.\n3. Додаємо склянку гарячої кипʼяченої води і решту борошна.\n4. Добре перемішуємо, тісто має бути однорідне.\n5. Перед першим млинцем змащуємо сковорідку олією, далі смажимо без олії.\n6. Для начинки відварюємо курку.\n7. Гриби просмажуємо, додаємо відварену курку та вершки.\n8. Тушкуємо до випаровування зайвої рідини.\n9. Вкінці додаємо спеції, загортаємо начинку в млинці і смакуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 36,
+    "carbs": 60,
+    "fats": 24,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "борошно",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "вода",
+        "quantity": 400.0,
+        "unit": "мл"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "гриби",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "вершки 10%",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "МЛИНЦІ ЗІ ШПИНАТУ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Промиваємо шпинат, закидаємо в чашу блендера, додаємо яйця і подрібнюємо.\n2. Якщо у вас велика чаша блендера, то можна додати решту інгредієнтів і перебити до однорідності.\n3. Якщо чаша мала, то просто замішуємо рідке тісто в глибокій посудині.\n4. Головне добре перемішати, щоб не було комочків.\n5. Розігріту сковорідку змащуємо олією і смажимо млинці на середньому вогні лише з одного боку (так буде гарніше забарвлення).\n6. На готові млинці намазуємо сирну намазку і викладаємо шматочки риби.\n7. Загортаємо в рулет, розрізаємо навпіл, викладаємо в тарілку і смакуємо.\n8. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 60,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "молоко 0,5% жирності",
+        "quantity": 400.0,
+        "unit": "мл"
+      },
+      {
+        "name": "шпинат",
+        "quantity": 120.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "борошно",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія (для смаження)",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль/спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сирна намазка",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "риба червона слабосолена",
+        "quantity": 80.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ВІВСЯНА ПІЦА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До 100г сиру додати 1 яйце і перебити блендером до однорідності.\n2. До сирної маси додаємо 40г вівсянки, сіль, спеції, перемішуємо і залишаємо набухати на 10-15 хв.\n3. Тим часом нарізаємо слайсами чері і натираємо сир.\n4. На розігріту сковорідку вливаємо трішки олії, та викладаємо вівсяну масу.\n5. Формуємо круглий млинець, обсмажуємо з двох сторін.\n6. Як тільки перевертаємо млинець, викладаємо помідори, тертий сир та петрушку.\n7. Накриваємо кришкою, щоб розплавився сир.\n8. По готовності викладаємо на тарілку, розрізаємо на шматочки, ніби піцу, та смакуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 30,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир сулугуні",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "петрушка",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "олія",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир кисломолочний (нежирний)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "вівсянка",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ПАСТА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Ставимо на плиту каструльку з водою, доводимо до кипіння, всипаємо макарони, варимо до готовності.\n2. Тим часом ставимо в духовку сир фета, чері та нарізаний кубиками лосось.\n3. Запікаємо 15-20хв при 180℃.\n4. Запечену рибу з сиром і помідорами виймаємо з духовки, додаємо відварені макарони, перемішуємо, викладаємо на тарілку і смакуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 50,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "свіжий лосось (філе)",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "макарони",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир фета",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідори чері",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЛІНИВА ЛАЗАНЬЯ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Ошпарюємо помідори, знімаємо шкірочку і перебиваємо блендером в пюре.\n2. На сковорідці обсмажуємо цибулю, часник, додаємо фарш і обсмажуємо разом.\n3. Потім додаємо сіль, спеції, томатну пасту і пюре помідорів, воду, зелень і крупно ламані листи лазаньї.\n4. Добре перемішуємо і накриваємо кришкою.\n5. Готуємо на малому вогні 15хв.\n6. Вкінці додаємо тертий сир, перемішуємо.\n7. Через пару хвилин викладаємо на тарілку, зверху трішки посипаємо сиром та прикрашаємо базиліком.\n8. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 45,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "томатна паста",
+        "quantity": 120.0,
+        "unit": "g"
+      },
+      {
+        "name": "зелень (петрушка, кінза, базилік)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "вода",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "листи лазаньї",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "фарш яловичий",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "РИБНІ КОТЛЕТИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Філе риби подрібнюємо в блендері разом з яйцем.\n2. До рибного фаршу додаємо борошно та спеції, ретельно перемішуємо і формуємо котлетки.\n3. Обсмажуємо котлети на розігрітій сухій сковорідці з обох сторін (без олії).\n4. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 10,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "філе риби минтай",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "борошно",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "КУРЯЧІ ГНІЗДА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. На розігрітій сковорідці обсмажуємо цибулю, додаємо дрібно нарізані гриби, смажимо до готовності.\n2. В глибоку тарілку викладаємо обсмажені гриби, дрібно нарізані помідори, сметану (за бажанням можна додати зелень), змішуємо.\n3. Курячий фарш солимо/перчимо, додаємо спеції і соєвий соус за смаком.\n4. Добре перемішуємо і кульками викладаємо на деко (застелене пергаментом).\n5. Ложку змочуємо водою і формуємо з фаршу гніздечка, викладаємо в них начинку.\n6. Випікаємо в розігрітій духовці 30хв.\n7. при 180℃. Зверху посипаємо тертим сиром і ставимо в духовку ще на пару хв, щоб розплавився сир.\n8. Виймаємо з духовки готові гніздечка і посипаємо зверху зеленою цибулькою.\n9. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 0,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "курячий фарш",
+        "quantity": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "шампіньйони (печериці)",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор .",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сметана",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир сулугуні",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія (для смаження)",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль, перець, спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "соєвий соус",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цибуля зелена",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "КАРТОПЛЯНІ ВАФЛІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо або запікаємо цілу картоплю в духовці.\n2. Ставимо у вафельницю, притискаємо і запікаємо 7хв.\n3. На готову вафлю намазуємо сир Філадельфія, зверху викладаємо червону рибку і огірок.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 45,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "червона риба",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "огірок",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "картопля",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир Філадельфія",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БАТЕР ЧІКЕН",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Куряче філе натираємо сумішшю спецій і ставимо маринуватися в холодильник до 1 години часу, потім обсмажуємо до 80% готовності.\n2. Виймаємо курку і в ту ж саму сковорідку ставимо смажитись цибулю.\n3. л. томатної пасти, всі ті самі спеції, консервовані помідори 300г.\n4. і 100г. вершків 10% По готовності, перебиваємо засмажку блендером, має утворитися однорідний соус.\n5. Отриманий соус вливаємо знову на сковорідку і додаємо смажену курку.\n6. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 5,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "філе куряче",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "сметана",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "сік лимона",
+        "quantity": 0.25,
+        "unit": "unit"
+      },
+      {
+        "name": "зубчик часнику",
+        "quantity": 3.0,
+        "unit": "unit"
+      },
+      {
+        "name": "імбир",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "томатна паста",
+        "quantity": 20.0,
+        "unit": "п"
+      },
+      {
+        "name": "консервовані помідори",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "вершки  10%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "карі",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "куркума",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "коріандр",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сушений імбир",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сушений часник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "паприка копчена",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "чилі (якщо є)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль/перець за смаком",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "КАБАЧКОВІ ОЛАДКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Натираємо кабачок на терці, віджимаємо зайвий сік.\n2. До кабачка додаємо яйце, крохмаль, сіль та спеції.\n3. Добре перемішуємо і смажимо на розігрітій сковороді з двох сторін, до готовності.\n4. Готові оладки викладаємо на тарілку, зверху викладаємо сметану та червону рибку.\n5. Збоку викладаємо мікрозелень та нарізаний помідор.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 15,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кабачки",
+        "quantity": 350.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир твердий",
+        "quantity": 40.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кукурудзяний крохмаль",
+        "quantity": 1.0,
+        "unit": "ст.л"
+      },
+      {
+        "name": "сіль/спеції за смаком",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "червона риба",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "сметана",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "мікрогрін (мікрозелень)",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ФАРШИРОВАНІ ПЕРЦІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Перець розрізаємо навпіл і запікаємо в духовці 20-30 хв при 180℃.\n2. До сиру кисломолочного додаємо сметану, подрібнений волоський горіх і зелень, та видавлюємо часник.\n3. Солимо/ перчимо за смаком, добре перемішуємо.\n4. По готовності виймаємо та охолоджуємо перець, очищуємо від шкірки і насіння.\n5. Викладаємо начинку в перець і закручуємо в рулетики.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 5,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "горіхи волоські",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль/перець",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "зубчик часнику",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "болгарський перець",
+        "quantity": 4.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир кисломолочний (нежирний)",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "кріп",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ПЕЧІНКОВІ РУЛЕТИКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Печінку перебиваємо блендером, додаємо туди яйце, молоко, борошно і сіль зі спеціями.\n2. Все збиваємо до однорідності.\n3. Смажимо на розігрітій сковорідці з обох сторін.\n4. Для начинки дрібно нарізаємо цибулю, моркву натираємо на терці.\n5. Протушуємо на сковорідці, доливаємо трішки води, пасируємо.\n6. В глибоку тарілку нарізаємо помідори кубиками, додаємо кріп, часник і засмажку.\n7. Перемішуємо, намазуємо на млинці і скручуємо рулетиком.\n8. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 15,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "печінка куряча",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "молоко 0,5% жирності",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "борошно",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "олія для смаження",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "сіль/спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква велика",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідор",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "часник зубчик",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кріп (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль/перець (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ОВОЧЕВА ЗАПІКАНКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Цвітну капусту і броколі злегка проварюємо, до стану «альденте».\n2. Тим часом окремо натираємо на терці моркву та сулугуні.\n3. Напівготові броколі і цвітну капусту нарізаємо кубиком, додаємо натерті сир та моркву, 3 яйця і спеції.\n4. Добре все перемішуємо і викладаємо у форму для запікання (попередньо застелену пергаментом).\n5. Ставимо в розігріту духовку до 180℃ на 20 хв.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 0,
+    "fats": 35,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир сулугуні",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 3.0,
+        "unit": "unit"
+      },
+      {
+        "name": "спеції (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "морква",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цвітна капуста",
+        "quantity": 0.5,
+        "unit": "unit"
+      },
+      {
+        "name": "броколі",
+        "quantity": 0.5,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "КУРЯЧІ СОСИСКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В чашу блендера закидаємо куряче філе, цибулю, яйце і спеції.\n2. Перебиваємо до стану фаршу.\n3. На харчову плівку ковбасками викладаємо фарш, загортаємо в плівку і скручуємо.\n4. Сформовані сосиски ставимо варитися на 7-10 хв.\n5. Готові сосиски подаємо з будь-яким гарніром.\n6. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 0,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сіль/перець (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "куряче філе",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЛІНИВІ ГОЛУБЦІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Листи капусти ставимо в каструлю з водою і пропарюємо до мʼякого стану.\n2. Тим часом на терці натираємо моркву, дрібно нарізаємо зелену цибулю і креветки (попередньо відварені).",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 40,
+    "carbs": 3,
+    "fats": 2,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "морква 1 маленька",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "соєвий соус/теріякі 2 ст ложки",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "пекінська капуста",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "креветки",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "зелена цибуля",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "БОУЛ З ЛОСОСЕМ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо рис до готовності.\n2. Тим часом нарізаємо кубиками огірок та лосось, шинкуємо капусту, додаємо оливки.\n3. Викладаємо все в глибоку тарілочку і смакуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 55,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "огірок",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "вибір)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "оливки",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "лосось слабосолений",
+        "quantity": 80.0,
+        "unit": "g"
+      },
+      {
+        "name": "рис",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "червона капуста",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БОУЛ З КУРКОЮ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Окремо відварюємо кускус і яйце.\n2. Тим часом нарізаємо курку невеликими кубиками і обсмажуємо на сковорідці до готовності.\n3. На тарілку викладаємо готовий кускус, збоку викладаємо обсмажену курку, горошок, яйце (розрізаємо начетверо), нарізаний кубиками помідор і салат айсберг.\n4. Зверху посипаємо кунжутом і боул готовий.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 50,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кускус",
+        "quantity": 70.0,
+        "unit": "g"
+      },
+      {
+        "name": "курка",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "горошок (консервований)",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "салат айсберг",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кунжут",
+        "quantity": 10.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БОУЛ З ТЕЛЯТИНОЮ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Окремо відварюємо булгур і броколі (до готовності).\n2. Тим часом нарізаємо телятину на маленькі шматочки і обсмажуємо на сковорідці без олії, тушкуємо під кришкою до готовності.\n3. На тарілку викладаємо готовий булгур, поруч кладемо телятину, болгарський перець, відварені броколі, квасолю і салат айсберг і посипаємо насінням кунжуту.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 50,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "квасоля червона відварена",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "або консервована",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "салат айсберг",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кунжут",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "булгур",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "телятина",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "перець болгарський",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "броколі",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БОУЛ ТЕРІЯКІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Окремо відварюємо рис і броколі.\n2. Тим часом нарізаємо курку невеличкими кубиками і обсмажуємо на сковорідці.\n3. Коли мʼясо підсмажиться, додаємо 1 ст.\n4. л. соєвого соусу теріякі, перемішуємо і прибираємо з вогню.\n5. В тарілочку викладаємо рис, поруч накладаємо курку, дрібно нарізаний помідор, авокадо, кукурудзу і відварені броколі.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 65,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "кукурудза (консервована)",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "броколі",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "соєвий соус теріякі",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "рис",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "курка",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "помідор",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "авокадо",
+        "quantity": 70.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПРОТЕЇНОВЕ ЖЕЛЕ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В чашу блендера додаємо сир, банан, кокосове молоко і збиваємо до однорідності.\n2. Желатин заливаємо водою або кокосовим молоком і залишаємо розбухати.\n3. До сиркової маси додаємо замінник цукру і розтоплений желатин (розтопити желатин можна на паровій бані або в мікрохвильовці).\n4. Знову збиваємо, заливаємо в силіконову форму і ставимо в холодильник на 3-4 годинки.\n5. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 15,
+    "fats": 2,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "желатин",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "цукрозамінник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "2 ст.л. какао",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир кисломолочний (нежирний) 0.2%",
+        "quantity": 500.0,
+        "unit": "g"
+      },
+      {
+        "name": "банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "молоко 1%",
+        "quantity": 300.0,
+        "unit": "мл"
+      }
+    ]
+  },
+  {
+    "name": "КУКУРУДЗЯНА КАША",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Відварюємо кашу.\n2. Коли вона трішки охолоне, додаємо 1 порцію протеїну.\n3. Нарізаємо ківі, додаємо корицю, мак і все перемішуємо.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 50,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "ківі",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "кориця",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "мак",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "кукурудзяна крупа",
+        "quantity": 50.0,
+        "unit": "g"
+      },
+      {
+        "name": "вода",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "протеїн шоколад",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ПРОТЕЇНОВІ ПАНКЕЙКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Протеїнову суміш розчиняємо з молоком, додаємо яйце, перемішуємо до однорідності.\n2. Тісто смажимо на розігрітій сковорідці, без олії.\n3. Готові панкейки поливаємо згущеним молоком.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 25,
+    "carbs": 65,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "знежирене згущене молоко",
+        "quantity": 20.0,
+        "unit": "g"
+      },
+      {
+        "name": "протеїнова суміш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "молоко 1%",
+        "quantity": 80.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ШОКОЛАДНИЙ БРАУНІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В чашу блендера кладемо банан, яйця та какао.\n2. Перебиваємо до однорідної маси.\n3. Виливаємо тісто у форму для випічки і посипаємо зверху горішками.\n4. Випікаємо 25хв при температурі 180℃.\n5. Дістаємо готовий брауні і насолоджуємося.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 20,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "какао",
+        "quantity": 1.0,
+        "unit": "ст.л."
+      },
+      {
+        "name": "горішки",
+        "quantity": 10.0,
+        "unit": "g"
+      },
+      {
+        "name": "банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ШОКОЛАДНОПРОТЕЇНОВІ КЕКСИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До сиру додаємо яйця, вишні та борошно, добре перемішуємо.\n2. Викладаємо сирну масу в силіконові формочки, запікаємо 30хв при 180℃.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 45,
+    "carbs": 35,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир кисломолочний (нежирний) 0.2%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "вишні (свіжі або заморожені)",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "борошно",
+        "quantity": 30.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "БІЛКОВА БУЛКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. До жовтків додаємо сир і збиваємо блендером до однорідності.\n2. Окремо збиваємо білки з 1 ст.\n3. л. крохмалю і підсолоджувачем (збиваємо до густих піків).\n4. До збитих білків додаємо жовтки з сиром, акуратно перемішуємо і додаємо ягоди.\n5. Викладаємо тісто на пергамент і запікаємо в розігрітій духовці 20 хв.\n6. при 160℃. В процесі випікання ні в якому разі не відкриваємо дверцята духовки, інакше білки опадуть.\n7. По готовності виймаємо булку і насолоджуємося.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 35,
+    "carbs": 40,
+    "fats": 15,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "яйця",
+        "quantity": 3.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "крохмаль кукурудзяний",
+        "quantity": 1.0,
+        "unit": "ст.л."
+      },
+      {
+        "name": "підсолоджувач (стевія)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "ягоди",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ЛАВАШ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В ковшик кладемо вишні (якщо заморожені, то попередньо розморозити), кукурудзяний крохмаль і трішки води.\n2. Нагріваємо помішуючи, поки не загустіє крохмаль.\n3. Окремо в глибоку миску кладемо сир, яйце, підсолоджувач і перебиваємо блендером, або перемішуємо виделкою.\n4. На пергамент кладемо тонкий лист лавашу, рівномірно розподіляємо сирну масу і викладаємо вишні.\n5. Акуратно загортаємо лаваш в рулет, зверху змащуємо яйцем.\n6. Ставимо в розігріту духовку до 180℃, випікаємо 25-30хв.\n7. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 20,
+    "carbs": 50,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "лаваш",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйця",
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      {
+        "name": "кукурудзяний крохмаль",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "вишні (без кісточок)",
+        "quantity": 150.0,
+        "unit": "g"
+      },
+      {
+        "name": "цукрозамінник (до смаку)",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЯБЛУЧНИЙ ПИРІГ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Яблуко натираємо на терці або нарізаємо маленькими кубиками.\n2. Все змішуємо разом і ставимо в духовку на 30-35 хв на 180 градусів.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 45,
+    "carbs": 35,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 250.0,
+        "unit": "g"
+      },
+      {
+        "name": "борошно",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "яблуко",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "цукрозамінник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "горіхи",
+        "quantity": 20.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "СИРНА ЗАПІКАНКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Вівсянку заливаємо окропом і залишаємо на 10-15 хв, щоб пропарилась.\n2. В блендері змішуємо сир, банан, яйце, йогурт, пропарену вівсянку.\n3. Збиваємо. Отриману масу виливаємо у силіконову форму, зверху викладаємо вишню.\n4. Ставимо в розігріту духовку до 180℃ на 30-40хв.\n5. *якщо немає блендера, можна перемішати всі інгредієнти вручну.\n6. КБЖВ на 1 порцію:",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 30,
+    "carbs": 50,
+    "fats": 7,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 300.0,
+        "unit": "g"
+      },
+      {
+        "name": "банан",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйце",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "йогурт (густий) 1.6%",
+        "quantity": 60.0,
+        "unit": "g"
+      },
+      {
+        "name": "вівсянка",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "вишня",
+        "quantity": 100.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ЗАПЕЧЕНІ ЯБЛУКА",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Кисломолочний сир змішуємо з какао, додаємо подрібнені горіхи і цукрозамінник.\n2. Перемішуємо до однорідності.\n3. З яблук вичищуємо серцевину і викладаємо всередину начинку.\n4. Запікаємо в розігрітій духовці до 180℃ (приблизно 20-25хв).",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 25,
+    "fats": 10,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "горіхи (волоський горіх)",
+        "quantity": 15.0,
+        "unit": "g"
+      },
+      {
+        "name": "цукрозамінник (стевія)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яблука",
+        "quantity": 4.0,
+        "unit": "unit"
+      },
+      {
+        "name": "сир кисломолочний 0.2%",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "100г",
+        "quantity": 100.0,
+        "unit": "g"
+      },
+      {
+        "name": "какао 1 чайна ложка",
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    ]
+  },
+  {
+    "name": "ЯБЛУЧНІ ОЛАДКИ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. Яблука очищуємо, подрібнюємо на терці (середньої величини).\n2. Додаємо яйце, трішки йогурту, борошно з розпушувачем, цукрозамінник.\n3. Ретельно перемішуємо, консистенція тіста має вийти така, як на звичайні оладки.\n4. На суху розігріту сковорідку викладаємо тісто (без олії).\n5. Смажимо оладки з двох сторін.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 10,
+    "carbs": 40,
+    "fats": 5,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "яблука",
+        "quantity": 200.0,
+        "unit": "g"
+      },
+      {
+        "name": "борошно",
+        "quantity": 30.0,
+        "unit": "g"
+      },
+      {
+        "name": "розпушувач",
+        "quantity": 5.0,
+        "unit": "g"
+      },
+      {
+        "name": "цукрозамінник",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "яйце .",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "йогурт питний 1,6%",
+        "quantity": 50.0,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "name": "ШОКОЛАДНИЙ БРАУНІ",
+    "servings": 1,
+    "prep_time": 15,
+    "cook_time": 5,
+    "instructions": "1. В чаші блендера збиваємо чищені яблука, яйця і розпушувач (за бажанням додаємо ваніль/корицю).\n2. Перебиваємо все до однорідності.\n3. Отримане тісто виливаємо у 2 малі формочки змащені олією (або 1 велику форму).\n4. Випікаємо в розігрітій духовці до 180℃ 30-40хв.\n5. По готовності можна полити дієтичним сиропом і прикрасити ягодами.",
+    "category": "Main",
+    "dietary_tags": [],
+    "calories": 0,
+    "protein": 15,
+    "carbs": 25,
+    "fats": 20,
+    "breakfast_weight": 0.3,
+    "lunch_weight": 0.5,
+    "dinner_weight": 0.2,
+    "ingredients": [
+      {
+        "name": "1 ч.л. розпушувача",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "ваніль/кориця (за смаком)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "2 яблука (середніх)",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "2 яйця",
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      {
+        "name": "3 ст.л. какао (з гіркою)",
+        "quantity": 1.0,
         "unit": "unit"
       }
     ]

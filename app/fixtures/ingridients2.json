@@ -1,0 +1,4565 @@
+[
+  {
+    "name": "моцарела",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шинка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "молоко 1%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "2 яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "4 ст.л. молока",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "моцарела",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кріп, петрушка, шпинат",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "протеїн",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яєчні білки",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кокосове молоко",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "ягоди",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горіхи",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний (нежирний) 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник (стевія)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вівсянка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "тунець у власному соку",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "пармезан",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "фрукти / ягоди",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соус zero (безкалорійний)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вівсяні пластівці",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "протеїн 1 скуп ()",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "намазка (10-12%)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "огірок",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рис",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "слабосолена риба",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудзяна крупа",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0,2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кріп, сіль",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "протеїн",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "ягоди",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вівсянка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "банан",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе куряче",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир твердий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цільнозерновий хліб",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "тунець у власному соку",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець свіжий",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цільнозерновий хліб",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "креветки сирі / варені",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "тунець консервований y власному соку",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "хліб цільнозерновий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морський коктейль в розсолі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "салат айсберг",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир пармезан тертий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "оливкова олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "французька гірчиця",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лимонний сік",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мед 0,5 ч.л",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сухий часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "листя салату",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус (від Торчин)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "телятина",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гірчиця французька",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "грецький йогурт 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "петрушка (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "червона квасоля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "огірок",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зубчик часника",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лимонний сік",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гірчиця французька",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "салат айсберг",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе / філе індички",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "пармезан",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гірчиця франзуцька",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курячі серця",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "фіолетова цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир сулугуні",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кріп/петрушка (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "буряк",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сік лимона",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рукола",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шпинат",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир фета",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза консервована",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шампіньйони консервовані",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гірчиця",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля зелена",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль, перець та спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "стегно куряче",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "петрушка",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "макарони",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "нут",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рис",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сочевиця",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "теляча вирізка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "теляча вирізка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "капуста молода",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "заправка з болгарським перцем",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "оцет",
+    "category": "Other",
+    "base_unit": "мл",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукор",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зелень",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "печінка куряча",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рис басматі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе куряче або індички",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля, часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції (куркума, паприка,",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зіра (кумін)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "петрушка",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спагеті",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "фарш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "томатна паста",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кабачок",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "макарони",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "пшенична крупа",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "тунець у власному соку",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир фета",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир твердий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кетчуп або томатна паста",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лаваш 1шт ()",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе куряче",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спагеті",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "індичка або куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кабачок",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія  (для смаження)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "запечені овочі",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе червоної риби",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "батат",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "моцарела",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе індички",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "баклажан великий",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мікс зелені",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лимон",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "дорадо",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "заморожений хек",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сік лимону",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "заморожений тунець",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "стручкова квасоля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гарнір (крупи)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курячі гомілки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус (від Торчин)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мед",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 5%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кокосова стружка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник (стевія)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спагеті",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "креветки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лаваш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "(нежирний) 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 5%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "стевія (підсолоджувач)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мак",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно ц/з",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "моцарела",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "оливкова олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряча печінка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "італійські трави",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "приправа до курки",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лавровий лист",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гриби",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль, перець",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "паприка",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сушений часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир сулугуні",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "відварене куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лаваш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зелень",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "томатна паста",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "болгарський перець",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курячий фарш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир моцарела",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шпинат",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вода",
+    "category": "Other",
+    "base_unit": "мл",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "стевія (цукрозамінник)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кисломолочний сир нежирний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вода",
+    "category": "Other",
+    "base_unit": "мл",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "гриби",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вершки 10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "молоко 0,5% жирності",
+    "category": "Other",
+    "base_unit": "мл",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шпинат",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія (для смаження)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сирна намазка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "риба червона слабосолена",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир сулугуні",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "петрушка",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний (нежирний)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вівсянка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "свіжий лосось (філе)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "макарони",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир фета",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідори чері",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "томатна паста",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зелень (петрушка, кінза, базилік)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вода",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "листи лазаньї",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "фарш яловичий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе риби минтай",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курячий фарш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "шампіньйони (печериці)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир сулугуні",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія (для смаження)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль, перець, спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля зелена",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "червона риба",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "огірок",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "картопля",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир Філадельфія",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "філе куряче",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сік лимона",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зубчик часнику",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "імбир",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "томатна паста",
+    "category": "Other",
+    "base_unit": "п",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "консервовані помідори",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вершки  10%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "карі",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куркума",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "коріандр",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сушений імбир",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сушений часник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "паприка копчена",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "чилі (якщо є)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/перець за смаком",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кабачки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир твердий",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудзяний крохмаль",
+    "category": "Other",
+    "base_unit": "ст.л",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/спеції за смаком",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "червона риба",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сметана",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мікрогрін (мікрозелень)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горіхи волоські",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/перець",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зубчик часнику",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "болгарський перець",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний (нежирний)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кріп",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "печінка куряча",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "молоко 0,5% жирності",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "олія для смаження",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква велика",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "часник зубчик",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кріп (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/перець (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир сулугуні",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "спеції (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цвітна капуста",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "броколі",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сіль/перець (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "куряче філе",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "морква 1 маленька",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус/теріякі 2 ст ложки",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "пекінська капуста",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "креветки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "зелена цибуля",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "огірок",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вибір)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "оливки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лосось слабосолений",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рис",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "червона капуста",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кускус",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горошок (консервований)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "салат айсберг",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кунжут",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "квасоля червона відварена",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "або консервована",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "салат айсберг",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кунжут",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "булгур",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "телятина",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "перець болгарський",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "броколі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудза (консервована)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "броколі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "соєвий соус теріякі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "рис",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "курка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "помідор",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "авокадо",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "желатин",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "2 ст.л. какао",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний (нежирний) 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "банан",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "молоко 1%",
+    "category": "Other",
+    "base_unit": "мл",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "ківі",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кориця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "мак",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудзяна крупа",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вода",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "протеїн шоколад",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "знежирене згущене молоко",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "протеїнова суміш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "молоко 1%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "какао",
+    "category": "Other",
+    "base_unit": "ст.л.",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горішки",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "банан",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний (нежирний) 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вишні (свіжі або заморожені)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "крохмаль кукурудзяний",
+    "category": "Other",
+    "base_unit": "ст.л.",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "підсолоджувач (стевія)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "ягоди",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "лаваш",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "кукурудзяний крохмаль",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вишні (без кісточок)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник (до смаку)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яблуко",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горіхи",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "банан",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт (густий) 1.6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вівсянка",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "вишня",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "горіхи (волоський горіх)",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник (стевія)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яблука",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "сир кисломолочний 0.2%",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "100г",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "какао 1 чайна ложка",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яблука",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "борошно",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "розпушувач",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "цукрозамінник",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "яйце .",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "йогурт питний 1,6%",
+    "category": "Other",
+    "base_unit": "g",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "1 ч.л. розпушувача",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "ваніль/кориця (за смаком)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "2 яблука (середніх)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "2 яйця",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  },
+  {
+    "name": "3 ст.л. какао (з гіркою)",
+    "category": "Other",
+    "base_unit": "unit",
+    "calories": 1.65,
+    "protein": 0.31,
+    "carbs": 0,
+    "fats": 0.036
+  }
+]
