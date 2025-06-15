@@ -92,3 +92,38 @@ async def export_shopping_list(shopping_list_id: int, format: str = "ios_reminde
         return {"format": "ios_reminders", "content": reminder_text.strip()}
     else:
         raise HTTPException(status_code=400, detail="Unsupported export format")
+    
+
+@router.get("/item/{shopping_list_item_id}/recipes", response_model=List[schemas.Recipe])
+async def get_recipes_by_shopping_item(
+    shopping_list_item_id: int,
+    db: Session = Depends(get_db)
+):
+    """
+    Get all recipes in a meal plan that use a specific shopping list item.
+    
+    Args:
+        shopping_list_item_id: ID of the shopping list item
+    """
+    
+    # Validate shopping list item exists
+    shopping_item = db.query(models.ShoppingListItem).filter(
+        models.ShoppingListItem.id == shopping_list_item_id
+    ).first()
+    
+    if not shopping_item:
+        raise HTTPException(status_code=404, detail="Shopping list item not found")
+    
+    # Get all recipes in the meal plan that use this ingredient
+    recipes = db.query(models.Recipe).join(
+        models.RecipeIngredient,
+        models.Recipe.id == models.RecipeIngredient.recipe_id
+    ).join(
+        models.MealPlanEntry,
+        models.Recipe.id == models.MealPlanEntry.recipe_id
+    ).filter(
+        models.RecipeIngredient.ingredient_id == shopping_item.ingredient_id,
+        models.MealPlanEntry.meal_plan_id == shopping_item.shopping_list.meal_plan_id
+    ).distinct().all()
+
+    return recipes

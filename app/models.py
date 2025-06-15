@@ -16,7 +16,7 @@ class Recipe(Base):
     cook_time = Column(Integer)  # in minutes
     instructions = Column(String, nullable=False)
     category = Column(String(100))
-    dietary_tags = Column(JSON)  # Array of dietary tags
+    # dietary_tags = Column(JSON)  # Array of dietary tags
     
     # Nutritional information
     calories = Column(Integer)

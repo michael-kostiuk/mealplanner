@@ -12,7 +12,7 @@ router = APIRouter(
 
 @router.get("/", response_model=List[schemas.Ingredient])
 async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query(default=None)):
-    db_query = db.query(models.Ingredient)
+    db_query = db.query(models.Ingredient).order_by(models.Ingredient.name)
     if name:
         name = unquote(name)
         db_query = db_query.filter(models.Ingredient.name.ilike(f"%{name}%"))
@@ -26,22 +26,12 @@ async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = 
     db.refresh(db_ingredient)
     return db_ingredient
 
-
-@router.post("/merge")
-async def merge_ingredients(
+def do_merge(
     keep_ingredient_id: int,
     merge_ingredient_ids: List[int],
-    db: Session = Depends(get_db)
+    db: Session
 ):
-    """
-    Merge duplicate ingredients into a single ingredient.
-    All recipes using the merged ingredients will be updated to use the kept ingredient.
-    
-    Args:
-        keep_ingredient_id: ID of the ingredient to keep
-        merge_ingredient_ids: List of ingredient IDs to merge into the kept ingredient
-    """
-    
+        
     # Validate that keep_ingredient exists
     keep_ingredient = db.query(models.Ingredient).filter(
         models.Ingredient.id == keep_ingredient_id
@@ -64,34 +54,50 @@ async def merge_ingredients(
             status_code=400, 
             detail="Keep ingredient cannot be in the merge list"
         )
+
+    # Update all RecipeIngredient entries to use the kept ingredient
+    db.query(models.RecipeIngredient).filter(
+        models.RecipeIngredient.ingredient_id.in_(merge_ingredient_ids)
+    ).update({
+        models.RecipeIngredient.ingredient_id: keep_ingredient_id
+    }, synchronize_session=False)
     
+    # Update all ShoppingListItem entries to use the kept ingredient
+    db.query(models.ShoppingListItem).filter(
+        models.ShoppingListItem.ingredient_id.in_(merge_ingredient_ids)
+    ).update({
+        models.ShoppingListItem.ingredient_id: keep_ingredient_id
+    }, synchronize_session=False)
+    
+    # Delete the merged ingredients
+    db.query(models.Ingredient).filter(
+        models.Ingredient.id.in_(merge_ingredient_ids)
+    ).delete(synchronize_session=False)
+
+    db.commit()
+    return keep_ingredient
+
+
+@router.post("/merge")
+async def merge_ingredients(
+    keep_ingredient_id: int,
+    merge_ingredient_ids: List[int],
+    db: Session = Depends(get_db)
+):
+    """
+    Merge duplicate ingredients into a single ingredient.
+    All recipes using the merged ingredients will be updated to use the kept ingredient.
+    
+    Args:
+        keep_ingredient_id: ID of the ingredient to keep
+        merge_ingredient_ids: List of ingredient IDs to merge into the kept ingredient
+    """
     try:
-        # Update all RecipeIngredient entries to use the kept ingredient
-        db.query(models.RecipeIngredient).filter(
-            models.RecipeIngredient.ingredient_id.in_(merge_ingredient_ids)
-        ).update({
-            models.RecipeIngredient.ingredient_id: keep_ingredient_id
-        }, synchronize_session=False)
-        
-        # Update all ShoppingListItem entries to use the kept ingredient
-        db.query(models.ShoppingListItem).filter(
-            models.ShoppingListItem.ingredient_id.in_(merge_ingredient_ids)
-        ).update({
-            models.ShoppingListItem.ingredient_id: keep_ingredient_id
-        }, synchronize_session=False)
-        
-        # Delete the merged ingredients
-        db.query(models.Ingredient).filter(
-            models.Ingredient.id.in_(merge_ingredient_ids)
-        ).delete(synchronize_session=False)
-        
-        db.commit()
-        
+        keep_ingredient = do_merge(keep_ingredient_id, merge_ingredient_ids, db)
         return {
             "message": f"Successfully merged {len(merge_ingredient_ids)} ingredients into '{keep_ingredient.name}'",
             "kept_ingredient": {
-                "id": keep_ingredient.id,
-                "name": keep_ingredient.name
+                "id": keep_ingredient_id,
             },
             "merged_count": len(merge_ingredient_ids)
         }

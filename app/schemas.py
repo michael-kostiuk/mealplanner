@@ -38,7 +38,7 @@ class RecipeBase(BaseModel):
     cook_time: int
     instructions: str
     category: str
-    dietary_tags: List[str]
+    dietary_tags: List[str] = []
     calories: int
     protein: float
     carbs: float
