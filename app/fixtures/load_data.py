@@ -5,16 +5,15 @@ from .. import models
 import json
 # D:\UNITY\mp\mealplanner\app\fixtures\ingridients.json
 
-# ING_PATH = 'app/fixtures/ingridients_al.json'
-# REC_PATH = 'app/fixtures/recipes_al.json'
-ING_PATH = 'app/fixtures/ingridients2.json'
-REC_PATH = 'app/fixtures/recipes2.json'
+ING_PATH = 'app/fixtures/ingridients_al.json'
+REC_PATH = 'app/fixtures/recipes_al.json'
+# ING_PATH = 'app/fixtures/ingridients2.json'
+# REC_PATH = 'app/fixtures/recipes2.json'
 
 def load_fixtures():
     db = Session(engine)
     from sqlalchemy import delete
-    # q = models.Recipe.delete()
-    db.execute(delete(models.Recipe))   
+
     # Load ingredients first
     with open(ING_PATH, 'r') as f:
         ingredients_data = json.load(f)
