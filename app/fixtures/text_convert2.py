@@ -80,7 +80,7 @@ def parse_recipe(text: str) -> Dict[str, Any]:
             break
     
     if calories_section and sections[calories_section]:
-        nutrition = parse_nutrition(sections[calories_section])
+        nutrition = parse_nutrition([calories_section] + sections[calories_section])
         recipe.update(nutrition)
     
     return recipe
@@ -272,6 +272,15 @@ output format - json:
     
     
     print(f"success: {suc}, failed: {err}")
+
+    # with open('app/fixtures/recipes2.json', 'rb') as f:
+    #     recipes_old = json.loads(f.read().decode('utf-8'))
+    # recipes_old = {recipe['name']: recipe for recipe in recipes_old}
+    # for recipe in recipes:
+    #     recipes_old[recipe['name']]['calories'] = recipe['calories']
+    # recipes = list(recipes_old.values())
+    # for r in recipes:
+    #     r['name'] = r['name'].capitalize()
 
     # Load ingredients first
     with open('app/fixtures/recipes2.json', 'wb') as f:

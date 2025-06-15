@@ -5,8 +5,14 @@ from .. import models
 import json
 # D:\UNITY\mp\mealplanner\app\fixtures\ingridients.json
 
-ING_PATH = 'app/fixtures/ingridients_al.json'
-REC_PATH = 'app/fixtures/recipes_al.json'
+ING_PATH = [
+    'app/fixtures/ingridients_al.json',
+    'app/fixtures/ingridients2.json'
+    ]
+REC_PATH = [
+    'app/fixtures/recipes_al.json',
+    'app/fixtures/recipes2.json',
+    ]
 # ING_PATH = 'app/fixtures/ingridients2.json'
 # REC_PATH = 'app/fixtures/recipes2.json'
 
@@ -15,8 +21,10 @@ def load_fixtures():
     from sqlalchemy import delete
 
     # Load ingredients first
-    with open(ING_PATH, 'r') as f:
-        ingredients_data = json.load(f)
+    ingredients_data = []
+    for ing_path in ING_PATH:
+        with open(ing_path, 'r') as f:
+            ingredients_data += json.load(f)
     
     names = [x['name'] for x in ingredients_data]
     db_query = db.query(models.Ingredient)
@@ -38,13 +46,28 @@ def load_fixtures():
         ingredients[ing_data['name']] = ingredient
     
     # Load recipes
-    with open(REC_PATH, 'r') as f:
-        recipes_data = json.load(f)
+    recipes_data = []
+    for rec_path in REC_PATH:
+        with open(rec_path, 'r') as f:
+            recipes_data += json.load(f)
+
+    db_query = db.query(models.Recipe)
+    # db_query = db_query.filter(any_([models.Ingredient.name.ilike(f"%{name}%") for name in names]))
+
+    recipes_all = {}
+    for exists in db_query.all():
+        recipes_all[exists.name.capitalize()] = exists
 
     for recipe_data in recipes_data:
         recipe_ingredients = recipe_data.pop('ingredients')
         # print(recipe_data)
-        recipe = models.Recipe(**recipe_data)
+        recipe_data['name'] = recipe_data['name'].capitalize()
+        if recipe_data['name'] in recipes_all:
+            recipe = recipes_all[recipe_data['name']]
+            for k, v in recipe_data.items():
+                setattr(recipe, k, v)
+        else:
+            recipe = models.Recipe(**recipe_data)
         db.add(recipe)
         db.commit()
         db.refresh(recipe)
