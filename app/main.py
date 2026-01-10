@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import recipes, meal_plans, shopping_lists, ingredients
+from .routers import recipes, meal_plans, shopping_lists, ingredients, nutrition
 from .database import engine
 from . import models
 
@@ -24,3 +24,4 @@ app.include_router(recipes.router)
 app.include_router(meal_plans.router)
 app.include_router(shopping_lists.router)
 app.include_router(ingredients.router)
+app.include_router(nutrition.router)
