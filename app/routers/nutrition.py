@@ -26,6 +26,7 @@ router = APIRouter(
 class EstimateNutritionRequest(BaseModel):
     """Request body for nutrition estimation endpoint."""
     ingredients: List[IngredientInput]
+    servings: int = 1
     
     model_config = {
         "json_schema_extra": {
@@ -114,7 +115,7 @@ async def estimate_nutrition(request: EstimateNutritionRequest):
         )
     
     try:
-        nutrition_data = await estimator.estimate_nutrition(request.ingredients)
+        nutrition_data = await estimator.estimate_nutrition(request.ingredients, request.servings)
         return EstimateNutritionResponse(
             calories=nutrition_data.calories,
             protein=nutrition_data.protein,

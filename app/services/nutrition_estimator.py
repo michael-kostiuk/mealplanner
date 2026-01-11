@@ -4,11 +4,15 @@ Nutrition Estimator Service using Google AI (Gemini) API
 This service estimates nutritional information for recipes based on ingredients.
 """
 
+import logging
 import os
 import json
 import httpx
 from typing import List, Optional
 from pydantic import BaseModel
+
+
+logger = logging.getLogger(__name__)
 
 
 class IngredientInput(BaseModel):
@@ -39,7 +43,7 @@ class NutritionEstimator:
     Service for estimating nutritional information using Google's Gemini AI.
     """
     
-    GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent"
+    GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent"
     
     def __init__(self):
         self.api_key = os.getenv("GOOGLE_AI_API_KEY")
@@ -53,14 +57,30 @@ class NutritionEstimator:
             for ing in ingredients
         )
     
-    def _build_prompt(self, ingredients: List[IngredientInput]) -> str:
+    def _build_prompt(self, ingredients: List[IngredientInput], servings: int = 1) -> str:
         """Build the prompt for the AI model."""
         ingredients_text = self._format_ingredients_text(ingredients)
-        return (
-            'estimate total calories. reply with format '
-            '{"calories": 1.65, "protein": 0.31, "carbs": 0, "fats": 0.036} \n'
-            f'{ingredients_text}'
-        )
+        return f"""
+            You are a nutrition calculator.
+
+            Task:
+            Estimate nutrition per serving based on the ingredients provided.
+
+            Rules:
+            - Output JSON only
+            - No explanations or comments
+            - Use numeric values (floats)
+            - Units: calories in kcal, macros in grams
+            - If information is missing, estimate reasonably
+
+            Output format:
+            {{"calories":0,"protein":0,"carbs":0,"fats":0}}
+
+            Ingredients:
+            {ingredients_text}
+            Servings:
+            {servings}
+            """.strip()
     
     def _parse_response(self, response_data: dict) -> NutritionData:
         """Parse the AI response and extract nutrition data."""
@@ -105,7 +125,8 @@ class NutritionEstimator:
     
     async def estimate_nutrition(
         self, 
-        ingredients: List[IngredientInput]
+        ingredients: List[IngredientInput],
+        servings: Optional[int] = 1
     ) -> NutritionData:
         """
         Estimate nutritional information for a list of ingredients.
@@ -122,7 +143,7 @@ class NutritionEstimator:
         if not ingredients:
             raise NutritionEstimationError("No ingredients provided")
         
-        prompt = self._build_prompt(ingredients)
+        prompt = self._build_prompt(ingredients, servings)
         
         # Build the request payload for Gemini API
         payload = {
@@ -171,6 +192,7 @@ class NutritionEstimator:
             except httpx.TimeoutException:
                 raise NutritionEstimationError("Request timed out")
             except httpx.RequestError as e:
+                logger.error(f"Request failed: {e}, {response.text}")
                 raise NutritionEstimationError(f"Request failed: {e}")
 
 
