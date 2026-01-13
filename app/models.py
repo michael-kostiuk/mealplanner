@@ -24,6 +24,9 @@ class Recipe(Base):
     carbs = Column(Float)
     fats = Column(Float)
     
+    # Image
+    image_url = Column(String(500), nullable=True)
+    
     # Meal type suitability weights (0-1)
     breakfast_weight = Column(Float, default=0.0)
     lunch_weight = Column(Float, default=0.0)

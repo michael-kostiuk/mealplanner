@@ -46,6 +46,7 @@ class RecipeBase(BaseModel):
     breakfast_weight: float
     lunch_weight: float
     dinner_weight: float
+    image_url: Optional[str] = None
 
 class RecipeCreate(RecipeBase):
     ingredients: List[RecipeIngredientCreate]
