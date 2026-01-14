@@ -6,6 +6,7 @@ from ..database import get_db
 from .. import models, schemas
 import json
 from datetime import datetime
+import time
 
 router = APIRouter(
     prefix="/recipes",
@@ -123,6 +124,8 @@ async def update_recipe(recipe_id: int, recipe: schemas.RecipeCreate, db: Sessio
         try:
             await dropbox_service.delete_image(old_image_url)
         except Exception as e:
+            # Silent failure - recipe update should succeed even if old image deletion fails
+            # Old images are not critical and can be cleaned up manually if needed
             print(f"Warning: Could not delete old image: {e}")
     
     # Update recipe attributes
@@ -189,7 +192,6 @@ async def upload_recipe_image(
             raise HTTPException(status_code=400, detail="File too large (max 10MB)")
         
         # Generate filename
-        import time
         timestamp = int(time.time())
         filename = f"{recipe_id}_{timestamp}_{file.filename}"
         print(f"[UPLOAD] Generated filename: {filename}")
@@ -225,7 +227,7 @@ async def upload_recipe_image(
         import traceback
         print(f"[UPLOAD] ERROR in upload_recipe_image: {str(e)}")
         print(traceback.format_exc())
-        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 
 @router.get("/export", response_model=List[schemas.Recipe])
 async def export_recipes(db: Session = Depends(get_db)):
