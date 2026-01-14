@@ -7,6 +7,7 @@ Provides AI-powered nutritional information estimation for recipes.
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
+import logging
 
 from ..services.nutrition_estimator import (
     NutritionEstimator,
@@ -15,6 +16,8 @@ from ..services.nutrition_estimator import (
     NutritionEstimationError,
     get_nutrition_estimator
 )
+
+logger = logging.getLogger(__name__)
 
 
 router = APIRouter(
@@ -106,14 +109,8 @@ async def estimate_nutrition(request: EstimateNutritionRequest):
     - 500: AI service error
     - 503: API key not configured
     """
-    try:
-        estimator = get_nutrition_estimator()
-    except ValueError as e:
-        raise HTTPException(
-            status_code=503,
-            detail=str(e)
-        )
-    
+    estimator = get_nutrition_estimator()
+
     try:
         nutrition_data = await estimator.estimate_nutrition(request.ingredients, request.servings)
         return EstimateNutritionResponse(
@@ -124,16 +121,8 @@ async def estimate_nutrition(request: EstimateNutritionRequest):
         )
     except NutritionEstimationError as e:
         if e.is_rate_limited:
-            raise HTTPException(
-                status_code=429,
-                detail=e.message
-            )
-        raise HTTPException(
-            status_code=500,
-            detail=e.message
-        )
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unexpected error: {str(e)}"
-        )
+            raise HTTPException(status_code=429, detail=e.message)
+        elif "API key not configured" in e.message or "environment variable is not set" in e.message:
+            raise HTTPException(status_code=503, detail=e.message)
+        else:
+            raise HTTPException(status_code=500, detail=e.message)

@@ -1,13 +1,40 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from .routers import recipes, meal_plans, shopping_lists, ingredients, nutrition
 from .database import engine
 from . import models
 
 import os
+import logging
+import sys
+import time
+from logging import StreamHandler
 from alembic import command
 from alembic.config import Config
 from sqlalchemy import inspect, text
+
+
+class DockerCompatibleHandler(StreamHandler):
+    def emit(self, record):
+        try:
+            msg = self.format(record)
+            sys.stdout.write(msg + "\n")
+            sys.stdout.flush()
+        except Exception:
+            self.handleError(record)
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    handlers=[DockerCompatibleHandler()],
+    force=True
+)
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 app = FastAPI(title="Meal Planning API")
 
@@ -19,6 +46,36 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
+
+@app.middleware("http")
+# NOTE: Using sys.stdout.write() instead of logging module here because uvicorn's
+# async middleware context blocks logging module output to stdout. The logging module
+# works correctly in other contexts (e.g., alembic migrations show logs),
+# but middleware requires direct stdout writes with explicit flush for Docker.
+async def log_requests(request: Request, call_next):
+    start_time = time.time()
+
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+    sys.stdout.write(f"{timestamp} - app.main - INFO - Request: {request.method} {request.url.path}\n")
+    sys.stdout.flush()
+
+    try:
+        response = await call_next(request)
+
+        process_time = time.time() - start_time
+        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+        sys.stdout.write(f"{timestamp} - app.main - INFO - Response: {request.method} {request.url.path} - Status: {response.status_code} - {process_time:.3f}s\n")
+        sys.stdout.flush()
+
+        return response
+    except Exception as e:
+        process_time = time.time() - start_time
+        timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
+        sys.stdout.write(f"{timestamp} - app.main - ERROR - Error: {request.method} {request.url.path} - {process_time:.3f}s - {type(e).__name__}: {str(e)}\n")
+        sys.stdout.flush()
+        import traceback
+        traceback.print_exc()
+        raise
 
 def run_migrations():
     # Ensure we are in the root directory where alembic.ini is located
@@ -41,10 +98,10 @@ def run_migrations():
                     should_stamp = True
     
     if should_stamp:
-        print("Detected existing database without migrations. Stamping head...")
+        logger.info("Detected existing database without migrations. Stamping head...")
         command.stamp(alembic_cfg, "head")
     
-    print("Running database migrations...")
+    logger.info("Running database migrations...")
     command.upgrade(alembic_cfg, "head")
 
 @app.on_event("startup")

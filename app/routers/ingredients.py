@@ -4,6 +4,9 @@ from typing import List, Optional
 from ..database import get_db
 from .. import models, schemas
 from urllib.parse import unquote
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/ingredients",
@@ -87,21 +90,21 @@ async def merge_ingredients(
     """
     Merge duplicate ingredients into a single ingredient.
     All recipes using the merged ingredients will be updated to use the kept ingredient.
-    
+
     Args:
         keep_ingredient_id: ID of the ingredient to keep
         merge_ingredient_ids: List of ingredient IDs to merge into the kept ingredient
     """
     try:
         keep_ingredient = do_merge(keep_ingredient_id, merge_ingredient_ids, db)
-        return {
-            "message": f"Successfully merged {len(merge_ingredient_ids)} ingredients into '{keep_ingredient.name}'",
-            "kept_ingredient": {
-                "id": keep_ingredient_id,
-            },
-            "merged_count": len(merge_ingredient_ids)
-        }
-        
-    except Exception as e:
+    except Exception:
         db.rollback()
-        raise HTTPException(status_code=500, detail=f"Error merging ingredients: {str(e)}")
+        raise
+
+    return {
+        "message": f"Successfully merged {len(merge_ingredient_ids)} ingredients into '{keep_ingredient.name}'",
+        "kept_ingredient": {
+            "id": keep_ingredient_id,
+        },
+        "merged_count": len(merge_ingredient_ids)
+    }

@@ -7,6 +7,9 @@ from .. import models, schemas
 import json
 from datetime import datetime
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/recipes",
@@ -126,7 +129,7 @@ async def update_recipe(recipe_id: int, recipe: schemas.RecipeCreate, db: Sessio
         except Exception as e:
             # Silent failure - recipe update should succeed even if old image deletion fails
             # Old images are not critical and can be cleaned up manually if needed
-            print(f"Warning: Could not delete old image: {e}")
+            logger.warning(f"Could not delete old image: {e}", exc_info=True)
     
     # Update recipe attributes
     for key, value in recipe.model_dump(exclude={'ingredients'}).items():
@@ -169,65 +172,47 @@ async def upload_recipe_image(
     file: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
-    try:
-        print(f"[UPLOAD] Upload image request for recipe {recipe_id}")
-        print(f"[UPLOAD] File info - filename: {file.filename}, content_type: {file.content_type}")
-        
-        recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
-        if not recipe:
-            print(f"[UPLOAD] ERROR: Recipe {recipe_id} not found")
-            raise HTTPException(status_code=404, detail="Recipe not found")
-        
-        # Validate file type
-        if not file.content_type or not file.content_type.startswith("image/"):
-            print(f"[UPLOAD] ERROR: Invalid file type {file.content_type}")
-            raise HTTPException(status_code=400, detail="File must be an image")
-        
-        # Read file data
-        file_data = await file.read()
-        print(f"[UPLOAD] File data size: {len(file_data)} bytes")
-        # Note: MAX_FILE_SIZE (10MB) is also defined in frontend/src/constants.ts
-        if len(file_data) > 10 * 1024 * 1024:  # 10MB limit
-            print(f"[UPLOAD] ERROR: File too large: {len(file_data)} bytes")
-            raise HTTPException(status_code=400, detail="File too large (max 10MB)")
-        
-        # Generate filename
-        timestamp = int(time.time())
-        filename = f"{recipe_id}_{timestamp}_{file.filename}"
-        print(f"[UPLOAD] Generated filename: {filename}")
-        
-        # Upload to Dropbox
-        from ..services.dropbox_service import dropbox_service
-        print("[UPLOAD] Calling Dropbox service...")
-        image_url = await dropbox_service.upload_image(file_data, filename)
-        
-        if not image_url:
-            print("[UPLOAD] ERROR: Dropbox returned None")
-            raise HTTPException(status_code=500, detail="Failed to upload image to Dropbox")
-        
-        # Update recipe
-        recipe.image_url = image_url
-        db.commit()
-        print(f"[UPLOAD] SUCCESS: Recipe updated with image_url: {image_url}")
-        
-        return {"image_url": image_url}
-    except ValueError as e:
-        # Handle Dropbox-specific errors
-        error_msg = str(e)
-        print(f"[UPLOAD] Dropbox Error: {error_msg}")
-        if "expired" in error_msg.lower() or "invalid" in error_msg.lower():
-            raise HTTPException(
-                status_code=401,
-                detail="Dropbox access token is expired or invalid. Please regenerate the token in Dropbox Developer Console."
-            )
-        raise HTTPException(status_code=500, detail=error_msg)
-    except HTTPException:
-        raise
-    except Exception as e:
-        import traceback
-        print(f"[UPLOAD] ERROR in upload_recipe_image: {str(e)}")
-        print(traceback.format_exc())
-        raise HTTPException(status_code=500, detail="Internal server error")
+    logger.info(f"Upload image request for recipe {recipe_id}")
+    logger.info(f"File info - filename: {file.filename}, content_type: {file.content_type}")
+
+    recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
+    if not recipe:
+        logger.error(f"Recipe {recipe_id} not found")
+        raise HTTPException(status_code=404, detail="Recipe not found")
+
+    # Validate file type
+    if not file.content_type or not file.content_type.startswith("image/"):
+        logger.error(f"Invalid file type {file.content_type}")
+        raise HTTPException(status_code=400, detail="File must be an image")
+
+    # Read file data
+    file_data = await file.read()
+    logger.info(f"File data size: {len(file_data)} bytes")
+    # Note: MAX_FILE_SIZE (10MB) is also defined in frontend/src/constants.ts
+    if len(file_data) > 10 * 1024 * 1024:  # 10MB limit
+        logger.error(f"File too large: {len(file_data)} bytes")
+        raise HTTPException(status_code=400, detail="File too large (max 10MB)")
+
+    # Generate filename
+    timestamp = int(time.time())
+    filename = f"{recipe_id}_{timestamp}_{file.filename}"
+    logger.info(f"Generated filename: {filename}")
+
+    # Upload to Dropbox
+    from ..services.dropbox_service import dropbox_service
+    logger.info("Calling Dropbox service...")
+    image_url = await dropbox_service.upload_image(file_data, filename)
+
+    if not image_url:
+        logger.error("Dropbox returned None")
+        raise HTTPException(status_code=500, detail="Failed to upload image to Dropbox")
+
+    # Update recipe
+    recipe.image_url = image_url
+    db.commit()
+    logger.info(f"SUCCESS: Recipe updated with image_url: {image_url}")
+
+    return {"image_url": image_url}
 
 @router.get("/export", response_model=List[schemas.Recipe])
 async def export_recipes(db: Session = Depends(get_db)):

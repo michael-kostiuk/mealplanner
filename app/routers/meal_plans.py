@@ -6,7 +6,10 @@ from ..database import get_db
 from .. import models, schemas
 from ..services import MealPlanGenerator
 import random
+import logging
 from .shopping_lists import generate_shopping_list
+
+logger = logging.getLogger(__name__)
 
 
 def get_user(db: Session = Depends(get_db)):
@@ -64,9 +67,9 @@ def calculate_daily_meals(recipes: List[models.Recipe], target_calories: int, di
         
         # Extract weights for the specific meal type
         weights = [getattr(recipe, meal_weights_attr) for recipe in suitable_cal_recipes]
-        
-        print([x.name for x in suitable_cal_recipes])
-        print(weights)
+
+        logger.debug(f"Suitable recipes: {[x.name for x in suitable_cal_recipes]}")
+        logger.debug(f"Weights: {weights}")
         # Handle case where all weights are 0
         if all(w == 0 for w in weights):
             return random.choice(suitable_cal_recipes)

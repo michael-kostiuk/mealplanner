@@ -192,7 +192,7 @@ class NutritionEstimator:
             except httpx.TimeoutException:
                 raise NutritionEstimationError("Request timed out")
             except httpx.RequestError as e:
-                logger.error(f"Request failed: {e}, {response.text}")
+                logger.error(f"Request failed: {e}")
                 raise NutritionEstimationError(f"Request failed: {e}")
 
 
