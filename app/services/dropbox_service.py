@@ -80,7 +80,8 @@ class DropboxService:
     async def upload_image(self, file_data: bytes, filename: str) -> Optional[str]:
         path = None
         try:
-            path = f"{DROPBOX_UPLOAD_FOLDER}/{filename}"
+            folder = DROPBOX_UPLOAD_FOLDER.lstrip('/')
+            path = f"/{folder}/{filename}"
             headers = await self._get_headers()
 
             logger.info(f"Uploading file {filename} to {path}")
