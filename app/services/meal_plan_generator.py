@@ -35,11 +35,10 @@ class MealPlanGenerator:
 
         # Get all suitable recipes
         recipes = self.db.query(models.Recipe).all()
-        suitable_recipes = [r for r in recipes 
-                          if all(pref in r.dietary_tags for pref in dietary_preferences) or not dietary_preferences]
+        suitable_recipes = recipes  # All recipes are suitable since dietary_tags is not used
 
         if not suitable_recipes:
-            raise ValueError("No recipes available matching dietary preferences")
+            raise ValueError("No recipes available")
 
         # Generate meals for each day
         current_date = start_date

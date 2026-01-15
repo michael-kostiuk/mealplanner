@@ -36,8 +36,7 @@ def test():
     return day
 
 def calculate_daily_meals(recipes: List[models.Recipe], target_calories: int, dietary_preferences: List[str]):
-    # Filter recipes by dietary preferences
-    suitable_recipes = [r for r in recipes if all(pref in r.dietary_tags for pref in dietary_preferences) or not dietary_preferences]
+    suitable_recipes = recipes  # All recipes are suitable since dietary_tags is not used
     
     if not suitable_recipes:
         return {}

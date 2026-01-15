@@ -22,7 +22,6 @@ async def list_recipes(
     limit: int = 100,
     category: Optional[str] = None,
     name: Optional[str] = None,
-    dietary_tags: Optional[List[str]] = Query(None),
     max_prep_time: Optional[int] = None,
     min_calories: Optional[int] = None,
     max_calories: Optional[int] = None,
@@ -34,8 +33,6 @@ async def list_recipes(
         query = query.filter(models.Recipe.name.ilike(f"%{name}%"))
     if category:
         query = query.filter(models.Recipe.category == category)
-    if dietary_tags:
-        query = query.filter(models.Recipe.dietary_tags.contains(dietary_tags))
     if max_prep_time:
         query = query.filter(models.Recipe.prep_time <= max_prep_time)
     if min_calories:
@@ -83,11 +80,7 @@ async def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_
 async def bulk_import_recipes(recipes: List[schemas.RecipeCreate], db: Session = Depends(get_db)):
     imported_recipes = []
     for recipe_data in recipes:
-        # Filter out fields that don't exist in the model
         recipe_dict = recipe_data.model_dump(exclude={'ingredients'})
-        # Remove dietary_tags if it's not in the model
-        if 'dietary_tags' in recipe_dict:
-            del recipe_dict['dietary_tags']
         db_recipe = models.Recipe(**recipe_dict)
         db.add(db_recipe)
         db.commit()
@@ -223,7 +216,6 @@ async def export_recipes(db: Session = Depends(get_db)):
 async def search_recipes(
     query: str,
     category: Optional[str] = None,
-    dietary_tags: Optional[List[str]] = Query(None),
     max_prep_time: Optional[int] = None,
     min_calories: Optional[int] = None,
     max_calories: Optional[int] = None,
@@ -240,8 +232,6 @@ async def search_recipes(
     
     if category:
         db_query = db_query.filter(models.Recipe.category == category)
-    if dietary_tags:
-        db_query = db_query.filter(models.Recipe.dietary_tags.contains(dietary_tags))
     if max_prep_time:
         db_query = db_query.filter(models.Recipe.prep_time <= max_prep_time)
     if min_calories:
