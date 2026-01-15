@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from ..database import get_db
 from .. import models, schemas
 from ..services import MealPlanGenerator
-import random
 import logging
 from .shopping_lists import generate_shopping_list
 
@@ -29,72 +28,7 @@ router = APIRouter(
 )
 
 
-def test():
-    for db in get_db():
-        recs = db.query(models.Recipe).all()
-        day = calculate_daily_meals(recs, 2000, [])
-    return day
 
-def calculate_daily_meals(recipes: List[models.Recipe], target_calories: int, dietary_preferences: List[str]):
-    suitable_recipes = recipes  # All recipes are suitable since dietary_tags is not used
-    
-    if not suitable_recipes:
-        return {}
-    
-    # Separate recipes by meal type (recipes with weight > 0 for each meal)
-    breakfast_recipes = [r for r in suitable_recipes if r.breakfast_weight > 0]
-    lunch_recipes = [r for r in suitable_recipes if r.lunch_weight > 0]
-    dinner_recipes = [r for r in suitable_recipes if r.dinner_weight > 0]
-    
-    # Calculate target calories per meal
-    breakfast_calories = target_calories * 0.25  # 25% for breakfast
-    lunch_calories = target_calories * 0.35      # 35% for lunch
-    dinner_calories = target_calories * 0.40     # 40% for dinner
-    
-    def weighted_random_selection(recipes_list, meal_weights_attr, target_cal):
-        """Select recipe using weighted random selection with calorie constraint"""
-        if not recipes_list:
-            return None
-            
-        # Filter recipes that are within acceptable calorie range (80-120% of target)
-        suitable_cal_recipes = [r for r in recipes_list 
-                               if 0.8 <= r.calories/target_cal <= 1.2]
-        
-        # If no recipes match calorie constraint, use all available recipes
-        if not suitable_cal_recipes:
-            suitable_cal_recipes = recipes_list
-        
-        # Extract weights for the specific meal type
-        weights = [getattr(recipe, meal_weights_attr) for recipe in suitable_cal_recipes]
-
-        logger.debug(f"Suitable recipes: {[x.name for x in suitable_cal_recipes]}")
-        logger.debug(f"Weights: {weights}")
-        # Handle case where all weights are 0
-        if all(w == 0 for w in weights):
-            return random.choice(suitable_cal_recipes)
-        
-        # Weighted random selection
-        return random.choices(suitable_cal_recipes, weights=weights, k=1)[0]
-    
-    # Select meals using weighted randomization
-    selected_meals = {}
-    
-    if breakfast_recipes:
-        selected_meals['breakfast'] = weighted_random_selection(
-            breakfast_recipes, 'breakfast_weight', breakfast_calories
-        )
-    
-    if lunch_recipes:
-        selected_meals['lunch'] = weighted_random_selection(
-            lunch_recipes, 'lunch_weight', lunch_calories
-        )
-    
-    if dinner_recipes:
-        selected_meals['dinner'] = weighted_random_selection(
-            dinner_recipes, 'dinner_weight', dinner_calories
-        )
-    
-    return selected_meals
 
 
 @router.get("/", response_model=List[schemas.MealPlan])
@@ -152,34 +86,6 @@ async def auto_generate_meal_plan(
         dietary_preferences=dietary_preferences,
         user_id=user_id
     )
-    # db_meal_plan = models.MealPlan(
-    #     user_id=user_id,
-    #     start_date=start_date,
-    #     end_date=start_date + timedelta(days=days),
-    #     people_count=people_count,
-    #     target_calories=target_calories,
-    #     dietary_preferences=dietary_preferences
-    # )
-    # db.add(db_meal_plan)
-    # db.commit()
-    # db.refresh(db_meal_plan)
-    
-    # # Generate meals for each day
-    # current_date = start_date
-    # for _ in range(days):
-    #     daily_meals = calculate_daily_meals(recipes, target_calories, dietary_preferences)
-        
-    #     for meal_type, recipe in daily_meals.items():
-    #         db_entry = models.MealPlanEntry(
-    #             meal_plan_id=db_meal_plan.id,
-    #             recipe_id=recipe.id,
-    #             date=current_date,
-    #             meal_type=meal_type,
-    #             servings=people_count
-    #         )
-    #         db.add(db_entry)
-        
-        # current_date += timedelta(days=1)
     
     db.commit()
     db.refresh(db_meal_plan)

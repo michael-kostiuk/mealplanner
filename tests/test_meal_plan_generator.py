@@ -252,3 +252,64 @@ def test_no_suitable_recipes_raises_error(db_session, test_user):
             user_id=test_user.id
         )
 
+def test_no_same_meal_in_one_day(db_session, test_user):
+    """
+    Test that the same recipe is not selected multiple times in a single day.
+    """
+    # Create one recipe that fits all meals
+    r1 = Recipe(
+        name="Universal Meal",
+        servings=1,
+        instructions="x",
+        calories=500,
+        breakfast_weight=1.0,
+        lunch_weight=1.0,
+        dinner_weight=1.0
+    )
+    # Create another recipe to allow variety if needed, 
+    # but we want to ensure r1 isn't picked 3 times even if it's the only one?
+    # If r1 is the only one, the generator might fail or be forced to pick it?
+    # MealPlanGenerator excludes previously selected IDs in the same day.
+    # So if only 1 recipe exists, it will fail to find a recipe for lunch/dinner?
+    # Let's see behavior. If it fails, that confirms it tries to avoid duplicates.
+    
+    db_session.add(r1)
+    db_session.commit()
+    
+    generator = MealPlanGenerator(db_session)
+    
+    # If we have only 1 recipe, and we try to generate 1 day (3 meals).
+    # Breakfast picks r1.
+    # Lunch excludes r1. No recipes left.
+    # _select_recipe will try to pick from empty list?
+    # _select_recipe filters available_recipes. If empty, it might crash or return None?
+    # Looking at code: `available_recipes = [r for r ... if r.id not in exclude_ids ...]`
+    # If empty, `suitable_recipes` empty.
+    # `min(available_recipes, ...)` will crash if available_recipes is empty.
+    
+    # So we need at least 3 recipes to satisfy "unique meals per day" requirement if we want success.
+    
+    r2 = Recipe(name="Meal 2", servings=1, instructions="x", calories=500, breakfast_weight=1.0, lunch_weight=1.0, dinner_weight=1.0)
+    r3 = Recipe(name="Meal 3", servings=1, instructions="x", calories=500, breakfast_weight=1.0, lunch_weight=1.0, dinner_weight=1.0)
+    db_session.add_all([r2, r3])
+    db_session.commit()
+    
+    plan = generator.generate_meal_plan(
+        start_date=datetime.now(),
+        days=1,
+        target_calories=1500,
+        people_count=1,
+        dietary_preferences=[],
+        user_id=test_user.id
+    )
+    
+    for entry in plan.entries:
+        # Group by date
+        # (Since we only generate 1 day)
+        pass
+        
+    # Verify entries for the day are unique recipes
+    recipe_ids = [e.recipe_id for e in plan.entries]
+    assert len(recipe_ids) == 3
+    assert len(set(recipe_ids)) == 3, f"Duplicate recipes found in one day: {recipe_ids}"
+

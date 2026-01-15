@@ -24,7 +24,7 @@ class MealPlanGenerator:
         meal_plan = models.MealPlan(
             user_id=user_id,
             start_date=start_date,
-            end_date=start_date + timedelta(days=days),
+            end_date=start_date + timedelta(days=days - 1),
             people_count=people_count,
             target_calories=target_calories,
             dietary_preferences=dietary_preferences
@@ -67,10 +67,8 @@ class MealPlanGenerator:
         return meal_plan
 
     def _generate_daily_meals(self, recipes: List[models.Recipe], target_calories: int, date: datetime) -> Dict[str, models.Recipe]:
-        # Sort recipes by meal type weights
-        breakfast_recipes = self._filter_and_sort_recipes(recipes, 'breakfast_weight')
-        lunch_recipes = self._filter_and_sort_recipes(recipes, 'lunch_weight')
-        dinner_recipes = self._filter_and_sort_recipes(recipes, 'dinner_weight')
+        # Filter recipes by usage count
+        available_recipes = self._filter_available_recipes(recipes)
 
         # Calculate target calories per meal
         breakfast_target = target_calories * 0.25
@@ -83,7 +81,7 @@ class MealPlanGenerator:
         # Select breakfast
         selected_meals['breakfast'] = self._select_recipe(
             'breakfast',
-            breakfast_recipes,
+            available_recipes,
             breakfast_target,
             0.2  # 20% calorie deviation allowed
         )
@@ -91,7 +89,7 @@ class MealPlanGenerator:
         # Select lunch
         selected_meals['lunch'] = self._select_recipe(
             'lunch',
-            lunch_recipes,
+            available_recipes,
             lunch_target,
             0.2,
             exclude_ids={selected_meals['breakfast'].id}
@@ -104,7 +102,7 @@ class MealPlanGenerator:
         )
         selected_meals['dinner'] = self._select_recipe(
             'dinner',
-            dinner_recipes,
+            available_recipes,
             remaining_calories,
             0.25,  # Allow slightly more deviation for final meal
             exclude_ids={m.id for m in selected_meals.values()}
@@ -116,19 +114,12 @@ class MealPlanGenerator:
 
         return selected_meals
 
-    def _filter_and_sort_recipes(
+    def _filter_available_recipes(
         self,
-        recipes: List[models.Recipe],
-        weight_attr: str
+        recipes: List[models.Recipe]
     ) -> List[models.Recipe]:
         # Filter out recipes used twice already
-        available_recipes = [r for r in recipes if self.used_recipes[r.id] < 2]
-        # Sort by weight and randomize within weight groups
-        return sorted(
-            available_recipes,
-            key=lambda x: (getattr(x, weight_attr) * random.uniform(0.8, 1.2)),
-            reverse=True
-        )
+        return [r for r in recipes if self.used_recipes[r.id] < 2]
 
     def _select_recipe(
         self,
@@ -142,8 +133,18 @@ class MealPlanGenerator:
             exclude_ids = set()
 
         weight_attr = f'{meal_type}_weight'
-        # Filter out excluded recipes
+        # Filter out excluded recipes and recipes with 0 weight for this meal type
         available_recipes = [r for r in recipes if r.id not in exclude_ids and getattr(r, weight_attr) > 0]
+
+        if not available_recipes:
+            # If no recipes available (e.g. all used or weight 0), try to find any recipe not excluded
+            # ignoring the weight requirement if absolutely necessary, or just fail.
+            # But usually we want to respect meal types.
+            # If we strictly enforce weight > 0, we might run out.
+            # For now, let's raise error or return None? The previous code would crash on min() on empty sequence.
+            # Let's try to be robust: if strict meal type not found, try any available recipe?
+            # But "Dinner" should probably not be a "Breakfast" only recipe.
+            raise ValueError(f"No available recipes for {meal_type}")
 
         # Try to find a recipe within the calorie range
         min_calories = target_calories * (1 - max_deviation)
@@ -153,14 +154,19 @@ class MealPlanGenerator:
             r for r in available_recipes
             if min_calories <= r.calories <= max_calories
         ]
-        weights = [getattr(r, weight_attr) for r in suitable_recipes]
+        
+        # If no recipes match calorie constraint, use all available recipes (fallback logic from calculate_daily_meals)
+        if not suitable_recipes:
+            suitable_recipes = available_recipes
 
-        if suitable_recipes:
-            selected = random.choices(suitable_recipes, weights=weights, k=1)[0]
+        # Weighted random selection
+        weights = [getattr(r, weight_attr) for r in suitable_recipes]
+        
+        # Handle case where all weights are 0 (should not happen due to available_recipes filter, but safe check)
+        if not weights or sum(weights) == 0:
+             selected = random.choice(suitable_recipes)
         else:
-            # If no recipe in range, select the closest one
-            selected = min(available_recipes,
-                          key=lambda r: abs(r.calories - target_calories))
+             selected = random.choices(suitable_recipes, weights=weights, k=1)[0]
 
         # Update usage count
         self.used_recipes[selected.id] += 1
