@@ -103,6 +103,7 @@ def run_migrations():
     
     logger.info("Running database migrations...")
     command.upgrade(alembic_cfg, "head")
+    logger.info("Database migrations completed.")
 
 @app.on_event("startup")
 def startup_event():

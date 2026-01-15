@@ -121,8 +121,8 @@ async def update_recipe(recipe_id: int, recipe: schemas.RecipeCreate, db: Sessio
     old_image_url = db_recipe.image_url
     new_image_url = recipe.image_url
     
-    # Delete old image if it's being replaced
-    if old_image_url and new_image_url and old_image_url != new_image_url:
+    # Delete old image if it's being replaced or removed
+    if old_image_url and (new_image_url is None or old_image_url != new_image_url):
         from ..services.dropbox_service import dropbox_service
         try:
             await dropbox_service.delete_image(old_image_url)
