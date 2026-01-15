@@ -24,7 +24,22 @@ config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+    # Only configure logging from alembic.ini if we are running from CLI
+    # If running from app (which sets up its own logging), skip this.
+    # We detect this by checking if 'app' logger is already configured or if we are in a specific context.
+    # But simpler: if logging.getLogger().handlers is set, we might skip.
+    # However, alembic needs some logging.
+    # Let's check if we are running via 'alembic' command or via app.
+    # If 'uvicorn' is loaded, we are likely in app.
+    if "uvicorn" not in sys.modules:
+        fileConfig(config.config_file_name)
+    else:
+        # We are likely running inside the app.
+        # We might want to keep existing logging.
+        # But we can allow alembic to configure its loggers if needed,
+        # just be careful about root logger.
+        # For now, let's skip fileConfig if uvicorn is present to avoid resetting root logger.
+        pass
 
 # add your model's MetaData object here
 # for 'autogenerate' support
