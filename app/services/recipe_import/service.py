@@ -30,10 +30,14 @@ class RecipeImportService:
         return await self._jobs.cancel(job_id)
 
     async def _run_job(self, job_id: str, source_type: str, input_data: Any, **kwargs) -> None:
+        if await self._jobs.is_canceled(job_id):
+            return
+
         await self._jobs.update(job_id, status="processing", current_step="extracting", step_progress=0, overall_progress=0)
         
         try:
             if await self._jobs.is_canceled(job_id):
+                await self._jobs.update(job_id, status="canceled")
                 return
 
             # 1. Extraction
