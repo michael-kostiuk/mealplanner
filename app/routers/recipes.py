@@ -8,6 +8,7 @@ import json
 from datetime import datetime
 import time
 import logging
+from ..services.recipe_from_image import recipe_from_image_service
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +16,34 @@ router = APIRouter(
     prefix="/recipes",
     tags=["recipes"]
 )
+
+@router.post("/parse-from-image", response_model=schemas.RecipeFromImageStartResponse)
+async def parse_recipe_from_image(
+    file: UploadFile = File(...),
+):
+    if not file.content_type or not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="File must be an image")
+    file_data = await file.read()
+    if len(file_data) > 10 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large (max 10MB)")
+    return await recipe_from_image_service.start_job(file_data, file.content_type)
+
+
+@router.get("/parse-from-image/{job_id}", response_model=schemas.RecipeFromImageJob)
+async def get_parse_from_image_job(job_id: str):
+    job = await recipe_from_image_service.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return job
+
+
+@router.post("/parse-from-image/{job_id}/cancel")
+async def cancel_parse_from_image_job(job_id: str):
+    ok = await recipe_from_image_service.cancel_job(job_id)
+    if not ok:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return {"status": "canceled"}
+
 
 @router.get("/", response_model=List[schemas.Recipe])
 async def list_recipes(

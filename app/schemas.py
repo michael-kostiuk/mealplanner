@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Literal, Any
 from pydantic import BaseModel, ConfigDict
 
 class IngredientBase(BaseModel):
@@ -127,3 +127,44 @@ class User(UserBase):
     id: int
     meal_plans: List[MealPlan]
     model_config = ConfigDict(from_attributes=True)
+
+
+class ParsedIngredientFromImage(BaseModel):
+    raw_name: str
+    quantity: Optional[float] = None
+    unit: Optional[str] = None
+    preparation: Optional[str] = None
+    matched_ingredient_id: Optional[int] = None
+    matched_ingredient_name: Optional[str] = None
+    match_confidence: float = 0.0
+    match_type: Literal["exact", "fuzzy_high", "ai_verified", "unmatched"] = "unmatched"
+    needs_review: bool = True
+
+
+class ParsedRecipeFromImage(BaseModel):
+    name: Optional[str] = None
+    servings: Optional[int] = None
+    prep_time: Optional[int] = None
+    cook_time: Optional[int] = None
+    instructions: Optional[str] = None
+    category: Optional[str] = None
+    ingredients: List[ParsedIngredientFromImage] = []
+    nutrition: Optional[Dict[str, float]] = None
+    warnings: List[str] = []
+    raw: Optional[Dict[str, Any]] = None
+
+
+class RecipeFromImageStartResponse(BaseModel):
+    job_id: str
+
+
+class RecipeFromImageJob(BaseModel):
+    id: str
+    status: Literal["queued", "processing", "completed", "failed", "canceled"] = "queued"
+    current_step: str = ""
+    step_progress: int = 0
+    overall_progress: int = 0
+    result: Optional[ParsedRecipeFromImage] = None
+    error: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime

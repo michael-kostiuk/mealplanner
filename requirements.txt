@@ -8,4 +8,5 @@ alembic>=1.7.0
 requests>=2.26.0
 httpx>=0.24.0
 python-multipart>=0.0.5
+rapidfuzz>=3.0.0
 pytest>=8.0.0
