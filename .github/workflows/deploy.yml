@@ -1,0 +1,21 @@
+name: Deploy to Dokku
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy to Dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@154.86.14.194:22/mp-be'
+          ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
+          ssh_host_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2zevLnHaLSfds/fmdtklsTkfuP5JOAEfdoZ6U0TnXBbobVO20qtWqrji5BUi4XUEhMSQTdfOtMM09GlRiyntrSx41L7HL4Yn/ZR9HuL2KvV6OaVutxJLEN0/DfUqO8+CPZoWBjcp4QrfV7nKuZZp3Rr8yBit/BzcGJoOOQC4ex9CMV7+zy/BpqZp9knjZ6oiM5HEfXF6P33f25LzCc8FRoCXU4urA0W+W/Jtd/osihnbqXHReb8UeQ8+U6CZYunXFcNBw2PE1d2OAmrmPMnBdA9byrhxB6nC/+w8O0a+s+wwKfCHnv3KzIFCkWnc6OMDWSUHG7gxzuCmM6owmnW6QN5yHg6gmFLRR92NjFM2J0JtEk/W3jeInKvyl5XnDR7U9Oyqki68ty7RHhRWTx6jm1wxltlaZXkKTMGrBIUbyzxsCh9iORPXg3OEBHUVCAqIF8SE4UNhdo5mSMyqHXh4h4nymilou9ARuJUqjHzgcQSiBneu4iLJkgyXPzdzH9D0='

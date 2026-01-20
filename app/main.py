@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from .routers import recipes, meal_plans, shopping_lists, ingredients, nutrition
+from .routers import recipes, meal_plans, shopping_lists, ingredients, nutrition, health
 from .database import engine
 from . import models
 from .logging_setup import setup_logging
@@ -89,3 +89,4 @@ app.include_router(meal_plans.router)
 app.include_router(shopping_lists.router)
 app.include_router(ingredients.router)
 app.include_router(nutrition.router)
+app.include_router(health.router)

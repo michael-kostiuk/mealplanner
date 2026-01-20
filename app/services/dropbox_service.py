@@ -2,7 +2,7 @@ import httpx
 import os
 import time
 import logging
-from typing import Optional
+from typing import Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -291,5 +291,42 @@ class DropboxService:
             elif "?dl=0" in url:
                 url = url.replace("?dl=0", "?raw=1")
         return url
+
+    async def check_health(self) -> Tuple[bool, Optional[str]]:
+        """
+        Verify Dropbox connectivity by hitting a lightweight account endpoint.
+        Returns (is_healthy, error_details_if_any).
+        """
+        try:
+            headers = await self._get_headers()
+        except Exception as e:
+            logger.error(f"Dropbox token retrieval failed: {e}", exc_info=True)
+            return False, f"token_error: {e}"
+
+        try:
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                response = await client.post(
+                    f"{DROPBOX_API_URL}/2/users/get_current_account",
+                    headers=headers
+                )
+
+                if response.status_code == 401:
+                    # Token might be stale; refresh and retry once.
+                    token_manager.clear_cache()
+                    headers = await self._get_headers()
+                    response = await client.post(
+                        f"{DROPBOX_API_URL}/2/users/get_current_account",
+                        headers=headers
+                    )
+
+                if response.status_code == 200:
+                    return True, None
+
+                error_preview = response.text[:200] if response.text else ""
+                logger.warning(f"Dropbox healthcheck failed: {response.status_code} {error_preview}")
+                return False, f"status_{response.status_code}: {error_preview}"
+        except Exception as e:
+            logger.error(f"Dropbox healthcheck error: {e}", exc_info=True)
+            return False, str(e)[:200]
 
 dropbox_service = DropboxService()
