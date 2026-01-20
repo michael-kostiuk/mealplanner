@@ -183,7 +183,6 @@ async def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
         from ..services.dropbox_service import dropbox_service
         await dropbox_service.delete_image(image_url)
     
-    # Delete associated recipe ingredients (cascade will handle this if set up in models)
     db.delete(db_recipe)
     db.commit()
     return {"message": "Recipe deleted successfully"}
