@@ -16,5 +16,5 @@ jobs:
       - name: Deploy to Dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: 'ssh://dokku@154.86.14.194:22/mp-be'
+          git_remote_url: 'ssh://dokku@154.86.14.194:22/mealplanner'
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
