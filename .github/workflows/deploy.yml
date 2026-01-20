@@ -12,20 +12,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Test SSH and Git
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 154.86.14.194 >> ~/.ssh/known_hosts
-          echo "Testing SSH connection..."
-          ssh -v dokku@154.86.14.194 apps:list
-          echo "Testing git ls-remote..."
-          git ls-remote ssh://dokku@154.86.14.194:22/mp-be
-
       - name: Deploy to Dokku
         uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@154.86.14.194:22/mp-be'
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
+          branch: 'main'
+          git_push_flags: '--force'
