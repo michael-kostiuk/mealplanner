@@ -18,6 +18,17 @@ class Ingredient(IngredientBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
 
+class IngredientNutritionEstimateFailure(BaseModel):
+    id: int
+    reason: str
+    rate_limited: bool = False
+
+class IngredientBulkEstimateResponse(BaseModel):
+    updated: List[Ingredient]
+    updated_count: int
+    skipped_count: int
+    failed: List[IngredientNutritionEstimateFailure]
+
 class RecipeIngredientBase(BaseModel):
     ingredient_id: int
     quantity: float

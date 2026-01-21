@@ -1,10 +1,19 @@
-from fastapi import APIRouter, Body, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from typing import List, Optional
-from ..database import get_db
-from .. import models, schemas
 from urllib.parse import unquote
 import logging
+import asyncio
+
+from ..database import get_db
+from .. import models, schemas
+from ..services.nutrition_estimator import (
+    IngredientInput,
+    NutritionEstimationError,
+    get_nutrition_estimator,
+)
+from ..services import fdc_lookup
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +21,68 @@ router = APIRouter(
     prefix="/ingredients",
     tags=["ingredients"],
 )
+
+
+async def _estimate_and_update_ingredient(
+    ingredient: models.Ingredient,
+    estimator,
+    db: Session,
+) -> models.Ingredient:
+    """
+    Use AI to estimate nutrition for a single ingredient and persist it.
+    Assumes caller handles exception mapping.
+    """
+    input_item = IngredientInput(
+        name=ingredient.name,
+        quantity=100.0,
+        unit=ingredient.base_unit or "unit",
+    )
+    nutrition = await estimator.estimate_nutrition([input_item], servings=1)
+
+    ingredient.calories = float(nutrition.calories)
+    ingredient.protein = float(nutrition.protein)
+    ingredient.carbs = float(nutrition.carbs)
+    ingredient.fats = float(nutrition.fats)
+
+    db.add(ingredient)
+    db.commit()
+    db.refresh(ingredient)
+    return ingredient
+
+
+def _update_ingredient_from_macros(
+    ingredient: models.Ingredient,
+    macros: dict,
+    db: Session,
+) -> models.Ingredient:
+    ingredient.calories = float(macros["calories"])
+    ingredient.protein = float(macros["protein"])
+    ingredient.carbs = float(macros["carbs"])
+    ingredient.fats = float(macros["fats"])
+
+    db.add(ingredient)
+    db.commit()
+    db.refresh(ingredient)
+    return ingredient
+
+
+async def _estimate_with_fdc_then_ai(
+    ingredient: models.Ingredient,
+    estimator,
+    db: Session,
+) -> models.Ingredient:
+    macros = None
+    try:
+        macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
+        if macros:
+            logger.info("Ingredient %s matched via FDC", ingredient.id)
+            return _update_ingredient_from_macros(ingredient, macros, db)
+    except fdc_lookup.FdcLookupError as e:
+        logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, e)
+
+    logger.info("Ingredient %s falling back to AI estimation", ingredient.id)
+    return await _estimate_and_update_ingredient(ingredient, estimator, db)
+
 
 @router.get("/", response_model=List[schemas.Ingredient])
 async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query(default=None)):
@@ -21,6 +92,7 @@ async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = 
         db_query = db_query.filter(models.Ingredient.name.ilike(f"%{name}%"))
     return db_query.all()
 
+
 @router.post("/", response_model=schemas.Ingredient)
 async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = Depends(get_db)):
     db_ingredient = models.Ingredient(**ingredient.model_dump())
@@ -29,32 +101,173 @@ async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = 
     db.refresh(db_ingredient)
     return db_ingredient
 
+
+@router.post("/{ingredient_id}/estimate-nutrition", response_model=schemas.Ingredient)
+async def estimate_ingredient_nutrition(
+    ingredient_id: int,
+    db: Session = Depends(get_db),
+):
+    """
+    Estimate nutrition for a single ingredient (per 100 base_unit) using FDC first, AI fallback.
+    """
+    ingredient = db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
+    if not ingredient:
+        raise HTTPException(status_code=404, detail="Ingredient not found")
+
+    try:
+        # Try FDC first
+        macros = None
+        try:
+            macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
+        except fdc_lookup.FdcLookupError as fe:
+            logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, fe)
+
+        if macros:
+            return _update_ingredient_from_macros(ingredient, macros, db)
+
+        # FDC failed or no match; use AI
+        try:
+            estimator = get_nutrition_estimator()
+        except ValueError as e:
+            raise HTTPException(status_code=503, detail=str(e))
+
+        updated = await _estimate_and_update_ingredient(ingredient, estimator, db)
+        return updated
+    except NutritionEstimationError as e:
+        db.rollback()
+        if e.is_rate_limited:
+            raise HTTPException(status_code=429, detail=e.message)
+        if "environment variable is not set" in e.message or "API key not configured" in e.message:
+            raise HTTPException(status_code=503, detail=e.message)
+        raise HTTPException(status_code=500, detail=e.message)
+
+
+@router.post("/estimate-missing", response_model=schemas.IngredientBulkEstimateResponse)
+async def estimate_missing_ingredients(
+    db: Session = Depends(get_db),
+):
+    """
+    Estimate nutrition for all ingredients where all nutrition fields are zero or null.
+    Processes sequentially to avoid rate limits, using FDC first then AI fallback.
+    """
+    total_count = db.query(func.count(models.Ingredient.id)).scalar() or 0
+    missing = (
+        db.query(models.Ingredient)
+        .filter(
+            func.coalesce(models.Ingredient.calories, 0) == 0,
+            func.coalesce(models.Ingredient.protein, 0) == 0,
+            func.coalesce(models.Ingredient.carbs, 0) == 0,
+            func.coalesce(models.Ingredient.fats, 0) == 0,
+        )
+        .order_by(models.Ingredient.id)
+        .all()
+    )
+    estimator = None
+    updated: List[models.Ingredient] = []
+    failed: List[schemas.IngredientNutritionEstimateFailure] = []
+    skipped_count = total_count - len(missing)
+
+    for ingredient in missing:
+        try:
+            macros = None
+            try:
+                macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
+                if macros:
+                    logger.info("Ingredient %s matched via FDC", ingredient.id)
+                    updated_ing = _update_ingredient_from_macros(ingredient, macros, db)
+                    updated.append(updated_ing)
+                    continue
+            except fdc_lookup.FdcLookupError as fe:
+                logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, fe)
+
+            # FDC missing/unavailable -> AI fallback
+            try:
+                if estimator is None:
+                    estimator = get_nutrition_estimator()
+            except ValueError as e:
+                failed.append(
+                    schemas.IngredientNutritionEstimateFailure(
+                        id=ingredient.id,
+                        reason=str(e),
+                        rate_limited=False,
+                    )
+                )
+                continue
+
+            updated_ing = await _estimate_and_update_ingredient(ingredient, estimator, db)
+            updated.append(updated_ing)
+        except NutritionEstimationError as e:
+            db.rollback()
+            # Retry once on rate limit with a short backoff
+            if e.is_rate_limited:
+                await asyncio.sleep(1.0)
+                try:
+                    updated_ing = await _estimate_and_update_ingredient(ingredient, estimator, db)
+                    updated.append(updated_ing)
+                    continue
+                except NutritionEstimationError as retry_err:
+                    db.rollback()
+                    failed.append(
+                        schemas.IngredientNutritionEstimateFailure(
+                            id=ingredient.id,
+                            reason=retry_err.message,
+                            rate_limited=retry_err.is_rate_limited,
+                        )
+                    )
+                    continue
+
+            failed.append(
+                schemas.IngredientNutritionEstimateFailure(
+                    id=ingredient.id,
+                    reason=e.message,
+                    rate_limited=e.is_rate_limited,
+                )
+            )
+        except Exception as e:
+            if isinstance(e, HTTPException):
+                raise
+            db.rollback()
+            failed.append(
+                schemas.IngredientNutritionEstimateFailure(
+                    id=ingredient.id,
+                    reason=str(e),
+                    rate_limited=False,
+                )
+            )
+
+    return schemas.IngredientBulkEstimateResponse(
+        updated=updated,
+        updated_count=len(updated),
+        skipped_count=skipped_count,
+        failed=failed,
+    )
+
+
 def do_merge(
     keep_ingredient_id: int,
     merge_ingredient_ids: List[int],
     db: Session
 ):
-        
     # Validate that keep_ingredient exists
     keep_ingredient = db.query(models.Ingredient).filter(
         models.Ingredient.id == keep_ingredient_id
     ).first()
-    
+
     if not keep_ingredient:
         raise HTTPException(status_code=404, detail="Keep ingredient not found")
-    
+
     # Validate that all merge ingredients exist
     merge_ingredients = db.query(models.Ingredient).filter(
         models.Ingredient.id.in_(merge_ingredient_ids)
     ).all()
-    
+
     if len(merge_ingredients) != len(merge_ingredient_ids):
         raise HTTPException(status_code=404, detail="One or more merge ingredients not found")
-    
+
     # Ensure keep_ingredient is not in merge list
     if keep_ingredient_id in merge_ingredient_ids:
         raise HTTPException(
-            status_code=400, 
+            status_code=400,
             detail="Keep ingredient cannot be in the merge list"
         )
 
@@ -64,14 +277,14 @@ def do_merge(
     ).update({
         models.RecipeIngredient.ingredient_id: keep_ingredient_id
     }, synchronize_session=False)
-    
+
     # Update all ShoppingListItem entries to use the kept ingredient
     db.query(models.ShoppingListItem).filter(
         models.ShoppingListItem.ingredient_id.in_(merge_ingredient_ids)
     ).update({
         models.ShoppingListItem.ingredient_id: keep_ingredient_id
     }, synchronize_session=False)
-    
+
     # Delete the merged ingredients
     db.query(models.Ingredient).filter(
         models.Ingredient.id.in_(merge_ingredient_ids)
