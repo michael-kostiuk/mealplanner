@@ -1,15 +1,19 @@
 import asyncio
 import json
 import logging
-import os
 import re
 from typing import Dict, List, Optional, Tuple, Any
-
-import httpx
 from rapidfuzz import fuzz, process
 from sqlalchemy.orm import Session
 
 from app import models
+from app.core.google_ai_client import (
+    GoogleAIParseError,
+    GoogleAIRateLimitError,
+    GoogleAIRequestError,
+    extract_json,
+    get_google_ai_client,
+)
 from app.services.nutrition_estimator import IngredientInput, NutritionEstimationError, get_nutrition_estimator
 from .schemas import RecipeImportDraft, IngredientImportDraft
 from .utils import normalize_text
@@ -42,12 +46,11 @@ class IngredientMatcher:
         return matched_id, original_name, float(score)
 
 class RecipeImportPipeline:
-    DEFAULT_GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent"
+    DEFAULT_GEMINI_MODEL = "gemma-3-27b-it"
 
-    def __init__(self, db: Session, api_key: Optional[str] = None):
+    def __init__(self, db: Session, model: Optional[str] = None):
         self.db = db
-        self._api_key = api_key or os.getenv("GOOGLE_AI_API_KEY")
-        self._api_url = os.getenv("GEMINI_API_URL", self.DEFAULT_GEMINI_API_URL)
+        self._model = model or self.DEFAULT_GEMINI_MODEL
 
     async def run(self, draft: RecipeImportDraft, progress_callback=None) -> RecipeImportDraft:
         # Merge duplicates
@@ -148,8 +151,10 @@ class RecipeImportPipeline:
         return draft, verify_pairs
 
     async def _verify_pairs(self, pairs: List[Tuple[int, str, int, str]]) -> Dict[int, bool]:
-        if not self._api_key:
-             return {}
+        try:
+            client = get_google_ai_client()
+        except ValueError:
+            return {}
 
         items = [
             {"index": idx, "a": raw_name, "b": matched_name}
@@ -165,24 +170,9 @@ class RecipeImportPipeline:
             "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {"temperature": 0.0, "maxOutputTokens": 1024},
         }
-        url = f"{self._api_url}?key={self._api_key}"
         try:
-            async with httpx.AsyncClient(timeout=45.0) as client:
-                resp = await client.post(url, json=payload, headers={"Content-Type": "application/json"})
-                if resp.status_code != 200:
-                    return {}
-                data = resp.json()
-            text = (
-                data.get("candidates", [{}])[0]
-                .get("content", {})
-                .get("parts", [{}])[0]
-                .get("text", "")
-            )
-            json_start = text.find("{")
-            json_end = text.rfind("}") + 1
-            if json_start == -1 or json_end <= 0:
-                return {}
-            parsed = json.loads(text[json_start:json_end])
+            data = await client.generate_content(self._model, payload, timeout=45.0)
+            parsed = extract_json(data)
             results = {}
             for item in parsed.get("results", []) or []:
                 idx = item.get("index")
@@ -190,8 +180,11 @@ class RecipeImportPipeline:
                 if isinstance(idx, int) and isinstance(same, bool):
                     results[idx] = same
             return results
-        except Exception as e:
-            logger.error(f"Error verifying pairs: {e}")
+        except (GoogleAIRateLimitError, GoogleAIRequestError, GoogleAIParseError) as exc:
+            logger.error("Error verifying pairs: %s", exc)
+            return {}
+        except Exception as exc:
+            logger.error("Error verifying pairs: %s", exc)
             return {}
 
     def _apply_verification(self, draft: RecipeImportDraft, verified: Dict[int, bool]):
@@ -217,10 +210,10 @@ class RecipeImportPipeline:
             servings = draft.servings or 1
             nutrition = await estimator.estimate_nutrition(ingredients, servings)
             return {
-                "calories": float(nutrition.calories),
-                "protein": float(nutrition.protein),
-                "carbs": float(nutrition.carbs),
-                "fats": float(nutrition.fats),
+                "calories": round(float(nutrition.calories), 2),
+                "protein": round(float(nutrition.protein), 2),
+                "carbs": round(float(nutrition.carbs), 2),
+                "fats": round(float(nutrition.fats), 2),
             }
         except NutritionEstimationError:
             return None

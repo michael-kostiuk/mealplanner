@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Optional, Dict, Literal, Any
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_serializer
 
 class IngredientBase(BaseModel):
     name: str
@@ -10,6 +10,10 @@ class IngredientBase(BaseModel):
     protein: float
     carbs: float
     fats: float
+
+    @field_serializer("calories", "protein", "carbs", "fats")
+    def _serialize_macros(self, value: float):
+        return round(value, 2)
 
 class IngredientCreate(IngredientBase):
     pass

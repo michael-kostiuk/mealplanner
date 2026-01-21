@@ -114,10 +114,10 @@ async def estimate_nutrition(request: EstimateNutritionRequest):
     try:
         nutrition_data = await estimator.estimate_nutrition(request.ingredients, request.servings)
         return EstimateNutritionResponse(
-            calories=nutrition_data.calories,
-            protein=nutrition_data.protein,
-            carbs=nutrition_data.carbs,
-            fats=nutrition_data.fats
+            calories=round(float(nutrition_data.calories), 2),
+            protein=round(float(nutrition_data.protein), 2),
+            carbs=round(float(nutrition_data.carbs), 2),
+            fats=round(float(nutrition_data.fats), 2)
         )
     except NutritionEstimationError as e:
         if e.is_rate_limited:

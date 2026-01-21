@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from unittest.mock import AsyncMock, patch, MagicMock, Mock
+from unittest.mock import AsyncMock, patch, MagicMock
 from app.services.recipe_import.service import recipe_import_service
 from app.services.recipe_import.extractors.image import ImageExtractor
 from app.services.recipe_import.pipeline import RecipeImportPipeline
@@ -80,26 +80,6 @@ def sample_verification_response():
     }
 
 
-class MockAsyncClientContext:
-    """Mock async context manager for httpx.AsyncClient."""
-    def __init__(self, response_data, status_code=200):
-        self.response_data = response_data
-        self.status_code = status_code
-        self.client_instance = None
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        pass
-
-    async def post(self, *args, **kwargs):
-        mock_response = AsyncMock()
-        mock_response.status_code = self.status_code
-        mock_response.json = lambda: self.response_data
-        return mock_response
-
-
 @pytest.mark.asyncio
 async def test_import_recipe_from_image_happy_path(db_session, mock_ingredient, sample_image_bytes, sample_valid_ai_response, sample_verification_response):
     """
@@ -115,7 +95,10 @@ async def test_import_recipe_from_image_happy_path(db_session, mock_ingredient, 
     extractor = ImageExtractor()
     draft = extractor._to_draft(extracted)
     
-    mock_verify_client_context = MockAsyncClientContext(sample_verification_response)
+    mock_google_client = MagicMock()
+    mock_google_client.generate_content = AsyncMock(
+        return_value=sample_verification_response
+    )
     
     # Create a simple nutrition result object
     class MockNutrition:
@@ -139,8 +122,8 @@ async def test_import_recipe_from_image_happy_path(db_session, mock_ingredient, 
         return draft
     
     with patch('app.services.recipe_import.extractors.image.ImageExtractor.extract', side_effect=mock_extract), \
-         patch('app.services.recipe_import.pipeline.httpx.AsyncClient', return_value=mock_verify_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_google_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         assert result.job_id is not None
@@ -173,7 +156,12 @@ async def test_import_recipe_missing_required_fields(db_session, mock_ingredient
         }]
     }
     
-    mock_client_context = MockAsyncClientContext(incomplete_response)
+    mock_google_client = MagicMock()
+    mock_google_client.generate_content = AsyncMock(return_value=incomplete_response)
+    mock_verify_client = MagicMock()
+    mock_verify_client.generate_content = AsyncMock(
+        return_value={"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]}
+    )
     
     mock_nutrition_result = MagicMock()
     mock_nutrition_result.calories = 0.0
@@ -187,8 +175,9 @@ async def test_import_recipe_missing_required_fields(db_session, mock_ingredient
     mock_estimator = MagicMock()
     mock_estimator.estimate_nutrition = mock_estimate
     
-    with patch('app.services.recipe_import.extractors.image.httpx.AsyncClient', return_value=mock_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+    with patch('app.services.recipe_import.extractors.image.get_google_ai_client', return_value=mock_google_client), \
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_verify_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         
@@ -230,7 +219,12 @@ async def test_import_recipe_with_duplicate_ingredients(db_session, mock_ingredi
         }]
     }
     
-    mock_client_context = MockAsyncClientContext(duplicate_response)
+    mock_google_client = MagicMock()
+    mock_google_client.generate_content = AsyncMock(return_value=duplicate_response)
+    mock_verify_client = MagicMock()
+    mock_verify_client.generate_content = AsyncMock(
+        return_value={"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]}
+    )
     
     mock_nutrition_result = MagicMock()
     mock_nutrition_result.calories = 100.0
@@ -244,8 +238,9 @@ async def test_import_recipe_with_duplicate_ingredients(db_session, mock_ingredi
     mock_estimator = MagicMock()
     mock_estimator.estimate_nutrition = mock_estimate
     
-    with patch('app.services.recipe_import.extractors.image.httpx.AsyncClient', return_value=mock_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+    with patch('app.services.recipe_import.extractors.image.get_google_ai_client', return_value=mock_google_client), \
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_verify_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         
@@ -330,7 +325,12 @@ async def test_import_recipe_with_matching(db_session, mock_ingredient, sample_i
         }]
     }
     
-    mock_client_context = MockAsyncClientContext(match_response)
+    mock_google_client = MagicMock()
+    mock_google_client.generate_content = AsyncMock(return_value=match_response)
+    mock_verify_client = MagicMock()
+    mock_verify_client.generate_content = AsyncMock(
+        return_value={"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]}
+    )
     
     mock_nutrition_result = MagicMock()
     mock_nutrition_result.calories = 300.0
@@ -344,8 +344,9 @@ async def test_import_recipe_with_matching(db_session, mock_ingredient, sample_i
     mock_estimator = MagicMock()
     mock_estimator.estimate_nutrition = mock_estimate
     
-    with patch('app.services.recipe_import.extractors.image.httpx.AsyncClient', return_value=mock_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+    with patch('app.services.recipe_import.extractors.image.get_google_ai_client', return_value=mock_google_client), \
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_verify_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         
@@ -385,7 +386,12 @@ async def test_import_recipe_nutrition_estimation_failure(db_session, mock_ingre
         }]
     }
     
-    mock_client_context = MockAsyncClientContext(match_response)
+    mock_google_client = MagicMock()
+    mock_google_client.generate_content = AsyncMock(return_value=match_response)
+    mock_verify_client = MagicMock()
+    mock_verify_client.generate_content = AsyncMock(
+        return_value={"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]}
+    )
     
     async def mock_estimate_error(*args, **kwargs):
         raise NutritionEstimationError("Failed to estimate")
@@ -393,8 +399,9 @@ async def test_import_recipe_nutrition_estimation_failure(db_session, mock_ingre
     mock_estimator = MagicMock()
     mock_estimator.estimate_nutrition = mock_estimate_error
     
-    with patch('app.services.recipe_import.extractors.image.httpx.AsyncClient', return_value=mock_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+    with patch('app.services.recipe_import.extractors.image.get_google_ai_client', return_value=mock_google_client), \
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_verify_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         
@@ -416,8 +423,14 @@ async def test_import_progress_updates(db_session, mock_ingredient, sample_image
     """
     Test that job progress is updated correctly through stages.
     """
-    mock_client_context = MockAsyncClientContext(sample_valid_ai_response)
-    mock_verify_client_context = MockAsyncClientContext({"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]})
+    mock_extractor_client = MagicMock()
+    mock_extractor_client.generate_content = AsyncMock(
+        return_value=sample_valid_ai_response
+    )
+    mock_verify_client = MagicMock()
+    mock_verify_client.generate_content = AsyncMock(
+        return_value={"candidates": [{"content": {"parts": [{"text": '{"results":[]}'}]}}]}
+    )
     
     mock_nutrition_result = MagicMock()
     mock_nutrition_result.calories = 400.0
@@ -431,9 +444,9 @@ async def test_import_progress_updates(db_session, mock_ingredient, sample_image
     mock_estimator = MagicMock()
     mock_estimator.estimate_nutrition = mock_estimate
     
-    with patch('app.services.recipe_import.extractors.image.httpx.AsyncClient', return_value=mock_client_context), \
-         patch('app.services.recipe_import.pipeline.httpx.AsyncClient', return_value=mock_verify_client_context), \
-         patch('app.services.nutrition_estimator.get_nutrition_estimator', return_value=mock_estimator):
+    with patch('app.services.recipe_import.extractors.image.get_google_ai_client', return_value=mock_extractor_client), \
+         patch('app.services.recipe_import.pipeline.get_google_ai_client', return_value=mock_verify_client), \
+         patch('app.services.recipe_import.pipeline.get_nutrition_estimator', return_value=mock_estimator):
         
         result = await recipe_import_service.start_job("image", sample_image_bytes, mime_type="image/png")
         

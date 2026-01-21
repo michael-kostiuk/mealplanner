@@ -13,6 +13,10 @@ from ..services.nutrition_estimator import (
     NutritionEstimationError,
     get_nutrition_estimator,
 )
+from ..services.ingredient_translator import (
+    IngredientTranslationError,
+    get_ingredient_translator,
+)
 from ..services import fdc_lookup
 
 logger = logging.getLogger(__name__)
@@ -39,10 +43,10 @@ async def _estimate_and_update_ingredient(
     )
     nutrition = await estimator.estimate_nutrition([input_item], servings=1)
 
-    ingredient.calories = float(nutrition.calories)
-    ingredient.protein = float(nutrition.protein)
-    ingredient.carbs = float(nutrition.carbs)
-    ingredient.fats = float(nutrition.fats)
+    ingredient.calories = round(float(nutrition.calories), 2)
+    ingredient.protein = round(float(nutrition.protein), 2)
+    ingredient.carbs = round(float(nutrition.carbs), 2)
+    ingredient.fats = round(float(nutrition.fats), 2)
 
     db.add(ingredient)
     db.commit()
@@ -55,10 +59,10 @@ def _update_ingredient_from_macros(
     macros: dict,
     db: Session,
 ) -> models.Ingredient:
-    ingredient.calories = float(macros["calories"])
-    ingredient.protein = float(macros["protein"])
-    ingredient.carbs = float(macros["carbs"])
-    ingredient.fats = float(macros["fats"])
+    ingredient.calories = round(float(macros["calories"]), 2)
+    ingredient.protein = round(float(macros["protein"]), 2)
+    ingredient.carbs = round(float(macros["carbs"]), 2)
+    ingredient.fats = round(float(macros["fats"]), 2)
 
     db.add(ingredient)
     db.commit()
@@ -71,17 +75,42 @@ async def _estimate_with_fdc_then_ai(
     estimator,
     db: Session,
 ) -> models.Ingredient:
-    macros = None
-    try:
-        macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
-        if macros:
-            logger.info("Ingredient %s matched via FDC", ingredient.id)
-            return _update_ingredient_from_macros(ingredient, macros, db)
-    except fdc_lookup.FdcLookupError as e:
-        logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, e)
+    macros = await _lookup_fdc_macros(ingredient)
+    if macros:
+        logger.info("Ingredient %s matched via FDC", ingredient.id)
+        return _update_ingredient_from_macros(ingredient, macros, db)
 
     logger.info("Ingredient %s falling back to AI estimation", ingredient.id)
     return await _estimate_and_update_ingredient(ingredient, estimator, db)
+
+
+async def _lookup_fdc_macros(ingredient: models.Ingredient) -> Optional[dict]:
+    lookup_name = ingredient.name
+    allow_ascii = False
+    try:
+        translator = get_ingredient_translator()
+    except ValueError as exc:
+        logger.warning("Ingredient translation unavailable for ingredient %s: %s", ingredient.id, exc)
+    else:
+        try:
+            translated = await translator.translate_to_english(ingredient.name)
+            if translated:
+                lookup_name = translated
+                allow_ascii = True
+        except IngredientTranslationError as exc:
+            logger.warning("Ingredient translation failed for ingredient %s: %s", ingredient.id, exc.message)
+        except Exception as exc:
+            logger.warning("Ingredient translation failed for ingredient %s: %s", ingredient.id, exc)
+
+    try:
+        return fdc_lookup.lookup_nutrition(
+            lookup_name,
+            ingredient.base_unit,
+            allow_ascii=allow_ascii,
+        )
+    except fdc_lookup.FdcLookupError as exc:
+        logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, exc)
+        return None
 
 
 @router.get("/", response_model=List[schemas.Ingredient])
@@ -115,13 +144,7 @@ async def estimate_ingredient_nutrition(
         raise HTTPException(status_code=404, detail="Ingredient not found")
 
     try:
-        # Try FDC first
-        macros = None
-        try:
-            macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
-        except fdc_lookup.FdcLookupError as fe:
-            logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, fe)
-
+        macros = await _lookup_fdc_macros(ingredient)
         if macros:
             return _update_ingredient_from_macros(ingredient, macros, db)
 
@@ -169,16 +192,12 @@ async def estimate_missing_ingredients(
 
     for ingredient in missing:
         try:
-            macros = None
-            try:
-                macros = fdc_lookup.lookup_nutrition(ingredient.name, ingredient.base_unit)
-                if macros:
-                    logger.info("Ingredient %s matched via FDC", ingredient.id)
-                    updated_ing = _update_ingredient_from_macros(ingredient, macros, db)
-                    updated.append(updated_ing)
-                    continue
-            except fdc_lookup.FdcLookupError as fe:
-                logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, fe)
+            macros = await _lookup_fdc_macros(ingredient)
+            if macros:
+                logger.info("Ingredient %s matched via FDC", ingredient.id)
+                updated_ing = _update_ingredient_from_macros(ingredient, macros, db)
+                updated.append(updated_ing)
+                continue
 
             # FDC missing/unavailable -> AI fallback
             try:

@@ -43,6 +43,16 @@ class MockEstimator:
         return response
 
 
+class MockTranslator:
+    def __init__(self, translation):
+        self.translation = translation
+        self.calls = 0
+
+    async def translate_to_english(self, *args, **kwargs):
+        self.calls += 1
+        return self.translation
+
+
 def add_ingredient(db_session, **kwargs):
     ingredient = models.Ingredient(**kwargs)
     db_session.add(ingredient)
@@ -67,7 +77,9 @@ def test_estimate_single_ingredient_updates_values(client, db_session):
         [MockNutrition(calories=41.0, protein=0.9, carbs=9.6, fats=0.2)]
     )
 
-    with patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator):
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
+        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
 
     assert response.status_code == 200
@@ -83,6 +95,43 @@ def test_estimate_single_ingredient_updates_values(client, db_session):
     assert refreshed.protein == 0.9
     assert refreshed.carbs == 9.6
     assert refreshed.fats == 0.2
+
+
+def test_estimate_single_ingredient_rounds_calories(client, db_session):
+    ingredient = add_ingredient(
+        db_session,
+        id=1,
+        name="Onion",
+        category="vegetables",
+        base_unit="g",
+        calories=0,
+        protein=0,
+        carbs=0,
+        fats=0,
+    )
+
+    mock_estimator = MockEstimator(
+        [MockNutrition(calories=12.3456, protein=0.1234, carbs=2.3456, fats=0.9876)]
+    )
+
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
+        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    ):
+        response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["calories"] == 12.35
+    assert data["protein"] == 0.12
+    assert data["carbs"] == 2.35
+    assert data["fats"] == 0.99
+
+    db_session.expire_all()
+    refreshed = db_session.get(models.Ingredient, ingredient.id)
+    assert refreshed.calories == 12.35
+    assert refreshed.protein == 0.12
+    assert refreshed.carbs == 2.35
+    assert refreshed.fats == 0.99
 
 
 def test_estimate_missing_bulk_skips_populated(client, db_session):
@@ -113,7 +162,9 @@ def test_estimate_missing_bulk_skips_populated(client, db_session):
         [MockNutrition(calories=16.0, protein=0.7, carbs=3.0, fats=0.1)]
     )
 
-    with patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator):
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
+        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    ):
         response = client.post("/ingredients/estimate-missing")
 
     assert response.status_code == 200
@@ -157,7 +208,9 @@ def test_estimate_missing_retries_on_rate_limit(client, db_session):
         ]
     )
 
-    with patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator):
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
+        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    ):
         response = client.post("/ingredients/estimate-missing")
 
     assert response.status_code == 200
@@ -189,11 +242,38 @@ def test_estimate_missing_returns_503_when_no_api_key(client, db_session):
     def raise_value_error():
         raise ValueError("GOOGLE_AI_API_KEY environment variable is not set")
 
-    with patch("app.routers.ingredients.get_nutrition_estimator", side_effect=raise_value_error):
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
+        "app.routers.ingredients.get_nutrition_estimator", side_effect=raise_value_error
+    ):
         response = client.post("/ingredients/estimate-missing")
-
     assert response.status_code == 200
     payload = response.json()
     assert payload["updated_count"] == 0
     assert payload["failed"]
     assert "not set" in payload["failed"][0]["reason"]
+
+
+def test_estimate_single_ingredient_uses_translation_for_fdc_lookup(client, db_session):
+    ingredient = add_ingredient(
+        db_session,
+        id=1,
+        name="morkva",
+        category="vegetables",
+        base_unit="g",
+        calories=0,
+        protein=0,
+        carbs=0,
+        fats=0,
+    )
+
+    mock_translator = MockTranslator("carrot")
+    macros = {"calories": 41.0, "protein": 0.9, "carbs": 9.6, "fats": 0.2}
+
+    with patch("app.routers.ingredients.get_ingredient_translator", return_value=mock_translator), patch(
+        "app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=macros
+    ) as lookup:
+        response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
+
+    assert response.status_code == 200
+    lookup.assert_called_once_with("carrot", ingredient.base_unit, allow_ascii=True)
+    assert response.json()["calories"] == 41.0

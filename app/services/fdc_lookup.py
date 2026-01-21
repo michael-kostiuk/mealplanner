@@ -142,14 +142,14 @@ def _data_type_weight(row: sqlite3.Row) -> int:
     return 0
 
 
-def _search(name: str, base_unit: Optional[str]) -> List[sqlite3.Row]:
+def _search(name: str, base_unit: Optional[str], allow_ascii: bool = False) -> List[sqlite3.Row]:
     conn = _get_conn()
     global _synonyms
     if not _synonyms:
         _synonyms = _load_synonyms()
     normalized = _normalize(name)
     synonyms_hit = _synonyms.get(normalized, normalized)
-    if synonyms_hit == normalized and normalized.isascii():
+    if synonyms_hit == normalized and normalized.isascii() and not allow_ascii:
         return []
     tokens = [t for t in _normalize(synonyms_hit).split() if t]
     scoring_tokens = list(tokens)
@@ -211,12 +211,16 @@ def _search(name: str, base_unit: Optional[str]) -> List[sqlite3.Row]:
     return [r for _, r in scored]
 
 
-def lookup_nutrition(ingredient_name: str, base_unit: Optional[str]) -> Optional[Dict[str, float]]:
+def lookup_nutrition(
+    ingredient_name: str,
+    base_unit: Optional[str],
+    allow_ascii: bool = False,
+) -> Optional[Dict[str, float]]:
     """
     Find macros per base_unit for the given ingredient name.
     Returns None if no confident match is found.
     """
-    candidates = _search(ingredient_name, base_unit)
+    candidates = _search(ingredient_name, base_unit, allow_ascii=allow_ascii)
     if not candidates:
         return None
     picked = candidates[0]

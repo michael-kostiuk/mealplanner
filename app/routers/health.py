@@ -1,13 +1,10 @@
 import logging
-import os
 from typing import Optional, Tuple
-from urllib.parse import urlparse
-
-import httpx
 from fastapi import APIRouter, status
 from sqlalchemy import text
 
 from ..database import engine
+from ..core.google_ai_client import get_google_ai_client
 from ..services.dropbox_service import dropbox_service
 
 logger = logging.getLogger(__name__)
@@ -22,25 +19,6 @@ router = APIRouter(
 async def basic_healthcheck():
     """Lightweight healthcheck for load balancers."""
     return {"status": "ok"}
-
-
-def _resolve_gemini_models_url() -> str:
-    """
-    Build the Gemini models endpoint from the configured API URL (if provided),
-    falling back to the public base URL.
-    """
-    default_base = "https://generativelanguage.googleapis.com"
-    default_version = "v1beta"
-
-    api_url = os.getenv("GEMINI_API_URL")
-    if not api_url:
-        return f"{default_base}/{default_version}/models"
-
-    parsed = urlparse(api_url)
-    base = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else default_base
-    path_parts = [part for part in parsed.path.split("/") if part]
-    version = path_parts[0] if path_parts and path_parts[0].startswith("v1") else default_version
-    return f"{base}/{version}/models"
 
 
 def _trim_detail(detail: str, limit: int = 200) -> str:
@@ -58,24 +36,15 @@ async def _check_database() -> Tuple[bool, Optional[str]]:
 
 
 async def _check_google_ai() -> Tuple[bool, Optional[str]]:
-    api_key = os.getenv("GOOGLE_AI_API_KEY")
-    if not api_key:
+    try:
+        client = get_google_ai_client()
+    except ValueError:
         return False, "GOOGLE_AI_API_KEY not set"
 
-    models_url = _resolve_gemini_models_url()
-    try:
-        async with httpx.AsyncClient(timeout=10.0) as client:
-            response = await client.get(models_url, params={"key": api_key, "pageSize": 1})
-
-        if response.status_code == 200:
-            return True, None
-
-        preview = response.text[:200] if response.text else ""
-        logger.warning("Google AI health check failed: %s %s", response.status_code, preview)
-        return False, f"status_{response.status_code}: {preview}"
-    except Exception as e:
-        logger.error("Google AI health check error: %s", e, exc_info=True)
-        return False, _trim_detail(str(e))
+    ok, detail = await client.check_health()
+    if detail:
+        detail = _trim_detail(detail)
+    return ok, detail
 
 
 @router.get("/extended", status_code=status.HTTP_200_OK)
