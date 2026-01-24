@@ -4,7 +4,7 @@ from fastapi import APIRouter, status
 from sqlalchemy import text
 
 from ..database import engine
-from ..core.google_ai_client import get_google_ai_client
+from ..core.google_ai_client import get_ai_provider, get_google_ai_client
 from ..services.dropbox_service import dropbox_service
 
 logger = logging.getLogger(__name__)
@@ -38,8 +38,8 @@ async def _check_database() -> Tuple[bool, Optional[str]]:
 async def _check_google_ai() -> Tuple[bool, Optional[str]]:
     try:
         client = get_google_ai_client()
-    except ValueError:
-        return False, "GOOGLE_AI_API_KEY not set"
+    except ValueError as exc:
+        return False, str(exc)
 
     ok, detail = await client.check_health()
     if detail:
@@ -56,11 +56,12 @@ async def extended_healthcheck():
     db_ok, db_detail = await _check_database()
     dropbox_ok, dropbox_detail = await dropbox_service.check_health()
     google_ok, google_detail = await _check_google_ai()
+    ai_provider = get_ai_provider()
 
     services = {
         "database": {"status": "ok" if db_ok else "error"},
         "dropbox": {"status": "ok" if dropbox_ok else "error"},
-        "google_ai": {"status": "ok" if google_ok else "error"},
+        "google_ai": {"status": "ok" if google_ok else "error", "provider": ai_provider},
     }
 
     if db_detail:
