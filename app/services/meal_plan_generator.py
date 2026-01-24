@@ -106,9 +106,6 @@ class MealPlanGenerator:
         return {recipe_id for (recipe_id,) in rows}
 
     def _generate_daily_meals(self, recipes: List[models.Recipe], target_calories: int, date: datetime) -> Dict[str, models.Recipe]:
-        # Filter recipes by usage count
-        available_recipes = self._filter_available_recipes(recipes)
-
         # Calculate target calories per meal
         breakfast_target = target_calories * 0.25
         lunch_target = target_calories * 0.35
@@ -120,7 +117,7 @@ class MealPlanGenerator:
         # Select breakfast
         selected_meals['breakfast'] = self._select_recipe(
             'breakfast',
-            available_recipes,
+            recipes,
             breakfast_target,
             0.2  # 20% calorie deviation allowed
         )
@@ -128,7 +125,7 @@ class MealPlanGenerator:
         # Select lunch
         selected_meals['lunch'] = self._select_recipe(
             'lunch',
-            available_recipes,
+            recipes,
             lunch_target,
             0.2,
             exclude_ids={selected_meals['breakfast'].id}
@@ -141,7 +138,7 @@ class MealPlanGenerator:
         )
         selected_meals['dinner'] = self._select_recipe(
             'dinner',
-            available_recipes,
+            recipes,
             remaining_calories,
             0.25,  # Allow slightly more deviation for final meal
             exclude_ids={m.id for m in selected_meals.values()}
@@ -153,36 +150,52 @@ class MealPlanGenerator:
 
         return selected_meals
 
-    def _filter_available_recipes(
-        self,
-        recipes: List[models.Recipe]
-    ) -> List[models.Recipe]:
-        # Filter out recipes used twice already
-        return [r for r in recipes if self.used_recipes[r.id] < 2]
-
     def _select_recipe(
         self,
         meal_type: str,
         recipes: List[models.Recipe],
         target_calories: float,
         max_deviation: float,
-        exclude_ids: Set[int] = None
+        exclude_ids: Optional[Set[int]] = None
     ) -> models.Recipe:
         if exclude_ids is None:
             exclude_ids = set()
 
         weight_attr = f'{meal_type}_weight'
-        # Filter out excluded recipes and recipes with 0 weight for this meal type
-        available_recipes = [r for r in recipes if r.id not in exclude_ids and getattr(r, weight_attr) > 0]
+        
+        # Primary filter: not excluded, not overused, has meal type weight > 0
+        available_recipes = [
+            r for r in recipes 
+            if r.id not in exclude_ids 
+            and self.used_recipes[r.id] < 2 
+            and getattr(r, weight_attr) > 0
+        ]
 
         if not available_recipes:
-            # If no recipes available (e.g. all used or weight 0), try to find any recipe not excluded
-            # ignoring the weight requirement if absolutely necessary, or just fail.
-            # But usually we want to respect meal types.
-            # If we strictly enforce weight > 0, we might run out.
-            # For now, let's raise error or return None? The previous code would crash on min() on empty sequence.
-            # Let's try to be robust: if strict meal type not found, try any available recipe?
-            # But "Dinner" should probably not be a "Breakfast" only recipe.
+            # Fallback 1: Allow overused recipes (used >= 2 times) but keep other constraints
+            available_recipes = [
+                r for r in recipes 
+                if r.id not in exclude_ids 
+                and getattr(r, weight_attr) > 0
+            ]
+        
+        if not available_recipes:
+            # Fallback 2: Allow recipes with 0 weight for this meal type
+            available_recipes = [
+                r for r in recipes 
+                if r.id not in exclude_ids 
+                and self.used_recipes[r.id] < 2
+            ]
+        
+        if not available_recipes:
+            # Fallback 3: Allow any recipe not excluded today
+            available_recipes = [r for r in recipes if r.id not in exclude_ids]
+        
+        if not available_recipes:
+            # Fallback 4: Last resort - use any recipe at all (even if used today)
+            available_recipes = list(recipes)
+        
+        if not available_recipes:
             raise ValueError(f"No available recipes for {meal_type}")
 
         # Try to find a recipe within the calorie range
