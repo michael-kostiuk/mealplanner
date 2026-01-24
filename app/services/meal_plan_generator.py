@@ -10,6 +10,7 @@ class MealPlanGenerator:
         self.db = db
         self.used_recipes: Dict[int, int] = defaultdict(int)  # recipe_id -> usage count
         self.daily_calories: List[float] = []  # track calories for each day
+        self.recent_recipe_ids: Set[int] = set()
 
     def generate_meal_plan(
         self,
@@ -40,6 +41,9 @@ class MealPlanGenerator:
         if not suitable_recipes:
             raise ValueError("No recipes available")
 
+        # Apply a weight penalty to recipes used in the previous week for this user
+        self.recent_recipe_ids = self._load_recent_recipe_ids(user_id, start_date)
+
         # Generate meals for each day
         current_date = start_date
         for day in range(days):
@@ -65,6 +69,19 @@ class MealPlanGenerator:
         self.db.commit()
         self.db.refresh(meal_plan)
         return meal_plan
+
+    def _load_recent_recipe_ids(self, user_id: int, start_date: datetime) -> Set[int]:
+        window_start = start_date - timedelta(days=7)
+        rows = (
+            self.db.query(models.MealPlanEntry.recipe_id)
+            .join(models.MealPlan, models.MealPlan.id == models.MealPlanEntry.meal_plan_id)
+            .filter(models.MealPlan.user_id == user_id)
+            .filter(models.MealPlanEntry.date >= window_start)
+            .filter(models.MealPlanEntry.date < start_date)
+            .distinct()
+            .all()
+        )
+        return {recipe_id for (recipe_id,) in rows}
 
     def _generate_daily_meals(self, recipes: List[models.Recipe], target_calories: int, date: datetime) -> Dict[str, models.Recipe]:
         # Filter recipes by usage count
@@ -160,7 +177,10 @@ class MealPlanGenerator:
             suitable_recipes = available_recipes
 
         # Weighted random selection
-        weights = [getattr(r, weight_attr) for r in suitable_recipes]
+        weights = [
+            getattr(r, weight_attr) * (0.5 if r.id in self.recent_recipe_ids else 1.0)
+            for r in suitable_recipes
+        ]
         
         # Handle case where all weights are 0 (should not happen due to available_recipes filter, but safe check)
         if not weights or sum(weights) == 0:

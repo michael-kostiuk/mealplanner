@@ -2,6 +2,7 @@ import pytest
 from datetime import datetime, timedelta
 from collections import Counter
 from app.services.meal_plan_generator import MealPlanGenerator
+import app.services.meal_plan_generator as mpg
 from app.models import Recipe, MealPlan, MealPlanEntry, User
 
 # Helper to create a user
@@ -209,6 +210,69 @@ def test_no_excessive_repetition(db_session, test_user):
         assert count <= 2, f"Recipe {recipe_id} used {count} times, expected <= 2"
         assert count < 5, "Requirement: no 5 same meals in week"
 
+def test_recent_week_weight_penalty_applied(db_session, test_user, monkeypatch):
+    """
+    Recipes used in the previous week should receive a 50% weight penalty.
+    """
+    r_recent = Recipe(
+        name="Recent",
+        servings=1,
+        instructions="x",
+        calories=500,
+        breakfast_weight=1.0,
+        lunch_weight=1.0,
+        dinner_weight=1.0
+    )
+    r_other = Recipe(
+        name="Other",
+        servings=1,
+        instructions="x",
+        calories=500,
+        breakfast_weight=1.0,
+        lunch_weight=1.0,
+        dinner_weight=1.0
+    )
+    db_session.add_all([r_recent, r_other])
+    db_session.commit()
+
+    start_date = datetime(2025, 1, 15, 12, 0, 0)
+    past_plan = MealPlan(
+        user_id=test_user.id,
+        start_date=start_date - timedelta(days=7),
+        end_date=start_date - timedelta(days=1),
+        people_count=1,
+        target_calories=1500,
+        dietary_preferences=[]
+    )
+    db_session.add(past_plan)
+    db_session.commit()
+    db_session.refresh(past_plan)
+
+    entry = MealPlanEntry(
+        meal_plan_id=past_plan.id,
+        recipe_id=r_recent.id,
+        date=start_date - timedelta(days=2),
+        meal_type="breakfast",
+        servings=1
+    )
+    db_session.add(entry)
+    db_session.commit()
+
+    generator = MealPlanGenerator(db_session)
+    generator.recent_recipe_ids = generator._load_recent_recipe_ids(test_user.id, start_date)
+    assert r_recent.id in generator.recent_recipe_ids
+
+    captured = {}
+    def fake_choices(seq, weights, k):
+        captured["weights"] = weights
+        return [seq[0]]
+
+    monkeypatch.setattr(mpg.random, "choices", fake_choices)
+    generator._select_recipe("breakfast", [r_recent, r_other], 500, 1.0)
+
+    assert captured["weights"][0] == 0.5
+    assert captured["weights"][1] == 1.0
+
 def test_sanity_checks(db_session, test_user):
     """
     General sanity checks.
@@ -312,4 +376,3 @@ def test_no_same_meal_in_one_day(db_session, test_user):
     recipe_ids = [e.recipe_id for e in plan.entries]
     assert len(recipe_ids) == 3
     assert len(set(recipe_ids)) == 3, f"Duplicate recipes found in one day: {recipe_ids}"
-
