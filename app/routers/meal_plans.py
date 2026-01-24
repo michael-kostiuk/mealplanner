@@ -63,30 +63,61 @@ async def create_meal_plan(meal_plan: schemas.MealPlanCreate, db: Session = Depe
 
 @router.post("/auto-generate", response_model=schemas.MealPlan)
 async def auto_generate_meal_plan(
-    start_date: datetime,
-    days: int,
-    target_calories: int,
-    people_count: int,
+    start_date: Optional[datetime] = None,
+    days: Optional[int] = None,
+    target_calories: Optional[int] = None,
+    people_count: Optional[int] = None,
     dietary_preferences: List[str] = Query([]),
-    user_id: int = Query(...),
+    user_id: Optional[int] = Query(None),
+    meal_plan_id: Optional[int] = Query(None, alias="id"),
     db: Session = Depends(get_db)
 ):
     # Get all available recipes
-    recipes = db.query(models.Recipe).all()
-    if not recipes:
+    if db.query(models.Recipe.id).first() is None:
         raise HTTPException(status_code=400, detail="No recipes available for meal planning")
-    
-    # Create meal plan
+
     planner = MealPlanGenerator(db)
-    db_meal_plan = planner.generate_meal_plan(
-        start_date=start_date,
-        days=days,
-        target_calories=target_calories,
-        people_count=people_count,
-        dietary_preferences=dietary_preferences,
-        user_id=user_id
-    )
-    
+    if meal_plan_id is not None:
+        meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
+        if meal_plan is None:
+            raise HTTPException(status_code=404, detail="Meal plan not found")
+        try:
+            db_meal_plan = planner.regenerate_meal_plan(meal_plan)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        db.commit()
+        db.refresh(db_meal_plan)
+        return db_meal_plan
+
+    missing_params = [
+        name for name, value in {
+            "start_date": start_date,
+            "days": days,
+            "target_calories": target_calories,
+            "people_count": people_count,
+            "user_id": user_id,
+        }.items()
+        if value is None
+    ]
+    if missing_params:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Missing required params: {', '.join(missing_params)}"
+        )
+
+    # Create meal plan
+    try:
+        db_meal_plan = planner.generate_meal_plan(
+            start_date=start_date,
+            days=days,
+            target_calories=target_calories,
+            people_count=people_count,
+            dietary_preferences=dietary_preferences,
+            user_id=user_id
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
     db.commit()
     db.refresh(db_meal_plan)
     return db_meal_plan

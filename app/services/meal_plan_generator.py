@@ -12,6 +12,11 @@ class MealPlanGenerator:
         self.daily_calories: List[float] = []  # track calories for each day
         self.recent_recipe_ids: Set[int] = set()
 
+    def _reset_state(self) -> None:
+        self.used_recipes = defaultdict(int)
+        self.daily_calories = []
+        self.recent_recipe_ids = set()
+
     def generate_meal_plan(
         self,
         start_date: datetime,
@@ -34,6 +39,27 @@ class MealPlanGenerator:
         self.db.commit()
         self.db.refresh(meal_plan)
 
+        self._reset_state()
+        self._populate_entries(meal_plan)
+        self.db.commit()
+        self.db.refresh(meal_plan)
+        return meal_plan
+
+    def regenerate_meal_plan(self, meal_plan: models.MealPlan) -> models.MealPlan:
+        self._reset_state()
+        self.db.query(models.MealPlanEntry).filter(
+            models.MealPlanEntry.meal_plan_id == meal_plan.id
+        ).delete(synchronize_session=False)
+        self._populate_entries(meal_plan)
+        self.db.commit()
+        self.db.refresh(meal_plan)
+        return meal_plan
+
+    def _populate_entries(self, meal_plan: models.MealPlan) -> None:
+        days = (meal_plan.end_date - meal_plan.start_date).days + 1
+        if days <= 0:
+            raise ValueError("Invalid meal plan date range")
+
         # Get all suitable recipes
         recipes = self.db.query(models.Recipe).all()
         suitable_recipes = recipes  # All recipes are suitable since dietary_tags is not used
@@ -42,14 +68,14 @@ class MealPlanGenerator:
             raise ValueError("No recipes available")
 
         # Apply a weight penalty to recipes used in the previous week for this user
-        self.recent_recipe_ids = self._load_recent_recipe_ids(user_id, start_date)
+        self.recent_recipe_ids = self._load_recent_recipe_ids(meal_plan.user_id, meal_plan.start_date)
 
         # Generate meals for each day
-        current_date = start_date
+        current_date = meal_plan.start_date
         for day in range(days):
             daily_meals = self._generate_daily_meals(
                 suitable_recipes,
-                target_calories,
+                meal_plan.target_calories,
                 current_date
             )
 
@@ -60,15 +86,11 @@ class MealPlanGenerator:
                     recipe_id=recipe.id,
                     date=current_date,
                     meal_type=meal_type,
-                    servings=people_count
+                    servings=meal_plan.people_count
                 )
                 self.db.add(entry)
 
             current_date += timedelta(days=1)
-
-        self.db.commit()
-        self.db.refresh(meal_plan)
-        return meal_plan
 
     def _load_recent_recipe_ids(self, user_id: int, start_date: datetime) -> Set[int]:
         window_start = start_date - timedelta(days=7)
