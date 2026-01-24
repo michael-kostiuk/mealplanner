@@ -8,6 +8,7 @@ import asyncio
 
 from ..database import get_db
 from .. import models, schemas
+from ..units import BaseUnit, normalize_unit
 from ..services.nutrition_estimator import (
     IngredientInput,
     NutritionEstimationError,
@@ -36,10 +37,11 @@ async def _estimate_and_update_ingredient(
     Use AI to estimate nutrition for a single ingredient and persist it.
     Assumes caller handles exception mapping.
     """
+    unit = normalize_unit(ingredient.base_unit) or BaseUnit.PIECE.value
     input_item = IngredientInput(
         name=ingredient.name,
         quantity=100.0,
-        unit=ingredient.base_unit or "unit",
+        unit=unit,
     )
     nutrition = await estimator.estimate_nutrition([input_item], servings=1)
 
@@ -103,9 +105,10 @@ async def _lookup_fdc_macros(ingredient: models.Ingredient) -> Optional[dict]:
             logger.warning("Ingredient translation failed for ingredient %s: %s", ingredient.id, exc)
 
     try:
+        normalized_unit = normalize_unit(ingredient.base_unit) or ingredient.base_unit
         return fdc_lookup.lookup_nutrition(
             lookup_name,
-            ingredient.base_unit,
+            normalized_unit,
             allow_ascii=allow_ascii,
         )
     except fdc_lookup.FdcLookupError as exc:
@@ -124,7 +127,7 @@ async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = 
 
 @router.post("/", response_model=schemas.Ingredient)
 async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = Depends(get_db)):
-    db_ingredient = models.Ingredient(**ingredient.model_dump())
+    db_ingredient = models.Ingredient(**ingredient.model_dump(mode="json"))
     db.add(db_ingredient)
     db.commit()
     db.refresh(db_ingredient)

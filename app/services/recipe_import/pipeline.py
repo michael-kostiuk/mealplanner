@@ -15,6 +15,7 @@ from app.core.google_ai_client import (
     get_google_ai_client,
 )
 from app.services.nutrition_estimator import IngredientInput, NutritionEstimationError, get_nutrition_estimator
+from app.units import BaseUnit, normalize_unit
 from .schemas import RecipeImportDraft, IngredientImportDraft
 from .utils import normalize_text
 
@@ -53,6 +54,8 @@ class RecipeImportPipeline:
         self._model = model or self.DEFAULT_GEMINI_MODEL
 
     async def run(self, draft: RecipeImportDraft, progress_callback=None) -> RecipeImportDraft:
+        draft = self._normalize_units(draft)
+
         # Merge duplicates
         if progress_callback: await progress_callback("merging", 0)
         draft = self._merge_duplicates(draft)
@@ -71,6 +74,26 @@ class RecipeImportPipeline:
         if progress_callback: await progress_callback("nutrition", 0)
         draft.nutrition = await self._estimate_nutrition(draft)
         
+        return draft
+
+    def _normalize_units(self, draft: RecipeImportDraft) -> RecipeImportDraft:
+        if not draft.ingredients:
+            return draft
+
+        for ing in draft.ingredients:
+            raw_unit = (ing.unit or "").strip()
+            if not raw_unit:
+                ing.unit = None
+                continue
+            normalized = normalize_unit(raw_unit)
+            if normalized:
+                ing.unit = normalized
+                continue
+            draft.warnings.append(
+                f"Unknown unit '{ing.unit}' for ingredient '{ing.raw_name}', defaulting to '{BaseUnit.PIECE.value}'."
+            )
+            ing.unit = BaseUnit.PIECE.value
+            ing.needs_review = True
         return draft
 
     def _merge_duplicates(self, draft: RecipeImportDraft) -> RecipeImportDraft:

@@ -155,7 +155,7 @@ def _search(name: str, base_unit: Optional[str], allow_ascii: bool = False) -> L
     scoring_tokens = list(tokens)
     if (
         base_unit
-        and base_unit.lower() in ("g", "gram", "grams", "unit")
+        and base_unit.lower() in ("g", "gram", "grams", "unit", "piece")
         and len(tokens) == 1
         and "raw" not in scoring_tokens
     ):

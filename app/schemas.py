@@ -1,15 +1,23 @@
 from datetime import datetime
 from typing import List, Optional, Dict, Literal, Any
-from pydantic import BaseModel, ConfigDict, field_serializer
+from pydantic import BaseModel, ConfigDict, field_serializer, field_validator
+from app.units import BaseUnit, normalize_unit
 
 class IngredientBase(BaseModel):
     name: str
     category: str
-    base_unit: str
+    base_unit: BaseUnit
     calories: float
     protein: float
     carbs: float
     fats: float
+
+    @field_validator("base_unit", mode="before")
+    def _normalize_base_unit(cls, value):
+        normalized = normalize_unit(value)
+        if not normalized:
+            raise ValueError("Unsupported base unit")
+        return normalized
 
     @field_serializer("calories", "protein", "carbs", "fats")
     def _serialize_macros(self, value: float):
