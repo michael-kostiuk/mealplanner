@@ -1,7 +1,7 @@
 import logging
 import time
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
@@ -123,6 +123,41 @@ async def bulk_import_recipes(recipes: list[schemas.RecipeCreate], db: Session =
 
     db.commit()
     return imported_recipes
+
+
+@router.get("/suggestions", response_model=list[schemas.Recipe])
+async def get_recipe_suggestions(
+    meal_type: str,
+    exclude_ids: list[int] | None = Query(None),
+    limit: int = Query(10, ge=1, le=100),
+    db: Session = Depends(get_db),
+):
+    """
+    Get recipe suggestions for a specific meal type, ordered by suitability weight.
+
+    - meal_type: "breakfast", "lunch", or "dinner"
+    - exclude_ids: Recipe IDs to exclude (e.g., already used in the meal plan for that day)
+    - limit: Maximum number of suggestions to return (1-100)
+    """
+    if meal_type not in ("breakfast", "lunch", "dinner"):
+        raise HTTPException(
+            status_code=400,
+            detail="meal_type must be 'breakfast', 'lunch', or 'dinner'",
+        )
+
+    # Normalize exclude_ids
+    exclude_ids = exclude_ids or []
+
+    weight_attr = getattr(models.Recipe, f"{meal_type}_weight")
+
+    query = db.query(models.Recipe).filter(weight_attr > 0)
+
+    if exclude_ids:
+        query = query.filter(models.Recipe.id.notin_(exclude_ids))
+
+    query = query.order_by(weight_attr.desc())
+
+    return query.limit(limit).all()
 
 
 @router.get("/{recipe_id}", response_model=schemas.Recipe)
