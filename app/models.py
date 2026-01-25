@@ -36,8 +36,15 @@ class Recipe(Base):
 
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    ingredients = relationship("RecipeIngredient", back_populates="recipe")
-    meal_plan_entries = relationship("MealPlanEntry", back_populates="recipe")
+    ingredients = relationship(
+        "RecipeIngredient",
+        back_populates="recipe",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+    meal_plan_entries = relationship(
+        "MealPlanEntry", back_populates="recipe", cascade="all, delete-orphan", passive_deletes=True
+    )
 
 
 class Ingredient(Base):
@@ -54,7 +61,12 @@ class Ingredient(Base):
     carbs = Column(Float)
     fats = Column(Float)
 
-    recipes = relationship("RecipeIngredient", back_populates="ingredient")
+    recipes = relationship(
+        "RecipeIngredient",
+        back_populates="ingredient",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
 
 
 class RecipeIngredient(Base):
@@ -83,8 +95,18 @@ class MealPlan(Base):
     dietary_preferences = Column(JSON)  # Array of dietary preferences
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    entries = relationship("MealPlanEntry", back_populates="meal_plan")
-    shopping_lists = relationship("ShoppingList", back_populates="meal_plan")
+    entries = relationship(
+        "MealPlanEntry",
+        back_populates="meal_plan",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+    shopping_lists = relationship(
+        "ShoppingList",
+        back_populates="meal_plan",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
     user = relationship("User", back_populates="meal_plans")
 
 
@@ -111,7 +133,12 @@ class ShoppingList(Base):
     status = Column(String(50), default="active")  # active, exported, completed
     export_format = Column(String(50))  # ios_reminders, pdf, etc.
 
-    items = relationship("ShoppingListItem", back_populates="shopping_list")
+    items = relationship(
+        "ShoppingListItem",
+        back_populates="shopping_list",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
     meal_plan = relationship("MealPlan", back_populates="shopping_lists")
 
 
@@ -138,4 +165,6 @@ class User(Base):
     calorie_target = Column(Integer)
     dietary_preferences = Column(String)
 
-    meal_plans = relationship("MealPlan", back_populates="user")
+    meal_plans = relationship(
+        "MealPlan", back_populates="user", cascade="all, delete-orphan", passive_deletes=True
+    )
