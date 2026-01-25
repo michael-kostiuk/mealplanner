@@ -15,10 +15,10 @@ import unicodedata
 import urllib.request
 import zipfile
 from io import TextIOWrapper
-from typing import Dict, List, Optional, Tuple
 
-
-FOUNDATION_URL = "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_foundation_food_csv_2025-12-18.zip"
+FOUNDATION_URL = (
+    "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_foundation_food_csv_2025-12-18.zip"
+)
 FOUNDATION_PREFIX = "FoodData_Central_foundation_food_csv_2025-12-18"
 SR_URL = "https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_sr_legacy_food_csv_2018-04.zip"
 SR_PREFIX = "FoodData_Central_sr_legacy_food_csv_2018-04"
@@ -55,19 +55,21 @@ def open_csv(zip_path: str, prefix: str, filename: str) -> csv.DictReader:
     return csv.DictReader(TextIOWrapper(handle, encoding="utf-8")), zf
 
 
-def load_lookup(zip_path: str, prefix: str) -> Tuple[Dict[str, dict], Dict[str, dict], Dict[str, dict]]:
+def load_lookup(
+    zip_path: str, prefix: str
+) -> tuple[dict[str, dict], dict[str, dict], dict[str, dict]]:
     food_rows, zf_food = open_csv(zip_path, prefix, "food.csv")
     foods = {row["fdc_id"]: row for row in food_rows}
     zf_food.close()
 
     nutrient_rows, zf_nutrient = open_csv(zip_path, prefix, "food_nutrient.csv")
-    nutrients: Dict[str, List[dict]] = {}
+    nutrients: dict[str, list[dict]] = {}
     for row in nutrient_rows:
         nutrients.setdefault(row["fdc_id"], []).append(row)
     zf_nutrient.close()
 
     portion_rows, zf_portion = open_csv(zip_path, prefix, "food_portion.csv")
-    portions: Dict[str, List[dict]] = {}
+    portions: dict[str, list[dict]] = {}
     for row in portion_rows:
         portions.setdefault(row["fdc_id"], []).append(row)
     zf_portion.close()
@@ -79,7 +81,7 @@ def load_lookup(zip_path: str, prefix: str) -> Tuple[Dict[str, dict], Dict[str, 
     return foods, nutrients, {"portions": portions, "measure_units": measure_units}
 
 
-def pick_energy(nutrient_rows: List[dict]) -> Optional[float]:
+def pick_energy(nutrient_rows: list[dict]) -> float | None:
     nutrient_map = {row["nutrient_id"]: row for row in nutrient_rows}
     for nid in ENERGY_IDS:
         if nid in nutrient_map and nutrient_map[nid].get("amount"):
@@ -90,7 +92,7 @@ def pick_energy(nutrient_rows: List[dict]) -> Optional[float]:
     return None
 
 
-def extract_macros(nutrient_rows: List[dict]) -> Optional[Dict[str, float]]:
+def extract_macros(nutrient_rows: list[dict]) -> dict[str, float] | None:
     nutrient_map = {row["nutrient_id"]: row for row in nutrient_rows}
     try:
         protein = float(nutrient_map[PROTEIN_ID]["amount"])
@@ -104,7 +106,7 @@ def extract_macros(nutrient_rows: List[dict]) -> Optional[Dict[str, float]]:
     return {"calories": energy, "protein": protein, "carbs": carbs, "fats": fat}
 
 
-def simplify_portions(portions: List[dict], measure_units: Dict[str, str]) -> List[dict]:
+def simplify_portions(portions: list[dict], measure_units: dict[str, str]) -> list[dict]:
     simplified = []
     for p in portions:
         gram_weight = p.get("gram_weight")
@@ -150,9 +152,9 @@ def create_schema(conn: sqlite3.Connection) -> None:
 
 def ingest_dataset(
     conn: sqlite3.Connection,
-    foods: Dict[str, dict],
-    nutrients: Dict[str, List[dict]],
-    portions_bundle: Dict[str, dict],
+    foods: dict[str, dict],
+    nutrients: dict[str, list[dict]],
+    portions_bundle: dict[str, dict],
 ) -> None:
     portions = portions_bundle["portions"]
     measure_units = portions_bundle["measure_units"]
@@ -203,9 +205,9 @@ def build_sqlite(dest: str, include_sr_legacy: bool) -> None:
         foundation_zip = os.path.join(tmpdir, "foundation.zip")
         download(FOUNDATION_URL, foundation_zip)
         foods, nutrients, portions_bundle = load_lookup(foundation_zip, FOUNDATION_PREFIX)
-        sr_foods: Dict[str, dict] = {}
-        sr_nutrients: Dict[str, List[dict]] = {}
-        sr_portions_bundle: Dict[str, dict] = {"portions": {}, "measure_units": {}}
+        sr_foods: dict[str, dict] = {}
+        sr_nutrients: dict[str, list[dict]] = {}
+        sr_portions_bundle: dict[str, dict] = {"portions": {}, "measure_units": {}}
 
         if include_sr_legacy:
             sr_zip = os.path.join(tmpdir, "sr.zip")
@@ -221,9 +223,13 @@ def build_sqlite(dest: str, include_sr_legacy: bool) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build SQLite FDC subset (Foundation + optional SR Legacy).")
+    parser = argparse.ArgumentParser(
+        description="Build SQLite FDC subset (Foundation + optional SR Legacy)."
+    )
     parser.add_argument("--dest", default="data/fdc.sqlite", help="Destination path for SQLite DB")
-    parser.add_argument("--include-sr-legacy", action="store_true", help="Include SR Legacy data (recommended)")
+    parser.add_argument(
+        "--include-sr-legacy", action="store_true", help="Include SR Legacy data (recommended)"
+    )
     args = parser.parse_args()
 
     dest = os.path.abspath(args.dest)

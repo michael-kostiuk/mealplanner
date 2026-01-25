@@ -5,12 +5,10 @@ Offline lookup against a bundled FoodData Central SQLite snapshot.
 import json
 import logging
 import os
+import re
 import sqlite3
 import threading
 import unicodedata
-import re
-from typing import Dict, Optional, Tuple, Any, List
-
 
 logger = logging.getLogger(__name__)
 
@@ -20,12 +18,14 @@ DEFAULT_DB_PATH = os.getenv(
 )
 DEFAULT_SYNONYMS_PATH = os.getenv(
     "FDC_SYNONYMS_PATH",
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data", "fdc_synonyms.json")),
+    os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "data", "fdc_synonyms.json")
+    ),
 )
 
-_conn: Optional[sqlite3.Connection] = None
+_conn: sqlite3.Connection | None = None
 _lock = threading.Lock()
-_synonyms: Dict[str, str] = {}
+_synonyms: dict[str, str] = {}
 
 PROCESSED_BLOCKLIST = {
     "pie",
@@ -56,13 +56,13 @@ def _normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def _load_synonyms() -> Dict[str, str]:
+def _load_synonyms() -> dict[str, str]:
     # This should be replaced to proper translation in future updates
     path = DEFAULT_SYNONYMS_PATH
     if not os.path.exists(path):
         return {}
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             data = json.load(f)
     except Exception as exc:  # pragma: no cover - defensive
         logger.warning("Failed to load FDC synonyms: %s", exc)
@@ -87,7 +87,7 @@ def _get_conn() -> sqlite3.Connection:
     return _conn
 
 
-def _best_portion(portions: List[dict]) -> Optional[float]:
+def _best_portion(portions: list[dict]) -> float | None:
     """Pick a representative gram weight for converting non-gram base units."""
     for p in portions:
         gram_weight = p.get("gram_weight")
@@ -96,7 +96,7 @@ def _best_portion(portions: List[dict]) -> Optional[float]:
     return None
 
 
-def _score_candidate(description: str, tokens: List[str]) -> Optional[float]:
+def _score_candidate(description: str, tokens: list[str]) -> float | None:
     """
     Score based on full token containment, data_type preference, and penalties.
     Returns None if token containment fails or blocklist hits.
@@ -105,7 +105,9 @@ def _score_candidate(description: str, tokens: List[str]) -> Optional[float]:
     desc_tokens = normalized_desc.split()
 
     # Block obvious processed items unless explicitly asked (tokens contain the processed term)
-    if any(b in desc_tokens for b in PROCESSED_BLOCKLIST) and not any(b in tokens for b in PROCESSED_BLOCKLIST):
+    if any(b in desc_tokens for b in PROCESSED_BLOCKLIST) and not any(
+        b in tokens for b in PROCESSED_BLOCKLIST
+    ):
         return None
 
     def _contains(token: str) -> bool:
@@ -142,7 +144,7 @@ def _data_type_weight(row: sqlite3.Row) -> int:
     return 0
 
 
-def _search(name: str, base_unit: Optional[str], allow_ascii: bool = False) -> List[sqlite3.Row]:
+def _search(name: str, base_unit: str | None, allow_ascii: bool = False) -> list[sqlite3.Row]:
     conn = _get_conn()
     global _synonyms
     if not _synonyms:
@@ -213,9 +215,9 @@ def _search(name: str, base_unit: Optional[str], allow_ascii: bool = False) -> L
 
 def lookup_nutrition(
     ingredient_name: str,
-    base_unit: Optional[str],
+    base_unit: str | None,
     allow_ascii: bool = False,
-) -> Optional[Dict[str, float]]:
+) -> dict[str, float] | None:
     """
     Find macros per base_unit for the given ingredient name.
     Returns None if no confident match is found.

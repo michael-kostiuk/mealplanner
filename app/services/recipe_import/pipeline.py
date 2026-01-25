@@ -1,8 +1,7 @@
-import asyncio
 import json
 import logging
 import re
-from typing import Dict, List, Optional, Tuple, Any
+
 from rapidfuzz import fuzz, process
 from sqlalchemy.orm import Session
 
@@ -14,22 +13,28 @@ from app.core.google_ai_client import (
     extract_json,
     get_google_ai_client,
 )
-from app.services.nutrition_estimator import IngredientInput, NutritionEstimationError, get_nutrition_estimator
+from app.services.nutrition_estimator import (
+    IngredientInput,
+    NutritionEstimationError,
+    get_nutrition_estimator,
+)
 from app.units import BaseUnit, normalize_unit
-from .schemas import RecipeImportDraft, IngredientImportDraft
+
+from .schemas import IngredientImportDraft, RecipeImportDraft
 from .utils import normalize_text
 
 logger = logging.getLogger(__name__)
 
+
 class IngredientMatcher:
     def __init__(self, db: Session) -> None:
         self._db = db
-        self._candidates: List[Tuple[int, str, str]] = []
+        self._candidates: list[tuple[int, str, str]] = []
         for ing in self._db.query(models.Ingredient).all():
             name = ing.name or ""
             self._candidates.append((ing.id, name, normalize_text(name)))
 
-    def find_best_candidate(self, query: str) -> Optional[Tuple[int, str, float]]:
+    def find_best_candidate(self, query: str) -> tuple[int, str, float] | None:
         qn = normalize_text(query)
         if not qn:
             return None
@@ -46,10 +51,11 @@ class IngredientMatcher:
             return None
         return matched_id, original_name, float(score)
 
+
 class RecipeImportPipeline:
     DEFAULT_GEMINI_MODEL = "gemma-3-27b-it"
 
-    def __init__(self, db: Session, model: Optional[str] = None):
+    def __init__(self, db: Session, model: str | None = None):
         self.db = db
         self._model = model or self.DEFAULT_GEMINI_MODEL
 
@@ -57,23 +63,27 @@ class RecipeImportPipeline:
         draft = self._normalize_units(draft)
 
         # Merge duplicates
-        if progress_callback: await progress_callback("merging", 0)
+        if progress_callback:
+            await progress_callback("merging", 0)
         draft = self._merge_duplicates(draft)
-        
+
         # Match ingredients
-        if progress_callback: await progress_callback("matching", 0)
+        if progress_callback:
+            await progress_callback("matching", 0)
         draft, verify_pairs = await self._match_ingredients(draft, progress_callback)
-        
+
         # Verify pairs
         if verify_pairs:
-            if progress_callback: await progress_callback("verifying", 0)
+            if progress_callback:
+                await progress_callback("verifying", 0)
             verified = await self._verify_pairs(verify_pairs)
             self._apply_verification(draft, verified)
-        
+
         # Estimate nutrition
-        if progress_callback: await progress_callback("nutrition", 0)
+        if progress_callback:
+            await progress_callback("nutrition", 0)
         draft.nutrition = await self._estimate_nutrition(draft)
-        
+
         return draft
 
     def _normalize_units(self, draft: RecipeImportDraft) -> RecipeImportDraft:
@@ -100,14 +110,14 @@ class RecipeImportPipeline:
         if not draft.ingredients:
             return draft
 
-        merged: Dict[str, IngredientImportDraft] = {}
+        merged: dict[str, IngredientImportDraft] = {}
         for ing in draft.ingredients:
             raw_name = ing.raw_name.strip()
             if not raw_name:
                 continue
 
             name = normalize_text(raw_name)
-            name = re.sub(r'\s*\([^)]*\)\s*$', '', name)
+            name = re.sub(r"\s*\([^)]*\)\s*$", "", name)
             name = name.strip()
             if not name:
                 continue
@@ -126,16 +136,20 @@ class RecipeImportPipeline:
                 if not existing.unit and ing.unit:
                     existing.unit = ing.unit
                 elif existing.unit and ing.unit and existing.unit != ing.unit:
-                    draft.warnings.append(f"Merged ingredients '{name}' have different units: {existing.unit} vs {ing.unit}")
+                    draft.warnings.append(
+                        f"Merged ingredients '{name}' have different units: {existing.unit} vs {ing.unit}"
+                    )
 
         draft.ingredients = list(merged.values())
         return draft
 
-    async def _match_ingredients(self, draft: RecipeImportDraft, progress_callback) -> Tuple[RecipeImportDraft, List[Tuple[int, str, int, str]]]:
+    async def _match_ingredients(
+        self, draft: RecipeImportDraft, progress_callback
+    ) -> tuple[RecipeImportDraft, list[tuple[int, str, int, str]]]:
         matcher = IngredientMatcher(self.db)
-        ingredients: List[IngredientImportDraft] = []
+        ingredients: list[IngredientImportDraft] = []
         total = max(1, len(draft.ingredients))
-        verify_pairs: List[Tuple[int, str, int, str]] = []
+        verify_pairs: list[tuple[int, str, int, str]] = []
 
         for idx, ing in enumerate(draft.ingredients):
             best = matcher.find_best_candidate(ing.raw_name)
@@ -146,7 +160,7 @@ class RecipeImportPipeline:
                 new_ing = ing.model_copy()
                 new_ing.matched_ingredient_id = matched_id
                 new_ing.matched_ingredient_name = matched_name
-                
+
                 if score >= 100.0:
                     new_ing.match_confidence = 1.0
                     new_ing.match_type = "exact"
@@ -173,7 +187,7 @@ class RecipeImportPipeline:
         draft.ingredients = ingredients
         return draft, verify_pairs
 
-    async def _verify_pairs(self, pairs: List[Tuple[int, str, int, str]]) -> Dict[int, bool]:
+    async def _verify_pairs(self, pairs: list[tuple[int, str, int, str]]) -> dict[int, bool]:
         try:
             client = get_google_ai_client()
         except ValueError:
@@ -210,20 +224,20 @@ class RecipeImportPipeline:
             logger.error("Error verifying pairs: %s", exc)
             return {}
 
-    def _apply_verification(self, draft: RecipeImportDraft, verified: Dict[int, bool]):
+    def _apply_verification(self, draft: RecipeImportDraft, verified: dict[int, bool]):
         for idx, is_same in verified.items():
             if not is_same:
                 continue
-            
+
             if idx < len(draft.ingredients):
                 ing = draft.ingredients[idx]
                 if ing.matched_ingredient_id and ing.matched_ingredient_name:
                     ing.match_type = "ai_verified"
                     ing.needs_review = False
 
-    async def _estimate_nutrition(self, draft: RecipeImportDraft) -> Optional[Dict[str, float]]:
+    async def _estimate_nutrition(self, draft: RecipeImportDraft) -> dict[str, float] | None:
         estimator = get_nutrition_estimator()
-        ingredients: List[IngredientInput] = []
+        ingredients: list[IngredientInput] = []
         for ing in draft.ingredients:
             name = ing.matched_ingredient_name or ing.raw_name
             qty = ing.quantity if ing.quantity is not None else 0.0

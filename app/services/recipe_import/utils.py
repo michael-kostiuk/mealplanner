@@ -1,4 +1,5 @@
-from typing import Any, Optional
+from typing import Any
+
 
 def normalize_text(value: str) -> str:
     value = value.lower().strip()
@@ -10,7 +11,7 @@ def normalize_text(value: str) -> str:
     return value
 
 
-def safe_parse_float(value: Any) -> Optional[float]:
+def safe_parse_float(value: Any) -> float | None:
     if value is None:
         return None
     if isinstance(value, (int, float)):
@@ -35,7 +36,7 @@ def safe_parse_float(value: Any) -> Optional[float]:
         return None
 
 
-def safe_parse_int(value: Any) -> Optional[int]:
+def safe_parse_int(value: Any) -> int | None:
     if value is None:
         return None
     if isinstance(value, int):

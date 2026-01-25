@@ -1,10 +1,10 @@
 import logging
-from typing import Optional, Tuple
+
 from fastapi import APIRouter, status
 from sqlalchemy import text
 
-from ..database import engine
 from ..core.google_ai_client import get_ai_provider, get_google_ai_client
+from ..database import engine
 from ..services.dropbox_service import dropbox_service
 
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ def _trim_detail(detail: str, limit: int = 200) -> str:
     return detail[:limit]
 
 
-async def _check_database() -> Tuple[bool, Optional[str]]:
+async def _check_database() -> tuple[bool, str | None]:
     try:
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
@@ -35,7 +35,7 @@ async def _check_database() -> Tuple[bool, Optional[str]]:
         return False, _trim_detail(str(e))
 
 
-async def _check_google_ai() -> Tuple[bool, Optional[str]]:
+async def _check_google_ai() -> tuple[bool, str | None]:
     try:
         client = get_google_ai_client()
     except ValueError as exc:

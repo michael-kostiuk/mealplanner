@@ -1,2 +1,3 @@
-from .meal_plan_generator import MealPlanGenerator
-from .nutrition_estimator import NutritionEstimator, get_nutrition_estimator
+from .meal_plan_generator import MealPlanGenerator as MealPlanGenerator
+from .nutrition_estimator import NutritionEstimator as NutritionEstimator
+from .nutrition_estimator import get_nutrition_estimator as get_nutrition_estimator

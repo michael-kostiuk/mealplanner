@@ -1,7 +1,9 @@
 from datetime import datetime
-from typing import List, Optional, Dict, Literal, Any
+
 from pydantic import BaseModel, ConfigDict, field_serializer, field_validator
+
 from app.units import BaseUnit, normalize_unit
+
 
 class IngredientBase(BaseModel):
     name: str
@@ -23,36 +25,44 @@ class IngredientBase(BaseModel):
     def _serialize_macros(self, value: float):
         return round(value, 2)
 
+
 class IngredientCreate(IngredientBase):
     pass
+
 
 class Ingredient(IngredientBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
+
 
 class IngredientNutritionEstimateFailure(BaseModel):
     id: int
     reason: str
     rate_limited: bool = False
 
+
 class IngredientBulkEstimateResponse(BaseModel):
-    updated: List[Ingredient]
+    updated: list[Ingredient]
     updated_count: int
     skipped_count: int
-    failed: List[IngredientNutritionEstimateFailure]
+    failed: list[IngredientNutritionEstimateFailure]
+
 
 class RecipeIngredientBase(BaseModel):
     ingredient_id: int
     quantity: float
     unit: str
 
+
 class RecipeIngredientCreate(RecipeIngredientBase):
     pass
+
 
 class RecipeIngredient(RecipeIngredientBase):
     recipe_id: int
     ingredient: Ingredient
     model_config = ConfigDict(from_attributes=True)
+
 
 class RecipeBase(BaseModel):
     name: str
@@ -68,16 +78,19 @@ class RecipeBase(BaseModel):
     breakfast_weight: float
     lunch_weight: float
     dinner_weight: float
-    image_url: Optional[str] = None
+    image_url: str | None = None
+
 
 class RecipeCreate(RecipeBase):
-    ingredients: List[RecipeIngredientCreate]
+    ingredients: list[RecipeIngredientCreate]
+
 
 class Recipe(RecipeBase):
     id: int
     created_at: datetime
-    ingredients: List[RecipeIngredient]
+    ingredients: list[RecipeIngredient]
     model_config = ConfigDict(from_attributes=True)
+
 
 class MealPlanEntryBase(BaseModel):
     recipe_id: int
@@ -85,8 +98,10 @@ class MealPlanEntryBase(BaseModel):
     meal_type: str
     servings: int
 
+
 class MealPlanEntryCreate(MealPlanEntryBase):
     pass
+
 
 class MealPlanEntry(MealPlanEntryBase):
     id: int
@@ -94,29 +109,34 @@ class MealPlanEntry(MealPlanEntryBase):
     recipe: Recipe
     model_config = ConfigDict(from_attributes=True)
 
+
 class MealPlanBase(BaseModel):
     start_date: datetime
     end_date: datetime
     people_count: int
     target_calories: int
-    dietary_preferences: List[str]
+    dietary_preferences: list[str]
+
 
 class MealPlanCreate(MealPlanBase):
-    entries: List[MealPlanEntryCreate]
+    entries: list[MealPlanEntryCreate]
+
 
 class MealPlan(MealPlanBase):
     id: int
     user_id: int
     created_at: datetime
-    entries: List[MealPlanEntry]
+    entries: list[MealPlanEntry]
     model_config = ConfigDict(from_attributes=True)
+
 
 class ShoppingListItemBase(BaseModel):
     ingredient_id: int
     quantity: float
     unit: str
     category: str
-    status: str = 'pending'
+    status: str = "pending"
+
 
 class ShoppingListItem(ShoppingListItemBase):
     id: int
@@ -124,39 +144,45 @@ class ShoppingListItem(ShoppingListItemBase):
     ingredient: Ingredient
     model_config = ConfigDict(from_attributes=True)
 
+
 class ShoppingListBase(BaseModel):
     meal_plan_id: int
-    status: str = 'active'
-    export_format: Optional[str] = None
+    status: str = "active"
+    export_format: str | None = None
+
 
 class ShoppingListCreate(ShoppingListBase):
     pass
 
+
 class ShoppingList(ShoppingListBase):
     id: int
     created_at: datetime
-    items: List[ShoppingListItem]
+    items: list[ShoppingListItem]
     model_config = ConfigDict(from_attributes=True)
+
 
 class UserBase(BaseModel):
     email: str
     calorie_target: int
-    dietary_preferences: Optional[str] = None
+    dietary_preferences: str | None = None
+
 
 class UserCreate(UserBase):
     password: str
 
+
 class User(UserBase):
     id: int
-    meal_plans: List[MealPlan]
+    meal_plans: list[MealPlan]
     model_config = ConfigDict(from_attributes=True)
 
 
 from app.services.recipe_import.schemas import (
     IngredientImportDraft,
     RecipeImportDraft,
+    RecipeImportJob,
     RecipeImportStartResponse,
-    RecipeImportJob
 )
 
 # Aliases for backward compatibility and to avoid duplication

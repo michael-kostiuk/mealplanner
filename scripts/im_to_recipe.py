@@ -14,8 +14,9 @@ from app.services.recipe_import.extractors.image import ImageExtractor
 from app.services.recipe_import.pipeline import RecipeImportPipeline
 
 # Configure logging to stderr
-logging.basicConfig(level=logging.INFO, format='%(message)s', stream=sys.stderr)
+logging.basicConfig(level=logging.INFO, format="%(message)s", stream=sys.stderr)
 logger = logging.getLogger("im_to_recipe")
+
 
 async def main():
     if len(sys.argv) < 2:
@@ -54,20 +55,21 @@ async def main():
     db = SessionLocal()
     try:
         pipeline = RecipeImportPipeline(db)
-        
+
         async def progress_callback(step: str, progress: int):
             logger.info(f"[{step}] {progress}%")
 
         result = await pipeline.run(draft, progress_callback)
-        
+
         # Output JSON to stdout
         print(json.dumps(result.model_dump(mode="json"), indent=2, ensure_ascii=False))
-        
+
     except Exception as e:
         logger.error(f"Processing failed: {e}")
         sys.exit(1)
     finally:
         db.close()
+
 
 if __name__ == "__main__":
     asyncio.run(main())

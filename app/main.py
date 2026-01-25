@@ -1,19 +1,16 @@
-from fastapi import FastAPI, Request, status
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from .routers import recipes, meal_plans, shopping_lists, ingredients, nutrition, health
-from .database import engine
-from . import models
-from .logging_setup import setup_logging
-
-import os
 import logging
-import sys
 import time
-from alembic import command
-from alembic.config import Config
+
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import inspect, text
 
+from alembic import command
+from alembic.config import Config
+
+from .database import engine
+from .logging_setup import setup_logging
+from .routers import health, ingredients, meal_plans, nutrition, recipes, shopping_lists
 
 # Setup logging
 setup_logging()
@@ -30,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
+
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start_time = time.time()
@@ -40,23 +38,29 @@ async def log_requests(request: Request, call_next):
         response = await call_next(request)
 
         process_time = time.time() - start_time
-        logger.info(f"Response: {request.method} {request.url.path} - Status: {response.status_code} - {process_time:.3f}s")
+        logger.info(
+            f"Response: {request.method} {request.url.path} - Status: {response.status_code} - {process_time:.3f}s"
+        )
 
         return response
     except Exception as e:
         process_time = time.time() - start_time
-        logger.error(f"Error: {request.method} {request.url.path} - {process_time:.3f}s - {type(e).__name__}: {str(e)}", exc_info=True)
+        logger.error(
+            f"Error: {request.method} {request.url.path} - {process_time:.3f}s - {type(e).__name__}: {str(e)}",
+            exc_info=True,
+        )
         raise
+
 
 def run_migrations():
     # Ensure we are in the root directory where alembic.ini is located
     # This might depend on how the app is run. Assuming CWD is project root.
     alembic_cfg = Config("alembic.ini")
-    
+
     # Check if database is already initialized but not versioned
     inspector = inspect(engine)
     existing_tables = inspector.get_table_names()
-    
+
     should_stamp = False
     if "recipes" in existing_tables:
         if "alembic_version" not in existing_tables:
@@ -67,14 +71,15 @@ def run_migrations():
                 version = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
                 if version is None:
                     should_stamp = True
-    
+
     if should_stamp:
         logger.info("Detected existing database without migrations. Stamping head...")
         command.stamp(alembic_cfg, "head")
-    
+
     logger.info("Running database migrations...")
     command.upgrade(alembic_cfg, "head")
     logger.info("Database migrations completed.")
+
 
 @app.on_event("startup")
 def startup_event():
@@ -82,6 +87,7 @@ def startup_event():
     # Re-apply logging setup in case Alembic or Uvicorn messed it up
     setup_logging()
     logger.info("Application startup completed. Logging verified.")
+
 
 # Include routers
 app.include_router(recipes.router)

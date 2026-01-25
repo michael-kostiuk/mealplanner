@@ -1,8 +1,8 @@
-import httpx
+import logging
 import os
 import time
-import logging
-from typing import Optional, Tuple
+
+import httpx
 
 logger = logging.getLogger(__name__)
 
@@ -11,12 +11,13 @@ DROPBOX_CONTENT_URL = "https://content.dropboxapi.com"
 DROPBOX_OAUTH_URL = "https://api.dropboxapi.com/oauth2/token"
 DROPBOX_UPLOAD_FOLDER = os.getenv("DROPBOX_UPLOAD_FOLDER") or "/recipes"
 
+
 class DropboxTokenManager:
     def __init__(self):
         self.app_key = os.getenv("DROPBOX_APP_KEY")
         self.app_secret = os.getenv("DROPBOX_APP_SECRET")
         self.refresh_token = os.getenv("DROPBOX_REFRESH_TOKEN")
-        self._access_token: Optional[str] = None
+        self._access_token: str | None = None
         self._token_expires_at: float = 0
 
         if not self.app_key:
@@ -45,8 +46,8 @@ class DropboxTokenManager:
                         "grant_type": "refresh_token",
                         "refresh_token": self.refresh_token,
                         "client_id": self.app_key,
-                        "client_secret": self.app_secret
-                    }
+                        "client_secret": self.app_secret,
+                    },
                 )
                 if response.status_code != 200:
                     logger.error(f"Token refresh failed: {response.status_code} - {response.text}")
@@ -65,7 +66,9 @@ class DropboxTokenManager:
         self._access_token = None
         self._token_expires_at = 0
 
+
 token_manager = DropboxTokenManager()
+
 
 class DropboxService:
     def __init__(self):
@@ -73,14 +76,12 @@ class DropboxService:
 
     async def _get_headers(self) -> dict:
         access_token = await token_manager.get_access_token()
-        return {
-            "Authorization": f"Bearer {access_token}"
-        }
+        return {"Authorization": f"Bearer {access_token}"}
 
-    async def upload_image(self, file_data: bytes, filename: str) -> Optional[str]:
+    async def upload_image(self, file_data: bytes, filename: str) -> str | None:
         path = None
         try:
-            folder = DROPBOX_UPLOAD_FOLDER.lstrip('/')
+            folder = DROPBOX_UPLOAD_FOLDER.lstrip("/")
             path = f"/{folder}/{filename}"
             headers = await self._get_headers()
 
@@ -90,7 +91,7 @@ class DropboxService:
             upload_headers = {
                 **headers,
                 "Dropbox-API-Arg": f'{{"path": "{path}", "mode": "add"}}',
-                "Content-Type": "application/octet-stream"
+                "Content-Type": "application/octet-stream",
             }
 
             async with httpx.AsyncClient(timeout=60.0) as client:
@@ -98,7 +99,7 @@ class DropboxService:
                 upload_response = await client.post(
                     f"{DROPBOX_CONTENT_URL}/2/files/upload",
                     headers=upload_headers,
-                    content=file_data
+                    content=file_data,
                 )
                 logger.info(f"Upload response status: {upload_response.status_code}")
 
@@ -110,12 +111,14 @@ class DropboxService:
                     upload_response = await client.post(
                         f"{DROPBOX_CONTENT_URL}/2/files/upload",
                         headers=upload_headers,
-                        content=file_data
+                        content=file_data,
                     )
                     logger.info(f"Retry upload response status: {upload_response.status_code}")
 
                 if upload_response.status_code == 401 or upload_response.status_code == 403:
-                    raise ValueError("Dropbox access token is expired or invalid. Please regenerate the token in Dropbox Developer Console.")
+                    raise ValueError(
+                        "Dropbox access token is expired or invalid. Please regenerate the token in Dropbox Developer Console."
+                    )
 
                 if upload_response.status_code != 200:
                     logger.error(f"Upload failed with status {upload_response.status_code}")
@@ -125,35 +128,31 @@ class DropboxService:
                 upload_response.raise_for_status()
                 logger.info("Upload successful")
 
-                link_headers = {
-                    **headers,
-                    "Content-Type": "application/json"
-                }
+                link_headers = {**headers, "Content-Type": "application/json"}
                 link_data = {
                     "path": path,
-                    "settings": {
-                        "requested_visibility": "public",
-                        "allow_download": True
-                    }
+                    "settings": {"requested_visibility": "public", "allow_download": True},
                 }
 
                 logger.info("Creating shared link...")
                 link_response = await client.post(
                     f"{DROPBOX_API_URL}/2/sharing/create_shared_link_with_settings",
                     headers=link_headers,
-                    json=link_data
+                    json=link_data,
                 )
                 logger.info(f"Link response status: {link_response.status_code}")
 
                 if link_response.status_code == 401:
-                    logger.info("Token expired during link creation, clearing cache and retrying...")
+                    logger.info(
+                        "Token expired during link creation, clearing cache and retrying..."
+                    )
                     token_manager.clear_cache()
                     headers = await self._get_headers()
                     link_headers["Authorization"] = headers["Authorization"]
                     link_response = await client.post(
                         f"{DROPBOX_API_URL}/2/sharing/create_shared_link_with_settings",
                         headers=link_headers,
-                        json=link_data
+                        json=link_data,
                     )
                     logger.info(f"Retry link response status: {link_response.status_code}")
 
@@ -167,7 +166,9 @@ class DropboxService:
                 return direct_url
         except httpx.HTTPStatusError as e:
             error_text = e.response.text[:500] if e.response else "No response"
-            logger.error(f"HTTP Error: {e.response.status_code if e.response else 'Unknown'}: {error_text}")
+            logger.error(
+                f"HTTP Error: {e.response.status_code if e.response else 'Unknown'}: {error_text}"
+            )
 
             if path and e.response and e.response.status_code == 409:
                 logger.info("Shared link already exists, trying to get existing link...")
@@ -178,7 +179,12 @@ class DropboxService:
                 except Exception as ex:
                     logger.warning(f"Could not get existing link: {ex}")
 
-            if path and e.response and e.response.status_code == 400 and "sharing.write" in error_text:
+            if (
+                path
+                and e.response
+                and e.response.status_code == 400
+                and "sharing.write" in error_text
+            ):
                 logger.warning("Missing sharing.write scope, falling back to temporary link...")
                 try:
                     temp_url = await self._get_temporary_link(path)
@@ -186,24 +192,23 @@ class DropboxService:
                         return temp_url
                 except Exception as ex:
                     logger.warning(f"Could not get temporary link: {ex}")
-                    raise ValueError("Dropbox API error: Cannot create shared link and temporary link fallback also failed")
+                    raise ValueError(
+                        "Dropbox API error: Cannot create shared link and temporary link fallback also failed"
+                    ) from ex
 
-            raise ValueError(f"Dropbox API error: {e.response.status_code}")
+            raise ValueError(f"Dropbox API error: {e.response.status_code}") from e
         except Exception as e:
             logger.error(f"Error uploading to Dropbox: {type(e).__name__}: {e}", exc_info=True)
             raise
 
-    async def _get_existing_shared_link(self, path: str) -> Optional[str]:
+    async def _get_existing_shared_link(self, path: str) -> str | None:
         headers = await self._get_headers()
         async with httpx.AsyncClient() as client:
-            list_headers = {
-                **headers,
-                "Content-Type": "application/json"
-            }
+            list_headers = {**headers, "Content-Type": "application/json"}
             response = await client.post(
                 f"{DROPBOX_API_URL}/2/sharing/list_shared_links",
                 headers=list_headers,
-                json={"path": path, "direct_only": True}
+                json={"path": path, "direct_only": True},
             )
             response.raise_for_status()
             data = response.json()
@@ -214,20 +219,17 @@ class DropboxService:
                     return self._to_direct_url(url)
         return None
 
-    async def _get_temporary_link(self, path: str) -> Optional[str]:
+    async def _get_temporary_link(self, path: str) -> str | None:
         headers = await self._get_headers()
         async with httpx.AsyncClient() as client:
-            link_headers = {
-                **headers,
-                "Content-Type": "application/json"
-            }
+            link_headers = {**headers, "Content-Type": "application/json"}
             link_data = {"path": path}
 
             logger.info("Getting temporary link...")
             response = await client.post(
                 f"{DROPBOX_API_URL}/2/files/get_temporary_link",
                 headers=link_headers,
-                json=link_data
+                json=link_data,
             )
             logger.info(f"Temporary link response status: {response.status_code}")
 
@@ -261,7 +263,7 @@ class DropboxService:
             list_response = await client.post(
                 f"{DROPBOX_API_URL}/2/files/list_folder",
                 headers=list_headers,
-                json={"path": DROPBOX_UPLOAD_FOLDER}
+                json={"path": DROPBOX_UPLOAD_FOLDER},
             )
             list_response.raise_for_status()
 
@@ -273,7 +275,7 @@ class DropboxService:
                     delete_response = await client.post(
                         f"{DROPBOX_API_URL}/2/files/delete_v2",
                         headers=delete_headers,
-                        json={"path": entry["path_lower"]}
+                        json={"path": entry["path_lower"]},
                     )
                     delete_response.raise_for_status()
                     return True
@@ -292,7 +294,7 @@ class DropboxService:
                 url = url.replace("?dl=0", "?raw=1")
         return url
 
-    async def check_health(self) -> Tuple[bool, Optional[str]]:
+    async def check_health(self) -> tuple[bool, str | None]:
         """
         Verify Dropbox connectivity by hitting a lightweight account endpoint.
         Returns (is_healthy, error_details_if_any).
@@ -306,8 +308,7 @@ class DropboxService:
         try:
             async with httpx.AsyncClient(timeout=10.0) as client:
                 response = await client.post(
-                    f"{DROPBOX_API_URL}/2/users/get_current_account",
-                    headers=headers
+                    f"{DROPBOX_API_URL}/2/users/get_current_account", headers=headers
                 )
 
                 if response.status_code == 401:
@@ -315,18 +316,20 @@ class DropboxService:
                     token_manager.clear_cache()
                     headers = await self._get_headers()
                     response = await client.post(
-                        f"{DROPBOX_API_URL}/2/users/get_current_account",
-                        headers=headers
+                        f"{DROPBOX_API_URL}/2/users/get_current_account", headers=headers
                     )
 
                 if response.status_code == 200:
                     return True, None
 
                 error_preview = response.text[:200] if response.text else ""
-                logger.warning(f"Dropbox healthcheck failed: {response.status_code} {error_preview}")
+                logger.warning(
+                    f"Dropbox healthcheck failed: {response.status_code} {error_preview}"
+                )
                 return False, f"status_{response.status_code}: {error_preview}"
         except Exception as e:
             logger.error(f"Dropbox healthcheck error: {e}", exc_info=True)
             return False, str(e)[:200]
+
 
 dropbox_service = DropboxService()

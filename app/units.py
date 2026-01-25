@@ -1,7 +1,6 @@
-from enum import Enum
-from typing import Optional
 import re
 import unicodedata
+from enum import Enum
 
 
 class BaseUnit(str, Enum):
@@ -163,7 +162,7 @@ def _normalize_unit_token(value: str) -> str:
     return " ".join(cleaned.split())
 
 
-def normalize_unit(value: Optional[str]) -> Optional[str]:
+def normalize_unit(value: str | None) -> str | None:
     if value is None:
         return None
     if isinstance(value, BaseUnit):

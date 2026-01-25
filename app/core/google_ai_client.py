@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 from urllib.parse import urlparse
 
 import httpx
@@ -30,7 +30,7 @@ class GoogleAIParseError(GoogleAIError):
     """Raised when parsing the API response fails."""
 
 
-def _resolve_base_url(configured: Optional[str]) -> str:
+def _resolve_base_url(configured: str | None) -> str:
     if not configured:
         return DEFAULT_BASE_URL
 
@@ -51,12 +51,14 @@ def _resolve_base_url(configured: Optional[str]) -> str:
 class GoogleAIClient:
     provider = "google"
 
-    def __init__(self, api_key: Optional[str] = None, base_url: Optional[str] = None):
+    def __init__(self, api_key: str | None = None, base_url: str | None = None):
         self._api_key = api_key or os.getenv("GOOGLE_AI_API_KEY")
         if not self._api_key:
             raise ValueError("GOOGLE_AI_API_KEY environment variable is not set")
 
-        configured_base = base_url or os.getenv("GEMINI_API_BASE_URL") or os.getenv("GEMINI_API_URL")
+        configured_base = (
+            base_url or os.getenv("GEMINI_API_BASE_URL") or os.getenv("GEMINI_API_URL")
+        )
         self._base_url = _resolve_base_url(configured_base)
 
     @property
@@ -75,9 +77,9 @@ class GoogleAIClient:
     async def generate_content(
         self,
         model: str,
-        payload: Dict[str, Any],
+        payload: dict[str, Any],
         timeout: float = 30.0,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         url = self.build_generate_content_url(model)
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
@@ -102,7 +104,7 @@ class GoogleAIClient:
 
         return response.json()
 
-    async def check_health(self, timeout: float = 10.0) -> Tuple[bool, Optional[str]]:
+    async def check_health(self, timeout: float = 10.0) -> tuple[bool, str | None]:
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
                 response = await client.get(
@@ -117,13 +119,11 @@ class GoogleAIClient:
             return True, None
 
         preview = response.text[:200] if response.text else ""
-        logger.warning(
-            "Google AI health check failed: %s %s", response.status_code, preview
-        )
+        logger.warning("Google AI health check failed: %s %s", response.status_code, preview)
         return False, f"status_{response.status_code}: {preview}"
 
 
-def _resolve_openrouter_base_url(configured: Optional[str]) -> str:
+def _resolve_openrouter_base_url(configured: str | None) -> str:
     if not configured:
         return OPENROUTER_DEFAULT_BASE_URL
 
@@ -138,7 +138,7 @@ def _resolve_openrouter_base_url(configured: Optional[str]) -> str:
     return base.rstrip("/")
 
 
-def _normalize_provider(value: Optional[str]) -> str:
+def _normalize_provider(value: str | None) -> str:
     if not value:
         return DEFAULT_PROVIDER
     lowered = value.strip().lower()
@@ -156,21 +156,17 @@ OPENROUTER_DEFAULT_VISION_MODEL = "google/gemini-2.0-flash-001"
 class OpenRouterAIClient:
     provider = "openrouter"
 
-    def __init__(self, api_key: Optional[str] = None, base_url: Optional[str] = None):
+    def __init__(self, api_key: str | None = None, base_url: str | None = None):
         self._api_key = api_key or os.getenv("OPENROUTER_API_KEY")
         if not self._api_key:
             raise ValueError("OPENROUTER_API_KEY environment variable is not set")
 
-        configured_base = base_url or os.getenv("OPENROUTER_API_BASE_URL") or os.getenv(
-            "OPENROUTER_API_URL"
+        configured_base = (
+            base_url or os.getenv("OPENROUTER_API_BASE_URL") or os.getenv("OPENROUTER_API_URL")
         )
         self._base_url = _resolve_openrouter_base_url(configured_base)
-        self._site_url = os.getenv("OPENROUTER_SITE_URL") or os.getenv(
-            "OPENROUTER_HTTP_REFERER"
-        )
-        self._site_title = os.getenv("OPENROUTER_SITE_TITLE") or os.getenv(
-            "OPENROUTER_SITE_NAME"
-        )
+        self._site_url = os.getenv("OPENROUTER_SITE_URL") or os.getenv("OPENROUTER_HTTP_REFERER")
+        self._site_title = os.getenv("OPENROUTER_SITE_TITLE") or os.getenv("OPENROUTER_SITE_NAME")
         self._vision_model = os.getenv("OPENROUTER_VISION_MODEL") or OPENROUTER_DEFAULT_VISION_MODEL
 
     @property
@@ -191,7 +187,7 @@ class OpenRouterAIClient:
                 return vision_override.strip()
             # Use default vision model since most text models don't support images
             return self._vision_model
-        
+
         override = os.getenv("OPENROUTER_MODEL") or os.getenv("OPENROUTER_DEFAULT_MODEL")
         if override:
             return override.strip()
@@ -201,8 +197,8 @@ class OpenRouterAIClient:
         if "/" in model:
             return model
         return f"google/{model}"
-    
-    def _payload_has_images(self, payload: Dict[str, Any]) -> bool:
+
+    def _payload_has_images(self, payload: dict[str, Any]) -> bool:
         """Check if the payload contains image data."""
         contents = payload.get("contents") or []
         for content in contents:
@@ -214,7 +210,7 @@ class OpenRouterAIClient:
                     continue
                 if "inline_data" in part:
                     return True
-        
+
         # Also check OpenRouter-style messages format
         messages = payload.get("messages") or []
         for message in messages:
@@ -227,7 +223,7 @@ class OpenRouterAIClient:
                         return True
         return False
 
-    def _headers(self) -> Dict[str, str]:
+    def _headers(self) -> dict[str, str]:
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",
@@ -238,8 +234,8 @@ class OpenRouterAIClient:
             headers["X-Title"] = self._site_title
         return headers
 
-    def _parts_to_content(self, parts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        content: List[Dict[str, Any]] = []
+    def _parts_to_content(self, parts: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        content: list[dict[str, Any]] = []
         for part in parts:
             if not isinstance(part, dict):
                 continue
@@ -255,20 +251,18 @@ class OpenRouterAIClient:
                     content.append(
                         {
                             "type": "image_url",
-                            "image_url": {
-                                "url": f"data:{mime_type};base64,{data}"
-                            },
+                            "image_url": {"url": f"data:{mime_type};base64,{data}"},
                         }
                     )
         return content
 
-    def _payload_to_messages(self, payload: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def _payload_to_messages(self, payload: dict[str, Any]) -> list[dict[str, Any]]:
         if "messages" in payload:
             messages = payload.get("messages")
             if isinstance(messages, list):
                 return messages
         contents = payload.get("contents") or []
-        messages: List[Dict[str, Any]] = []
+        messages: list[dict[str, Any]] = []
         for content in contents:
             if not isinstance(content, dict):
                 continue
@@ -300,9 +294,9 @@ class OpenRouterAIClient:
     async def generate_content(
         self,
         model: str,
-        payload: Dict[str, Any],
+        payload: dict[str, Any],
         timeout: float = 30.0,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         has_images = self._payload_has_images(payload)
         resolved_model = self._resolve_model(model, has_images=has_images)
         if has_images:
@@ -311,7 +305,7 @@ class OpenRouterAIClient:
         if not messages:
             raise GoogleAIRequestError("No messages provided for OpenRouter request")
 
-        request_payload: Dict[str, Any] = {"model": resolved_model, "messages": messages}
+        request_payload: dict[str, Any] = {"model": resolved_model, "messages": messages}
 
         generation = payload.get("generationConfig") or {}
         if isinstance(generation, dict):
@@ -353,7 +347,11 @@ class OpenRouterAIClient:
         # Check for error in response body (OpenRouter can return 200 with error)
         if "error" in data:
             error_info = data["error"]
-            error_msg = error_info.get("message", str(error_info)) if isinstance(error_info, dict) else str(error_info)
+            error_msg = (
+                error_info.get("message", str(error_info))
+                if isinstance(error_info, dict)
+                else str(error_info)
+            )
             raise GoogleAIRequestError(f"OpenRouter API error: {error_msg}")
 
         choices = data.get("choices") or []
@@ -369,12 +367,10 @@ class OpenRouterAIClient:
             ]
         }
 
-    async def check_health(self, timeout: float = 10.0) -> Tuple[bool, Optional[str]]:
+    async def check_health(self, timeout: float = 10.0) -> tuple[bool, str | None]:
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
-                response = await client.get(
-                    self._build_models_url(), headers=self._headers()
-                )
+                response = await client.get(self._build_models_url(), headers=self._headers())
         except Exception as exc:
             logger.error("OpenRouter health check error: %s", exc, exc_info=True)
             return False, str(exc)[:200]
@@ -383,13 +379,11 @@ class OpenRouterAIClient:
             return True, None
 
         preview = response.text[:200] if response.text else ""
-        logger.warning(
-            "OpenRouter health check failed: %s %s", response.status_code, preview
-        )
+        logger.warning("OpenRouter health check failed: %s %s", response.status_code, preview)
         return False, f"status_{response.status_code}: {preview}"
 
 
-def extract_text(response_data: Dict[str, Any]) -> str:
+def extract_text(response_data: dict[str, Any]) -> str:
     candidates = response_data.get("candidates", [])
     if not candidates:
         raise GoogleAIParseError("No response generated by AI")
@@ -404,7 +398,7 @@ def extract_text(response_data: Dict[str, Any]) -> str:
     raise GoogleAIParseError("Empty response from AI")
 
 
-def extract_json_from_text(text_response: str) -> Dict[str, Any]:
+def extract_json_from_text(text_response: str) -> dict[str, Any]:
     json_start = text_response.find("{")
     json_end = text_response.rfind("}") + 1
     if json_start == -1 or json_end <= 0:
@@ -416,18 +410,16 @@ def extract_json_from_text(text_response: str) -> Dict[str, Any]:
         raise GoogleAIParseError(f"Failed to parse AI response as JSON: {exc}") from exc
 
 
-def extract_json(response_data: Dict[str, Any]) -> Dict[str, Any]:
+def extract_json(response_data: dict[str, Any]) -> dict[str, Any]:
     return extract_json_from_text(extract_text(response_data))
 
 
-_client: Optional[Any] = None
-_client_provider: Optional[str] = None
+_client: Any | None = None
+_client_provider: str | None = None
 
 
 def get_ai_provider() -> str:
-    return _normalize_provider(
-        os.getenv("AI_PROVIDER") or os.getenv("GEMINI_PROVIDER")
-    )
+    return _normalize_provider(os.getenv("AI_PROVIDER") or os.getenv("GEMINI_PROVIDER"))
 
 
 def get_google_ai_client() -> Any:
@@ -435,9 +427,6 @@ def get_google_ai_client() -> Any:
     global _client_provider
     provider = get_ai_provider()
     if _client is None or _client_provider != provider:
-        if provider == "openrouter":
-            _client = OpenRouterAIClient()
-        else:
-            _client = GoogleAIClient()
+        _client = OpenRouterAIClient() if provider == "openrouter" else GoogleAIClient()
         _client_provider = provider
     return _client

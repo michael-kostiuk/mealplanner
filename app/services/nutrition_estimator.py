@@ -5,7 +5,6 @@ This service estimates nutritional information for recipes based on ingredients.
 """
 
 import logging
-from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -17,12 +16,12 @@ from app.core.google_ai_client import (
     get_google_ai_client,
 )
 
-
 logger = logging.getLogger(__name__)
 
 
 class IngredientInput(BaseModel):
     """Input model for a single ingredient with quantity."""
+
     name: str
     quantity: float
     unit: str
@@ -30,6 +29,7 @@ class IngredientInput(BaseModel):
 
 class NutritionData(BaseModel):
     """Nutritional information returned by the AI."""
+
     calories: float
     protein: float
     carbs: float
@@ -38,6 +38,7 @@ class NutritionData(BaseModel):
 
 class NutritionEstimationError(Exception):
     """Custom exception for nutrition estimation errors."""
+
     def __init__(self, message: str, is_rate_limited: bool = False):
         self.message = message
         self.is_rate_limited = is_rate_limited
@@ -51,18 +52,15 @@ class NutritionEstimator:
 
     DEFAULT_GEMINI_MODEL = "gemma-3-27b-it"
 
-    def __init__(self, model: Optional[str] = None):
+    def __init__(self, model: str | None = None):
         self._client = get_google_ai_client()
         self._model = model or self.DEFAULT_GEMINI_MODEL
-    
-    def _format_ingredients_text(self, ingredients: List[IngredientInput]) -> str:
+
+    def _format_ingredients_text(self, ingredients: list[IngredientInput]) -> str:
         """Format ingredients into a readable string for the prompt."""
-        return " ".join(
-            f"{ing.name} {ing.quantity} {ing.unit}"
-            for ing in ingredients
-        )
-    
-    def _build_prompt(self, ingredients: List[IngredientInput], servings: int = 1) -> str:
+        return " ".join(f"{ing.name} {ing.quantity} {ing.unit}" for ing in ingredients)
+
+    def _build_prompt(self, ingredients: list[IngredientInput], servings: int = 1) -> str:
         """Build the prompt for the AI model."""
         ingredients_text = self._format_ingredients_text(ingredients)
         return f"""
@@ -86,7 +84,7 @@ class NutritionEstimator:
             Servings:
             {servings}
             """.strip()
-    
+
     def _parse_response(self, response_data: dict) -> NutritionData:
         """Parse the AI response and extract nutrition data."""
         try:
@@ -99,50 +97,38 @@ class NutritionEstimator:
             )
         except GoogleAIParseError as exc:
             raise NutritionEstimationError(str(exc)) from exc
-    
+
     async def estimate_nutrition(
-        self, 
-        ingredients: List[IngredientInput],
-        servings: Optional[int] = 1
+        self, ingredients: list[IngredientInput], servings: int | None = 1
     ) -> NutritionData:
         """
         Estimate nutritional information for a list of ingredients.
-        
+
         Args:
             ingredients: List of ingredients with quantities and units
-            
+
         Returns:
             NutritionData with estimated calories, protein, carbs, and fats
-            
+
         Raises:
             NutritionEstimationError: If the estimation fails
         """
         if not ingredients:
             raise NutritionEstimationError("No ingredients provided")
-        
+
         prompt = self._build_prompt(ingredients, servings)
-        
+
         # Build the request payload for Gemini API
         payload = {
-            "contents": [
-                {
-                    "parts": [
-                        {
-                            "text": prompt
-                        }
-                    ]
-                }
-            ],
+            "contents": [{"parts": [{"text": prompt}]}],
             "generationConfig": {
                 "temperature": 0.1,  # Low temperature for more consistent results
-                "maxOutputTokens": 256
-            }
+                "maxOutputTokens": 256,
+            },
         }
-        
+
         try:
-            response_data = await self._client.generate_content(
-                self._model, payload, timeout=30.0
-            )
+            response_data = await self._client.generate_content(self._model, payload, timeout=30.0)
             return self._parse_response(response_data)
         except GoogleAIRateLimitError as exc:
             raise NutritionEstimationError(
@@ -155,7 +141,7 @@ class NutritionEstimator:
 
 
 # Singleton instance
-_estimator: Optional[NutritionEstimator] = None
+_estimator: NutritionEstimator | None = None
 
 
 def get_nutrition_estimator() -> NutritionEstimator:

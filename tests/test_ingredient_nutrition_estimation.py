@@ -1,10 +1,11 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
 from fastapi.testclient import TestClient
 
-from app.main import app
-from app.database import get_db
 from app import models
+from app.database import get_db
+from app.main import app
 from app.services.nutrition_estimator import NutritionEstimationError
 
 
@@ -73,12 +74,13 @@ def test_estimate_single_ingredient_updates_values(client, db_session):
         fats=0,
     )
 
-    mock_estimator = MockEstimator(
-        [MockNutrition(calories=41.0, protein=0.9, carbs=9.6, fats=0.2)]
-    )
+    mock_estimator = MockEstimator([MockNutrition(calories=41.0, protein=0.9, carbs=9.6, fats=0.2)])
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
-        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    with (
+        patch(
+            "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
+        ),
+        patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
 
@@ -114,8 +116,11 @@ def test_estimate_single_ingredient_rounds_calories(client, db_session):
         [MockNutrition(calories=12.3456, protein=0.1234, carbs=2.3456, fats=0.9876)]
     )
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
-        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    with (
+        patch(
+            "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
+        ),
+        patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
 
@@ -158,12 +163,13 @@ def test_estimate_missing_bulk_skips_populated(client, db_session):
         fats=91,
     )
 
-    mock_estimator = MockEstimator(
-        [MockNutrition(calories=16.0, protein=0.7, carbs=3.0, fats=0.1)]
-    )
+    mock_estimator = MockEstimator([MockNutrition(calories=16.0, protein=0.7, carbs=3.0, fats=0.1)])
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
-        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    with (
+        patch(
+            "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
+        ),
+        patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post("/ingredients/estimate-missing")
 
@@ -208,8 +214,11 @@ def test_estimate_missing_retries_on_rate_limit(client, db_session):
         ]
     )
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
-        "app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator
+    with (
+        patch(
+            "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
+        ),
+        patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post("/ingredients/estimate-missing")
 
@@ -242,8 +251,11 @@ def test_estimate_missing_returns_503_when_no_api_key(client, db_session):
     def raise_value_error():
         raise ValueError("GOOGLE_AI_API_KEY environment variable is not set")
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)), patch(
-        "app.routers.ingredients.get_nutrition_estimator", side_effect=raise_value_error
+    with (
+        patch(
+            "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
+        ),
+        patch("app.routers.ingredients.get_nutrition_estimator", side_effect=raise_value_error),
     ):
         response = client.post("/ingredients/estimate-missing")
     assert response.status_code == 200
@@ -269,9 +281,10 @@ def test_estimate_single_ingredient_uses_translation_for_fdc_lookup(client, db_s
     mock_translator = MockTranslator("carrot")
     macros = {"calories": 41.0, "protein": 0.9, "carbs": 9.6, "fats": 0.2}
 
-    with patch("app.routers.ingredients.get_ingredient_translator", return_value=mock_translator), patch(
-        "app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=macros
-    ) as lookup:
+    with (
+        patch("app.routers.ingredients.get_ingredient_translator", return_value=mock_translator),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=macros) as lookup,
+    ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
 
     assert response.status_code == 200

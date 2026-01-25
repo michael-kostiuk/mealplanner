@@ -1,21 +1,22 @@
 import asyncio
 import logging
-from datetime import datetime, timezone
-from typing import Dict, Optional
+from datetime import UTC, datetime
 
-from .schemas import RecipeImportJob, RecipeImportDraft
+from .schemas import RecipeImportDraft, RecipeImportJob
 
 logger = logging.getLogger(__name__)
 
+
 def _utcnow() -> datetime:
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
+
 
 class JobStore:
     def __init__(self) -> None:
-        self._jobs: Dict[str, RecipeImportJob] = {}
-        self._cancel: Dict[str, asyncio.Event] = {}
+        self._jobs: dict[str, RecipeImportJob] = {}
+        self._cancel: dict[str, asyncio.Event] = {}
         self._lock = asyncio.Lock()
-        self._cleanup_task: Optional[asyncio.Task] = None
+        self._cleanup_task: asyncio.Task | None = None
         self._cleanup_interval_s = 300
 
     def _ensure_cleanup_task(self) -> None:
@@ -54,7 +55,7 @@ class JobStore:
             self._cancel[job_id] = asyncio.Event()
             return job
 
-    async def get(self, job_id: str) -> Optional[RecipeImportJob]:
+    async def get(self, job_id: str) -> RecipeImportJob | None:
         self._ensure_cleanup_task()
         async with self._lock:
             return self._jobs.get(job_id)
@@ -63,12 +64,12 @@ class JobStore:
         self,
         job_id: str,
         *,
-        status: Optional[str] = None,
-        current_step: Optional[str] = None,
-        step_progress: Optional[int] = None,
-        overall_progress: Optional[int] = None,
-        result: Optional[RecipeImportDraft] = None,
-        error: Optional[str] = None,
+        status: str | None = None,
+        current_step: str | None = None,
+        step_progress: int | None = None,
+        overall_progress: int | None = None,
+        result: RecipeImportDraft | None = None,
+        error: str | None = None,
     ) -> None:
         self._ensure_cleanup_task()
         async with self._lock:

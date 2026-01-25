@@ -17,7 +17,7 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@dbmp:5432/${POSTGRES_DB}
-   
+
     # networks:
     #   - host
 

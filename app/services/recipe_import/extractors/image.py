@@ -1,6 +1,6 @@
 import base64
 import logging
-from typing import Any, Dict, Optional, List
+from typing import Any
 
 from app.core.google_ai_client import (
     GoogleAIParseError,
@@ -10,9 +10,9 @@ from app.core.google_ai_client import (
     get_google_ai_client,
 )
 
-from ..schemas import RecipeImportDraft, IngredientImportDraft
-from .base import BaseExtractor
+from ..schemas import IngredientImportDraft, RecipeImportDraft
 from ..utils import safe_parse_float, safe_parse_int
+from .base import BaseExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ RECIPE_EXTRACTION_PROMPT_UA = (
     "1. servings (порції): якщо не вказано явно, оціни на основі кількості інгредієнтів та розміру страви\n"
     "2. ingredients (інгредієнти):\n"
     "   - НЕ дублюй однакові інгредієнти навіть з різною метою (наприклад, цукор для тіста і цукор для посипання - це один інгредієнт з загальною кількістю)\n"
-    "   - name: використовуй коротку нормалізовану назву інгредієнта (наприклад, \"яловичина\", \"сир\", не \"шматок яловичини\")\n"
+    '   - name: використовуй коротку нормалізовану назву інгредієнта (наприклад, "яловичина", "сир", не "шматок яловичини")\n'
     "   - quantity: число (можна дробове), не мішай з одиницями виміру\n"
     "   - unit: тільки одиниця виміру (g, kg, ml, l, cup, tbsp, tsp, piece, slice, clove, bunch, can, package), не пиши число в цьому полі\n"
     "   - НЕ використовуй поле preparation для інгредієнтів\n"
@@ -48,10 +48,11 @@ RECIPE_EXTRACTION_PROMPT_UA = (
     "}\n"
 )
 
+
 class ImageExtractor(BaseExtractor):
     DEFAULT_GEMINI_MODEL = "gemma-3-27b-it"
 
-    def __init__(self, model: Optional[str] = None):
+    def __init__(self, model: str | None = None):
         self._client = get_google_ai_client()
         self._model = model or self.DEFAULT_GEMINI_MODEL
 
@@ -63,7 +64,7 @@ class ImageExtractor(BaseExtractor):
         mime_type = kwargs.get("mime_type")
         if not mime_type:
             raise ValueError("mime_type is required for ImageExtractor")
-        
+
         logger.info("Calling Gemini API for recipe extraction")
         image_b64 = base64.b64encode(input_data).decode("ascii")
         prompt = RECIPE_EXTRACTION_PROMPT_UA
@@ -84,9 +85,7 @@ class ImageExtractor(BaseExtractor):
             "generationConfig": {"temperature": 0.2, "maxOutputTokens": 4096},
         }
         try:
-            data = await self._client.generate_content(
-                self._model, payload, timeout=60.0
-            )
+            data = await self._client.generate_content(self._model, payload, timeout=60.0)
         except GoogleAIRateLimitError as exc:
             raise RuntimeError("Rate limit exceeded by AI service (429)") from exc
         except GoogleAIRequestError as exc:
@@ -99,8 +98,8 @@ class ImageExtractor(BaseExtractor):
 
         return self._to_draft(extracted)
 
-    def _to_draft(self, extracted: Dict[str, Any]) -> RecipeImportDraft:
-        ingredients_out: List[IngredientImportDraft] = []
+    def _to_draft(self, extracted: dict[str, Any]) -> RecipeImportDraft:
+        ingredients_out: list[IngredientImportDraft] = []
         for ing in extracted.get("ingredients", []) or []:
             name = (ing.get("name") or "").strip()
             if not name:

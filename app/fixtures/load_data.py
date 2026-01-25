@@ -1,32 +1,31 @@
-from sqlalchemy.orm import Session
-from sqlalchemy import any_
-from ..database import get_db, engine
-from .. import models
 import json
+
+from sqlalchemy.orm import Session
+
+from .. import models
+from ..database import engine
+
 # D:\UNITY\mp\mealplanner\app\fixtures\ingridients.json
 
-ING_PATH = [
-    'app/fixtures/ingridients_al.json',
-    'app/fixtures/ingridients2.json'
-    ]
+ING_PATH = ["app/fixtures/ingridients_al.json", "app/fixtures/ingridients2.json"]
 REC_PATH = [
-    'app/fixtures/recipes_al.json',
-    'app/fixtures/recipes2.json',
-    ]
+    "app/fixtures/recipes_al.json",
+    "app/fixtures/recipes2.json",
+]
 # ING_PATH = 'app/fixtures/ingridients2.json'
 # REC_PATH = 'app/fixtures/recipes2.json'
 
+
 def load_fixtures():
     db = Session(engine)
-    from sqlalchemy import delete
 
     # Load ingredients first
     ingredients_data = []
     for ing_path in ING_PATH:
-        with open(ing_path, 'r') as f:
+        with open(ing_path) as f:
             ingredients_data += json.load(f)
-    
-    names = [x['name'] for x in ingredients_data]
+
+    names = [x["name"] for x in ingredients_data]
     db_query = db.query(models.Ingredient)
     # db_query = db_query.filter(any_([models.Ingredient.name.ilike(f"%{name}%") for name in names]))
 
@@ -43,12 +42,12 @@ def load_fixtures():
         db.add(ingredient)
         db.commit()
         db.refresh(ingredient)
-        ingredients[ing_data['name']] = ingredient
-    
+        ingredients[ing_data["name"]] = ingredient
+
     # Load recipes
     recipes_data = []
     for rec_path in REC_PATH:
-        with open(rec_path, 'r') as f:
+        with open(rec_path) as f:
             recipes_data += json.load(f)
 
     db_query = db.query(models.Recipe)
@@ -59,11 +58,11 @@ def load_fixtures():
         recipes_all[exists.name.capitalize()] = exists
 
     for recipe_data in recipes_data:
-        recipe_ingredients = recipe_data.pop('ingredients')
+        recipe_ingredients = recipe_data.pop("ingredients")
         # print(recipe_data)
-        recipe_data['name'] = recipe_data['name'].capitalize()
-        if recipe_data['name'] in recipes_all:
-            recipe = recipes_all[recipe_data['name']]
+        recipe_data["name"] = recipe_data["name"].capitalize()
+        if recipe_data["name"] in recipes_all:
+            recipe = recipes_all[recipe_data["name"]]
             for k, v in recipe_data.items():
                 setattr(recipe, k, v)
         else:
@@ -71,20 +70,19 @@ def load_fixtures():
         db.add(recipe)
         db.commit()
         db.refresh(recipe)
-        
+
         for ing_data in recipe_ingredients:
-            ing_name = ing_data.pop('name').capitalize()
+            ing_name = ing_data.pop("name").capitalize()
             ingredient = ingredients[ing_name]
             recipe_ing = models.RecipeIngredient(
-                recipe_id=recipe.id,
-                ingredient_id=ingredient.id,
-                **ing_data
+                recipe_id=recipe.id, ingredient_id=ingredient.id, **ing_data
             )
             db.add(recipe_ing)
-        
+
         db.commit()
-    
+
     db.close()
+
 
 if __name__ == "__main__":
     load_fixtures()

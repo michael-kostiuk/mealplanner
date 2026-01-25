@@ -1,24 +1,24 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session
-from sqlalchemy import func
-from typing import List, Optional
-from urllib.parse import unquote
-import logging
 import asyncio
+import logging
+from urllib.parse import unquote
 
-from ..database import get_db
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import func
+from sqlalchemy.orm import Session
+
 from .. import models, schemas
-from ..units import BaseUnit, normalize_unit
+from ..database import get_db
+from ..services import fdc_lookup
+from ..services.ingredient_translator import (
+    IngredientTranslationError,
+    get_ingredient_translator,
+)
 from ..services.nutrition_estimator import (
     IngredientInput,
     NutritionEstimationError,
     get_nutrition_estimator,
 )
-from ..services.ingredient_translator import (
-    IngredientTranslationError,
-    get_ingredient_translator,
-)
-from ..services import fdc_lookup
+from ..units import BaseUnit, normalize_unit
 
 logger = logging.getLogger(__name__)
 
@@ -86,13 +86,15 @@ async def _estimate_with_fdc_then_ai(
     return await _estimate_and_update_ingredient(ingredient, estimator, db)
 
 
-async def _lookup_fdc_macros(ingredient: models.Ingredient) -> Optional[dict]:
+async def _lookup_fdc_macros(ingredient: models.Ingredient) -> dict | None:
     lookup_name = ingredient.name
     allow_ascii = False
     try:
         translator = get_ingredient_translator()
     except ValueError as exc:
-        logger.warning("Ingredient translation unavailable for ingredient %s: %s", ingredient.id, exc)
+        logger.warning(
+            "Ingredient translation unavailable for ingredient %s: %s", ingredient.id, exc
+        )
     else:
         try:
             translated = await translator.translate_to_english(ingredient.name)
@@ -100,9 +102,13 @@ async def _lookup_fdc_macros(ingredient: models.Ingredient) -> Optional[dict]:
                 lookup_name = translated
                 allow_ascii = True
         except IngredientTranslationError as exc:
-            logger.warning("Ingredient translation failed for ingredient %s: %s", ingredient.id, exc.message)
+            logger.warning(
+                "Ingredient translation failed for ingredient %s: %s", ingredient.id, exc.message
+            )
         except Exception as exc:
-            logger.warning("Ingredient translation failed for ingredient %s: %s", ingredient.id, exc)
+            logger.warning(
+                "Ingredient translation failed for ingredient %s: %s", ingredient.id, exc
+            )
 
     try:
         normalized_unit = normalize_unit(ingredient.base_unit) or ingredient.base_unit
@@ -116,8 +122,8 @@ async def _lookup_fdc_macros(ingredient: models.Ingredient) -> Optional[dict]:
         return None
 
 
-@router.get("/", response_model=List[schemas.Ingredient])
-async def list_ingredients(db: Session = Depends(get_db), name: Optional[str] = Query(default=None)):
+@router.get("/", response_model=list[schemas.Ingredient])
+async def list_ingredients(db: Session = Depends(get_db), name: str | None = Query(default=None)):
     db_query = db.query(models.Ingredient).order_by(models.Ingredient.name)
     if name:
         name = unquote(name)
@@ -155,17 +161,17 @@ async def estimate_ingredient_nutrition(
         try:
             estimator = get_nutrition_estimator()
         except ValueError as e:
-            raise HTTPException(status_code=503, detail=str(e))
+            raise HTTPException(status_code=503, detail=str(e)) from e
 
         updated = await _estimate_and_update_ingredient(ingredient, estimator, db)
         return updated
     except NutritionEstimationError as e:
         db.rollback()
         if e.is_rate_limited:
-            raise HTTPException(status_code=429, detail=e.message)
+            raise HTTPException(status_code=429, detail=e.message) from e
         if "environment variable is not set" in e.message or "API key not configured" in e.message:
-            raise HTTPException(status_code=503, detail=e.message)
-        raise HTTPException(status_code=500, detail=e.message)
+            raise HTTPException(status_code=503, detail=e.message) from e
+        raise HTTPException(status_code=500, detail=e.message) from e
 
 
 @router.post("/estimate-missing", response_model=schemas.IngredientBulkEstimateResponse)
@@ -189,8 +195,8 @@ async def estimate_missing_ingredients(
         .all()
     )
     estimator = None
-    updated: List[models.Ingredient] = []
-    failed: List[schemas.IngredientNutritionEstimateFailure] = []
+    updated: list[models.Ingredient] = []
+    failed: list[schemas.IngredientNutritionEstimateFailure] = []
     skipped_count = total_count - len(missing)
 
     for ingredient in missing:
@@ -265,52 +271,41 @@ async def estimate_missing_ingredients(
     )
 
 
-def do_merge(
-    keep_ingredient_id: int,
-    merge_ingredient_ids: List[int],
-    db: Session
-):
+def do_merge(keep_ingredient_id: int, merge_ingredient_ids: list[int], db: Session):
     # Validate that keep_ingredient exists
-    keep_ingredient = db.query(models.Ingredient).filter(
-        models.Ingredient.id == keep_ingredient_id
-    ).first()
+    keep_ingredient = (
+        db.query(models.Ingredient).filter(models.Ingredient.id == keep_ingredient_id).first()
+    )
 
     if not keep_ingredient:
         raise HTTPException(status_code=404, detail="Keep ingredient not found")
 
     # Validate that all merge ingredients exist
-    merge_ingredients = db.query(models.Ingredient).filter(
-        models.Ingredient.id.in_(merge_ingredient_ids)
-    ).all()
+    merge_ingredients = (
+        db.query(models.Ingredient).filter(models.Ingredient.id.in_(merge_ingredient_ids)).all()
+    )
 
     if len(merge_ingredients) != len(merge_ingredient_ids):
         raise HTTPException(status_code=404, detail="One or more merge ingredients not found")
 
     # Ensure keep_ingredient is not in merge list
     if keep_ingredient_id in merge_ingredient_ids:
-        raise HTTPException(
-            status_code=400,
-            detail="Keep ingredient cannot be in the merge list"
-        )
+        raise HTTPException(status_code=400, detail="Keep ingredient cannot be in the merge list")
 
     # Update all RecipeIngredient entries to use the kept ingredient
     db.query(models.RecipeIngredient).filter(
         models.RecipeIngredient.ingredient_id.in_(merge_ingredient_ids)
-    ).update({
-        models.RecipeIngredient.ingredient_id: keep_ingredient_id
-    }, synchronize_session=False)
+    ).update({models.RecipeIngredient.ingredient_id: keep_ingredient_id}, synchronize_session=False)
 
     # Update all ShoppingListItem entries to use the kept ingredient
     db.query(models.ShoppingListItem).filter(
         models.ShoppingListItem.ingredient_id.in_(merge_ingredient_ids)
-    ).update({
-        models.ShoppingListItem.ingredient_id: keep_ingredient_id
-    }, synchronize_session=False)
+    ).update({models.ShoppingListItem.ingredient_id: keep_ingredient_id}, synchronize_session=False)
 
     # Delete the merged ingredients
-    db.query(models.Ingredient).filter(
-        models.Ingredient.id.in_(merge_ingredient_ids)
-    ).delete(synchronize_session=False)
+    db.query(models.Ingredient).filter(models.Ingredient.id.in_(merge_ingredient_ids)).delete(
+        synchronize_session=False
+    )
 
     db.commit()
     return keep_ingredient
@@ -318,9 +313,7 @@ def do_merge(
 
 @router.post("/merge")
 async def merge_ingredients(
-    keep_ingredient_id: int,
-    merge_ingredient_ids: List[int],
-    db: Session = Depends(get_db)
+    keep_ingredient_id: int, merge_ingredient_ids: list[int], db: Session = Depends(get_db)
 ):
     """
     Merge duplicate ingredients into a single ingredient.
@@ -341,5 +334,5 @@ async def merge_ingredients(
         "kept_ingredient": {
             "id": keep_ingredient_id,
         },
-        "merged_count": len(merge_ingredient_ids)
+        "merged_count": len(merge_ingredient_ids),
     }

@@ -6,7 +6,6 @@ Translates ingredient names to English for improved FDC lookup.
 
 import json
 import logging
-from typing import Optional, Dict
 
 from app.core.google_ai_client import (
     GoogleAIParseError,
@@ -35,16 +34,16 @@ class IngredientTranslator:
 
     DEFAULT_GEMINI_MODEL = "gemma-3-27b-it"
 
-    def __init__(self, model: Optional[str] = None):
+    def __init__(self, model: str | None = None):
         self._client = get_google_ai_client()
         self._model = model or self.DEFAULT_GEMINI_MODEL
-        self._cache: Dict[str, Optional[str]] = {}
+        self._cache: dict[str, str | None] = {}
 
     def _build_prompt(self, ingredient_name: str) -> str:
         ingredient_json = json.dumps(ingredient_name, ensure_ascii=False)
         return (
             "Translate ingredient names to English for USDA FoodData Central lookup.\n"
-            "Return JSON only: {\"translation\":\"...\"}\n"
+            'Return JSON only: {"translation":"..."}\n'
             "Rules:\n"
             "- Output a short, plain English ingredient name (singular noun phrase).\n"
             "- Remove quantities, units, brands, packaging, and adjectives like fresh/organic.\n"
@@ -63,7 +62,7 @@ class IngredientTranslator:
         translation = (parsed.get("translation") or "").strip()
         return translation
 
-    async def translate_to_english(self, ingredient_name: str) -> Optional[str]:
+    async def translate_to_english(self, ingredient_name: str) -> str | None:
         if not ingredient_name:
             return None
         ingredient_name = ingredient_name.strip()
@@ -89,9 +88,7 @@ class IngredientTranslator:
         }
 
         try:
-            response_data = await self._client.generate_content(
-                self._model, payload, timeout=30.0
-            )
+            response_data = await self._client.generate_content(self._model, payload, timeout=30.0)
             translation = self._parse_response(response_data)
         except GoogleAIRateLimitError as exc:
             raise IngredientTranslationError(
@@ -106,7 +103,7 @@ class IngredientTranslator:
         return translation or None
 
 
-_translator: Optional[IngredientTranslator] = None
+_translator: IngredientTranslator | None = None
 
 
 def get_ingredient_translator() -> IngredientTranslator:
