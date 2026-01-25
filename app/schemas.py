@@ -5,6 +5,14 @@ from pydantic import BaseModel, ConfigDict, field_serializer, field_validator
 from app.units import BaseUnit, normalize_unit
 
 
+def _validate_base_unit(value):
+    """Shared base_unit normalization logic."""
+    normalized = normalize_unit(value)
+    if not normalized:
+        raise ValueError("Unsupported base unit")
+    return normalized
+
+
 class IngredientBase(BaseModel):
     name: str
     category: str
@@ -15,19 +23,31 @@ class IngredientBase(BaseModel):
     fats: float
 
     @field_validator("base_unit", mode="before")
+    @classmethod
     def _normalize_base_unit(cls, value):
-        normalized = normalize_unit(value)
-        if not normalized:
-            raise ValueError("Unsupported base unit")
-        return normalized
+        return _validate_base_unit(value)
 
     @field_serializer("calories", "protein", "carbs", "fats")
     def _serialize_macros(self, value: float):
         return round(value, 2)
 
 
-class IngredientCreate(IngredientBase):
-    pass
+class IngredientCreate(BaseModel):
+    """Schema for creating ingredients. Nutrition fields are optional - if not provided,
+    they will be estimated asynchronously using FDC lookup or AI."""
+
+    name: str
+    category: str
+    base_unit: BaseUnit
+    calories: float | None = None
+    protein: float | None = None
+    carbs: float | None = None
+    fats: float | None = None
+
+    @field_validator("base_unit", mode="before")
+    @classmethod
+    def _normalize_base_unit(cls, value):
+        return _validate_base_unit(value)
 
 
 class Ingredient(IngredientBase):

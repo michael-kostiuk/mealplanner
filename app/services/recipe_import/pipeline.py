@@ -2,7 +2,7 @@ import json
 import logging
 import re
 
-from rapidfuzz import fuzz, process
+from rapidfuzz import fuzz
 from sqlalchemy.orm import Session
 
 from app import models
@@ -29,27 +29,42 @@ logger = logging.getLogger(__name__)
 class IngredientMatcher:
     def __init__(self, db: Session) -> None:
         self._db = db
-        self._candidates: list[tuple[int, str, str]] = []
+        self._candidates: list[tuple[int, str, str, str]] = []
         for ing in self._db.query(models.Ingredient).all():
             name = ing.name or ""
-            self._candidates.append((ing.id, name, normalize_text(name)))
+            norm = normalize_text(name)
+            # Pre-compute token-sorted version for word-order-independent matching
+            norm_sorted = " ".join(sorted(norm.split()))
+            self._candidates.append((ing.id, name, norm, norm_sorted))
 
     def find_best_candidate(self, query: str) -> tuple[int, str, float] | None:
         qn = normalize_text(query)
         if not qn:
             return None
-        for ing_id, name, norm in self._candidates:
-            if norm == qn:
+
+        # Pre-compute token-sorted version of query
+        qn_sorted = " ".join(sorted(qn.split()))
+
+        # Check for exact match (both direct and token-sorted)
+        for ing_id, name, norm, norm_sorted in self._candidates:
+            if norm == qn or norm_sorted == qn_sorted:
                 return ing_id, name, 100.0
-        choices = {ing_id: norm for ing_id, _, norm in self._candidates}
-        match = process.extractOne(qn, choices, scorer=fuzz.WRatio)
-        if not match:
-            return None
-        matched_id, score, _ = match
-        original_name = next((n for iid, n, _ in self._candidates if iid == matched_id), None)
-        if original_name is None:
-            return None
-        return matched_id, original_name, float(score)
+
+        # Fuzzy matching: use both WRatio and token_sort_ratio, take the best
+        best_match: tuple[int, str, float] | None = None
+
+        for ing_id, name, norm, norm_sorted in self._candidates:  # noqa: B007
+            # WRatio is good for general similarity
+            score_wratio = fuzz.WRatio(qn, norm)
+            # token_sort_ratio handles word reordering (e.g., "processed cheese" vs "cheese processed")
+            score_token_sort = fuzz.token_sort_ratio(qn, norm)
+            # Take the maximum of both scores
+            score = max(score_wratio, score_token_sort)
+
+            if best_match is None or score > best_match[2]:
+                best_match = (ing_id, name, float(score))
+
+        return best_match
 
 
 class RecipeImportPipeline:

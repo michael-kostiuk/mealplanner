@@ -2,12 +2,12 @@ import asyncio
 import logging
 from urllib.parse import unquote
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
-from ..database import get_db
+from ..database import SessionLocal, get_db
 from ..services import fdc_lookup
 from ..services.ingredient_translator import (
     IngredientTranslationError,
@@ -26,6 +26,105 @@ router = APIRouter(
     prefix="/ingredients",
     tags=["ingredients"],
 )
+
+
+def _is_nutrition_missing(ingredient: models.Ingredient) -> bool:
+    """Check if all nutrition fields are zero or null."""
+    return (
+        (ingredient.calories is None or ingredient.calories == 0)
+        and (ingredient.protein is None or ingredient.protein == 0)
+        and (ingredient.carbs is None or ingredient.carbs == 0)
+        and (ingredient.fats is None or ingredient.fats == 0)
+    )
+
+
+def _estimate_nutrition_background_sync(ingredient_id: int) -> None:
+    """Synchronous background task to estimate nutrition for a newly created ingredient.
+
+    Runs blocking DB/FDC operations in a thread pool to avoid blocking the event loop.
+    Creates its own database session since the request session will be closed.
+    """
+    db = SessionLocal()
+    try:
+        ingredient = (
+            db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
+        )
+        if not ingredient:
+            logger.warning(
+                "Background nutrition estimation: ingredient %s not found", ingredient_id
+            )
+            return
+
+        # Double-check nutrition is still missing (might have been updated concurrently)
+        if not _is_nutrition_missing(ingredient):
+            logger.info(
+                "Background nutrition estimation: ingredient %s already has nutrition data",
+                ingredient_id,
+            )
+            return
+
+        # Try FDC lookup first (sync operation)
+        macros = _lookup_fdc_macros_sync(ingredient)
+        if macros:
+            logger.info(
+                "Background nutrition estimation: ingredient %s matched via FDC", ingredient_id
+            )
+            _update_ingredient_from_macros(ingredient, macros, db)
+            return
+
+        # Fall back to AI estimation (requires async, run in new event loop)
+        logger.info(
+            "Background nutrition estimation: ingredient %s falling back to AI", ingredient_id
+        )
+        try:
+            estimator = get_nutrition_estimator()
+            # Run async estimation in a new event loop since we're in a sync context
+            loop = asyncio.new_event_loop()
+            try:
+                loop.run_until_complete(_estimate_and_update_ingredient(ingredient, estimator, db))
+            finally:
+                loop.close()
+            logger.info(
+                "Background nutrition estimation: ingredient %s completed via AI", ingredient_id
+            )
+        except ValueError as e:
+            logger.warning(
+                "Background nutrition estimation: AI estimator unavailable for ingredient %s: %s",
+                ingredient_id,
+                e,
+            )
+        except NutritionEstimationError as e:
+            logger.warning(
+                "Background nutrition estimation: AI estimation failed for ingredient %s: %s",
+                ingredient_id,
+                e.message,
+            )
+    except Exception as e:
+        logger.exception(
+            "Background nutrition estimation: unexpected error for ingredient %s: %s",
+            ingredient_id,
+            e,
+        )
+        db.rollback()
+    finally:
+        db.close()
+
+
+def _lookup_fdc_macros_sync(ingredient: models.Ingredient) -> dict | None:
+    """Synchronous version of FDC lookup for background tasks.
+
+    Skips async translation since we're in a sync context.
+    """
+    try:
+        normalized_unit = normalize_unit(ingredient.base_unit) or ingredient.base_unit
+        return fdc_lookup.lookup_nutrition(
+            ingredient.name,
+            normalized_unit,
+            allow_ascii=False,
+        )
+    except fdc_lookup.FdcLookupError as exc:
+        logger.warning("FDC lookup unavailable for ingredient %s: %s", ingredient.id, exc)
+        return None
 
 
 async def _estimate_and_update_ingredient(
@@ -132,11 +231,36 @@ async def list_ingredients(db: Session = Depends(get_db), name: str | None = Que
 
 
 @router.post("/", response_model=schemas.Ingredient)
-async def create_ingredient(ingredient: schemas.IngredientCreate, db: Session = Depends(get_db)):
-    db_ingredient = models.Ingredient(**ingredient.model_dump(mode="json"))
+async def create_ingredient(
+    ingredient: schemas.IngredientCreate,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
+    # Check if user provided NO nutrition at all (all fields are None)
+    # If they provide partial data, we assume intentional (e.g., salt has 0 calories)
+    nutrition_fields = ("calories", "protein", "carbs", "fats")
+    all_nutrition_none = all(getattr(ingredient, field) is None for field in nutrition_fields)
+
+    # Convert None nutrition values to 0 for database storage
+    ingredient_data = ingredient.model_dump(mode="json")
+    for field in nutrition_fields:
+        if ingredient_data.get(field) is None:
+            ingredient_data[field] = 0.0
+
+    db_ingredient = models.Ingredient(**ingredient_data)
     db.add(db_ingredient)
     db.commit()
     db.refresh(db_ingredient)
+
+    # Only estimate if user provided NO nutrition data at all
+    # This distinguishes "unknown" from intentional zero-calorie items like salt/water
+    if all_nutrition_none:
+        background_tasks.add_task(_estimate_nutrition_background_sync, db_ingredient.id)
+        logger.info(
+            "Ingredient %s created without nutrition, scheduling background estimation",
+            db_ingredient.id,
+        )
+
     return db_ingredient
 
 
