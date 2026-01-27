@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, joinedload
 from .. import models, schemas
 from ..database import get_db
 from ..services.unit_converter import QuantityUnit, aggregate_quantities
+from ..units import BaseUnit, normalize_unit
 
 logger = logging.getLogger(__name__)
 
@@ -44,10 +45,11 @@ def generate_shopping_list(meal_plan: models.MealPlan, db: Session):
 
         multiplier = entry.servings / recipe.servings
         for recipe_ingredient in recipe.ingredients:
+            unit = normalize_unit(recipe_ingredient.unit) or BaseUnit.PIECE.value
             ingredient_quantities[recipe_ingredient.ingredient_id].append(
                 QuantityUnit(
                     quantity=recipe_ingredient.quantity * multiplier,
-                    unit=recipe_ingredient.unit,
+                    unit=unit,
                 )
             )
 

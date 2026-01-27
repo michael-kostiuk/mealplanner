@@ -40,6 +40,21 @@ class AggregatedItem:
     unconvertible: list[QuantityUnit] = field(default_factory=list)
 
 
+def _combine_same_units(items: list[QuantityUnit]) -> list[QuantityUnit]:
+    """Combine multiple QuantityUnit entries that share the same unit."""
+
+    totals: dict[str, float] = {}
+    order: list[str] = []
+    for item in items:
+        if item.unit is None:
+            continue
+        qty = float(item.quantity or 0)
+        if item.unit not in totals:
+            order.append(item.unit)
+        totals[item.unit] = totals.get(item.unit, 0.0) + qty
+    return [QuantityUnit(quantity=totals[unit], unit=unit) for unit in order]
+
+
 def _to_grams_static(quantity: float, unit: str) -> float | None:
     """
     Convert quantity to grams using static conversion factors.
@@ -188,6 +203,10 @@ def aggregate_quantities(
             unconvertible.append(item)
 
     # Determine aggregation strategy
+
+    # Combine unconvertible items with identical units to avoid duplicate lines
+    # (e.g., 1 tsp + 1 tsp should become a single 2 tsp item if we can't convert).
+    unconvertible = _combine_same_units(unconvertible)
 
     # Case 1: All items are the same count unit
     if len(count_items) == 1 and not convertible_to_grams:

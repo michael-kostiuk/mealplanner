@@ -330,6 +330,22 @@ class TestScenario5PartialConversion:
         assert result.unconvertible[0].unit == "pinch"
 
 
+class TestScenario8SameUnconvertibleUnits:
+    """Scenario 8: Same unconvertible unit should combine to a single line."""
+
+    def test_same_unit_combines(self, butter_ingredient):
+        items = [
+            QuantityUnit(quantity=1, unit="tsp"),
+            QuantityUnit(quantity=1, unit="tsp"),
+        ]
+
+        result = aggregate_quantities(items, butter_ingredient)
+
+        assert result.main_quantity == 2
+        assert result.main_unit == "tsp"
+        assert len(result.unconvertible) == 0
+
+
 class TestScenario6VolumeUnits:
     """Scenario 6: Volume units via FDC."""
 
