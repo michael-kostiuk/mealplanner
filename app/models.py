@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, DateTime, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -55,6 +55,9 @@ class Ingredient(Base):
     category = Column(String(100))  # for shopping list organization
     base_unit = Column(String(50))  # base unit for nutritional info
 
+    # FDC link for unit conversion
+    fdc_id = Column(Integer, nullable=True, index=True)
+
     # Nutritional information per base unit
     calories = Column(Float)
     protein = Column(Float)
@@ -63,6 +66,12 @@ class Ingredient(Base):
 
     recipes = relationship(
         "RecipeIngredient",
+        back_populates="ingredient",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+    portions = relationship(
+        "IngredientPortion",
         back_populates="ingredient",
         cascade="all, delete-orphan",
         passive_deletes=True,
@@ -155,6 +164,23 @@ class ShoppingListItem(Base):
 
     shopping_list = relationship("ShoppingList", back_populates="items")
     ingredient = relationship("Ingredient")
+
+
+class IngredientPortion(Base):
+    """Stores portion conversion data from FDC for unit conversion."""
+
+    __tablename__ = "ingredient_portions"
+
+    id = Column(Integer, primary_key=True)
+    ingredient_id = Column(
+        Integer, ForeignKey("ingredients.id", ondelete="CASCADE"), nullable=False
+    )
+    unit = Column(String(50), nullable=False)  # "piece", "cup", "tbsp", "slice"
+    gram_weight = Column(Float, nullable=False)  # weight in grams
+    modifier = Column(String(100), nullable=True)  # "medium", "large", "small"
+    is_default = Column(Boolean, default=False)  # default portion for this unit
+
+    ingredient = relationship("Ingredient", back_populates="portions")
 
 
 class User(Base):

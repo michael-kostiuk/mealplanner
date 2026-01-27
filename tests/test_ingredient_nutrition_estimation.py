@@ -80,6 +80,7 @@ def test_estimate_single_ingredient_updates_values(client, db_session):
         patch(
             "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
         ),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=None),
         patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
@@ -120,6 +121,7 @@ def test_estimate_single_ingredient_rounds_calories(client, db_session):
         patch(
             "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
         ),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=None),
         patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post(f"/ingredients/{ingredient.id}/estimate-nutrition")
@@ -169,6 +171,7 @@ def test_estimate_missing_bulk_skips_populated(client, db_session):
         patch(
             "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
         ),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=None),
         patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post("/ingredients/estimate-missing")
@@ -218,6 +221,7 @@ def test_estimate_missing_retries_on_rate_limit(client, db_session):
         patch(
             "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
         ),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=None),
         patch("app.routers.ingredients.get_nutrition_estimator", return_value=mock_estimator),
     ):
         response = client.post("/ingredients/estimate-missing")
@@ -255,6 +259,7 @@ def test_estimate_missing_returns_503_when_no_api_key(client, db_session):
         patch(
             "app.routers.ingredients.get_ingredient_translator", return_value=MockTranslator(None)
         ),
+        patch("app.routers.ingredients.fdc_lookup.lookup_nutrition", return_value=None),
         patch("app.routers.ingredients.get_nutrition_estimator", side_effect=raise_value_error),
     ):
         response = client.post("/ingredients/estimate-missing")

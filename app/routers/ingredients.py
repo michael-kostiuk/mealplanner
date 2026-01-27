@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from .. import models, schemas
 from ..database import SessionLocal, get_db
 from ..services import fdc_lookup
+from ..services.fdc_linker import link_ingredient_to_fdc_async
 from ..services.ingredient_translator import (
     IngredientTranslationError,
     get_ingredient_translator,
@@ -102,6 +103,55 @@ def _estimate_nutrition_background_sync(ingredient_id: int) -> None:
     except Exception as e:
         logger.exception(
             "Background nutrition estimation: unexpected error for ingredient %s: %s",
+            ingredient_id,
+            e,
+        )
+        db.rollback()
+    finally:
+        db.close()
+
+
+def _link_fdc_background_sync(ingredient_id: int) -> None:
+    """Background task to link ingredient to FDC for unit conversion.
+
+    Uses async translation via new event loop since we're in sync context.
+    Creates its own database session since the request session will be closed.
+    """
+    db = SessionLocal()
+    try:
+        ingredient = (
+            db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
+        )
+        if not ingredient:
+            logger.warning("Background FDC linking: ingredient %s not found", ingredient_id)
+            return
+
+        # Skip if already linked
+        if ingredient.fdc_id is not None:
+            logger.debug("Background FDC linking: ingredient %s already linked", ingredient_id)
+            return
+
+        # Run async linking in a new event loop since we're in a sync context
+        loop = asyncio.new_event_loop()
+        try:
+            linked = loop.run_until_complete(link_ingredient_to_fdc_async(ingredient, db))
+            if linked:
+                db.commit()
+                logger.info(
+                    "Background FDC linking: ingredient %s linked to FDC %s",
+                    ingredient_id,
+                    ingredient.fdc_id,
+                )
+            else:
+                logger.debug(
+                    "Background FDC linking: no FDC match for ingredient %s",
+                    ingredient_id,
+                )
+        finally:
+            loop.close()
+    except Exception as e:
+        logger.warning(
+            "Background FDC linking: failed for ingredient %s: %s",
             ingredient_id,
             e,
         )
@@ -252,7 +302,14 @@ async def create_ingredient(
     db.commit()
     db.refresh(db_ingredient)
 
-    # Only estimate if user provided NO nutrition data at all
+    # Schedule FDC linking in background (uses AI translation, can be slow)
+    background_tasks.add_task(_link_fdc_background_sync, db_ingredient.id)
+    logger.info(
+        "Ingredient %s created, scheduling background FDC linking",
+        db_ingredient.id,
+    )
+
+    # Only estimate nutrition if user provided NO nutrition data at all
     # This distinguishes "unknown" from intentional zero-calorie items like salt/water
     if all_nutrition_none:
         background_tasks.add_task(_estimate_nutrition_background_sync, db_ingredient.id)

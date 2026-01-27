@@ -1,5 +1,13 @@
 """
 Offline lookup against a bundled FoodData Central SQLite snapshot.
+
+Public API:
+- lookup_nutrition: Find macros for an ingredient
+- get_fdc_connection: Get SQLite connection for FDC database
+- normalize_text: Normalize text for FDC search
+- score_fdc_candidate: Score a candidate match
+- get_data_type_weight: Get weight bonus for data_type
+- load_synonyms: Load synonym dictionary
 """
 
 import json
@@ -46,7 +54,8 @@ class FdcLookupError(Exception):
     """Raised when lookup cannot be performed (e.g., DB missing)."""
 
 
-def _normalize(text: str) -> str:
+def normalize_text(text: str) -> str:
+    """Normalize text for FDC search - lowercase, remove accents, keep alphanumeric and Cyrillic."""
     if not text:
         return ""
     text = unicodedata.normalize("NFKD", text)
@@ -56,8 +65,12 @@ def _normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def _load_synonyms() -> dict[str, str]:
-    # This should be replaced to proper translation in future updates
+# Alias for backward compatibility
+_normalize = normalize_text
+
+
+def load_synonyms() -> dict[str, str]:
+    """Load synonym dictionary from JSON file, normalized keys."""
     path = DEFAULT_SYNONYMS_PATH
     if not os.path.exists(path):
         return {}
@@ -69,11 +82,16 @@ def _load_synonyms() -> dict[str, str]:
         return {}
     normalized = {}
     for key, value in data.items():
-        normalized[_normalize(key)] = value
+        normalized[normalize_text(key)] = value
     return normalized
 
 
-def _get_conn() -> sqlite3.Connection:
+# Alias for backward compatibility
+_load_synonyms = load_synonyms
+
+
+def get_fdc_connection() -> sqlite3.Connection:
+    """Get SQLite connection for FDC database (singleton, thread-safe)."""
     global _conn, _synonyms
     if _conn is not None:
         return _conn
@@ -83,8 +101,12 @@ def _get_conn() -> sqlite3.Connection:
                 raise FdcLookupError(f"FDC SQLite not found at {DEFAULT_DB_PATH}")
             _conn = sqlite3.connect(DEFAULT_DB_PATH, check_same_thread=False)
             _conn.row_factory = sqlite3.Row
-            _synonyms = _load_synonyms()
+            _synonyms = load_synonyms()
     return _conn
+
+
+# Alias for backward compatibility
+_get_conn = get_fdc_connection
 
 
 def _best_portion(portions: list[dict]) -> float | None:
@@ -96,12 +118,14 @@ def _best_portion(portions: list[dict]) -> float | None:
     return None
 
 
-def _score_candidate(description: str, tokens: list[str]) -> float | None:
+def score_fdc_candidate(description: str, tokens: list[str]) -> float | None:
     """
-    Score based on full token containment, data_type preference, and penalties.
+    Score a candidate FDC match based on token containment and relevance.
+
     Returns None if token containment fails or blocklist hits.
+    Higher score = better match.
     """
-    normalized_desc = _normalize(description)
+    normalized_desc = normalize_text(description)
     desc_tokens = normalized_desc.split()
 
     # Block obvious processed items unless explicitly asked (tokens contain the processed term)
@@ -110,38 +134,64 @@ def _score_candidate(description: str, tokens: list[str]) -> float | None:
     ):
         return None
 
-    def _contains(token: str) -> bool:
-        for dt in desc_tokens:
-            if dt == token:
+    def _token_matches(token: str, desc_token: str) -> bool:
+        if desc_token == token:
+            return True
+        if desc_token.rstrip("s") == token or token.rstrip("s") == desc_token:
+            return True
+        if desc_token.endswith("es") and desc_token[:-2] == token:
+            return True
+        if token.endswith("es") and token[:-2] == desc_token:
+            return True
+        # Handle -y/-ies pluralization (cherry/cherries, berry/berries)
+        if desc_token.endswith("ies") and token.endswith("y"):
+            if desc_token[:-3] + "y" == token:
                 return True
-            if dt.rstrip("s") == token or token.rstrip("s") == dt:
-                return True
-            if dt.endswith("es") and dt[:-2] == token:
-                return True
-            if token.endswith("es") and token[:-2] == dt:
+        if token.endswith("ies") and desc_token.endswith("y"):
+            if token[:-3] + "y" == desc_token:
                 return True
         return False
+
+    def _contains(token: str) -> bool:
+        return any(_token_matches(token, dt) for dt in desc_tokens)
 
     if not all(_contains(t) for t in tokens):
         return None
 
     match_count = len(tokens)
     extra_tokens = max(len(desc_tokens) - match_count, 0)
-    score = match_count * 10 - extra_tokens * 0.2
+    score = match_count * 10 - extra_tokens * 0.5  # Increased penalty for extra tokens
 
-    if "raw" in desc_tokens or "skin" in desc_tokens:
+    # Bonus if the first search token matches the first description token
+    # This prioritizes "Cream, heavy" over "Coconut cream" when searching for "cream"
+    if tokens and desc_tokens:
+        first_token = tokens[0]
+        first_desc = desc_tokens[0]
+        if _token_matches(first_token, first_desc):
+            score += 15  # Strong bonus for primary ingredient match
+
+    if "raw" in desc_tokens:
         score += 3
 
     return score
 
 
-def _data_type_weight(row: sqlite3.Row) -> int:
+# Alias for backward compatibility
+_score_candidate = score_fdc_candidate
+
+
+def get_data_type_weight(row: sqlite3.Row) -> int:
+    """Get score weight bonus based on FDC data_type (foundation=6, sr_legacy=3, other=0)."""
     dt = (row["data_type"] or "").lower()
     if dt.startswith("foundation"):
         return 6
     if "sr_legacy" in dt:
         return 3
     return 0
+
+
+# Alias for backward compatibility
+_data_type_weight = get_data_type_weight
 
 
 def _search(name: str, base_unit: str | None, allow_ascii: bool = False) -> list[sqlite3.Row]:
@@ -151,8 +201,6 @@ def _search(name: str, base_unit: str | None, allow_ascii: bool = False) -> list
         _synonyms = _load_synonyms()
     normalized = _normalize(name)
     synonyms_hit = _synonyms.get(normalized, normalized)
-    if synonyms_hit == normalized and normalized.isascii() and not allow_ascii:
-        return []
     tokens = [t for t in _normalize(synonyms_hit).split() if t]
     scoring_tokens = list(tokens)
     if (
@@ -193,20 +241,20 @@ def _search(name: str, base_unit: str | None, allow_ascii: bool = False) -> list
         rows = cursor.fetchall()
     scored = []
     for r in rows:
-        score = _score_candidate(r["description"], scoring_tokens)
+        score = score_fdc_candidate(r["description"], scoring_tokens)
         if score is None:
             continue
-        score += _data_type_weight(r)
+        score += get_data_type_weight(r)
         scored.append((score, r))
 
     # If raw hint filtered everything out, retry without it.
     if not scored and "raw" in scoring_tokens:
         scoring_tokens_no_raw = [t for t in scoring_tokens if t != "raw"]
         for r in rows:
-            score = _score_candidate(r["description"], scoring_tokens_no_raw)
+            score = score_fdc_candidate(r["description"], scoring_tokens_no_raw)
             if score is None:
                 continue
-            score += _data_type_weight(r)
+            score += get_data_type_weight(r)
             scored.append((score, r))
 
     scored.sort(key=lambda x: x[0], reverse=True)

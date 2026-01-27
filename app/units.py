@@ -17,6 +17,36 @@ class BaseUnit(str, Enum):
     BUNCH = "bunch"
     CAN = "can"
     PACKAGE = "package"
+    # Unconvertible units
+    PINCH = "pinch"
+    TO_TASTE = "to taste"
+    AS_NEEDED = "as needed"
+
+
+# Units that cannot be converted to grams
+UNCONVERTIBLE_UNITS = {BaseUnit.PINCH.value, BaseUnit.TO_TASTE.value, BaseUnit.AS_NEEDED.value}
+
+# Count units - stay as counts when all items use the same unit
+COUNT_UNITS = {
+    BaseUnit.PIECE.value,
+    BaseUnit.SLICE.value,
+    BaseUnit.CLOVE.value,
+    BaseUnit.BUNCH.value,
+    BaseUnit.CAN.value,
+    BaseUnit.PACKAGE.value,
+}
+
+# Mass unit conversions to grams
+MASS_UNITS = {
+    BaseUnit.G.value: 1.0,
+    BaseUnit.KG.value: 1000.0,
+}
+
+# Volume unit conversions to ml
+VOLUME_UNITS = {
+    BaseUnit.ML.value: 1.0,
+    BaseUnit.L.value: 1000.0,
+}
 
 
 _UNIT_ALIASES = {
@@ -145,6 +175,23 @@ _UNIT_ALIASES = {
     "упаковки": BaseUnit.PACKAGE.value,
     "paquete": BaseUnit.PACKAGE.value,
     "paquetes": BaseUnit.PACKAGE.value,
+    # Unconvertible units
+    "pinch": BaseUnit.PINCH.value,
+    "pinches": BaseUnit.PINCH.value,
+    "щіпка": BaseUnit.PINCH.value,
+    "щіпки": BaseUnit.PINCH.value,
+    "щепотка": BaseUnit.PINCH.value,
+    "щепотки": BaseUnit.PINCH.value,
+    "pizca": BaseUnit.PINCH.value,
+    "pizcas": BaseUnit.PINCH.value,
+    "to taste": BaseUnit.TO_TASTE.value,
+    "за смаком": BaseUnit.TO_TASTE.value,
+    "по вкусу": BaseUnit.TO_TASTE.value,
+    "al gusto": BaseUnit.TO_TASTE.value,
+    "as needed": BaseUnit.AS_NEEDED.value,
+    "за потребою": BaseUnit.AS_NEEDED.value,
+    "по необходимости": BaseUnit.AS_NEEDED.value,
+    "según sea necesario": BaseUnit.AS_NEEDED.value,
 }
 
 _PUNCT_RE = re.compile(r"[^\w\s]+", flags=re.UNICODE)
