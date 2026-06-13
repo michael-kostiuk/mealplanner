@@ -10,7 +10,7 @@ from alembic.config import Config
 
 from .database import engine
 from .logging_setup import setup_logging
-from .routers import health, ingredients, meal_plans, nutrition, recipes, shopping_lists
+from .routers import favorites, health, ingredients, meal_plans, nutrition, recipes, shopping_lists
 
 # Setup logging
 setup_logging()
@@ -96,3 +96,4 @@ app.include_router(shopping_lists.router)
 app.include_router(ingredients.router)
 app.include_router(nutrition.router)
 app.include_router(health.router)
+app.include_router(favorites.router)

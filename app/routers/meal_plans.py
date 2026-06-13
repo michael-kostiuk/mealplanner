@@ -191,6 +191,52 @@ async def update_meal(
     return db_meal
 
 
+@router.post("/{meal_plan_id}/meals", response_model=schemas.MealPlanEntry)
+async def add_meal(
+    meal_plan_id: int,
+    meal: schemas.MealPlanEntryCreate,
+    db: Session = Depends(get_db),
+):
+    """Add a new meal to a meal plan."""
+    meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
+    if meal_plan is None:
+        raise HTTPException(status_code=404, detail="Meal plan not found")
+
+    # Verify recipe exists
+    recipe = db.query(models.Recipe).filter(models.Recipe.id == meal.recipe_id).first()
+    if recipe is None:
+        raise HTTPException(status_code=404, detail="Recipe not found")
+
+    db_meal = models.MealPlanEntry(meal_plan_id=meal_plan_id, **meal.model_dump())
+    db.add(db_meal)
+    db.commit()
+    db.refresh(db_meal)
+    return db_meal
+
+
+@router.delete("/{meal_plan_id}/meals/{meal_id}")
+async def delete_meal(
+    meal_plan_id: int,
+    meal_id: int,
+    db: Session = Depends(get_db),
+):
+    """Remove a meal from a meal plan."""
+    db_meal = (
+        db.query(models.MealPlanEntry)
+        .filter(
+            models.MealPlanEntry.id == meal_id, models.MealPlanEntry.meal_plan_id == meal_plan_id
+        )
+        .first()
+    )
+
+    if db_meal is None:
+        raise HTTPException(status_code=404, detail="Meal not found")
+
+    db.delete(db_meal)
+    db.commit()
+    return {"message": "Meal deleted successfully"}
+
+
 # Add this endpoint to the meal_plans router
 @router.get("/{meal_plan_id}/shopping-list", response_model=schemas.ShoppingList)
 async def create_shopping_list(meal_plan_id: int, db: Session = Depends(get_db)):

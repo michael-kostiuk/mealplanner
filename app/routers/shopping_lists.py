@@ -196,3 +196,24 @@ async def get_recipes_by_shopping_item(shopping_list_item_id: int, db: Session =
     )
 
     return recipes
+
+
+@router.put("/items/{item_id}", response_model=schemas.ShoppingListItem)
+async def update_shopping_list_item(
+    item_id: int, item_update: schemas.ShoppingListItemUpdate, db: Session = Depends(get_db)
+):
+    """
+    Update a shopping list item (e.g., toggle status between pending/purchased).
+    """
+    item = db.query(models.ShoppingListItem).filter(models.ShoppingListItem.id == item_id).first()
+    if not item:
+        raise HTTPException(status_code=404, detail="Shopping list item not found")
+
+    if item_update.status is not None:
+        if item_update.status not in ("pending", "purchased"):
+            raise HTTPException(status_code=400, detail="Status must be 'pending' or 'purchased'")
+        item.status = item_update.status
+
+    db.commit()
+    db.refresh(item)
+    return item

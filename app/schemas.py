@@ -198,6 +198,26 @@ class User(UserBase):
     model_config = ConfigDict(from_attributes=True)
 
 
+class FavoriteBase(BaseModel):
+    recipe_id: int
+
+
+class FavoriteCreate(FavoriteBase):
+    pass
+
+
+class Favorite(FavoriteBase):
+    id: int
+    user_id: int
+    created_at: datetime
+    recipe: Recipe
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ShoppingListItemUpdate(BaseModel):
+    status: str | None = None
+
+
 from app.services.recipe_import.schemas import (
     IngredientImportDraft,
     RecipeImportDraft,
