@@ -1,0 +1,141 @@
+# Verner Recipe Book Parse Plan
+
+**Source:** `new recipe book verner.pdf` (121 pages, 100.9 MB)
+**Target:** `recipes_verner.json` + `ingridients_verner.json` → loaded via `load_data.py`
+
+---
+
+## What we learned (POC scripts)
+
+| Script | What it tested | Key finding |
+|---|---|---|
+| `poc_extract_verner.py` | pdfplumber raw text | 121 pages, layout OK but 2-col interleaved |
+| `poc_columns.py` | 6 extraction methods side-by-side | pymupdf4llm wins: ingredient table is embedded vector graphic, extracted cleanly in `picture text` blocks |
+| `extract_verner_raw.py` | pymupdf4llm all pages | 121 files → `verner_pages/`, 580K total, ~2s, no OCR |
+| `poc_ollama_parse.py` | gemma4:26b via Ollama @ 10.0.2.2 | 45–125s/page, repetition loops, invalid JSON — unusable |
+| `poc_gemini_parse.py` | gemini-2.5-flash-lite, 2.5-flash, 3.1-flash-lite, gemma-4-31b-it | 3.1-flash-lite: 3s/page, 222 tok/s, valid JSON, all ingredients correct |
+
+### pymupdf4llm page format (per `verner_pages/page_NNN.txt`)
+
+```
+## Recipe Name
+
+рецепт N   ← garbled font, unreliable
+
+ККАЛ: 285 БІЛКИ: 12,3 ЖИРИ: 17,1 ВУГ: 19,5   ← sometimes inline, sometimes in picture block
+
+## приготування:
+
+- instruction text (may have garbled chars from decorative font)
+
+**----- Start of picture text -----**
+Інгредієнти Кількість заміна
+Назва інгредієнта  150 г  Заміна
+...
+**----- End of picture text -----**
+```
+
+**Caveats:**
+- Multi-line ingredient names (name / quantity / continuation) — LLM handles correctly
+- Nutrition sometimes split into separate picture blocks (one per value)
+- Instructions have garbled chars from decorative drop-cap font — LLM reconstructs OK
+- Recipe number in header is garbled — detect recipe boundary from `## Name` header instead
+- Page 1 = cover, page 2 = menu/index → skip both
+
+---
+
+## API model cascade
+
+| Priority | Model | Limit | Speed |
+|---|---|---|---|
+| 1 (primary) | `gemini-3.1-flash-lite` | 500 req/day | ~3s/page |
+| 2 (fallback) | `gemini-2.5-flash-lite` | 20 req/day | ~3s/page |
+| 3 (fallback) | `gemini-2.5-flash` | 20 req/day | ~13s/page |
+
+119 recipe pages + retries fits comfortably within 500/day.
+
+---
+
+## Retry / backoff strategy
+
+Per model: 3 attempts with exponential backoff before moving to next model.
+
+```
+for each page:
+    for model in [gemini-3.1-flash-lite, gemini-2.5-flash-lite, gemini-2.5-flash]:
+        for attempt in 1..3:
+            call API
+            → 200 + valid JSON  : accept, break to next page
+            → 200 + invalid JSON: wait 60s, retry
+            → 429 (rate limit)  : wait 60/120/180s (by attempt), retry
+            → 503 (overloaded)  : wait 60/120/180s (by attempt), retry
+            → timeout           : wait 60/120/180s (by attempt), retry
+        if all 3 attempts failed: move to next model
+    if all 3 models exhausted: log page to failed.json, continue
+```
+
+Backoff delays: attempt 1 fail → 60s, attempt 2 fail → 120s, attempt 3 fail → 180s → next model.
+
+---
+
+## Pipeline steps
+
+### Step 1 — pages already extracted ✓
+`verner_pages/page_001.txt` … `page_121.txt` via `extract_verner_raw.py`
+
+### Step 2 — batch parse: `scripts/verner/parse_verner.py`
+
+```
+pages 3–121 (skip cover + menu)
+    ↓ gemini-3.1-flash-lite (with backoff cascade)
+    ↓ extract: name, calories, protein, fats, carbs,
+               ingredients [{name, quantity, unit}],
+               instructions, category
+    ↓ save → app/fixtures/recipes_verner.json
+           → app/fixtures/ingridients_verner.json
+```
+
+**Prompt rules to include:**
+- Use per-portion calories when page shows both total and per-portion
+- `unit`: `g`=г, `ml`=мл, `unit`=шт, `tsp`=ч.л., `tbsp`=ст.л.
+- Ignore `заміна` (substitution) column
+- Quantity for "за смаком" / "дрібка" → `0.0`
+- Instructions: reconstruct clean Ukrainian, skip `Verner` watermark
+
+### Step 3 — load into DB: `load_data.py`
+
+Add new paths to the existing lists:
+```python
+ING_PATH = [..., "app/fixtures/ingridients_verner.json"]
+REC_PATH = [..., "app/fixtures/recipes_verner.json"]
+```
+
+Run in container:
+```bash
+docker-compose run --rm web python app/fixtures/load_data.py
+```
+
+---
+
+## Files
+
+```
+scripts/verner/               ← scripts (committed)
+  VERNER_PARSE_PLAN.md          ← this file
+  poc_extract_verner.py         ← POC: pdfplumber extraction
+  poc_columns.py                ← POC: 6 column extraction methods
+  poc_ollama_parse.py           ← POC: Ollama gemma4:26b (rejected)
+  poc_gemini_parse.py           ← POC: Gemini model comparison
+  extract_verner_raw.py         ← production extractor (pymupdf4llm)
+  extract_verner_images.py      ← food photo extractor
+  parse_verner.py               ← batch parser + Gemini API calls
+  load_verner.py                ← load parsed data into DB via API
+  fix_soup_dinner_weights.py    ← post-process meal weights
+
+app/fixtures/                 ← generated data (gitignored)
+  verner_pages/page_NNN.txt     ← extracted pages (121 files) ✓
+  verner_images/page_NNN.jpg    ← food photos (119 files) ✓
+  recipes_verner.json           ← generated by parse_verner.py
+  ingridients_verner.json       ← generated by parse_verner.py
+  load_data.py                  ← extended with verner paths ✓
+```

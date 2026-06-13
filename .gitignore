@@ -194,3 +194,19 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Verner recipe book parsing — generated/temporary data
+app/fixtures/verner_pages/
+app/fixtures/verner_images/
+app/fixtures/ingridients_verner.json
+app/fixtures/recipes_verner.json
+app/fixtures/recipes_verner_bak.json
+app/fixtures/parse_verner_progress.json
+app/fixtures/verner_sample.txt
+new recipe book verner.pdf
+
+# DB backups
+db_backup_*.dump
+
+# Generated API spec
+openapi.json

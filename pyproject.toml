@@ -19,6 +19,7 @@ exclude = [
     "__pycache__",
     "alembic/versions",
     "app/fixtures",  # One-off scripts
+    "scripts",       # One-off scripts
 ]
 
 [tool.ruff.lint.per-file-ignores]

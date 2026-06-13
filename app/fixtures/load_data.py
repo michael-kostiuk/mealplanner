@@ -7,10 +7,11 @@ from ..database import engine
 
 # D:\UNITY\mp\mealplanner\app\fixtures\ingridients.json
 
-ING_PATH = ["app/fixtures/ingridients_al.json", "app/fixtures/ingridients2.json"]
+ING_PATH = ["app/fixtures/ingridients_al.json", "app/fixtures/ingridients2.json", "app/fixtures/ingridients_verner.json"]
 REC_PATH = [
     "app/fixtures/recipes_al.json",
     "app/fixtures/recipes2.json",
+    "app/fixtures/recipes_verner.json",
 ]
 # ING_PATH = 'app/fixtures/ingridients2.json'
 # REC_PATH = 'app/fixtures/recipes2.json'
@@ -57,9 +58,13 @@ def load_fixtures():
     for exists in db_query.all():
         recipes_all[exists.name.capitalize()] = exists
 
+    model_columns = {c.key for c in models.Recipe.__table__.columns}
+
     for recipe_data in recipes_data:
         recipe_ingredients = recipe_data.pop("ingredients")
-        # print(recipe_data)
+        recipe_data.pop("dietary_tags", None)
+        recipe_data.pop("image_path", None)
+        recipe_data = {k: v for k, v in recipe_data.items() if k in model_columns}
         recipe_data["name"] = recipe_data["name"].capitalize()
         if recipe_data["name"] in recipes_all:
             recipe = recipes_all[recipe_data["name"]]
@@ -73,7 +78,10 @@ def load_fixtures():
 
         for ing_data in recipe_ingredients:
             ing_name = ing_data.pop("name").capitalize()
-            ingredient = ingredients[ing_name]
+            ingredient = ingredients.get(ing_name)
+            if ingredient is None:
+                print(f"  SKIP unknown ingredient: {ing_name!r} (recipe: {recipe_data['name']})")
+                continue
             recipe_ing = models.RecipeIngredient(
                 recipe_id=recipe.id, ingredient_id=ingredient.id, **ing_data
             )
