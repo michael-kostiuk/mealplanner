@@ -1,6 +1,10 @@
 """
 Offline lookup against a bundled FoodData Central SQLite snapshot.
 
+Known limitation: the SQLite file is a static snapshot — nutritional data and portion
+weights are never updated automatically. Production would query the live FDC API or
+run scheduled refreshes. Acceptable for a personal app where staleness is low-risk.
+
 Public API:
 - lookup_nutrition: Find macros for an ingredient
 - get_fdc_connection: Get SQLite connection for FDC database

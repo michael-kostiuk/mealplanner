@@ -110,6 +110,8 @@ async def bulk_import_recipes(recipes: list[schemas.RecipeCreate], db: Session =
         recipe_dict = recipe_data.model_dump(exclude={"ingredients"})
         db_recipe = models.Recipe(**recipe_dict)
         db.add(db_recipe)
+        # Known limitation: one commit per recipe to get the id for ingredients.
+        # A single transaction with flush() would be more efficient.
         db.commit()
         db.refresh(db_recipe)
 

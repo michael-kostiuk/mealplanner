@@ -79,6 +79,8 @@ class MealPlanGenerator:
         honoured. Calorie targeting is best-effort: it falls back to any recipe of the
         meal type if none land in the calorie band.
         """
+        # Known limitation: loads full recipe table into memory. Fine for a personal
+        # recipe collection; would need pagination or filtering for larger datasets.
         recipes = self.db.query(models.Recipe).all()
         if not recipes:
             raise ValueError("No recipes available")
@@ -100,7 +102,8 @@ class MealPlanGenerator:
         if days <= 0:
             raise ValueError("Invalid meal plan date range")
 
-        # Get all suitable recipes
+        # Known limitation: loads full recipe table into memory. Fine for a personal
+        # recipe collection; would need pagination or filtering for larger datasets.
         recipes = self.db.query(models.Recipe).all()
         suitable_recipes = recipes  # All recipes are suitable since dietary_tags is not used
 

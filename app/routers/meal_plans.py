@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 def get_user(db: Session = Depends(get_db)):
     usr = db.query(models.User).filter(models.User.id == 1).first()
     if not usr:
-        # craete
         usr = models.User(id=1, email="test@example.com")
         db.add(usr)
         db.commit()
         db.refresh(usr)
+    return usr
 
 
 router = APIRouter(
@@ -37,7 +37,7 @@ async def list_meal_plans(user_id: int, db: Session = Depends(get_db)):
 @router.post("/", response_model=schemas.MealPlan)
 async def create_meal_plan(meal_plan: schemas.MealPlanCreate, db: Session = Depends(get_db)):
     db_meal_plan = models.MealPlan(
-        user_id=1,  # temp
+        user_id=1,
         start_date=meal_plan.start_date,
         end_date=meal_plan.end_date,
         people_count=meal_plan.people_count,

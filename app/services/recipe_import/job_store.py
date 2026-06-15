@@ -11,6 +11,10 @@ def _utcnow() -> datetime:
     return datetime.now(UTC)
 
 
+# Known limitation: jobs are stored in-memory in a single-process dict. This means
+# jobs are lost on restart and won't work across multiple workers. A persistent queue
+# (e.g. Redis + Celery) would be needed for production. Acceptable for a single-user
+# personal app running one process.
 class JobStore:
     def __init__(self) -> None:
         self._jobs: dict[str, RecipeImportJob] = {}
