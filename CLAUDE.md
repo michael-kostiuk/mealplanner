@@ -66,7 +66,7 @@ Tests connect to `postgresql://postgres:postgres@dbmp:5432/test_db` and create/d
 
 ## Deployment
 
-**Backend** is deployed to a Dokku instance at `154.86.14.194` (app name `mp-be`) via GitHub Actions on every push to `main` (`.github/workflows/deploy.yml`). The workflow does a force-push to the Dokku git remote using `DOKKU_SSH_KEY` from repo secrets.
+**Backend** is deployed to a Dokku instance (app name `mp-be`) via GitHub Actions on every push to `main` (`.github/workflows/deploy.yml`). The host is stored in the `DOKKU_HOST` GitHub Actions secret. The workflow does a force-push to the Dokku git remote using `DOKKU_SSH_KEY` from repo secrets.
 
 Locally the backend runs via `docker compose up` (see `docker-compose.yml`): a `web` service on port 8000 and a `dbmp` Postgres 15 service on port 5432. Both read credentials from a `.env` file (`POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`).
 
