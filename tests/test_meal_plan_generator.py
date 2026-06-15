@@ -379,6 +379,54 @@ def test_no_suitable_recipes_raises_error(db_session, test_user):
         )
 
 
+def test_suggest_meal_excludes_current_recipe(db_session, test_user):
+    """Re-roll must return a different recipe than the one currently in the slot."""
+    recipes = create_recipes(db_session, 4, "B", 400, {"breakfast": 1.0})
+    current = recipes[0]
+
+    generator = MealPlanGenerator(db_session)
+    for _ in range(15):
+        suggestion = generator.suggest_meal(
+            meal_type="breakfast",
+            target_calories=1600,
+            plan_recipe_ids=[current.id],
+            current_recipe_id=current.id,
+        )
+        assert suggestion.id != current.id
+
+
+def test_suggest_meal_respects_max_two_uses(db_session, test_user):
+    """A recipe already used twice in the rest of the plan must not be suggested."""
+    recipes = create_recipes(db_session, 3, "B", 400, {"breakfast": 1.0})
+    current, capped, free = recipes
+
+    generator = MealPlanGenerator(db_session)
+    # `capped` appears twice in the rest of the plan -> over the limit. Only `free` is valid.
+    for _ in range(15):
+        suggestion = generator.suggest_meal(
+            meal_type="breakfast",
+            target_calories=1600,
+            plan_recipe_ids=[capped.id, capped.id],
+            current_recipe_id=current.id,
+        )
+        assert suggestion.id == free.id
+
+
+def test_suggest_meal_snack_without_weight_column(db_session, test_user):
+    """Snacks have no `snack_weight`; suggestion should still work (flat selection)."""
+    recipes = create_recipes(db_session, 3, "Any", 300, {"breakfast": 1.0})
+    valid_ids = {r.id for r in recipes}
+
+    generator = MealPlanGenerator(db_session)
+    suggestion = generator.suggest_meal(
+        meal_type="snack",
+        target_calories=2000,
+        plan_recipe_ids=[],
+        current_recipe_id=None,
+    )
+    assert suggestion.id in valid_ids
+
+
 def test_no_same_meal_in_one_day(db_session, test_user):
     """
     Test that the same recipe is not selected multiple times in a single day.

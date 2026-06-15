@@ -8,6 +8,10 @@ from .. import models
 
 
 class MealPlanGenerator:
+    # Share of the daily calorie target allotted to each meal type. Used both by the
+    # full-plan generator and by single-meal re-rolls so suggestions stay consistent.
+    MEAL_CALORIE_FRACTIONS = {"breakfast": 0.25, "lunch": 0.35, "dinner": 0.40, "snack": 0.15}
+
     def __init__(self, db: Session):
         self.db = db
         self.used_recipes: dict[int, int] = defaultdict(int)  # recipe_id -> usage count
@@ -56,6 +60,40 @@ class MealPlanGenerator:
         self.db.commit()
         self.db.refresh(meal_plan)
         return meal_plan
+
+    def _meal_target_calories(self, meal_type: str, target_calories: int) -> float:
+        return target_calories * self.MEAL_CALORIE_FRACTIONS.get(meal_type, 0.25)
+
+    def suggest_meal(
+        self,
+        meal_type: str,
+        target_calories: int,
+        plan_recipe_ids: list[int],
+        current_recipe_id: int | None = None,
+    ) -> models.Recipe:
+        """Pick a single replacement recipe for one meal slot (the "re-roll" action).
+
+        Uses the same weighted-random selection as full-plan generation. The recipe
+        currently in the slot is always excluded, and ``plan_recipe_ids`` (the recipes
+        used in the *rest* of the plan) seed the usage counts so the max-2-uses cap is
+        honoured. Calorie targeting is best-effort: it falls back to any recipe of the
+        meal type if none land in the calorie band.
+        """
+        recipes = self.db.query(models.Recipe).all()
+        if not recipes:
+            raise ValueError("No recipes available")
+
+        self._reset_state()
+        for rid in plan_recipe_ids:
+            if rid and rid > 0:
+                self.used_recipes[rid] += 1
+
+        exclude_ids: set[int] = set()
+        if current_recipe_id and current_recipe_id > 0:
+            exclude_ids.add(current_recipe_id)
+
+        meal_target = self._meal_target_calories(meal_type, target_calories)
+        return self._select_recipe(meal_type, recipes, meal_target, 0.25, exclude_ids=exclude_ids)
 
     def _populate_entries(self, meal_plan: models.MealPlan) -> None:
         days = (meal_plan.end_date - meal_plan.start_date).days + 1
@@ -167,13 +205,13 @@ class MealPlanGenerator:
             for r in recipes
             if r.id not in exclude_ids
             and self.used_recipes[r.id] < 2
-            and getattr(r, weight_attr) > 0
+            and getattr(r, weight_attr, 0.0) > 0
         ]
 
         if not available_recipes:
             # Fallback 1: Allow overused recipes (used >= 2 times) but keep other constraints
             available_recipes = [
-                r for r in recipes if r.id not in exclude_ids and getattr(r, weight_attr) > 0
+                r for r in recipes if r.id not in exclude_ids and getattr(r, weight_attr, 0.0) > 0
             ]
 
         if not available_recipes:
@@ -207,7 +245,7 @@ class MealPlanGenerator:
 
         # Weighted random selection
         weights = [
-            getattr(r, weight_attr) * (0.5 if r.id in self.recent_recipe_ids else 1.0)
+            getattr(r, weight_attr, 0.0) * (0.5 if r.id in self.recent_recipe_ids else 1.0)
             for r in suitable_recipes
         ]
 

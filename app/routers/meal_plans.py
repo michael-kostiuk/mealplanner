@@ -120,6 +120,25 @@ async def auto_generate_meal_plan(
     return db_meal_plan
 
 
+@router.post("/suggest-meal", response_model=schemas.Recipe)
+async def suggest_meal(req: schemas.MealSuggestRequest, db: Session = Depends(get_db)):
+    """Suggest one replacement recipe for a single meal slot (the re-roll action)."""
+    if db.query(models.Recipe.id).first() is None:
+        raise HTTPException(status_code=400, detail="No recipes available for meal planning")
+
+    planner = MealPlanGenerator(db)
+    try:
+        recipe = planner.suggest_meal(
+            meal_type=req.meal_type,
+            target_calories=req.target_calories,
+            plan_recipe_ids=req.plan_recipe_ids,
+            current_recipe_id=req.current_recipe_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return recipe
+
+
 @router.get("/{meal_plan_id}", response_model=schemas.MealPlan)
 async def get_meal_plan(meal_plan_id: int, db: Session = Depends(get_db)):
     meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()

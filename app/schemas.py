@@ -142,6 +142,13 @@ class MealPlanCreate(MealPlanBase):
     entries: list[MealPlanEntryCreate]
 
 
+class MealSuggestRequest(BaseModel):
+    meal_type: str
+    target_calories: int
+    current_recipe_id: int | None = None
+    plan_recipe_ids: list[int] = []
+
+
 class MealPlan(MealPlanBase):
     id: int
     user_id: int
