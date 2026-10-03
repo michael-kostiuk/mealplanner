@@ -11,17 +11,32 @@ class MealPlanGenerator:
     # Share of the daily calorie target allotted to each meal type. Used both by the
     # full-plan generator and by single-meal re-rolls so suggestions stay consistent.
     MEAL_CALORIE_FRACTIONS = {"breakfast": 0.25, "lunch": 0.35, "dinner": 0.40, "snack": 0.15}
+    # Order of the generated slots within a day; leftovers move forward through this order.
+    DAILY_MEAL_TYPES = ("breakfast", "lunch", "dinner")
+    # Meal types leftovers of each meal type may be eaten at (dinner never becomes breakfast)
+    LEFTOVER_MEAL_TYPES = {
+        "breakfast": ("breakfast",),
+        "lunch": ("lunch", "dinner"),
+        "dinner": ("lunch", "dinner"),
+    }
+    # How many meals' worth of leftovers may spill past the end of the plan.
+    MAX_LEFTOVER_OVERFLOW = 1
 
     def __init__(self, db: Session):
         self.db = db
         self.used_recipes: dict[int, int] = defaultdict(int)  # recipe_id -> usage count
         self.daily_calories: list[float] = []  # track calories for each day
         self.recent_recipe_ids: set[int] = set()
+        # (day index, meal type) -> recipe whose leftovers fill that slot
+        self.leftover_slots: dict[tuple[int, str], models.Recipe] = {}
+        self.people_count = 1
+        self.days = 0
 
     def _reset_state(self) -> None:
         self.used_recipes = defaultdict(int)
         self.daily_calories = []
         self.recent_recipe_ids = set()
+        self.leftover_slots = {}
 
     def generate_meal_plan(
         self,
@@ -115,11 +130,14 @@ class MealPlanGenerator:
             meal_plan.user_id, meal_plan.start_date
         )
 
+        self.people_count = meal_plan.people_count
+        self.days = days
+
         # Generate meals for each day
         current_date = meal_plan.start_date
-        for _day in range(days):
+        for day in range(days):
             daily_meals = self._generate_daily_meals(
-                suitable_recipes, meal_plan.target_calories, current_date
+                suitable_recipes, meal_plan.target_calories, day
             )
 
             # Create meal plan entries
@@ -130,10 +148,74 @@ class MealPlanGenerator:
                     date=current_date,
                     meal_type=meal_type,
                     servings=meal_plan.people_count,
+                    is_leftover=(day, meal_type) in self.leftover_slots,
                 )
                 self.db.add(entry)
 
             current_date += timedelta(days=1)
+
+    def _leftover_meal_count(self, recipe: models.Recipe) -> int:
+        """Whole meals for the group left over after the first one is eaten."""
+        return max(recipe.servings // self.people_count - 1, 0)
+
+    def _find_leftover_slots(
+        self, recipe: models.Recipe, day: int, meal_type: str
+    ) -> list[tuple[int, str]]:
+        """Next free slots after (day, meal_type), in date order, where the leftovers can be
+        eaten: its own meal type, or a compatible one the recipe has a weight for."""
+        needed = self._leftover_meal_count(recipe)
+        slots: list[tuple[int, str]] = []
+        start = self.DAILY_MEAL_TYPES.index(meal_type) + 1
+        for d in range(day, self.days):
+            for mt in self.DAILY_MEAL_TYPES[start if d == day else 0 :]:
+                if len(slots) == needed:
+                    return slots
+                fits = mt == meal_type or (
+                    mt in self.LEFTOVER_MEAL_TYPES[meal_type]
+                    and getattr(recipe, f"{mt}_weight", 0.0) > 0
+                )
+                if fits and (d, mt) not in self.leftover_slots:
+                    slots.append((d, mt))
+        return slots
+
+    def _overflowing_recipe_ids(
+        self, recipes: list[models.Recipe], day: int, meal_type: str
+    ) -> set[int]:
+        """Recipes whose leftovers would spill past the plan end by too many meals."""
+        return {
+            r.id
+            for r in recipes
+            if self._leftover_meal_count(r) - len(self._find_leftover_slots(r, day, meal_type))
+            > self.MAX_LEFTOVER_OVERFLOW
+        }
+
+    def _pick_meal(
+        self,
+        meal_type: str,
+        recipes: list[models.Recipe],
+        target_calories: float,
+        max_deviation: float,
+        day: int,
+        exclude_ids: set[int],
+    ) -> models.Recipe:
+        """Fill one slot: leftovers if reserved, otherwise cook a new recipe and reserve
+        the following slots for its extra portions."""
+        leftover = self.leftover_slots.get((day, meal_type))
+        if leftover is not None:
+            return leftover
+
+        exclude_ids = (
+            exclude_ids
+            # Don't cook a recipe again while its leftovers are still waiting to be eaten
+            | {r.id for (d, _mt), r in self.leftover_slots.items() if d >= day}
+            | self._overflowing_recipe_ids(recipes, day, meal_type)
+        )
+        recipe = self._select_recipe(
+            meal_type, recipes, target_calories, max_deviation, exclude_ids=exclude_ids
+        )
+        for slot in self._find_leftover_slots(recipe, day, meal_type):
+            self.leftover_slots[slot] = recipe
+        return recipe
 
     def _load_recent_recipe_ids(self, user_id: int, start_date: datetime) -> set[int]:
         window_start = start_date - timedelta(days=7)
@@ -149,7 +231,7 @@ class MealPlanGenerator:
         return {recipe_id for (recipe_id,) in rows}
 
     def _generate_daily_meals(
-        self, recipes: list[models.Recipe], target_calories: int, date: datetime
+        self, recipes: list[models.Recipe], target_calories: int, day: int
     ) -> dict[str, models.Recipe]:
         # Calculate target calories per meal
         breakfast_target = target_calories * 0.25
@@ -159,28 +241,31 @@ class MealPlanGenerator:
         selected_meals = {}
 
         # Select breakfast
-        selected_meals["breakfast"] = self._select_recipe(
+        selected_meals["breakfast"] = self._pick_meal(
             "breakfast",
             recipes,
             breakfast_target,
             0.2,  # 20% calorie deviation allowed
+            day,
+            set(),
         )
 
         # Select lunch
-        selected_meals["lunch"] = self._select_recipe(
-            "lunch", recipes, lunch_target, 0.2, exclude_ids={selected_meals["breakfast"].id}
+        selected_meals["lunch"] = self._pick_meal(
+            "lunch", recipes, lunch_target, 0.2, day, {selected_meals["breakfast"].id}
         )
 
         # Select dinner with final calorie adjustment
         remaining_calories = target_calories - (
             selected_meals["breakfast"].calories + selected_meals["lunch"].calories
         )
-        selected_meals["dinner"] = self._select_recipe(
+        selected_meals["dinner"] = self._pick_meal(
             "dinner",
             recipes,
             remaining_calories,
             0.25,  # Allow slightly more deviation for final meal
-            exclude_ids={m.id for m in selected_meals.values()},
+            day,
+            {m.id for m in selected_meals.values()},
         )
 
         # Track daily calories for overall balance

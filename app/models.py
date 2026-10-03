@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, Boolean, Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, Column, DateTime, Float, ForeignKey, Integer, String, false
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -128,6 +128,8 @@ class MealPlanEntry(Base):
     date = Column(DateTime, nullable=False)
     meal_type = Column(String(50))  # breakfast, lunch, dinner
     servings = Column(Integer, default=1)
+    # Eaten from an earlier cooked batch of the same recipe; not bought again
+    is_leftover = Column(Boolean, nullable=False, default=False, server_default=false())
 
     meal_plan = relationship("MealPlan", back_populates="entries")
     recipe = relationship("Recipe", back_populates="meal_plan_entries")

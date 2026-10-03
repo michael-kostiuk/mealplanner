@@ -120,11 +120,13 @@ class MealPlanEntryBase(BaseModel):
 
 
 class MealPlanEntryCreate(MealPlanEntryBase):
-    pass
+    # None = keep the flag of the existing entry for the same slot and recipe (see router)
+    is_leftover: bool | None = None
 
 
 class MealPlanEntry(MealPlanEntryBase):
     id: int
+    is_leftover: bool
     meal_plan_id: int
     recipe: Recipe
     model_config = ConfigDict(from_attributes=True)

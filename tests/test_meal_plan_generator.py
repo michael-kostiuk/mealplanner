@@ -498,3 +498,104 @@ def test_no_same_meal_in_one_day(db_session, test_user):
     recipe_ids = [e.recipe_id for e in plan.entries]
     assert len(recipe_ids) == 3
     assert len(set(recipe_ids)) == 3, f"Duplicate recipes found in one day: {recipe_ids}"
+
+
+def _batch_recipe(db, name, servings, weights):
+    r = Recipe(
+        name=name,
+        servings=servings,
+        instructions="x",
+        calories=500,
+        breakfast_weight=weights.get("breakfast", 0.0),
+        lunch_weight=weights.get("lunch", 0.0),
+        dinner_weight=weights.get("dinner", 0.0),
+    )
+    db.add(r)
+    db.commit()
+    return r
+
+
+def _generator_for(db, people_count, days):
+    generator = MealPlanGenerator(db)
+    generator.people_count = people_count
+    generator.days = days
+    return generator
+
+
+def test_leftovers_go_to_next_slot_of_allowed_meal_type(db_session, test_user):
+    """Dinner leftovers skip breakfast and land on the next lunch the recipe allows."""
+    plov = _batch_recipe(db_session, "Plov", 4, {"breakfast": 0.1, "lunch": 1.0, "dinner": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=3)
+
+    picked = generator._pick_meal("dinner", [plov], 1000, 0.25, 0, set())
+
+    assert picked.id == plov.id
+    assert generator.leftover_slots == {(1, "lunch"): plov}
+
+
+def test_dinner_only_leftovers_carry_to_next_dinners(db_session, test_user):
+    stew = _batch_recipe(db_session, "Stew", 6, {"dinner": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=4)
+
+    generator._pick_meal("dinner", [stew], 1000, 0.25, 0, set())
+
+    assert generator.leftover_slots == {(1, "dinner"): stew, (2, "dinner"): stew}
+
+
+def test_reserved_slot_returns_leftover_without_selecting(db_session, test_user):
+    plov = _batch_recipe(db_session, "Plov", 4, {"dinner": 1.0})
+    other = _batch_recipe(db_session, "Other", 1, {"dinner": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=2)
+    generator.leftover_slots[(1, "dinner")] = plov
+
+    assert generator._pick_meal("dinner", [other], 1000, 0.25, 1, set()).id == plov.id
+    assert generator.used_recipes[plov.id] == 0
+
+
+def test_recipe_overflowing_plan_end_by_more_than_one_meal_is_excluded(db_session, test_user):
+    """10 servings for 2 people = 4 leftover dinners; only 2 fit in a 3-day plan."""
+    big = _batch_recipe(db_session, "Big pot", 10, {"dinner": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=3)
+    assert generator._overflowing_recipe_ids([big], 0, "dinner") == {big.id}
+
+    # 4-day plan: 3 leftover dinners fit, 1 overflows -> allowed
+    generator = _generator_for(db_session, people_count=2, days=4)
+    assert generator._overflowing_recipe_ids([big], 0, "dinner") == set()
+
+
+def test_no_leftovers_when_servings_match_people(db_session, test_user):
+    r = _batch_recipe(db_session, "Pair", 3, {"dinner": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=3)
+
+    generator._pick_meal("dinner", [r], 1000, 0.25, 0, set())
+
+    assert generator.leftover_slots == {}
+
+
+def test_generated_plan_marks_leftover_entries(db_session, test_user):
+    create_recipes(db_session, 4, "Breakfast", 400, {"breakfast": 1.0})
+    create_recipes(db_session, 4, "Lunch", 600, {"lunch": 1.0})
+    plov = _batch_recipe(db_session, "Plov", 4, {"dinner": 1.0})
+
+    plan = MealPlanGenerator(db_session).generate_meal_plan(
+        start_date=datetime(2026, 10, 5),
+        days=4,
+        target_calories=1800,
+        people_count=2,
+        dietary_preferences=[],
+        user_id=test_user.id,
+    )
+
+    dinners = sorted((e for e in plan.entries if e.meal_type == "dinner"), key=lambda e: e.date)
+    assert [e.recipe_id for e in dinners] == [plov.id] * 4
+    assert [e.is_leftover for e in dinners] == [False, True, False, True]
+    assert not any(e.is_leftover for e in plan.entries if e.meal_type != "dinner")
+
+
+def test_breakfast_leftovers_stay_at_breakfast(db_session, test_user):
+    pancakes = _batch_recipe(db_session, "Pancakes", 4, {"breakfast": 1.0, "lunch": 0.5})
+    generator = _generator_for(db_session, people_count=2, days=3)
+
+    generator._pick_meal("breakfast", [pancakes], 500, 0.2, 0, set())
+
+    assert generator.leftover_slots == {(1, "breakfast"): pancakes}

@@ -38,12 +38,25 @@ def generate_shopping_list(meal_plan: models.MealPlan, db: Session):
     )
     recipes_by_id = {r.id: r for r in recipes}
 
-    for entry in meal_plan.entries:
+    # Portions still uneaten from the last cooked batch of each recipe
+    remaining_portions: dict[int, float] = defaultdict(float)
+    meal_order = {"breakfast": 0, "lunch": 1, "dinner": 2}
+    entries = sorted(meal_plan.entries, key=lambda e: (e.date, meal_order.get(e.meal_type, 3)))
+
+    for entry in entries:
         recipe = recipes_by_id.get(entry.recipe_id)
         if not recipe:
             continue
 
-        multiplier = entry.servings / recipe.servings
+        # Leftovers come from an earlier batch; buy them only if no batch covers them
+        # (e.g. the cooking slot was re-rolled to another recipe).
+        if entry.is_leftover and remaining_portions[recipe.id] >= entry.servings:
+            remaining_portions[recipe.id] -= entry.servings
+            continue
+
+        # A recipe is cooked whole, so buy at least one full batch
+        multiplier = max(entry.servings / recipe.servings, 1)
+        remaining_portions[recipe.id] = recipe.servings * multiplier - entry.servings
         for recipe_ingredient in recipe.ingredients:
             unit = normalize_unit(recipe_ingredient.unit) or BaseUnit.PIECE.value
             ingredient_quantities[recipe_ingredient.ingredient_id].append(

@@ -22,6 +22,20 @@ def get_user(db: Session = Depends(get_db)):
     return usr
 
 
+def _entry_fields(entry: schemas.MealPlanEntryCreate, previous: dict) -> dict:
+    """Entry columns from a request. Clients that don't send `is_leftover` keep the flag of
+    the previous entry with the same day, meal type and recipe; a new recipe is cooked."""
+    data = entry.model_dump()
+    if data["is_leftover"] is None:
+        key = (entry.date.date(), entry.meal_type, entry.recipe_id)
+        data["is_leftover"] = previous.get(key, False)
+    return data
+
+
+def _leftover_flags(entries: list[models.MealPlanEntry]) -> dict:
+    return {(e.date.date(), e.meal_type, e.recipe_id): e.is_leftover for e in entries}
+
+
 router = APIRouter(
     prefix="/meal-plans",
     tags=["meal-plans"],
@@ -50,7 +64,7 @@ async def create_meal_plan(meal_plan: schemas.MealPlanCreate, db: Session = Depe
 
     # Create meal plan entries
     for entry in meal_plan.entries:
-        db_entry = models.MealPlanEntry(meal_plan_id=db_meal_plan.id, **entry.model_dump())
+        db_entry = models.MealPlanEntry(meal_plan_id=db_meal_plan.id, **_entry_fields(entry, {}))
         db.add(db_entry)
 
     db.commit()
@@ -160,12 +174,13 @@ async def update_meal_plan(
         setattr(db_meal_plan, key, value)
 
     # Update entries
+    previous = _leftover_flags(db_meal_plan.entries)
     db.query(models.MealPlanEntry).filter(
         models.MealPlanEntry.meal_plan_id == meal_plan_id
     ).delete()
 
     for entry in meal_plan.entries:
-        db_entry = models.MealPlanEntry(meal_plan_id=meal_plan_id, **entry.model_dump())
+        db_entry = models.MealPlanEntry(meal_plan_id=meal_plan_id, **_entry_fields(entry, previous))
         db.add(db_entry)
 
     db.commit()
@@ -202,7 +217,7 @@ async def update_meal(
     if db_meal is None:
         raise HTTPException(status_code=404, detail="Meal not found")
 
-    for key, value in meal.model_dump().items():
+    for key, value in _entry_fields(meal, _leftover_flags([db_meal])).items():
         setattr(db_meal, key, value)
 
     db.commit()
@@ -226,7 +241,7 @@ async def add_meal(
     if recipe is None:
         raise HTTPException(status_code=404, detail="Recipe not found")
 
-    db_meal = models.MealPlanEntry(meal_plan_id=meal_plan_id, **meal.model_dump())
+    db_meal = models.MealPlanEntry(meal_plan_id=meal_plan_id, **_entry_fields(meal, {}))
     db.add(db_meal)
     db.commit()
     db.refresh(db_meal)
