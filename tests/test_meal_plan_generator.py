@@ -412,6 +412,66 @@ def test_suggest_meal_respects_max_two_uses(db_session, test_user):
         assert suggestion.id == free.id
 
 
+def test_suggest_meal_prefers_recipes_not_in_plan(db_session, test_user):
+    """Re-roll should avoid recipes already in the plan while unused ones exist."""
+    recipes = create_recipes(db_session, 4, "B", 400, {"breakfast": 1.0})
+    current, in_plan_a, in_plan_b, unused = recipes
+
+    generator = MealPlanGenerator(db_session)
+    for _ in range(15):
+        suggestion = generator.suggest_meal(
+            meal_type="breakfast",
+            target_calories=1600,
+            plan_recipe_ids=[in_plan_a.id, in_plan_b.id],
+            current_recipe_id=current.id,
+        )
+        assert suggestion.id == unused.id
+
+
+def test_suggest_meal_avoids_previously_offered(db_session, test_user):
+    """Consecutive re-rolls of a slot should not bounce back to recipes already offered."""
+    recipes = create_recipes(db_session, 4, "B", 400, {"breakfast": 1.0})
+    current = recipes[0]
+
+    generator = MealPlanGenerator(db_session)
+    history = [current.id]
+    for _ in range(3):
+        suggestion = generator.suggest_meal(
+            meal_type="breakfast",
+            target_calories=1600,
+            plan_recipe_ids=[],
+            current_recipe_id=history[-1],
+            exclude_recipe_ids=history,
+        )
+        assert suggestion.id not in history
+        history.append(suggestion.id)
+
+    # All recipes offered: falls back to anything except the current one
+    suggestion = generator.suggest_meal(
+        meal_type="breakfast",
+        target_calories=1600,
+        plan_recipe_ids=[],
+        current_recipe_id=history[-1],
+        exclude_recipe_ids=history,
+    )
+    assert suggestion.id != history[-1]
+
+
+def test_suggest_meal_falls_back_to_plan_recipes(db_session, test_user):
+    """With no unused recipes left, re-roll may reuse a plan recipe (under the cap)."""
+    recipes = create_recipes(db_session, 2, "B", 400, {"breakfast": 1.0})
+    current, in_plan = recipes
+
+    generator = MealPlanGenerator(db_session)
+    suggestion = generator.suggest_meal(
+        meal_type="breakfast",
+        target_calories=1600,
+        plan_recipe_ids=[in_plan.id],
+        current_recipe_id=current.id,
+    )
+    assert suggestion.id == in_plan.id
+
+
 def test_suggest_meal_snack_without_weight_column(db_session, test_user):
     """Snacks have no `snack_weight`; suggestion should still work (flat selection)."""
     recipes = create_recipes(db_session, 3, "Any", 300, {"breakfast": 1.0})

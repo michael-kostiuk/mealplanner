@@ -85,14 +85,16 @@ class MealPlanGenerator:
         target_calories: int,
         plan_recipe_ids: list[int],
         current_recipe_id: int | None = None,
+        exclude_recipe_ids: list[int] | None = None,
     ) -> models.Recipe:
         """Pick a single replacement recipe for one meal slot (the "re-roll" action).
 
         Uses the same weighted-random selection as full-plan generation. The recipe
-        currently in the slot is always excluded, and ``plan_recipe_ids`` (the recipes
-        used in the *rest* of the plan) seed the usage counts so the max-2-uses cap is
-        honoured. Calorie targeting is best-effort: it falls back to any recipe of the
-        meal type if none land in the calorie band.
+        currently in the slot is always excluded. Recipes already in the rest of the plan
+        (``plan_recipe_ids``) and recipes offered in earlier re-rolls of this slot
+        (``exclude_recipe_ids``) are avoided while other candidates exist; ``plan_recipe_ids``
+        also seed the usage counts so the max-2-uses cap is honoured. Calorie targeting is
+        best-effort: it falls back to any recipe of the meal type if none land in the band.
         """
         # Known limitation: loads full recipe table into memory. Fine for a personal
         # recipe collection; would need pagination or filtering for larger datasets.
@@ -105,9 +107,22 @@ class MealPlanGenerator:
             if rid and rid > 0:
                 self.used_recipes[rid] += 1
 
-        exclude_ids: set[int] = set()
-        if current_recipe_id and current_recipe_id > 0:
-            exclude_ids.add(current_recipe_id)
+        current_ids = {current_recipe_id} if current_recipe_id and current_recipe_id > 0 else set()
+        history_ids = set(exclude_recipe_ids or [])
+        # Progressively relaxed exclusions: first avoid everything already in the plan or
+        # offered before, then allow plan recipes (cap still applies), then only the current.
+        tiers = [current_ids | set(plan_recipe_ids) | history_ids, current_ids | history_ids]
+        weight_attr = f"{meal_type}_weight"
+        exclude_ids = current_ids
+        for tier in tiers:
+            if any(
+                r.id not in tier
+                and self.used_recipes[r.id] < 2
+                and getattr(r, weight_attr, 0.0) > 0
+                for r in recipes
+            ):
+                exclude_ids = tier
+                break
 
         meal_target = self._meal_target_calories(meal_type, target_calories)
         return self._select_recipe(meal_type, recipes, meal_target, 0.25, exclude_ids=exclude_ids)

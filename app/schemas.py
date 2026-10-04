@@ -149,6 +149,8 @@ class MealSuggestRequest(BaseModel):
     target_calories: int
     current_recipe_id: int | None = None
     plan_recipe_ids: list[int] = []
+    # Recipes already offered for this slot in earlier re-rolls; avoided while alternatives exist
+    exclude_recipe_ids: list[int] = []
 
 
 class MealPlan(MealPlanBase):

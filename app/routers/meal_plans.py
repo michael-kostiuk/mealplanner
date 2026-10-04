@@ -147,6 +147,7 @@ async def suggest_meal(req: schemas.MealSuggestRequest, db: Session = Depends(ge
             target_calories=req.target_calories,
             plan_recipe_ids=req.plan_recipe_ids,
             current_recipe_id=req.current_recipe_id,
+            exclude_recipe_ids=req.exclude_recipe_ids,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
