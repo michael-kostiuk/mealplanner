@@ -289,6 +289,18 @@ class MealPlanGenerator:
 
         return selected_meals
 
+    @staticmethod
+    def _calorie_fit(calories: float, target_calories: float, max_deviation: float) -> float:
+        """Weight multiplier for how close a recipe is to the calorie target: 1.0 within
+        ``max_deviation``, then fading quickly (0.5 at a quarter of ``max_deviation`` past
+        it) so plans stay close to the target while off-target recipes remain possible."""
+        if target_calories <= 0:
+            return 1.0
+        excess = abs(calories - target_calories) / target_calories - max_deviation
+        if excess <= 0:
+            return 1.0
+        return 1.0 / (1.0 + (excess / (max_deviation / 4)) ** 4)
+
     def _select_recipe(
         self,
         meal_type: str,
@@ -334,29 +346,21 @@ class MealPlanGenerator:
         if not available_recipes:
             raise ValueError(f"No available recipes for {meal_type}")
 
-        # Try to find a recipe within the calorie range
-        min_calories = target_calories * (1 - max_deviation)
-        max_calories = target_calories * (1 + max_deviation)
-
-        suitable_recipes = [
-            r for r in available_recipes if min_calories <= r.calories <= max_calories
-        ]
-
-        # If no recipes match calorie constraint, use all available recipes (fallback logic from calculate_daily_meals)
-        if not suitable_recipes:
-            suitable_recipes = available_recipes
-
-        # Weighted random selection
+        # Weighted random selection. Calorie fit is a soft preference rather than a hard
+        # filter: a hard band left only a handful of recipes when the target sits away from
+        # where most recipes' calories are, so the same few were picked over and over.
         weights = [
-            getattr(r, weight_attr, 0.0) * (0.5 if r.id in self.recent_recipe_ids else 1.0)
-            for r in suitable_recipes
+            getattr(r, weight_attr, 0.0)
+            * (0.5 if r.id in self.recent_recipe_ids else 1.0)
+            * self._calorie_fit(r.calories, target_calories, max_deviation)
+            for r in available_recipes
         ]
 
         # Handle case where all weights are 0 (should not happen due to available_recipes filter, but safe check)
         if not weights or sum(weights) == 0:
-            selected = random.choice(suitable_recipes)
+            selected = random.choice(available_recipes)
         else:
-            selected = random.choices(suitable_recipes, weights=weights, k=1)[0]
+            selected = random.choices(available_recipes, weights=weights, k=1)[0]
 
         # Update usage count
         self.used_recipes[selected.id] += 1
