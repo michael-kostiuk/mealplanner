@@ -1,5 +1,9 @@
 FROM python:3.11-slim
 
+# eMudhra intermediate CA compromise (2026-10-20): need ca-certificates >= 20250419+deb13u1
+RUN apt-get update && apt-get install -y --no-install-recommends --only-upgrade ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY requirements.txt .
