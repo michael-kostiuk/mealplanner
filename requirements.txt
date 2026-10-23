@@ -12,3 +12,5 @@ rapidfuzz>=3.0.0
 pytest>=8.0.0
 pytest-asyncio>=0.23.0
 certifi>=2026.10.19  # drops compromised eMudhra intermediates
+argon2-cffi>=23.1.0
+itsdangerous>=2.1.0

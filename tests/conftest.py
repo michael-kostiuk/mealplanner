@@ -1,6 +1,7 @@
 import contextlib
 import os
 import sys
+import tempfile
 
 import pytest
 from sqlalchemy import create_engine, text
@@ -10,8 +11,18 @@ from sqlalchemy.pool import StaticPool
 # Add app to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# Test env for app.config; assigned (not setdefault) so a real .env never leaks into tests.
+# Must happen before importing anything from `app`.
+from argon2 import PasswordHasher  # noqa: E402
 
-from app.models import Base
+os.environ["SESSION_SECRET"] = "test-secret-not-for-prod"
+os.environ["OWNER_PIN_HASH"] = PasswordHasher().hash("1234")
+os.environ["OWNER_USER_ID"] = "1"
+os.environ["COOKIE_SECURE"] = "false"
+os.environ["DEMO_DB_PATH"] = os.path.join(tempfile.gettempdir(), "mealplanner_test_demo.sqlite")
+os.environ["DEMO_SEED_PATH"] = "tests/fixtures/demo_seed_small.json"
+
+from app.models import Base  # noqa: E402
 
 # Use a test database URL.
 # We will assume we can create a database named 'test_db' on the same host.

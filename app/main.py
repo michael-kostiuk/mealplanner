@@ -8,6 +8,7 @@ from sqlalchemy import inspect, text
 from alembic import command
 from alembic.config import Config
 
+from .config import get_settings
 from .database import engine
 from .logging_setup import setup_logging
 from .routers import favorites, health, ingredients, meal_plans, nutrition, recipes, shopping_lists
@@ -21,7 +22,7 @@ app = FastAPI(title="Meal Planning API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=get_settings().cors_origins,
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
@@ -83,6 +84,7 @@ def run_migrations():
 
 @app.on_event("startup")
 def startup_event():
+    get_settings()  # fail at boot if secrets are missing
     run_migrations()
     # Re-apply logging setup in case Alembic or Uvicorn messed it up
     setup_logging()

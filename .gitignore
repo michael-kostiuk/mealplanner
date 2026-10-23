@@ -210,3 +210,7 @@ db_backup_*.dump
 
 # Generated API spec
 openapi.json
+
+# Demo mode / prod dumps
+data/demo.sqlite*
+data/prod_dump*
