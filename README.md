@@ -52,6 +52,19 @@ Router: `app/routers/shopping_lists.py`
 
 ---
 
+### 4. Auth & demo mode
+`app/auth/`, `app/demo/`, `app/database.py`
+
+Logged out is the demo: anonymous visitors get a throwaway SQLite database seeded with 27 English recipes (rebuilt at startup, reset weekly), so they can click through every feature without touching real data. The owner's 4-digit PIN (`POST /auth/login`) sets a signed session cookie and switches every request to Postgres.
+
+Routing happens in one place: the `get_db` dependency picks the session by who is asking. Background tasks and the recipe-import job never open a session themselves; they take a `session_factory`, so a demo request cannot reach Postgres. Demo uploads go to a separate Dropbox folder and demo never deletes from Dropbox.
+
+Why not accounts, OAuth or 2FA? There is one user and the source is public, so the PIN is protected by a global rate limiter (3 failures per hour, then a doubling lockout) rather than by obscurity. The threat model, trade-offs and what was left out on purpose are written up in `app/auth/__init__.py`.
+
+Routers: `app/routers/auth.py` (`/auth/login`, `/auth/logout`, `/auth/me`)
+
+---
+
 ## Running locally
 
 ```bash
@@ -72,6 +85,8 @@ app/
   schemas.py         # Pydantic v2 request/response
   units.py           # multilingual unit normalisation
   routers/           # HTTP handlers (one file per domain)
+  auth/              # PIN login, sessions, rate limiter (design notes in __init__.py)
+  demo/              # SQLite demo database, seed and lifecycle
   services/
     meal_plan_generator.py
     unit_converter.py

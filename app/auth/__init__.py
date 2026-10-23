@@ -21,7 +21,10 @@ Deliberately left out, and why:
 Accepted trade-offs:
 - An attacker can lock out new owner logins by burning the failure budget. Existing sessions
   (180-day signed cookies) keep working.
-- Lockout state lives in memory and resets on restart. That restart is the owner's unlock.
+- Lockout state lives in memory. The escalation level resets only on a correct PIN or an app
+  restart; that restart is the owner's unlock.
+- Sessions are stateless signed cookies: logout clears the browser cookie, and revoking every
+  session means rotating SESSION_SECRET.
 
 If this ever needs multiple users: the session cookie already carries user_id, so the change is a
 PIN (or other credential) per user mapped to a user row. Meal plans and favorites are already
