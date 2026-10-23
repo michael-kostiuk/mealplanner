@@ -216,3 +216,4 @@ data/demo.sqlite*
 data/prod_dump*
 data/demo_raw.json
 data/demo_candidates.md
+data/translate/
