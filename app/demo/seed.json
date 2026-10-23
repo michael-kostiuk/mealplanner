@@ -1,23 +1,3297 @@
 {
-  "version": 1,
   "ingredients": [
-    {"key": "1", "name": "Oats", "category": "grains", "base_unit": "g",
-     "calories": 3.8, "protein": 0.13, "carbs": 0.66, "fats": 0.07, "portions": []},
-    {"key": "2", "name": "Chicken breast", "category": "meat", "base_unit": "g",
-     "calories": 1.65, "protein": 0.31, "carbs": 0.0, "fats": 0.036, "portions": []},
-    {"key": "3", "name": "Egg", "category": "dairy", "base_unit": "g",
-     "calories": 1.43, "protein": 0.13, "carbs": 0.011, "fats": 0.095,
-     "portions": [{"unit": "piece", "gram_weight": 50.0, "modifier": "large", "is_default": true}]}
+    {
+      "key": "1",
+      "name": "Avocado",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 171705,
+      "calories": 223.33,
+      "protein": 1.81,
+      "carbs": 8.32,
+      "fats": 20.31,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 150.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 146.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 200.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "3",
+      "name": "banana",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 173944,
+      "calories": 27.0,
+      "protein": 1.66,
+      "carbs": 5.35,
+      "fats": 0.45,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 225.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 150.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 118.0,
+          "modifier": "medium",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "4",
+      "name": "wholemeal flour",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 168944,
+      "calories": 370.0,
+      "protein": 15.1,
+      "carbs": 71.2,
+      "fats": 2.73,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 8.0,
+          "modifier": "household",
+          "is_default": true
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 3.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "5",
+      "name": "broccoli",
+      "category": "Vegetables",
+      "base_unit": "piece",
+      "fdc_id": 321900,
+      "calories": 30.94,
+      "protein": 2.57,
+      "carbs": 6.04,
+      "fats": 0.34,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 76.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 500.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "8",
+      "name": "Cream",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 171255,
+      "calories": 207.0,
+      "protein": 3.5,
+      "carbs": 23.6,
+      "fats": 11.0,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 15.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 242.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "10",
+      "name": "Butter",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 173410,
+      "calories": 291.0,
+      "protein": 0.0,
+      "carbs": 72.43,
+      "fats": 0.09,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 14.2,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 227.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "12",
+      "name": "Walnuts",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 2346394,
+      "calories": 729.56,
+      "protein": 14.56,
+      "carbs": 10.91,
+      "fats": 69.74,
+      "portions": []
+    },
+    {
+      "key": "14",
+      "name": "Pumpkin",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 168448,
+      "calories": 26.0,
+      "protein": 1.0,
+      "carbs": 6.5,
+      "fats": 0.1,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 116.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "19",
+      "name": "fresh herbs",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 170416,
+      "calories": 59.0,
+      "protein": 2.13,
+      "carbs": 10.24,
+      "fats": 1.93,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 60.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 3.8,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 30.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "22",
+      "name": "greek yogurt",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 330137,
+      "calories": 82.0,
+      "protein": 8.05,
+      "carbs": 12.07,
+      "fats": 0.15,
+      "portions": []
+    },
+    {
+      "key": "24",
+      "name": "potato",
+      "category": "Vegetables",
+      "base_unit": "piece",
+      "fdc_id": 170026,
+      "calories": 85.12,
+      "protein": 4.0,
+      "carbs": 15.06,
+      "fats": 1.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 75.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 213.0,
+          "modifier": "medium",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "25",
+      "name": "ketchup",
+      "category": "Condiments",
+      "base_unit": "g",
+      "fdc_id": 168556,
+      "calories": 117.0,
+      "protein": 1.11,
+      "carbs": 26.8,
+      "fats": 0.55,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 17.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 240.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "27",
+      "name": "cashew",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 2515374,
+      "calories": 553.0,
+      "protein": 18.2,
+      "carbs": 30.2,
+      "fats": 43.9,
+      "portions": []
+    },
+    {
+      "key": "29",
+      "name": "Cinnamon",
+      "category": "Condiments",
+      "base_unit": "piece",
+      "fdc_id": 171320,
+      "calories": 70.84,
+      "protein": 1.97,
+      "carbs": 12.43,
+      "fats": 1.48,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 2.6,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 7.8,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 3.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "31",
+      "name": "Sesame Seeds",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 170150,
+      "calories": 570.0,
+      "protein": 17.81,
+      "carbs": 26.19,
+      "fats": 48.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 144.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 9.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "32",
+      "name": "chicken ham",
+      "category": "Meat",
+      "base_unit": "g",
+      "fdc_id": 173874,
+      "calories": 293.0,
+      "protein": 12.5,
+      "carbs": 3.4,
+      "fats": 25.1,
+      "portions": [
+        {
+          "unit": "slice",
+          "gram_weight": 12.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "33",
+      "name": "chicken fillet",
+      "category": "Meat",
+      "base_unit": "g",
+      "fdc_id": 171077,
+      "calories": 175.0,
+      "protein": 26.37,
+      "carbs": 0.09,
+      "fats": 7.67,
+      "portions": [
+        {
+          "unit": "package",
+          "gram_weight": 926.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "34",
+      "name": "lavash",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 174915,
+      "calories": 249.0,
+      "protein": 8.77,
+      "carbs": 35.82,
+      "fats": 7.89,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 60.0,
+          "modifier": "large",
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "35",
+      "name": "Lemon",
+      "category": "Fruits",
+      "base_unit": "piece",
+      "fdc_id": 167746,
+      "calories": 2.82,
+      "protein": 0.09,
+      "carbs": 0.96,
+      "fats": 0.02,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 212.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 7.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 100.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "36",
+      "name": "Honey",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 169640,
+      "calories": 304.0,
+      "protein": 0.3,
+      "carbs": 82.4,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 339.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 21.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 7.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "38",
+      "name": "milk",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 322228,
+      "calories": 46.0,
+      "protein": 1.6,
+      "carbs": 5.3,
+      "fats": 2.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 233.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "39",
+      "name": "carrot",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 170393,
+      "calories": 41.0,
+      "protein": 0.93,
+      "carbs": 9.58,
+      "fats": 0.24,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 128.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 122.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 61.0,
+          "modifier": "medium",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "40",
+      "name": "mozzarella",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 329370,
+      "calories": 296.0,
+      "protein": 23.7,
+      "carbs": 4.44,
+      "fats": 20.4,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 86.2,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "41",
+      "name": "flaxseed",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 169414,
+      "calories": 534.0,
+      "protein": 18.0,
+      "carbs": 29.0,
+      "fats": 42.0,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 10.3,
+          "modifier": "whole",
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "44",
+      "name": "Oil",
+      "category": "Condiments",
+      "base_unit": "g",
+      "fdc_id": 171025,
+      "calories": 884.0,
+      "protein": 0.11,
+      "carbs": 0.0,
+      "fats": 99.98,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 13.6,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 218.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 4.5,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "46",
+      "name": "Processed Cheese",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 325198,
+      "calories": 290.0,
+      "protein": 25.0,
+      "carbs": 2.0,
+      "fats": 22.0,
+      "portions": []
+    },
+    {
+      "key": "48",
+      "name": "Cooked Rice",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 168878,
+      "calories": 185.0,
+      "protein": 3.28,
+      "carbs": 31.16,
+      "fats": 5.29,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 158.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "49",
+      "name": "baking powder",
+      "category": "Other",
+      "base_unit": "piece",
+      "fdc_id": 172805,
+      "calories": 4.85,
+      "protein": 0.01,
+      "carbs": 2.35,
+      "fats": 0.02,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 5.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 10.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "50",
+      "name": "Vegetable Oil",
+      "category": "Other",
+      "base_unit": "piece",
+      "fdc_id": 171025,
+      "calories": 117.23,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 13.6,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 13.6,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 218.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 4.5,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "51",
+      "name": "hard cheese",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 171241,
+      "calories": 392.0,
+      "protein": 35.75,
+      "carbs": 3.22,
+      "fats": 25.0,
+      "portions": [
+        {
+          "unit": "package",
+          "gram_weight": 198.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "52",
+      "name": "sour cream",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 171257,
+      "calories": 196.41,
+      "protein": 3.07,
+      "carbs": 5.56,
+      "fats": 17.99,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 12.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 230.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "53",
+      "name": "Soy Sauce",
+      "category": "Condiments",
+      "base_unit": "piece",
+      "fdc_id": 174278,
+      "calories": 10.8,
+      "protein": 1.89,
+      "carbs": 1.0,
+      "fats": 0.02,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 18.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 6.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "54",
+      "name": "Salt",
+      "category": "Condiments",
+      "base_unit": "piece",
+      "fdc_id": 173468,
+      "calories": 845.24,
+      "protein": 5.71,
+      "carbs": 0.0,
+      "fats": 90.96,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 6.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 18.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 292.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 0.5,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "56",
+      "name": "tomato",
+      "category": "Vegetables",
+      "base_unit": "piece",
+      "fdc_id": 170457,
+      "calories": 139.32,
+      "protein": 7.62,
+      "carbs": 30.11,
+      "fats": 1.6,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 149.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 180.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 120.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "58",
+      "name": "Ground Beef",
+      "category": "Meat",
+      "base_unit": "g",
+      "fdc_id": 2514743,
+      "calories": 198.0,
+      "protein": 19.42,
+      "carbs": 0.0,
+      "fats": 12.73,
+      "portions": []
+    },
+    {
+      "key": "60",
+      "name": "bread",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 325871,
+      "calories": 266.0,
+      "protein": 12.5,
+      "carbs": 47.07,
+      "fats": 3.13,
+      "portions": []
+    },
+    {
+      "key": "61",
+      "name": "cauliflower",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 2685573,
+      "calories": 27.59,
+      "protein": 1.64,
+      "carbs": 4.72,
+      "fats": 0.24,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 600.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "64",
+      "name": "Zucchini",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 2685568,
+      "calories": 19.0,
+      "protein": 0.98,
+      "carbs": 3.27,
+      "fats": 0.2,
+      "portions": []
+    },
+    {
+      "key": "65",
+      "name": "champignon mushrooms",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 169251,
+      "calories": 32.0,
+      "protein": 1.49,
+      "carbs": 6.86,
+      "fats": 0.53,
+      "portions": [
+        {
+          "unit": "slice",
+          "gram_weight": 70.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 18.0,
+          "modifier": "medium",
+          "is_default": true
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 35.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "67",
+      "name": "Spinach",
+      "category": "Vegetables",
+      "base_unit": "piece",
+      "fdc_id": 168462,
+      "calories": 6.9,
+      "protein": 0.86,
+      "carbs": 1.09,
+      "fats": 0.12,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 30.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "bunch",
+          "gram_weight": 340.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "package",
+          "gram_weight": 284.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "68",
+      "name": "apple",
+      "category": "Fruits",
+      "base_unit": "g",
+      "fdc_id": 1105781,
+      "calories": 63.0,
+      "protein": 0.2,
+      "carbs": 15.22,
+      "fats": 0.18,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 180.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "70",
+      "name": "egg",
+      "category": "Dairy",
+      "base_unit": "piece",
+      "fdc_id": 171287,
+      "calories": 348.5,
+      "protein": 5.87,
+      "carbs": 70.38,
+      "fats": 5.44,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 50.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "74",
+      "name": "soft cottage cheese",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 172179,
+      "calories": 82.0,
+      "protein": 11.0,
+      "carbs": 4.31,
+      "fats": 2.3,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 210.0,
+          "modifier": "large",
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "76",
+      "name": "rice flour",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 169714,
+      "calories": 363.0,
+      "protein": 7.23,
+      "carbs": 76.48,
+      "fats": 2.78,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 158.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "77",
+      "name": "Water",
+      "category": "Baking",
+      "base_unit": "ml",
+      "fdc_id": 173647,
+      "calories": 70.56,
+      "protein": 1.16,
+      "carbs": 17.56,
+      "fats": 0.35,
+      "portions": []
+    },
+    {
+      "key": "79",
+      "name": "macaroni",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 169736,
+      "calories": 367.0,
+      "protein": 13.14,
+      "carbs": 74.88,
+      "fats": 1.04,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 91.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "80",
+      "name": "canned corn",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 169214,
+      "calories": 474.0,
+      "protein": 6.15,
+      "carbs": 64.43,
+      "fats": 23.38,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 164.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "can",
+          "gram_weight": 211.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "81",
+      "name": "cucumber",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 2346406,
+      "calories": 15.91,
+      "protein": 0.62,
+      "carbs": 2.95,
+      "fats": 0.18,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 150.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "82",
+      "name": "quinoa",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 168874,
+      "calories": 385.2,
+      "protein": 11.92,
+      "carbs": 69.52,
+      "fats": 6.6,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 170.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "83",
+      "name": "lettuce",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 2346391,
+      "calories": 404.0,
+      "protein": 0.85,
+      "carbs": 22.4,
+      "fats": 34.53,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 300.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "84",
+      "name": "olive oil",
+      "category": "Fats",
+      "base_unit": "g",
+      "fdc_id": 171413,
+      "calories": 206.06,
+      "protein": 26.94,
+      "carbs": 2.41,
+      "fats": 9.85,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 13.5,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 216.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 4.5,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "87",
+      "name": "mustard",
+      "category": "Condiments",
+      "base_unit": "g",
+      "fdc_id": 326698,
+      "calories": 27.0,
+      "protein": 2.86,
+      "carbs": 4.67,
+      "fats": 0.42,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 249.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 15.0,
+          "modifier": "household",
+          "is_default": true
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 5.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "88",
+      "name": "croutons",
+      "category": "Dairy",
+      "base_unit": "g",
+      "fdc_id": 172751,
+      "calories": 407.0,
+      "protein": 11.9,
+      "carbs": 73.5,
+      "fats": 6.6,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 30.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "89",
+      "name": "garlic",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 1104647,
+      "calories": 143.0,
+      "protein": 6.62,
+      "carbs": 28.2,
+      "fats": 0.38,
+      "portions": [
+        {
+          "unit": "clove",
+          "gram_weight": 5.0,
+          "modifier": "household",
+          "is_default": true
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 5.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "91",
+      "name": "Arugula",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 2710822,
+      "calories": 30.99,
+      "protein": 1.65,
+      "carbs": 5.37,
+      "fats": 0.33,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 50.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "93",
+      "name": "Grapefruit",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 173034,
+      "calories": 32.0,
+      "protein": 0.63,
+      "carbs": 8.19,
+      "fats": 0.1,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 230.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 300.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "100",
+      "name": "Pepper",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 170108,
+      "calories": 29.0,
+      "protein": 0.91,
+      "carbs": 6.5,
+      "fats": 0.37,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 149.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 92.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 9.3,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 119.0,
+          "modifier": "medium",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "101",
+      "name": "Beef",
+      "category": "Meat",
+      "base_unit": "g",
+      "fdc_id": 2646173,
+      "calories": 674.0,
+      "protein": 8.21,
+      "carbs": 0.0,
+      "fats": 70.89,
+      "portions": []
+    },
+    {
+      "key": "102",
+      "name": "Dry Red Wine",
+      "category": "Beverages",
+      "base_unit": "g",
+      "fdc_id": 173190,
+      "calories": 19.0,
+      "protein": 0.04,
+      "carbs": 0.27,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "103",
+      "name": "Rosemary Sprig",
+      "category": "Vegetables",
+      "base_unit": "piece",
+      "fdc_id": 173473,
+      "calories": 0.92,
+      "protein": 0.02,
+      "carbs": 0.14,
+      "fats": 0.04,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 0.7,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 1.7,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 1.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "104",
+      "name": "Bay Leaf",
+      "category": "Vegetables",
+      "base_unit": "g",
+      "fdc_id": 170917,
+      "calories": 313.0,
+      "protein": 7.61,
+      "carbs": 74.97,
+      "fats": 8.36,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 0.2,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "105",
+      "name": "Millet",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 169702,
+      "calories": 378.0,
+      "protein": 11.02,
+      "carbs": 72.85,
+      "fats": 4.22,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 200.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "106",
+      "name": "Sugar",
+      "category": "Grains",
+      "base_unit": "g",
+      "fdc_id": 334247,
+      "calories": 94.0,
+      "protein": 2.06,
+      "carbs": 23.64,
+      "fats": 0.29,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 188.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 12.5,
+          "modifier": "household",
+          "is_default": true
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 4.2,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "122",
+      "name": "Salt and Spices",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 173468,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 6.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 18.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 292.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "123",
+      "name": "Plain Yogurt 3%",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 2647437,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "124",
+      "name": "Dill",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 172233,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 8.9,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 30.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "126",
+      "name": "Cottage Cheese 5%",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 328841,
+      "calories": 82.0,
+      "protein": 11.0,
+      "carbs": 4.31,
+      "fats": 2.3,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 220.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "127",
+      "name": "Baking Soda",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 175040,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 4.6,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "128",
+      "name": "Salt and Herbs",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 173468,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 6.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 18.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 292.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "129",
+      "name": "semi-hard cheese",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 173419,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "package",
+          "gram_weight": 198.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "131",
+      "name": "vegetables",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 170471,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "package",
+          "gram_weight": 95.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "136",
+      "name": "cream cheese",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 2346385,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "141",
+      "name": "spices",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": null,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "148",
+      "name": "leek",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 169246,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 89.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 6.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "149",
+      "name": "whole grain bread",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 335240,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "152",
+      "name": "fresh parsley",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 170416,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 60.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 3.8,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "156",
+      "name": "skinless chicken thigh fillet",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 2727567,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "157",
+      "name": "yellow onion",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 790577,
+      "calories": 40.0,
+      "protein": 1.1,
+      "carbs": 9.34,
+      "fats": 0.1,
+      "portions": [
+        {
+          "unit": "piece",
+          "gram_weight": 110.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    },
+    {
+      "key": "174",
+      "name": "tuna in its own juice",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 334194,
+      "calories": 144.0,
+      "protein": 23.33,
+      "carbs": 0.0,
+      "fats": 4.9,
+      "portions": [
+        {
+          "unit": "can",
+          "gram_weight": 142.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "203",
+      "name": "coconut milk",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 170173,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 226.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 15.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "204",
+      "name": "dried garlic",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 171325,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 3.1,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 9.7,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "205",
+      "name": "herbs and spices",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": null,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "210",
+      "name": "rice noodles",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 169742,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": []
+    },
+    {
+      "key": "211",
+      "name": "fresh ginger",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 169231,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tsp",
+          "gram_weight": 2.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "slice",
+          "gram_weight": 24.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "248",
+      "name": "sour cream 10%",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 173443,
+      "calories": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fats": 0.0,
+      "portions": [
+        {
+          "unit": "tbsp",
+          "gram_weight": 12.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "cup",
+          "gram_weight": 230.0,
+          "modifier": null,
+          "is_default": false
+        }
+      ]
+    },
+    {
+      "key": "278",
+      "name": "lemon or lime juice",
+      "category": "Other",
+      "base_unit": "g",
+      "fdc_id": 167747,
+      "calories": 22.0,
+      "protein": 0.35,
+      "carbs": 6.9,
+      "fats": 0.24,
+      "portions": [
+        {
+          "unit": "cup",
+          "gram_weight": 244.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "piece",
+          "gram_weight": 48.0,
+          "modifier": null,
+          "is_default": false
+        },
+        {
+          "unit": "tsp",
+          "gram_weight": 5.0,
+          "modifier": "household",
+          "is_default": true
+        },
+        {
+          "unit": "tbsp",
+          "gram_weight": 15.0,
+          "modifier": "household",
+          "is_default": true
+        }
+      ]
+    }
   ],
   "recipes": [
-    {"name": "Oatmeal", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "breakfast", "instructions": "Cook oats in water.",
-     "calories": 500, "protein": 15.0, "carbs": 80.0, "fats": 10.0, "breakfast_weight": 1.0,
-     "ingredients": [{"ingredient_key": "1", "quantity": 100.0, "unit": "g"}]},
-    {"name": "Chicken Plate", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "lunch", "instructions": "Grill the chicken.",
-     "calories": 700, "protein": 50.0, "carbs": 20.0, "fats": 20.0, "lunch_weight": 1.0,
-     "ingredients": [{"ingredient_key": "2", "quantity": 250.0, "unit": "g"}]},
-    {"name": "Egg Scramble", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "dinner", "instructions": "Scramble the eggs.",
-     "calories": 800, "protein": 30.0, "carbs": 10.0, "fats": 50.0, "dinner_weight": 1.0,
-     "ingredients": [{"ingredient_key": "3", "quantity": 4.0, "unit": "piece"}]}
+    {
+      "name": "Green Chicken Soup with Egg",
+      "servings": 2,
+      "prep_time": 15,
+      "cook_time": 45,
+      "instructions": "Place the chicken thigh in a pot of cold water and bring it to a boil.\nDrain the water, cover the thigh with fresh cold water and simmer until cooked.\nRemove the chicken, shred the meat and discard the skin, bones and gristle.\nAdd diced potato, chopped onion and grated carrot to the broth and cook.\nSeason with a '10 vegetables' spice blend if you like.\nAdd the shredded meat and diced boiled egg when the vegetables are nearly done.\nStir in thin noodles and cover for a few minutes.\nFinish with chopped parsley and a spoonful of sour cream.",
+      "category": "Soup",
+      "calories": 334,
+      "protein": 25.0,
+      "carbs": 25.0,
+      "fats": 15.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/2dhkse4970uw2dc26gsgo/2_1791038935_inna_p31.png?rlkey=2h7osepxpu7101ks2dcogxbs6&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "156",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 2.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "39",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "152",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "24",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "141",
+          "quantity": 0.0,
+          "unit": "to taste"
+        },
+        {
+          "ingredient_key": "248",
+          "quantity": 70.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "157",
+          "quantity": 0.5,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "79",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Apple Pancakes",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 20,
+      "instructions": "Peel the apple and grate it finely.\nMix in the flour, egg, sweetener and baking powder until combined.\nAdd a little more flour if needed so the batter holds its shape.\nShape the dough into patties or small rounds.\nFry in a dry non-stick pan or with a little butter until golden on both sides.",
+      "category": "Breakfast",
+      "calories": 312,
+      "protein": 9.4,
+      "carbs": 58.9,
+      "fats": 5.1,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/9hnvol2gp1jwhkrengcwy/6_1791025046_6.jpg?rlkey=1lz3cpg9wurh8hgb4t7csh0jx&raw=1",
+      "breakfast_weight": 1.0,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "68",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "76",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "49",
+          "quantity": 1.2,
+          "unit": "tsp"
+        }
+      ]
+    },
+    {
+      "name": "Lavash Pizza",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Cut the lavash sheet in half and place one piece in a dry pan.\nSprinkle it with 50 g of cheese and cover with the second piece.\nSpread ketchup and yogurt over the top layer, then add your toppings.\nTop with the remaining cheese, cover and cook over low heat until the cheese melts.",
+      "category": "Lunch",
+      "calories": 640,
+      "protein": 53.0,
+      "carbs": 36.0,
+      "fats": 31.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/98vqc12u7pp9qb2n3tjrf/7_1791025048_7.jpg?rlkey=2hccf0qi6j0maxp9zbm4s794c&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.6,
+      "dinner_weight": 0.4,
+      "ingredients": [
+        {
+          "ingredient_key": "33",
+          "quantity": 80.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "34",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "65",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "22",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "25",
+          "quantity": 5.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Egg and Cheese Salad",
+      "servings": 1,
+      "prep_time": 5,
+      "cook_time": 30,
+      "instructions": "Boil the eggs and chop them finely.\nGrate the cheese on a fine grater.\nDice the cucumber into small cubes.\nToss everything together and season with salt and pepper to taste.",
+      "category": "Salad",
+      "calories": 431,
+      "protein": 30.0,
+      "carbs": 23.0,
+      "fats": 24.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/i01w57vro4jg3gvw4i8ir/9_1791025051_9.jpg?rlkey=zx8uitnyfxw021juef6szud0e&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.3,
+      "dinner_weight": 0.7,
+      "ingredients": [
+        {
+          "ingredient_key": "70",
+          "quantity": 2.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 70.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "80",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "22",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "81",
+          "quantity": 2.0,
+          "unit": "piece"
+        }
+      ]
+    },
+    {
+      "name": "Quinoa Salad",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Boil the quinoa for 25 minutes, then drain.\nWhisk together lemon juice and olive oil, adding salt, pepper or garlic if you like.\nDice the vegetables and toss them with the dressing and quinoa.\nAdd the salad leaves and mix gently.",
+      "category": "Salad",
+      "calories": 430,
+      "protein": 14.0,
+      "carbs": 55.0,
+      "fats": 18.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/3nrnkrr7aww8eggo40miv/10_1791025054_10.jpg?rlkey=yioqal8rq369mc573ugjz1vut&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.0,
+      "dinner_weight": 1.0,
+      "ingredients": [
+        {
+          "ingredient_key": "82",
+          "quantity": 80.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "56",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "81",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "83",
+          "quantity": 70.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "84",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "278",
+          "quantity": 5.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Stuffed Pancakes",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Mix all the ingredients except the ham and cheese in a bowl.\nLet the batter rest for about 15 minutes.\nSpoon 1 tablespoon of batter onto a hot pan for each pancake.\nTop each one with a slice of cheese and ham, then cover with more batter.\nCover the pan and cook over low heat until set.",
+      "category": "Breakfast",
+      "calories": 434,
+      "protein": 18.0,
+      "carbs": 33.0,
+      "fats": 25.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/7knwpoiluj45mksfyh9u8/11_1791025057_11.jpg?rlkey=pnutkcw6vun4jqo7izb0govh0&raw=1",
+      "breakfast_weight": 1.0,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "32",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "22",
+          "quantity": 110.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "49",
+          "quantity": 0.5,
+          "unit": "piece"
+        }
+      ]
+    },
+    {
+      "name": "Tuna Salad",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Drain the tuna and place it in a bowl.\nAdd the remaining ingredients and toss to combine.\nSeason to taste and serve.",
+      "category": "Salad",
+      "calories": 232,
+      "protein": 31.0,
+      "carbs": 11.0,
+      "fats": 2.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/srk6jmzhib5b5b43h54zg/13_1791025060_13.jpg?rlkey=i5cbyhu6he8o5qbmgukpvv2nk&raw=1",
+      "breakfast_weight": 0.2,
+      "lunch_weight": 0.3,
+      "dinner_weight": 0.5,
+      "ingredients": [
+        {
+          "ingredient_key": "81",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "22",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "87",
+          "quantity": 0.5,
+          "unit": "tsp"
+        },
+        {
+          "ingredient_key": "174",
+          "quantity": 100.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Chicken Caesar Salad",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Cook the chicken fillet by frying or boiling it, then slice it.\nWhisk lemon juice, 1 teaspoon of mustard, a clove of garlic and 1 tablespoon of olive oil into a dressing.\nChop the vegetables of your choice.\nToss the chicken and vegetables with the dressing.\nTop with croutons and serve.",
+      "category": "Salad",
+      "calories": 311,
+      "protein": 26.0,
+      "carbs": 14.0,
+      "fats": 17.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/wcx7xysh5rbis0pis7gt2/14_1791025063_14.jpg?rlkey=gm8c1akdnc4q1bxrlmdfc968z&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.2,
+      "dinner_weight": 0.8,
+      "ingredients": [
+        {
+          "ingredient_key": "33",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "56",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "81",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "88",
+          "quantity": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "83",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "89",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "84",
+          "quantity": 1.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "278",
+          "quantity": 1.0,
+          "unit": "tsp"
+        }
+      ]
+    },
+    {
+      "name": "Banana Roll",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Mix the flour, egg, milk, half the cheese, sweetener and a pinch of salt.\nCook the batter into one large pancake in a lightly oiled pan for 1 to 2 minutes per side.\nSpread the remaining cheese on the warm pancake, adding honey or sweetener if you like.\nPlace a whole banana on top and roll it up.\nSlice the roll into small pieces and serve.",
+      "category": "Breakfast",
+      "calories": 362,
+      "protein": 19.0,
+      "carbs": 49.0,
+      "fats": 11.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/oexiqok3c7ana919ogf4l/15_1791025066_15.jpg?rlkey=euginsngffurec7hr9cs203r0&raw=1",
+      "breakfast_weight": 1.0,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "74",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "38",
+          "quantity": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "3",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Walnut and Arugula Salad",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Arrange washed arugula on a deep plate.\nDice the cheese and tomato and scatter them over the arugula.\nBoil the eggs, then halve them.\nSprinkle the salad with chopped walnuts.\nDrizzle with liquid honey and oil.",
+      "category": "Salad",
+      "calories": 485,
+      "protein": 22.0,
+      "carbs": 10.0,
+      "fats": 41.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/ssp4rx1khkr4l8c0qwqhb/16_1791025068_16.jpg?rlkey=vvo16l57ktn03ghkh1zlhw9bj&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.0,
+      "dinner_weight": 1.0,
+      "ingredients": [
+        {
+          "ingredient_key": "91",
+          "quantity": 70.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 2.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "12",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "56",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "84",
+          "quantity": 1.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "36",
+          "quantity": 1.0,
+          "unit": "tsp"
+        }
+      ]
+    },
+    {
+      "name": "Garlic Shrimp and Avocado Salad",
+      "servings": 2,
+      "prep_time": 15,
+      "cook_time": 20,
+      "instructions": "Whisk together 3-4 tablespoons olive oil, the juice of half a lemon, 1 tablespoon whole grain mustard and 1 tablespoon honey until smooth.\nSauté the shrimp in 30 g butter with 1-2 crushed garlic cloves for 1-2 minutes.\nTransfer the shrimp to the bowl with the dressing and toss gently.\nPeel the avocado, remove the pit, cut it into large cubes and add it to the bowl.\nTear the iceberg lettuce by hand and add it to the shrimp.\nToss gently so the dressing coats everything evenly.\nSegment the grapefruit half, cut the pieces in half and add them with 1 tablespoon capers. Toss once more.",
+      "category": "Salad",
+      "calories": 650,
+      "protein": 10.0,
+      "carbs": 30.0,
+      "fats": 55.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/r1ojlqrb1jgbztanige9l/17_1791025071_17.jpg?rlkey=yczly3t2r4uqsab5flmaowsii&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.3,
+      "dinner_weight": 0.5,
+      "ingredients": [
+        {
+          "ingredient_key": "1",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "10",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "93",
+          "quantity": 0.5,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "83",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "87",
+          "quantity": 1.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "35",
+          "quantity": 0.5,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "36",
+          "quantity": 1.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "84",
+          "quantity": 4.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "89",
+          "quantity": 2.0,
+          "unit": "slice"
+        }
+      ]
+    },
+    {
+      "name": "Creamy Cheese Soup",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Dice the onion, carrot and potato, then boil them in water for 20 minutes.\nBlend everything into a smooth purée, draining off excess water if you prefer a thicker soup.\nReturn the purée to the heat and stir in the cream and seasonings.\nCube the cheese and add it to the pot, stirring constantly until fully melted.\nBlend the soup once more before serving.",
+      "category": "Soup",
+      "calories": 422,
+      "protein": 11.0,
+      "carbs": 36.0,
+      "fats": 27.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/rhu68xnfd21biagsro0m9/21_1791025079_21.jpg?rlkey=c6niz7s01xholtoz8ccu73mt1&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 1.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "39",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "24",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "8",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "77",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "50",
+          "quantity": 1.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "46",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "157",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Thai-Style Chicken Rice",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Sauté the chicken fillet with onion and vegetables until tender.\nAdd the cooked rice and soy sauce.\nStir-fry everything together for 3 minutes.",
+      "category": "Main",
+      "calories": 413,
+      "protein": 34.0,
+      "carbs": 41.0,
+      "fats": 13.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/m2ajl0z84h25k3trb80gr/24_1791025082_24.jpg?rlkey=kdx2d5kn5c4s5wsgk68v30p01&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.1,
+      "dinner_weight": 0.9,
+      "ingredients": [
+        {
+          "ingredient_key": "33",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "31",
+          "quantity": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "53",
+          "quantity": 3.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "48",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "81",
+          "quantity": 0.5,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "100",
+          "quantity": 0.5,
+          "unit": "piece"
+        }
+      ]
+    },
+    {
+      "name": "Slow-Roasted Rosemary Wine Meat",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Place a large piece of meat in a deep, ovenproof dish with a lid.\nSeason with salt and pepper, scatter garlic cloves and rosemary sprigs on top, and add bay leaves.\nPour in red wine, adding a little water if the meat is not fully covered.\nCover tightly with the lid; if the dish is thin, wrap it in two or three layers of foil to trap the aromas.\nBring to a boil, then bake at 140-160°C for 4-5 hours.\nThe wine will soak in, leaving a sauce behind, and the finished meat will practically fall apart.",
+      "category": "Main",
+      "calories": 685,
+      "protein": 55.0,
+      "carbs": 25.0,
+      "fats": 40.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/vylbnqvk58wcjf54at57k/26_1791025087_26.jpg?rlkey=kg4959bg5pvjzasar8k2dshg5&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.5,
+      "ingredients": [
+        {
+          "ingredient_key": "101",
+          "quantity": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "102",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "89",
+          "quantity": 3.0,
+          "unit": "slice"
+        },
+        {
+          "ingredient_key": "103",
+          "quantity": 4.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "104",
+          "quantity": 2.0,
+          "unit": "piece"
+        }
+      ]
+    },
+    {
+      "name": "Pumpkin Millet Porridge",
+      "servings": 4,
+      "prep_time": 10,
+      "cook_time": 60,
+      "instructions": "Peel 500 g of pumpkin, remove the seeds and cut it into small, even cubes.\nRinse 200 g of millet thoroughly, then place it in a pot with 1 liter of milk, 4 tablespoons of sugar and a pinch of salt.\nHeat the oven to 180°C.\nAdd the pumpkin cubes, 50 g butter and a cinnamon stick to the pot, then simmer over low heat for 20 minutes, stirring occasionally.\nTransfer the porridge to a baking dish, remove the cinnamon stick and top with 50 g butter. Bake for 30 minutes.\nLet the porridge cool slightly and serve warm. Garnish with marigold (calendula) petals for a special aroma, if desired.",
+      "category": "Porridge",
+      "calories": 385,
+      "protein": 8.0,
+      "carbs": 65.0,
+      "fats": 15.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/crw09f0b40b40d81bl8gc/27_1791025090_27.jpg?rlkey=2qdvfrr9jz45w202z1yinj449&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.1,
+      "dinner_weight": 0.5,
+      "ingredients": [
+        {
+          "ingredient_key": "14",
+          "quantity": 500.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "105",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "38",
+          "quantity": 1.0,
+          "unit": "l"
+        },
+        {
+          "ingredient_key": "106",
+          "quantity": 4.0,
+          "unit": "tbsp"
+        },
+        {
+          "ingredient_key": "29",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "10",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "54",
+          "quantity": 1.0,
+          "unit": "pinch"
+        }
+      ]
+    },
+    {
+      "name": "Uzbek Plov",
+      "servings": 4,
+      "prep_time": 30,
+      "cook_time": 90,
+      "instructions": "Soak the rice in heavily salted water at about 60°C, made from 3 cups of boiling water and 1 cup of cold water.\nHeat oil in a heavy pot and caramelize a piece of onion, then remove it.\nFry the sliced onion until golden red, then brown the meat in a single layer.\nAdd the carrots and cumin and fry until the carrots are soft.\nPour in boiling water and simmer gently for at least 40 minutes to make the zirvak broth.\nOnce the zirvak has simmered, add the garlic and pepper and season with salt.\nRinse the rice gently in warm water and spread it evenly over the carrots. Add more boiling water if needed to cover the rice, then turn the heat to maximum.\nWhen the water has boiled away and the rice is done, shape the plov into a mound, cover with a plate and let it rest on the lowest heat for at least 40 minutes.",
+      "category": "Main",
+      "calories": 650,
+      "protein": 35.0,
+      "carbs": 75.0,
+      "fats": 25.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/4ciadxu2t4jpnci3ifxjl/41_1791025095_41.jpg?rlkey=32ve7unnn4bks0kod7vvh4ap1&raw=1",
+      "breakfast_weight": 0.1,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.4,
+      "ingredients": [
+        {
+          "ingredient_key": "157",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "48",
+          "quantity": 800.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "39",
+          "quantity": 800.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "58",
+          "quantity": 800.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "54",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "89",
+          "quantity": 10.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Zucchini and Spinach Fritters with Yogurt Sauce",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Grate the zucchini finely into a deep bowl.\nAdd a pinch of salt, stir and leave for 5-7 minutes, then squeeze out as much juice as possible.\nBlend the spinach with the egg until smooth.\nCombine the squeezed zucchini with the spinach mixture, flour and spices.\nHeat a lightly oiled pan.\nSpoon the batter into the pan and fry under a lid over medium heat for 3-4 minutes per side, flipping once and cooking 2-3 minutes more.\nFor the sauce, mix yogurt, finely chopped dill, pressed garlic, lemon juice and a pinch of salt.",
+      "category": "Breakfast",
+      "calories": 285,
+      "protein": 12.3,
+      "carbs": 19.5,
+      "fats": 17.1,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/yokb8qc9i83ww38q57pz3/42_1779919248_page_003.jpg?rlkey=rn36ak5deivlqfge9urk86h3y&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "278",
+          "quantity": 0.5,
+          "unit": "tsp"
+        },
+        {
+          "ingredient_key": "67",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "64",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "123",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "124",
+          "quantity": 2.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "89",
+          "quantity": 0.5,
+          "unit": "piece"
+        }
+      ]
+    },
+    {
+      "name": "Cheese Buns",
+      "servings": 5,
+      "prep_time": 15,
+      "cook_time": 25,
+      "instructions": "Mash the cottage cheese with the egg, blending until creamy if it is grainy. If it is wet, wrap it in cheesecloth and squeeze out the excess liquid.\nStir in the finely grated hard cheese and seasonings.\nSift the flour with baking powder and gradually mix it into the cheese, keeping the dough slightly sticky.\nWet your hands, divide the dough into 5 equal balls and place them on parchment, flattening them slightly.\nBrush the tops with egg yolk or water and sprinkle with sesame seeds.\nBake at 180°C for 20-25 minutes until golden.",
+      "category": "Breakfast",
+      "calories": 140,
+      "protein": 11.9,
+      "carbs": 7.6,
+      "fats": 6.9,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/7nuen0f6shsxm8npps5kf/43_1779919389_page_004.jpg?rlkey=e2ablkl89esxtk4x3jre7uojk&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "126",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 55.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "127",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "49",
+          "quantity": 3.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "31",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "128",
+          "quantity": 0.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Lazy Khachapuri",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 6,
+      "instructions": "Separate one egg. In a bowl, mix the cottage cheese, egg white, flour, salt and spices.\nMash with a fork until smooth. The dough should be thick and hold its shape.\nSpread the dough onto a lightly oiled, preheated non-stick pan, wetting your fingers if it sticks.\nFry under a lid over low heat for 3 to 4 minutes, until the bottom is golden.\nCarefully flip the khachapuri and sprinkle grated mozzarella into the center.\nMake a small well in the cheese, add the reserved yolk and cover for 1 to 2 minutes, until the cheese melts and the yolk stays runny.",
+      "category": "Breakfast",
+      "calories": 340,
+      "protein": 28.8,
+      "carbs": 18.9,
+      "fats": 16.5,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/3pv1as5oe6n7ki0mt9go5/44_1779919391_page_005.jpg?rlkey=8ve8ot18xp1z5rakcm7pyvmew&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "126",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "40",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 2.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Egg Toast",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Cut a hole in the center of two slices of bread, leaving a border about 1 cm wide.\nHeat a non-stick pan with a drop of oil and toast the bread for 1 minute on each side, until lightly golden.\nCrack an egg into the center of each slice and season with salt and your favorite spices.\nPress the bread border down firmly so the egg does not run out.\nCover and cook over low heat until the whites are set, leaving the yolk runny if you like.\nSprinkle with grated cheese, cover again, turn off the heat and let it melt for 1 to 2 minutes.\nServe the toasts with the bread centers, toasted in the pan alongside.",
+      "category": "Breakfast",
+      "calories": 380,
+      "protein": 23.4,
+      "carbs": 24.0,
+      "fats": 20.4,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/kujy5h6taxtv9keou6o2d/45_1779919394_page_006.jpg?rlkey=sdvfc0hmmjgi03m538qdxvwet&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "60",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 2.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "129",
+          "quantity": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 2.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Frittata",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 10,
+      "instructions": "Whisk the eggs with milk, salt and spices in a bowl. Do not whip into foam, just mix until smooth.\nChop the vegetables and sauté them in oil until the excess moisture evaporates.\nPour the egg mixture over the vegetables in the pan.\nFor the oven, bake at 180 °C for 10 to 12 minutes, until the center is springy.\nOn the stovetop, cover and cook over low heat for 7 to 10 minutes instead.\nThe frittata is ready when the edges are set and the center still wobbles slightly.",
+      "category": "Breakfast",
+      "calories": 338,
+      "protein": 20.3,
+      "carbs": 3.5,
+      "fats": 26.2,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/jahf2a6wxeqtq8t20jtyf/46_1779919397_page_007.jpg?rlkey=d195uqg65pppxkrtl8s4l2daz&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "70",
+          "quantity": 3.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "131",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "38",
+          "quantity": 50.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Armenian Eka",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 5,
+      "instructions": "Grate the cheese on a medium or large grater and finely chop the fresh herbs.\nLightly beat the egg in a small bowl with salt and pepper.\nHeat a non-stick pan over medium-low heat and brush the bottom with a thin layer of oil.\nPlace the lavash on the warm pan and pour the egg into the center, spreading it and leaving a 2 to 3 cm border.\nQuickly sprinkle with the grated cheese and herbs.\nWhile the egg is still runny, fold the edges of the lavash into the center to form a square or triangle. The egg acts as glue.\nPress gently with a spatula, cover and cook for 2 to 3 minutes.\nFlip and cook for 1 to 2 minutes more, until the cheese melts and the lavash turns golden and crisp. Serve hot.",
+      "category": "Breakfast",
+      "calories": 329,
+      "protein": 18.3,
+      "carbs": 27.0,
+      "fats": 15.9,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/4558533dvshuya17qoy4v/47_1779919399_page_008.jpg?rlkey=1db2uepz9gt54h3fswc29a16i&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "129",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "34",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 2.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "19",
+          "quantity": 0.0,
+          "unit": "to taste"
+        }
+      ]
+    },
+    {
+      "name": "Ham and Cheese Muffins",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 22,
+      "instructions": "Preheat the oven to 180 °C and prepare the muffin tin with paper liners or a light coating of butter.\nDice the chicken ham and hard cheese very finely, about 3 to 4 mm, and finely chop the herbs.\nWhisk the egg, sour cream and melted butter in a deep bowl until completely smooth. Make sure all ingredients are at room temperature.\nAdd the whole grain flour, baking powder, a pinch of salt and spices, then fold gently with a spatula.\nStir in the ham, cheese and herbs, then divide the batter among the molds, filling them no more than two-thirds full.\nBake for 18 to 22 minutes, until golden and a wooden skewer comes out dry from the center.\nLet the muffins rest in the molds for 5 to 10 minutes.\nTransfer to a rack to cool completely.",
+      "category": "Breakfast",
+      "calories": 557,
+      "protein": 31.8,
+      "carbs": 31.8,
+      "fats": 33.0,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/nb88mvlq1xli0djmdwgd6/48_1779919402_page_009.jpg?rlkey=9r91v0j461dgy0hhpzgjzgvad&raw=1",
+      "breakfast_weight": 0.3,
+      "lunch_weight": 0.0,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "10",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "4",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "32",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "51",
+          "quantity": 35.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "52",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "49",
+          "quantity": 3.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "19",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Cauliflower Cream Soup",
+      "servings": 1,
+      "prep_time": 60,
+      "cook_time": 20,
+      "instructions": "Soak the cashews in clean water for at least 1 to 2 hours, or overnight for best results.\nCut the cauliflower and carrot into medium pieces.\nAdd the vegetables with just enough water to barely cover them and cook until very soft.\nPour off some of the vegetable broth into a separate container and set it aside.\nAdd the soaked cashews, light cream, salt and spices to the vegetables.\nBlend thoroughly with an immersion blender until completely smooth.\nIf the soup is too thick, gradually add back the reserved broth until you reach the desired consistency.",
+      "category": "Soup",
+      "calories": 270,
+      "protein": 5.7,
+      "carbs": 15.4,
+      "fats": 21.7,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/2m3juyxg88y9vrzg8svnh/90_1779919509_page_051.jpg?rlkey=5qpkiw08hno6si2i6tmk54k6p&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "61",
+          "quantity": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "39",
+          "quantity": 75.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "203",
+          "quantity": 60.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "27",
+          "quantity": 20.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Broccoli Cream Soup",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Dice the potato, carrot and onion into small cubes. The smaller the pieces, the faster they cook.\nCover the vegetables with water, just 1 cm above them, and simmer over medium heat for 10 to 12 minutes.\nBreak the broccoli into small florets, add them to the pot and cook for another 5 to 7 minutes.\nAdd the processed cheese and stir constantly until it fully dissolves into the hot broth.\nRemove from the heat, blend until perfectly smooth and season with salt, pepper and dried garlic.\nIf the soup is too thick, add a little hot water. Do not reboil it, so the broccoli keeps its bright green color.\nSprinkle with pumpkin seeds before serving.",
+      "category": "Soup",
+      "calories": 205,
+      "protein": 9.2,
+      "carbs": 16.7,
+      "fats": 11.3,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/gasdx3yj0f78eyb5wbavo/91_1779919512_page_052.jpg?rlkey=x7u1gehe0zmbwwqcf8evgsp1q&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "61",
+          "quantity": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "5",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "39",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "24",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "136",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "41",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "148",
+          "quantity": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "204",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "205",
+          "quantity": 0.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Cheese Cream Soup",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 30,
+      "instructions": "Dice the onion and carrot finely and cut the potatoes into medium pieces. Heat half the oil in a heavy-bottomed pot.\nAdd the onion and carrot and sauté over medium heat for 3 to 4 minutes, until soft and lightly golden. Stir in the turmeric and heat for 30 seconds.\nAdd the potatoes and pour in about 200 to 250 ml of hot water, just enough to barely cover the vegetables. Season with salt, cover and simmer for 15 to 20 minutes, until the potatoes are very soft.\nMeanwhile, cut the chicken fillet into small pieces, season with salt and pepper, and fry in the remaining oil until golden.\nRemove the chicken from the pan. Cut the whole grain bread into cubes and toast them in a dry pan until crisp.\nStir the finely chopped garlic into the soup, remove the pot from the heat and blend until smooth.\nReturn the pot to low heat, add the processed cheese and whisk until melted. Pour in the cream and heat for 1 minute without boiling.\nServe topped with the fried chicken and garlic croutons.",
+      "category": "Soup",
+      "calories": 483,
+      "protein": 35.7,
+      "carbs": 34.3,
+      "fats": 21.7,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/nl26pcz9vuwlrm03uv83g/93_1779919520_page_055.jpg?rlkey=31dx6gv4hr3a3te6xxgy7th46&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "33",
+          "quantity": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "24",
+          "quantity": 80.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "8",
+          "quantity": 60.0,
+          "unit": "ml"
+        },
+        {
+          "ingredient_key": "39",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "44",
+          "quantity": 5.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "122",
+          "quantity": 0.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "46",
+          "quantity": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "157",
+          "quantity": 30.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "149",
+          "quantity": 30.0,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "name": "Chicken and Egg Ramen",
+      "servings": 1,
+      "prep_time": 15,
+      "cook_time": 25,
+      "instructions": "Slice the chicken fillet thinly and place it in a pot with about 350 to 400 ml of water.\nAdd a crushed garlic clove and a peeled piece of ginger. Simmer for 10 to 12 minutes after boiling, skimming off the foam.\nBoil the egg for 6 minutes, then transfer it to ice water. Pour boiling water over the rice noodles, let them soak for 3 to 5 minutes and drain.\nRemove the ginger and garlic from the broth and stir in the soy sauce.\nDivide the noodles between deep bowls, top with the chicken and pour over the hot broth.\nHalve the egg, place it on top and sprinkle with sesame seeds.",
+      "category": "Lunch",
+      "calories": 416,
+      "protein": 39.6,
+      "carbs": 35.5,
+      "fats": 11.8,
+      "image_url": "https://dl.dropboxusercontent.com/scl/fi/00zbt3mg0i3r5dedv4e2n/94_1779919522_page_056.jpg?rlkey=zgnuk568wg7ddy8ded6fn98rr&raw=1",
+      "breakfast_weight": 0.0,
+      "lunch_weight": 0.5,
+      "dinner_weight": 0.0,
+      "ingredients": [
+        {
+          "ingredient_key": "89",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "33",
+          "quantity": 120.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "210",
+          "quantity": 40.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "70",
+          "quantity": 1.0,
+          "unit": "piece"
+        },
+        {
+          "ingredient_key": "53",
+          "quantity": 25.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "31",
+          "quantity": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredient_key": "211",
+          "quantity": 5.0,
+          "unit": "g"
+        }
+      ]
+    }
   ]
 }
