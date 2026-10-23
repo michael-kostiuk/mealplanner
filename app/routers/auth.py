@@ -1,6 +1,7 @@
 """Login, logout and auth status endpoints. Rationale: see app/auth/__init__.py."""
 
 import math
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, Response
 from fastapi.concurrency import run_in_threadpool
@@ -65,5 +66,5 @@ def logout(response: Response):
 
 
 @router.get("/me", response_model=AuthStatus)
-def me(auth: AuthContext = Depends(get_auth)):
+def me(auth: Annotated[AuthContext, Depends(get_auth)]):
     return AuthStatus(mode=auth.mode, login_locked_for=_locked_for())
