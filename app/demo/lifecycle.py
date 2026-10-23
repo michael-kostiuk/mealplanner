@@ -88,6 +88,12 @@ def ensure_demo_fresh() -> None:
                 ensure_current_week_plan(db)
 
 
+def invalidate_current_week() -> None:
+    """Force the next demo request to re-check (and if needed regenerate) the current plan."""
+    global _cached_week
+    _cached_week = None
+
+
 def demo_status() -> dict:
     return {
         "last_reset": (

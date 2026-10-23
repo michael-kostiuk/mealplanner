@@ -7,7 +7,9 @@ from sqlalchemy.orm import Session
 
 from .. import models, schemas
 from ..auth.current_user import get_current_user
+from ..auth.deps import AuthContext, get_auth
 from ..database import get_db
+from ..demo.lifecycle import invalidate_current_week
 from ..services import MealPlanGenerator
 from .shopping_lists import generate_shopping_list
 
@@ -169,6 +171,7 @@ async def update_meal_plan(
     meal_plan: schemas.MealPlanCreate,
     db: Annotated[Session, Depends(get_db)],
     user: Annotated[models.User, Depends(get_current_user)],
+    auth: Annotated[AuthContext, Depends(get_auth)],
 ):
     db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
@@ -188,6 +191,8 @@ async def update_meal_plan(
 
     db.commit()
     db.refresh(db_meal_plan)
+    if auth.mode == "demo":
+        invalidate_current_week()  # the update may have moved the plan off the current week
     return db_meal_plan
 
 
@@ -196,11 +201,14 @@ async def delete_meal_plan(
     meal_plan_id: int,
     db: Annotated[Session, Depends(get_db)],
     user: Annotated[models.User, Depends(get_current_user)],
+    auth: Annotated[AuthContext, Depends(get_auth)],
 ):
     db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
     db.delete(db_meal_plan)
     db.commit()
+    if auth.mode == "demo":
+        invalidate_current_week()  # the next demo request regenerates the current week
     return {"message": "Meal plan deleted successfully"}
 
 
