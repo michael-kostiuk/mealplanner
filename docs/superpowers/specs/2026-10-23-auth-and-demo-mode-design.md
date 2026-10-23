@@ -77,11 +77,17 @@ engine working on meaningful English data, with no friction.
   - Source data: dump from the prod database using the credentials in the local `.env` (the owner
     approved this). The same dump can populate local development. The dump is read-only against
     prod and the raw dump is never committed; only the translated, reviewed seed subset is.
-  - *Builder's call (set by design author):* the existing `ingredient_translator.py` only handles
-    ingredient names, so a one-off script in `app/fixtures/` translates recipe names, instructions
-    and categories too. The builder proposes the subset (balanced across meal types, recipes with
-    images preferred) and the owner approves it before merge. The backend work doesn't wait on
-    that approval: it can be built and tested against a draft seed.
+  - **Order (owner's decision):**
+    1. The builder proposes a candidate list of about 30–40 recipes, balanced across meal types
+       with recipes that have images preferred. The list shows the original names plus their
+       meal weights and calories.
+    2. The owner reviews it and vetoes recipes.
+    3. **Only then** are the approved recipes translated, by a Haiku subagent during
+       development, not by app code at runtime. That covers names, instructions, categories and
+       ingredient names.
+    4. The translated seed is committed after a final check.
+  - The backend work doesn't wait on the list. It can be built and tested against a small
+    hand-made draft seed.
   - The subset has to give the generator a real choice for breakfast, lunch and dinner (sensible
     `*_weight` values and calories).
   - The owner reviews and approves the subset, and it's checked for anything personal before
