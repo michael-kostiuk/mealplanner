@@ -162,7 +162,34 @@ argues from it.
 - [ ] **Step 2: Run** `pytest tests/test_auth_units.py -v` → FAIL.
 - [ ] **Step 3: Implement** `pin.py` and `rate_limit.py`.
 - [ ] **Step 4: Run** → PASS.
-- [ ] **Step 5: Commit** — `feat: add argon2 PIN verification and global login limiter`.
+- [ ] **Step 5: Write the design-rationale docstring** at the top of `app/auth/__init__.py`.
+  This is the owner's explicit requirement: a code reviewer must see that simplicity was a
+  deliberate choice. Plain prose, 25–40 lines, covering:
+  1. **Threat model.** There's a single owner. The app is a public showcase whose source is
+     public. The assets are the owner's data and the AI quota. Anonymous visitors are welcome and
+     get the demo.
+  2. **Why a 4-digit PIN works here:** 10k combinations, but a *global* (not per-IP, so forged
+     forwarded headers and IP rotation don't help) limit of 3 failures per hour with doubling
+     lockouts puts brute force at years. It's an argon2 hash in an env var, compared in constant
+     time.
+  3. **What was deliberately left out, and why:**
+     - **Accounts and signup:** one user.
+     - **OAuth:** a third-party dependency and redirect flow for one login.
+     - **2FA:** the PIN only guards a meal planner, and the owner has server access.
+     - **Password reset:** the owner changes the env var.
+     - **Distributed rate limiting:** the app runs one process.
+  4. **Accepted trade-offs:**
+     - An attacker can lock out *new* owner logins. Existing 180-day sessions keep working.
+     - Lockout state resets on restart, which is the owner's unlock.
+  5. **What changes for multiple users:** the session already carries `user_id`, so it's a PIN
+     (or credential) per user mapping to a user row. Plans and favorites are already scoped by
+     user.
+  6. **Where the pieces live:** `pin.py`, `rate_limit.py`, `session.py`, `deps.py`,
+     `routers/auth.py`.
+
+  Each of those modules gets a 1–3 line docstring pointing back to `app/auth/__init__.py`. Don't
+  scatter rationale comments elsewhere.
+- [ ] **Step 6: Commit** — `feat: add argon2 PIN verification and global login limiter`.
 
 ### Task 3: Session cookie, `get_auth`, `/auth` routes
 
@@ -483,8 +510,14 @@ argues from it.
 ### Task 10: Backend docs and deploy checklist
 
 **Files:**
-- Modify: `CLAUDE.md`
+- Modify: `CLAUDE.md`, `README.md` (the "Flows worth looking at" section)
 
+- [ ] **Step 0: Add a reviewer-facing section to the README**, "### 4. Auth & demo mode", after
+  section 3 and in the same style. In about 10–15 lines it explains:
+  - Logged out is the demo, served from SQLite; the owner's PIN switches to Postgres.
+  - Routing happens in one place (`get_db`, plus background tasks taking a `session_factory`).
+  - A short "why not accounts/OAuth/2FA" paragraph that summarizes and links to
+    `app/auth/__init__.py`.
 - [ ] **Step 1: Update CLAUDE.md:**
   - The frontend path is `../mp-ai-frontend`.
   - Auth and demo architecture: a short "Auth & demo" section naming `app/auth/`, `app/demo/`
