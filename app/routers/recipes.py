@@ -1,12 +1,13 @@
 import logging
 import time
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy import or_
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from .. import models, schemas
-from ..database import get_db
+from ..database import get_db, get_session_factory
 from ..services.recipe_from_image import recipe_from_image_service
 
 logger = logging.getLogger(__name__)
@@ -16,6 +17,7 @@ router = APIRouter(prefix="/recipes", tags=["recipes"])
 
 @router.post("/parse-from-image", response_model=schemas.RecipeFromImageStartResponse)
 async def parse_recipe_from_image(
+    session_factory: Annotated[sessionmaker, Depends(get_session_factory)],
     file: UploadFile = File(...),
 ):
     if not file.content_type or not file.content_type.startswith("image/"):
@@ -23,7 +25,7 @@ async def parse_recipe_from_image(
     file_data = await file.read()
     if len(file_data) > 10 * 1024 * 1024:
         raise HTTPException(status_code=400, detail="File too large (max 10MB)")
-    return await recipe_from_image_service.start_job(file_data, file.content_type)
+    return await recipe_from_image_service.start_job(file_data, file.content_type, session_factory)
 
 
 @router.get("/parse-from-image/{job_id}", response_model=schemas.RecipeFromImageJob)

@@ -2,6 +2,7 @@ import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+from sqlalchemy.orm import sessionmaker
 
 from app import models
 from app.services.recipe_import.extractors.image import ImageExtractor
@@ -138,7 +139,10 @@ async def test_import_recipe_from_image_happy_path(
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
         assert result.job_id is not None
 
@@ -204,7 +208,10 @@ async def test_import_recipe_missing_required_fields(
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         job = None
@@ -285,7 +292,10 @@ async def test_import_recipe_with_duplicate_ingredients(
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         job = None
@@ -318,7 +328,10 @@ async def test_import_job_cancellation(db_session, sample_image_bytes):
 
     with patch("app.services.recipe_import.service.ImageExtractor", return_value=mock_extractor):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         cancel_result = await recipe_import_service.cancel_job(result.job_id)
@@ -410,7 +423,10 @@ async def test_import_recipe_with_matching(db_session, mock_ingredient, sample_i
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         job = None
@@ -483,7 +499,10 @@ async def test_import_recipe_nutrition_estimation_failure(
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         job = None
@@ -540,7 +559,10 @@ async def test_import_progress_updates(
         ),
     ):
         result = await recipe_import_service.start_job(
-            "image", sample_image_bytes, mime_type="image/png"
+            "image",
+            sample_image_bytes,
+            mime_type="image/png",
+            session_factory=sessionmaker(bind=db_session.get_bind()),
         )
 
         job = await recipe_import_service.get_job(result.job_id)

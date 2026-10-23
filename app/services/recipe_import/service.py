@@ -4,7 +4,7 @@ import os
 import time
 from typing import Any
 
-from app.database import SessionLocal
+from sqlalchemy.orm import sessionmaker
 
 from .extractors.image import ImageExtractor
 from .job_store import JobStore
@@ -19,12 +19,14 @@ class RecipeImportService:
         self._jobs = JobStore()
 
     async def start_job(
-        self, source_type: str, input_data: Any, **kwargs
+        self, source_type: str, input_data: Any, *, session_factory: sessionmaker, **kwargs
     ) -> RecipeImportStartResponse:
         job_id = f"rfi_{int(time.time())}_{os.urandom(6).hex()}"
         await self._jobs.create(job_id)
 
-        asyncio.create_task(self._run_job(job_id, source_type, input_data, **kwargs))
+        asyncio.create_task(
+            self._run_job(job_id, source_type, input_data, session_factory, **kwargs)
+        )
         return RecipeImportStartResponse(job_id=job_id)
 
     async def get_job(self, job_id: str) -> RecipeImportJob | None:
@@ -33,7 +35,14 @@ class RecipeImportService:
     async def cancel_job(self, job_id: str) -> bool:
         return await self._jobs.cancel(job_id)
 
-    async def _run_job(self, job_id: str, source_type: str, input_data: Any, **kwargs) -> None:
+    async def _run_job(
+        self,
+        job_id: str,
+        source_type: str,
+        input_data: Any,
+        session_factory: sessionmaker,
+        **kwargs,
+    ) -> None:
         if await self._jobs.is_canceled(job_id):
             return
 
@@ -65,7 +74,7 @@ class RecipeImportService:
                 return
 
             # 2. Pipeline
-            db = SessionLocal()
+            db = session_factory()
             try:
                 pipeline = RecipeImportPipeline(db)
 

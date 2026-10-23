@@ -1,12 +1,16 @@
+from sqlalchemy.orm import sessionmaker
+
 from app import schemas
 from app.services.recipe_import.service import recipe_import_service as new_service
 
 
 class LegacyRecipeFromImageService:
     async def start_job(
-        self, image_bytes: bytes, mime_type: str
+        self, image_bytes: bytes, mime_type: str, session_factory: sessionmaker
     ) -> schemas.RecipeFromImageStartResponse:
-        result = await new_service.start_job("image", image_bytes, mime_type=mime_type)
+        result = await new_service.start_job(
+            "image", image_bytes, session_factory=session_factory, mime_type=mime_type
+        )
         return schemas.RecipeFromImageStartResponse(job_id=result.job_id)
 
     async def get_job(self, job_id: str) -> schemas.RecipeFromImageJob | None:

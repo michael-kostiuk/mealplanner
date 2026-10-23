@@ -1,13 +1,14 @@
 import asyncio
 import logging
+from typing import Annotated
 from urllib.parse import unquote
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 from sqlalchemy import func
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from .. import models, schemas
-from ..database import SessionLocal, get_db
+from ..database import get_db, get_session_factory
 from ..services import fdc_lookup
 from ..services.fdc_linker import link_ingredient_to_fdc_async
 from ..services.ingredient_translator import (
@@ -39,13 +40,13 @@ def _is_nutrition_missing(ingredient: models.Ingredient) -> bool:
     )
 
 
-def _estimate_nutrition_background_sync(ingredient_id: int) -> None:
+def _estimate_nutrition_background_sync(ingredient_id: int, session_factory: sessionmaker) -> None:
     """Synchronous background task to estimate nutrition for a newly created ingredient.
 
     Runs blocking DB/FDC operations in a thread pool to avoid blocking the event loop.
     Creates its own database session since the request session will be closed.
     """
-    db = SessionLocal()
+    db = session_factory()
     try:
         ingredient = (
             db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
@@ -111,13 +112,13 @@ def _estimate_nutrition_background_sync(ingredient_id: int) -> None:
         db.close()
 
 
-def _link_fdc_background_sync(ingredient_id: int) -> None:
+def _link_fdc_background_sync(ingredient_id: int, session_factory: sessionmaker) -> None:
     """Background task to link ingredient to FDC for unit conversion.
 
     Uses async translation via new event loop since we're in sync context.
     Creates its own database session since the request session will be closed.
     """
-    db = SessionLocal()
+    db = session_factory()
     try:
         ingredient = (
             db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
@@ -284,6 +285,7 @@ async def list_ingredients(db: Session = Depends(get_db), name: str | None = Que
 async def create_ingredient(
     ingredient: schemas.IngredientCreate,
     background_tasks: BackgroundTasks,
+    session_factory: Annotated[sessionmaker, Depends(get_session_factory)],
     db: Session = Depends(get_db),
 ):
     # Check if user provided NO nutrition at all (all fields are None)
@@ -303,7 +305,7 @@ async def create_ingredient(
     db.refresh(db_ingredient)
 
     # Schedule FDC linking in background (uses AI translation, can be slow)
-    background_tasks.add_task(_link_fdc_background_sync, db_ingredient.id)
+    background_tasks.add_task(_link_fdc_background_sync, db_ingredient.id, session_factory)
     logger.info(
         "Ingredient %s created, scheduling background FDC linking",
         db_ingredient.id,
@@ -312,7 +314,9 @@ async def create_ingredient(
     # Only estimate nutrition if user provided NO nutrition data at all
     # This distinguishes "unknown" from intentional zero-calorie items like salt/water
     if all_nutrition_none:
-        background_tasks.add_task(_estimate_nutrition_background_sync, db_ingredient.id)
+        background_tasks.add_task(
+            _estimate_nutrition_background_sync, db_ingredient.id, session_factory
+        )
         logger.info(
             "Ingredient %s created without nutrition, scheduling background estimation",
             db_ingredient.id,
