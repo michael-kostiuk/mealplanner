@@ -1,10 +1,10 @@
 from typing import Annotated
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app import models
-from app.auth.deps import AuthContext, get_auth
+from app.auth.deps import AuthContext, forget_user, get_auth
 from app.database import get_db
 
 
@@ -13,4 +13,9 @@ def get_current_user(
     db: Annotated[Session, Depends(get_db)],
 ) -> models.User:
     """The user row in the session's own DB (Postgres for the owner, SQLite for demo)."""
-    return db.get(models.User, auth.user_id)
+    user = db.get(models.User, auth.user_id)
+    if user is None:
+        # Cached owner row deleted, or demo DB without its user: drop the stale cache entry
+        forget_user(auth.user_id)
+        raise HTTPException(status_code=401, detail="User not found")
+    return user

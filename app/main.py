@@ -9,7 +9,9 @@ from alembic import command
 from alembic.config import Config
 
 from .config import get_settings
+from .auth.deps import _owner_exists
 from .database import engine
+from .db_core import get_owner_session_factory
 from .demo.lifecycle import rebuild_demo_db
 from .logging_setup import setup_logging
 from .routers import (
@@ -92,10 +94,25 @@ def run_migrations():
     logger.info("Database migrations completed.")
 
 
+def _warn_if_owner_missing() -> None:
+    """Owner login needs a users row; warn (never crash, demo must stay up) when it's absent."""
+    try:
+        if not _owner_exists(get_settings().owner_user_id, get_owner_session_factory()):
+            logger.warning(
+                "No users row with id=%s (OWNER_USER_ID): owner login will return 503",
+                get_settings().owner_user_id,
+            )
+    except Exception:
+        logger.warning(
+            "Could not check for the owner users row (Postgres unreachable?)", exc_info=True
+        )
+
+
 @app.on_event("startup")
 def startup_event():
     get_settings()  # fail at boot if secrets are missing
     run_migrations()
+    _warn_if_owner_missing()
     rebuild_demo_db()
     # Re-apply logging setup in case Alembic or Uvicorn messed it up
     setup_logging()

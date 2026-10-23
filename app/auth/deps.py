@@ -21,6 +21,10 @@ def reset_user_cache() -> None:
     _known_users.clear()
 
 
+def forget_user(user_id: int) -> None:
+    _known_users.discard(user_id)
+
+
 @dataclass(frozen=True)
 class AuthContext:
     mode: Literal["owner", "demo"]

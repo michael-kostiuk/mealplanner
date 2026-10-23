@@ -89,3 +89,18 @@ async def test_parallel_wrong_pins_cannot_exceed_limit():
         )
     codes = sorted(r.status_code for r in responses)
     assert codes == [401] * 3 + [429] * 7
+
+
+def test_login_without_owner_row_is_503_and_sets_no_cookie(client, owner_db):
+    from app.auth.deps import reset_user_cache
+    from app.models import User
+
+    owner_db.query(User).delete()
+    owner_db.commit()
+    reset_user_cache()
+
+    response = _login(client, "1234")
+    assert response.status_code == 503
+    assert response.json() == {"detail": "Owner account not found"}
+    assert "set-cookie" not in response.headers
+    assert client.get("/auth/me").json()["mode"] == "demo"
