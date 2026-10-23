@@ -1,6 +1,7 @@
 from datetime import datetime
+from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, field_serializer, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_serializer, field_validator
 
 from app.units import BaseUnit, normalize_unit
 
@@ -241,3 +242,12 @@ ParsedIngredientFromImage = IngredientImportDraft
 ParsedRecipeFromImage = RecipeImportDraft
 RecipeFromImageStartResponse = RecipeImportStartResponse
 RecipeFromImageJob = RecipeImportJob
+
+
+class LoginRequest(BaseModel):
+    pin: str = Field(pattern=r"^\d{4}$")
+
+
+class AuthStatus(BaseModel):
+    mode: Literal["owner", "demo"]
+    login_locked_for: int  # seconds, rounded up
