@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
@@ -40,7 +41,7 @@ def _get_owned_plan(db: Session, meal_plan_id: int, user: models.User) -> models
 
 @router.get("/", response_model=list[schemas.MealPlan])
 async def list_meal_plans(
-    db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+    db: Annotated[Session, Depends(get_db)], user: Annotated[models.User, Depends(get_current_user)]
 ):
     return db.query(models.MealPlan).filter(models.MealPlan.user_id == user.id).all()
 
@@ -48,8 +49,8 @@ async def list_meal_plans(
 @router.post("/", response_model=schemas.MealPlan)
 async def create_meal_plan(
     meal_plan: schemas.MealPlanCreate,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     db_meal_plan = models.MealPlan(
         user_id=user.id,
@@ -81,8 +82,9 @@ async def auto_generate_meal_plan(
     people_count: int | None = None,
     dietary_preferences: list[str] = Query([]),
     meal_plan_id: int | None = Query(None, alias="id"),
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    *,
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     # Get all available recipes
     if db.query(models.Recipe.id).first() is None:
@@ -133,7 +135,7 @@ async def auto_generate_meal_plan(
 
 
 @router.post("/suggest-meal", response_model=schemas.Recipe)
-async def suggest_meal(req: schemas.MealSuggestRequest, db: Session = Depends(get_db)):
+async def suggest_meal(req: schemas.MealSuggestRequest, db: Annotated[Session, Depends(get_db)]):
     """Suggest one replacement recipe for a single meal slot (the re-roll action)."""
     if db.query(models.Recipe.id).first() is None:
         raise HTTPException(status_code=400, detail="No recipes available for meal planning")
@@ -155,8 +157,8 @@ async def suggest_meal(req: schemas.MealSuggestRequest, db: Session = Depends(ge
 @router.get("/{meal_plan_id}", response_model=schemas.MealPlan)
 async def get_meal_plan(
     meal_plan_id: int,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     return _get_owned_plan(db, meal_plan_id, user)
 
@@ -165,8 +167,8 @@ async def get_meal_plan(
 async def update_meal_plan(
     meal_plan_id: int,
     meal_plan: schemas.MealPlanCreate,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
@@ -192,8 +194,8 @@ async def update_meal_plan(
 @router.delete("/{meal_plan_id}")
 async def delete_meal_plan(
     meal_plan_id: int,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
@@ -207,8 +209,8 @@ async def update_meal(
     meal_plan_id: int,
     meal_id: int,
     meal: schemas.MealPlanEntryCreate,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     _get_owned_plan(db, meal_plan_id, user)
     db_meal = (
@@ -234,8 +236,8 @@ async def update_meal(
 async def add_meal(
     meal_plan_id: int,
     meal: schemas.MealPlanEntryCreate,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     """Add a new meal to a meal plan."""
     _get_owned_plan(db, meal_plan_id, user)
@@ -256,8 +258,8 @@ async def add_meal(
 async def delete_meal(
     meal_plan_id: int,
     meal_id: int,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     """Remove a meal from a meal plan."""
     _get_owned_plan(db, meal_plan_id, user)
@@ -281,8 +283,8 @@ async def delete_meal(
 @router.get("/{meal_plan_id}/shopping-list", response_model=schemas.ShoppingList)
 async def create_shopping_list(
     meal_plan_id: int,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     meal_plan = _get_owned_plan(db, meal_plan_id, user)
     return generate_shopping_list(meal_plan, db)

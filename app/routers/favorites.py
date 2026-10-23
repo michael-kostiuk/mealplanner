@@ -1,4 +1,5 @@
 import logging
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
@@ -14,7 +15,7 @@ router = APIRouter(prefix="/favorites", tags=["favorites"])
 
 @router.get("/", response_model=list[schemas.Favorite])
 async def list_favorites(
-    db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+    db: Annotated[Session, Depends(get_db)], user: Annotated[models.User, Depends(get_current_user)]
 ):
     """List all favorites for the current user."""
     favorites = (
@@ -33,8 +34,8 @@ async def list_favorites(
 @router.post("/", response_model=schemas.Favorite, status_code=201)
 async def add_favorite(
     favorite: schemas.FavoriteCreate,
-    db: Session = Depends(get_db),
-    user: models.User = Depends(get_current_user),
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     """Add a recipe to favorites."""
     # Check if recipe exists
@@ -60,7 +61,9 @@ async def add_favorite(
 
 @router.delete("/recipe/{recipe_id}")
 async def remove_favorite(
-    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+    recipe_id: int,
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     """Remove a recipe from favorites by recipe ID."""
     favorite = (
@@ -78,7 +81,9 @@ async def remove_favorite(
 
 @router.get("/recipe/{recipe_id}", response_model=dict)
 async def check_favorite(
-    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+    recipe_id: int,
+    db: Annotated[Session, Depends(get_db)],
+    user: Annotated[models.User, Depends(get_current_user)],
 ):
     """Check if a recipe is in the user's favorites."""
     favorite = (
