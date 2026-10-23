@@ -2,7 +2,7 @@
   "ingredients": [
     {
       "key": "1",
-      "name": "Avocado",
+      "name": "avocado",
       "category": "Fruits",
       "base_unit": "g",
       "fdc_id": 171705,
@@ -114,7 +114,7 @@
     },
     {
       "key": "8",
-      "name": "Cream",
+      "name": "cream",
       "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 171255,
@@ -139,7 +139,7 @@
     },
     {
       "key": "10",
-      "name": "Butter",
+      "name": "butter",
       "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 173410,
@@ -164,8 +164,8 @@
     },
     {
       "key": "12",
-      "name": "Walnuts",
-      "category": "Fruits",
+      "name": "walnuts",
+      "category": "Nuts",
       "base_unit": "g",
       "fdc_id": 2346394,
       "calories": 729.56,
@@ -176,7 +176,7 @@
     },
     {
       "key": "14",
-      "name": "Pumpkin",
+      "name": "pumpkin",
       "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 168448,
@@ -226,7 +226,7 @@
     },
     {
       "key": "22",
-      "name": "greek yogurt",
+      "name": "Greek yogurt",
       "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 330137,
@@ -289,7 +289,7 @@
     {
       "key": "27",
       "name": "cashew",
-      "category": "Fruits",
+      "category": "Nuts",
       "base_unit": "g",
       "fdc_id": 2515374,
       "calories": 553.0,
@@ -300,7 +300,7 @@
     },
     {
       "key": "29",
-      "name": "Cinnamon",
+      "name": "cinnamon",
       "category": "Condiments",
       "base_unit": "piece",
       "fdc_id": 171320,
@@ -331,7 +331,7 @@
     },
     {
       "key": "31",
-      "name": "Sesame Seeds",
+      "name": "sesame seeds",
       "category": "Grains",
       "base_unit": "g",
       "fdc_id": 170150,
@@ -413,7 +413,7 @@
     },
     {
       "key": "35",
-      "name": "Lemon",
+      "name": "lemon",
       "category": "Fruits",
       "base_unit": "piece",
       "fdc_id": 167746,
@@ -444,8 +444,8 @@
     },
     {
       "key": "36",
-      "name": "Honey",
-      "category": "Fruits",
+      "name": "honey",
+      "category": "Condiments",
       "base_unit": "g",
       "fdc_id": 169640,
       "calories": 304.0,
@@ -563,8 +563,8 @@
     },
     {
       "key": "44",
-      "name": "Oil",
-      "category": "Condiments",
+      "name": "vegetable oil",
+      "category": "Fats",
       "base_unit": "g",
       "fdc_id": 171025,
       "calories": 884.0,
@@ -594,7 +594,7 @@
     },
     {
       "key": "46",
-      "name": "Processed Cheese",
+      "name": "processed cheese",
       "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 325198,
@@ -606,7 +606,7 @@
     },
     {
       "key": "48",
-      "name": "Cooked Rice",
+      "name": "cooked rice",
       "category": "Grains",
       "base_unit": "g",
       "fdc_id": 168878,
@@ -626,7 +626,7 @@
     {
       "key": "49",
       "name": "baking powder",
-      "category": "Other",
+      "category": "Baking",
       "base_unit": "piece",
       "fdc_id": 172805,
       "calories": 4.85,
@@ -645,37 +645,6 @@
           "gram_weight": 10.0,
           "modifier": "household",
           "is_default": true
-        }
-      ]
-    },
-    {
-      "key": "50",
-      "name": "Vegetable Oil",
-      "category": "Other",
-      "base_unit": "piece",
-      "fdc_id": 171025,
-      "calories": 117.23,
-      "protein": 0.0,
-      "carbs": 0.0,
-      "fats": 13.6,
-      "portions": [
-        {
-          "unit": "tbsp",
-          "gram_weight": 13.6,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "cup",
-          "gram_weight": 218.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "tsp",
-          "gram_weight": 4.5,
-          "modifier": null,
-          "is_default": false
         }
       ]
     },
@@ -725,7 +694,7 @@
     },
     {
       "key": "53",
-      "name": "Soy Sauce",
+      "name": "soy sauce",
       "category": "Condiments",
       "base_unit": "piece",
       "fdc_id": 174278,
@@ -750,7 +719,7 @@
     },
     {
       "key": "54",
-      "name": "Salt",
+      "name": "salt",
       "category": "Condiments",
       "base_unit": "piece",
       "fdc_id": 173468,
@@ -818,7 +787,7 @@
     },
     {
       "key": "58",
-      "name": "Ground Beef",
+      "name": "ground beef",
       "category": "Meat",
       "base_unit": "g",
       "fdc_id": 2514743,
@@ -861,7 +830,7 @@
     },
     {
       "key": "64",
-      "name": "Zucchini",
+      "name": "zucchini",
       "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 2685568,
@@ -904,7 +873,7 @@
     },
     {
       "key": "67",
-      "name": "Spinach",
+      "name": "spinach",
       "category": "Vegetables",
       "base_unit": "piece",
       "fdc_id": 168462,
@@ -973,8 +942,8 @@
     },
     {
       "key": "74",
-      "name": "soft cottage cheese",
-      "category": "Vegetables",
+      "name": "cottage cheese",
+      "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 172179,
       "calories": 82.0,
@@ -993,7 +962,7 @@
     {
       "key": "76",
       "name": "rice flour",
-      "category": "Dairy",
+      "category": "Baking",
       "base_unit": "g",
       "fdc_id": 169714,
       "calories": 363.0,
@@ -1011,8 +980,8 @@
     },
     {
       "key": "77",
-      "name": "Water",
-      "category": "Baking",
+      "name": "water",
+      "category": "Beverages",
       "base_unit": "ml",
       "fdc_id": 173647,
       "calories": 70.56,
@@ -1024,7 +993,7 @@
     {
       "key": "79",
       "name": "macaroni",
-      "category": "Dairy",
+      "category": "Grains",
       "base_unit": "g",
       "fdc_id": 169736,
       "calories": 367.0,
@@ -1087,7 +1056,7 @@
     {
       "key": "82",
       "name": "quinoa",
-      "category": "Dairy",
+      "category": "Grains",
       "base_unit": "g",
       "fdc_id": 168874,
       "calories": 385.2,
@@ -1187,7 +1156,7 @@
     {
       "key": "88",
       "name": "croutons",
-      "category": "Dairy",
+      "category": "Grains",
       "base_unit": "g",
       "fdc_id": 172751,
       "calories": 407.0,
@@ -1230,7 +1199,7 @@
     },
     {
       "key": "91",
-      "name": "Arugula",
+      "name": "arugula",
       "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 2710822,
@@ -1249,8 +1218,8 @@
     },
     {
       "key": "93",
-      "name": "Grapefruit",
-      "category": "Vegetables",
+      "name": "grapefruit",
+      "category": "Fruits",
       "base_unit": "g",
       "fdc_id": 173034,
       "calories": 32.0,
@@ -1274,8 +1243,8 @@
     },
     {
       "key": "100",
-      "name": "Pepper",
-      "category": "Vegetables",
+      "name": "pepper",
+      "category": "Condiments",
       "base_unit": "g",
       "fdc_id": 170108,
       "calories": 29.0,
@@ -1311,7 +1280,7 @@
     },
     {
       "key": "101",
-      "name": "Beef",
+      "name": "beef",
       "category": "Meat",
       "base_unit": "g",
       "fdc_id": 2646173,
@@ -1323,7 +1292,7 @@
     },
     {
       "key": "102",
-      "name": "Dry Red Wine",
+      "name": "dry red wine",
       "category": "Beverages",
       "base_unit": "g",
       "fdc_id": 173190,
@@ -1335,8 +1304,8 @@
     },
     {
       "key": "103",
-      "name": "Rosemary Sprig",
-      "category": "Vegetables",
+      "name": "rosemary",
+      "category": "Condiments",
       "base_unit": "piece",
       "fdc_id": 173473,
       "calories": 0.92,
@@ -1366,8 +1335,8 @@
     },
     {
       "key": "104",
-      "name": "Bay Leaf",
-      "category": "Vegetables",
+      "name": "bay leaf",
+      "category": "Condiments",
       "base_unit": "g",
       "fdc_id": 170917,
       "calories": 313.0,
@@ -1385,7 +1354,7 @@
     },
     {
       "key": "105",
-      "name": "Millet",
+      "name": "millet",
       "category": "Grains",
       "base_unit": "g",
       "fdc_id": 169702,
@@ -1404,8 +1373,8 @@
     },
     {
       "key": "106",
-      "name": "Sugar",
-      "category": "Grains",
+      "name": "sugar",
+      "category": "Baking",
       "base_unit": "g",
       "fdc_id": 334247,
       "calories": 94.0,
@@ -1434,40 +1403,9 @@
       ]
     },
     {
-      "key": "122",
-      "name": "Salt and Spices",
-      "category": "Other",
-      "base_unit": "g",
-      "fdc_id": 173468,
-      "calories": 0.0,
-      "protein": 0.0,
-      "carbs": 0.0,
-      "fats": 0.0,
-      "portions": [
-        {
-          "unit": "tsp",
-          "gram_weight": 6.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "tbsp",
-          "gram_weight": 18.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "cup",
-          "gram_weight": 292.0,
-          "modifier": null,
-          "is_default": false
-        }
-      ]
-    },
-    {
       "key": "123",
-      "name": "Plain Yogurt 3%",
-      "category": "Other",
+      "name": "plain yogurt",
+      "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 2647437,
       "calories": 0.0,
@@ -1478,8 +1416,8 @@
     },
     {
       "key": "124",
-      "name": "Dill",
-      "category": "Other",
+      "name": "dill",
+      "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 172233,
       "calories": 0.0,
@@ -1502,28 +1440,9 @@
       ]
     },
     {
-      "key": "126",
-      "name": "Cottage Cheese 5%",
-      "category": "Other",
-      "base_unit": "g",
-      "fdc_id": 328841,
-      "calories": 82.0,
-      "protein": 11.0,
-      "carbs": 4.31,
-      "fats": 2.3,
-      "portions": [
-        {
-          "unit": "cup",
-          "gram_weight": 220.0,
-          "modifier": null,
-          "is_default": false
-        }
-      ]
-    },
-    {
       "key": "127",
-      "name": "Baking Soda",
-      "category": "Other",
+      "name": "baking soda",
+      "category": "Baking",
       "base_unit": "g",
       "fdc_id": 175040,
       "calories": 0.0,
@@ -1540,40 +1459,9 @@
       ]
     },
     {
-      "key": "128",
-      "name": "Salt and Herbs",
-      "category": "Other",
-      "base_unit": "g",
-      "fdc_id": 173468,
-      "calories": 0.0,
-      "protein": 0.0,
-      "carbs": 0.0,
-      "fats": 0.0,
-      "portions": [
-        {
-          "unit": "tsp",
-          "gram_weight": 6.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "tbsp",
-          "gram_weight": 18.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "cup",
-          "gram_weight": 292.0,
-          "modifier": null,
-          "is_default": false
-        }
-      ]
-    },
-    {
       "key": "129",
       "name": "semi-hard cheese",
-      "category": "Other",
+      "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 173419,
       "calories": 0.0,
@@ -1611,7 +1499,7 @@
     {
       "key": "136",
       "name": "cream cheese",
-      "category": "Other",
+      "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 2346385,
       "calories": 0.0,
@@ -1623,7 +1511,7 @@
     {
       "key": "141",
       "name": "spices",
-      "category": "Other",
+      "category": "Condiments",
       "base_unit": "g",
       "fdc_id": null,
       "calories": 0.0,
@@ -1635,7 +1523,7 @@
     {
       "key": "148",
       "name": "leek",
-      "category": "Other",
+      "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 169246,
       "calories": 0.0,
@@ -1660,7 +1548,7 @@
     {
       "key": "149",
       "name": "whole grain bread",
-      "category": "Other",
+      "category": "Grains",
       "base_unit": "g",
       "fdc_id": 335240,
       "calories": 0.0,
@@ -1672,7 +1560,7 @@
     {
       "key": "152",
       "name": "fresh parsley",
-      "category": "Other",
+      "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 170416,
       "calories": 0.0,
@@ -1697,7 +1585,7 @@
     {
       "key": "156",
       "name": "skinless chicken thigh fillet",
-      "category": "Other",
+      "category": "Meat",
       "base_unit": "g",
       "fdc_id": 2727567,
       "calories": 0.0,
@@ -1709,7 +1597,7 @@
     {
       "key": "157",
       "name": "yellow onion",
-      "category": "Other",
+      "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 790577,
       "calories": 40.0,
@@ -1728,7 +1616,7 @@
     {
       "key": "174",
       "name": "tuna in its own juice",
-      "category": "Other",
+      "category": "Fish",
       "base_unit": "g",
       "fdc_id": 334194,
       "calories": 144.0,
@@ -1747,7 +1635,7 @@
     {
       "key": "203",
       "name": "coconut milk",
-      "category": "Other",
+      "category": "Dairy",
       "base_unit": "g",
       "fdc_id": 170173,
       "calories": 0.0,
@@ -1795,21 +1683,9 @@
       ]
     },
     {
-      "key": "205",
-      "name": "herbs and spices",
-      "category": "Other",
-      "base_unit": "g",
-      "fdc_id": null,
-      "calories": 0.0,
-      "protein": 0.0,
-      "carbs": 0.0,
-      "fats": 0.0,
-      "portions": []
-    },
-    {
       "key": "210",
       "name": "rice noodles",
-      "category": "Other",
+      "category": "Grains",
       "base_unit": "g",
       "fdc_id": 169742,
       "calories": 0.0,
@@ -1821,7 +1697,7 @@
     {
       "key": "211",
       "name": "fresh ginger",
-      "category": "Other",
+      "category": "Vegetables",
       "base_unit": "g",
       "fdc_id": 169231,
       "calories": 0.0,
@@ -1838,31 +1714,6 @@
         {
           "unit": "slice",
           "gram_weight": 24.0,
-          "modifier": null,
-          "is_default": false
-        }
-      ]
-    },
-    {
-      "key": "248",
-      "name": "sour cream 10%",
-      "category": "Other",
-      "base_unit": "g",
-      "fdc_id": 173443,
-      "calories": 0.0,
-      "protein": 0.0,
-      "carbs": 0.0,
-      "fats": 0.0,
-      "portions": [
-        {
-          "unit": "tbsp",
-          "gram_weight": 12.0,
-          "modifier": null,
-          "is_default": false
-        },
-        {
-          "unit": "cup",
-          "gram_weight": 230.0,
           "modifier": null,
           "is_default": false
         }
@@ -1954,7 +1805,7 @@
           "unit": "to taste"
         },
         {
-          "ingredient_key": "248",
+          "ingredient_key": "52",
           "quantity": 70.0,
           "unit": "g"
         },
@@ -2492,7 +2343,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "50",
+          "ingredient_key": "44",
           "quantity": 1.0,
           "unit": "tbsp"
         },
@@ -2752,7 +2603,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         },
@@ -2790,7 +2641,7 @@
       "dinner_weight": 0.0,
       "ingredients": [
         {
-          "ingredient_key": "126",
+          "ingredient_key": "74",
           "quantity": 200.0,
           "unit": "g"
         },
@@ -2825,7 +2676,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "128",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         }
@@ -2848,7 +2699,7 @@
       "dinner_weight": 0.0,
       "ingredients": [
         {
-          "ingredient_key": "126",
+          "ingredient_key": "74",
           "quantity": 100.0,
           "unit": "g"
         },
@@ -2873,7 +2724,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         }
@@ -2916,7 +2767,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         }
@@ -2954,7 +2805,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         },
@@ -3065,7 +2916,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         }
@@ -3103,7 +2954,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         },
@@ -3171,7 +3022,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "205",
+          "ingredient_key": "141",
           "quantity": 0.0,
           "unit": "g"
         }
@@ -3219,7 +3070,7 @@
           "unit": "g"
         },
         {
-          "ingredient_key": "122",
+          "ingredient_key": "54",
           "quantity": 0.0,
           "unit": "g"
         },

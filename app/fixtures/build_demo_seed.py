@@ -48,6 +48,113 @@ def normalise_units(seed: dict) -> None:
             portion["unit"] = canonical_unit(portion["unit"])
 
 
+# lowercased name -> canonical grocery name (merges near-duplicates)
+CANONICAL_NAMES = {
+    "salt and herbs": "salt",
+    "salt and spices": "salt",
+    "herbs and spices": "spices",
+    "sour cream 10%": "sour cream",
+    "oil": "vegetable oil",
+    "cottage cheese 5%": "cottage cheese",
+    "soft cottage cheese": "cottage cheese",
+    "plain yogurt 3%": "plain yogurt",
+    "rosemary sprig": "rosemary",
+}
+# English words that stay capitalised
+PROPER_WORDS = {"greek": "Greek"}
+# fixes for clearly wrong categories from the source data, by canonical name
+CATEGORY_OVERRIDES = {
+    "cashew": "Nuts",
+    "walnuts": "Nuts",
+    "honey": "Condiments",
+    "sugar": "Baking",
+    "baking soda": "Baking",
+    "baking powder": "Baking",
+    "water": "Beverages",
+    "croutons": "Grains",
+    "macaroni": "Grains",
+    "quinoa": "Grains",
+    "rice flour": "Baking",
+    "rice noodles": "Grains",
+    "cooked rice": "Grains",
+    "salt": "Condiments",
+    "spices": "Condiments",
+    "pepper": "Condiments",
+    "bay leaf": "Condiments",
+    "rosemary": "Condiments",
+    "dill": "Vegetables",
+    "fresh parsley": "Vegetables",
+    "fresh herbs": "Vegetables",
+    "fresh ginger": "Vegetables",
+    "leek": "Vegetables",
+    "yellow onion": "Vegetables",
+    "grapefruit": "Fruits",
+    "lemon": "Fruits",
+    "soft cottage cheese": "Dairy",
+    "cottage cheese": "Dairy",
+    "cream cheese": "Dairy",
+    "plain yogurt": "Dairy",
+    "semi-hard cheese": "Dairy",
+    "skinless chicken thigh fillet": "Meat",
+    "tuna in its own juice": "Fish",
+    "coconut milk": "Dairy",
+    "whole grain bread": "Grains",
+    "olive oil": "Fats",
+    "vegetable oil": "Fats",
+    "egg": "Dairy",
+}
+
+
+def clean_name(name: str) -> str:
+    lowered = " ".join(name.split()).lower()
+    lowered = CANONICAL_NAMES.get(lowered, lowered)
+    return " ".join(PROPER_WORDS.get(w, w) if i == 0 else w for i, w in enumerate(lowered.split()))
+
+
+def completeness(ing: dict) -> int:
+    nutrition = sum(ing.get(k) is not None for k in ("calories", "protein", "carbs", "fats"))
+    return nutrition + (ing.get("fdc_id") is not None) + len(ing.get("portions", []))
+
+
+def normalise_ingredients(seed: dict) -> None:
+    """Clean names/categories, merge same-name ingredients and re-point recipe links."""
+    groups: dict[str, list[dict]] = {}
+    for ing in seed["ingredients"]:
+        ing["name"] = clean_name(ing["name"])
+        groups.setdefault(ing["name"], []).append(ing)
+
+    remap: dict[str, str] = {}
+    merged = []
+    for name, group in groups.items():
+        keeper = max(group, key=completeness)  # first of equals wins
+        for ing in group:
+            remap[ing["key"]] = keeper["key"]
+        if keeper.get("category") or name.lower() in CATEGORY_OVERRIDES:
+            keeper["category"] = (
+                CATEGORY_OVERRIDES.get(name.lower()) or keeper["category"].strip().title()
+            )
+        merged.append(keeper)
+    seed["ingredients"] = merged
+
+    for r in seed["recipes"]:
+        links: list[dict] = []
+        for link in r["ingredients"]:
+            link["ingredient_key"] = remap[link["ingredient_key"]]
+            same = next(
+                (
+                    x
+                    for x in links
+                    if x["ingredient_key"] == link["ingredient_key"] and x["unit"] == link["unit"]
+                ),
+                None,
+            )
+            if same:
+                same["quantity"] += link["quantity"]
+            else:
+                links.append(link)
+        r["ingredients"] = links
+
+
 def assert_no_cyrillic(node, path="seed") -> None:
     if isinstance(node, str):
         if CYRILLIC.search(node):
@@ -135,6 +242,7 @@ def main() -> None:
     recipe_tr, ing_tr = load_translations(args.translations)
     seed = build(raw, approved, recipe_tr, ing_tr)
     normalise_units(seed)
+    normalise_ingredients(seed)
     assert_no_cyrillic(seed)
     validate(seed)
     Path(args.out).write_text(json.dumps(seed, ensure_ascii=False, indent=2) + "\n")
