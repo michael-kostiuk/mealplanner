@@ -212,7 +212,7 @@ db_backup_*.dump
 openapi.json
 
 # Demo mode / prod dumps
-data/demo.sqlite*
+data/demo*.sqlite*
 data/prod_dump*
 data/demo_raw.json
 data/demo_candidates.md
