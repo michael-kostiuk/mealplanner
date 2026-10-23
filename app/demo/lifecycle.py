@@ -3,7 +3,6 @@ import logging
 import threading
 import time
 from datetime import UTC, date, datetime, timedelta
-from pathlib import Path
 
 from sqlalchemy.orm import Session
 
@@ -12,7 +11,8 @@ from ..auth.deps import DEMO_USER_ID
 from ..config import get_settings
 from ..routers.shopping_lists import generate_shopping_list
 from ..services.meal_plan_generator import MealPlanGenerator
-from .database import dispose_demo_engine, get_demo_engine, get_demo_session_factory
+from . import database
+from .database import get_demo_session_factory
 from .seed import load_seed
 
 logger = logging.getLogger(__name__)
@@ -59,23 +59,19 @@ def ensure_current_week_plan(db: Session) -> models.MealPlan:
 
 
 def rebuild_demo_db() -> None:
-    """Throw away the demo DB file and rebuild it from the seed."""
+    """Build a fresh demo DB in a new file and swap it in; the old one is retired next time."""
     global _last_reset
     with _lock:
-        dispose_demo_engine()
-        path = get_settings().demo_db_path
-        # Remove the SQLite file and any journal/WAL leftovers
-        db_file = Path(path)
-        db_file.parent.mkdir(parents=True, exist_ok=True)
-        for suffix in ("", "-wal", "-shm", "-journal"):
-            Path(str(db_file) + suffix).unlink(missing_ok=True)
-
-        models.Base.metadata.create_all(get_demo_engine())
+        if not database.has_generation():
+            database.cleanup_leftover_files()
+        gen = database.new_generation()
+        models.Base.metadata.create_all(gen.engine)
         with open(get_settings().demo_seed_path, encoding="utf-8") as f:
             seed = json.load(f)
-        with get_demo_session_factory()() as db:
+        with gen.factory() as db:
             load_seed(db, seed)
             ensure_current_week_plan(db)
+        database.install_generation(gen)
         _last_reset = time.time()
         logger.info("Demo database rebuilt")
 

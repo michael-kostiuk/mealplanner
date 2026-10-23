@@ -1,4 +1,7 @@
 import threading
+import time
+from dataclasses import dataclass
+from pathlib import Path
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -6,35 +9,86 @@ from sqlalchemy.orm import sessionmaker
 
 from ..config import get_settings
 
+_SUFFIXES = ("", "-wal", "-shm", "-journal")
+
+
+@dataclass(frozen=True)
+class Generation:
+    """One demo DB file with its engine. Rebuilds create a new generation instead of
+    recreating the file in place, so in-flight connections never see their file swapped."""
+
+    path: Path
+    engine: Engine
+    factory: sessionmaker
+
+
 _lock = threading.Lock()
-_engine: Engine | None = None
-_factory: sessionmaker | None = None
+_current: Generation | None = None
+_previous: Generation | None = None
 
 
-def get_demo_engine() -> Engine:
-    global _engine, _factory
+def _generation_glob() -> tuple[Path, str]:
+    base = Path(get_settings().demo_db_path)
+    return base.parent, f"{base.stem}-*{base.suffix}*"
+
+
+def _retire(gen: Generation | None) -> None:
+    if gen is None:
+        return
+    gen.engine.dispose()
+    for suffix in _SUFFIXES:
+        Path(str(gen.path) + suffix).unlink(missing_ok=True)
+
+
+def cleanup_leftover_files() -> None:
+    """Remove generation files left behind by earlier runs."""
+    directory, pattern = _generation_glob()
+    for leftover in directory.glob(pattern):
+        leftover.unlink(missing_ok=True)
+
+
+def new_generation() -> Generation:
+    """Create an engine for a fresh, not yet populated DB file next to the configured path."""
+    base = Path(get_settings().demo_db_path)
+    base.parent.mkdir(parents=True, exist_ok=True)
+    path = base.with_name(f"{base.stem}-{time.time_ns()}{base.suffix}")
+    # Requests are served from a thread pool, so connections are shared across threads
+    engine = create_engine(f"sqlite:///{path}", connect_args={"check_same_thread": False})
+    return Generation(path, engine, sessionmaker(autocommit=False, autoflush=False, bind=engine))
+
+
+def install_generation(gen: Generation) -> None:
+    """Atomically make `gen` current; keep one previous generation for in-flight sessions."""
+    global _current, _previous
     with _lock:
-        if _engine is None:
-            # Requests are served from a thread pool, so the connection is shared across threads
-            _engine = create_engine(
-                f"sqlite:///{get_settings().demo_db_path}",
-                connect_args={"check_same_thread": False},
-            )
-            _factory = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
-        return _engine
+        stale = _previous
+        _previous, _current = _current, gen
+    _retire(stale)
+
+
+def has_generation() -> bool:
+    with _lock:
+        return _current is not None
 
 
 def get_demo_session_factory() -> sessionmaker:
-    get_demo_engine()
-    assert _factory is not None
-    return _factory
+    with _lock:
+        if _current is None:
+            raise RuntimeError("Demo database has not been built yet")
+        return _current.factory
+
+
+def get_demo_engine() -> Engine:
+    with _lock:
+        if _current is None:
+            raise RuntimeError("Demo database has not been built yet")
+        return _current.engine
 
 
 def dispose_demo_engine() -> None:
-    """Close all connections and forget the engine (next use recreates it)."""
-    global _engine, _factory
+    """Drop every generation (engines and files)."""
+    global _current, _previous
     with _lock:
-        if _engine is not None:
-            _engine.dispose()
-        _engine = None
-        _factory = None
+        gens, _current, _previous = (_current, _previous), None, None
+    for gen in gens:
+        _retire(gen)

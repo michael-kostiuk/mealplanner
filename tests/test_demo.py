@@ -98,3 +98,21 @@ def test_concurrent_freshness_generates_one_plan(demo_env):
     assert not errors
     with get_demo_session_factory()() as db:
         assert db.query(models.MealPlan).count() == 1
+
+
+def test_rebuild_keeps_in_flight_session_valid(demo_env):
+    rebuild_demo_db()
+    old = get_demo_session_factory()()
+    try:
+        assert old.query(models.Recipe).count() == 3
+        old.add(models.Recipe(name="Extra", servings=1, instructions="x"))
+        old.commit()
+        assert old.query(models.Recipe).count() == 4
+
+        rebuild_demo_db()
+
+        assert old.query(models.Recipe).count() == 4  # old file untouched and still readable
+        with get_demo_session_factory()() as fresh:
+            assert fresh.query(models.Recipe).count() == 3
+    finally:
+        old.close()
