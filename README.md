@@ -68,6 +68,13 @@ Routers: `app/routers/auth.py` (`/auth/login`, `/auth/logout`, `/auth/me`)
 ## Running locally
 
 ```bash
+# One-time setup
+cp .env.example .env
+python -c "import secrets;print(secrets.token_hex(32))"   # -> SESSION_SECRET in .env
+python -m app.auth.pin <pin>                              # -> OWNER_PIN_HASH in .env
+# In .env escape every `$` of the hash as `$$` (docker compose interpolation),
+# and set COOKIE_SECURE=false when serving over plain http.
+
 # Start app + Postgres
 docker compose up
 
@@ -76,6 +83,13 @@ pytest
 ```
 
 Tests use a real Postgres container (`test_db`) — no mocks or SQLite fallback.
+
+Owner login needs a `users` row whose id matches `OWNER_USER_ID` (otherwise `/auth/login` returns 503).
+For the local compose Postgres:
+
+```bash
+docker compose exec dbmp psql -U postgres -c "INSERT INTO users (id, email) VALUES (1, 'owner@example.com');"
+```
 
 ## Project layout
 

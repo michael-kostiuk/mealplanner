@@ -93,6 +93,17 @@ After too many wrong PINs the login is locked out (global, in memory). Unlock wi
 
 Locally the backend runs via `docker compose up` (see `docker-compose.yml`): a `web` service on port 8000 and a `dbmp` Postgres 15 service on port 5432. Both read credentials from a `.env` file (`POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`).
 
+### Deploy checklist (auth + demo mode)
+
+1. `dokku config:set mp-be SESSION_SECRET=<hex> OWNER_PIN_HASH='<argon2 hash, single-quoted>' OWNER_USER_ID=1 CORS_ORIGINS=https://mplanner.online` (add any other live frontend origin, e.g. `https://www.mplanner.online`, comma-separated). `config:set` restarts the old app, which is harmless.
+2. Merge the backend to `main` (auto-deploys).
+3. `dokku logs mp-be` — confirm a clean boot (no warning about a missing owner `users` row).
+4. `curl https://api.mplanner.online/auth/me` → `{"mode":"demo",...}`.
+5. Real login check: `curl -c jar -X POST https://api.mplanner.online/auth/login -H 'content-type: application/json' -d '{"pin":"<pin>"}'`, then `curl -b jar https://api.mplanner.online/auth/me` → `"mode":"owner"`.
+6. Merge the frontend (Netlify env `VITE_API_URL=https://api.mplanner.online`).
+
+Between steps 2 and 6 the old frontend has no login, so everyone sees demo data only.
+
 ## Frontend
 
 Located at `../mp-ai-frontend` (sibling repo). **React 18 + TypeScript + Tailwind CSS + React Router**, built with Vite, served by nginx in production.
