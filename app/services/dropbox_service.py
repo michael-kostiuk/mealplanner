@@ -78,10 +78,12 @@ class DropboxService:
         access_token = await token_manager.get_access_token()
         return {"Authorization": f"Bearer {access_token}"}
 
-    async def upload_image(self, file_data: bytes, filename: str) -> str | None:
+    async def upload_image(
+        self, file_data: bytes, filename: str, folder: str | None = None
+    ) -> str | None:
         path = None
         try:
-            folder = DROPBOX_UPLOAD_FOLDER.lstrip("/")
+            folder = (folder or DROPBOX_UPLOAD_FOLDER).lstrip("/")
             path = f"/{folder}/{filename}"
             headers = await self._get_headers()
 

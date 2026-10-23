@@ -7,6 +7,8 @@ from sqlalchemy import or_
 from sqlalchemy.orm import Session, sessionmaker
 
 from .. import models, schemas
+from ..auth.deps import AuthContext, get_auth
+from ..config import get_settings
 from ..database import get_db, get_session_factory
 from ..services.recipe_from_image import recipe_from_image_service
 
@@ -174,7 +176,10 @@ async def get_recipe(recipe_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{recipe_id}", response_model=schemas.Recipe)
 async def update_recipe(
-    recipe_id: int, recipe: schemas.RecipeCreate, db: Session = Depends(get_db)
+    recipe_id: int,
+    recipe: schemas.RecipeCreate,
+    auth: Annotated[AuthContext, Depends(get_auth)],
+    db: Session = Depends(get_db),
 ):
     db_recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
     if db_recipe is None:
@@ -183,8 +188,12 @@ async def update_recipe(
     old_image_url = db_recipe.image_url
     new_image_url = recipe.image_url
 
-    # Delete old image if it's being replaced or removed
-    if old_image_url and (new_image_url is None or old_image_url != new_image_url):
+    # Delete old image if it's being replaced or removed (never in demo mode)
+    if (
+        auth.mode != "demo"
+        and old_image_url
+        and (new_image_url is None or old_image_url != new_image_url)
+    ):
         from ..services.dropbox_service import dropbox_service
 
         try:
@@ -215,14 +224,18 @@ async def update_recipe(
 
 
 @router.delete("/{recipe_id}")
-async def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
+async def delete_recipe(
+    recipe_id: int,
+    auth: Annotated[AuthContext, Depends(get_auth)],
+    db: Session = Depends(get_db),
+):
     db_recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id).first()
     if db_recipe is None:
         raise HTTPException(status_code=404, detail="Recipe not found")
 
-    # Delete image from Dropbox if exists
+    # Delete image from Dropbox if exists (never in demo mode)
     image_url = db_recipe.image_url
-    if image_url:
+    if image_url and auth.mode != "demo":
         from ..services.dropbox_service import dropbox_service
 
         await dropbox_service.delete_image(image_url)
@@ -234,7 +247,10 @@ async def delete_recipe(recipe_id: int, db: Session = Depends(get_db)):
 
 @router.post("/{recipe_id}/upload-image")
 async def upload_recipe_image(
-    recipe_id: int, file: UploadFile = File(...), db: Session = Depends(get_db)
+    recipe_id: int,
+    auth: Annotated[AuthContext, Depends(get_auth)],
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
 ):
     logger.info(f"Upload image request for recipe {recipe_id}")
     logger.info(f"File info - filename: {file.filename}, content_type: {file.content_type}")
@@ -266,7 +282,8 @@ async def upload_recipe_image(
     from ..services.dropbox_service import dropbox_service
 
     logger.info("Calling Dropbox service...")
-    image_url = await dropbox_service.upload_image(file_data, filename)
+    folder = get_settings().dropbox_demo_folder if auth.mode == "demo" else None
+    image_url = await dropbox_service.upload_image(file_data, filename, folder=folder)
 
     if not image_url:
         logger.error("Dropbox returned None")
