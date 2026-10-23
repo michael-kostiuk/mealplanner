@@ -99,3 +99,38 @@ def db_session(db_engine):
         db.close()
         # Drop tables after each test to ensure clean state
         Base.metadata.drop_all(bind=db_engine)
+
+
+@pytest.fixture
+def demo_db(tmp_path, monkeypatch):
+    """A freshly built demo DB in tmp_path (seed: tests/fixtures/demo_seed_small.json)."""
+    from app.config import get_settings
+    from app.demo import database as demo_database
+    from app.demo.lifecycle import rebuild_demo_db
+
+    monkeypatch.setenv("DEMO_DB_PATH", str(tmp_path / "demo.sqlite"))
+    get_settings.cache_clear()
+    demo_database.dispose_demo_engine()
+    rebuild_demo_db()
+    yield
+    demo_database.dispose_demo_engine()
+    monkeypatch.undo()
+    get_settings.cache_clear()
+
+
+@pytest.fixture
+def owner_db(db_engine, db_session, demo_db):
+    """Point the owner path at test_db (user id 1 exists) and the demo path at a tmp demo DB."""
+    from app.auth.deps import reset_user_cache
+    from app.db_core import get_owner_session_factory
+    from app.main import app
+    from app.models import User
+
+    db_session.add(User(id=1, email="owner@example.com"))
+    db_session.commit()
+    reset_user_cache()
+    factory = sessionmaker(autocommit=False, autoflush=False, bind=db_engine)
+    app.dependency_overrides[get_owner_session_factory] = lambda: factory
+    yield db_session
+    app.dependency_overrides.pop(get_owner_session_factory, None)
+    reset_user_cache()

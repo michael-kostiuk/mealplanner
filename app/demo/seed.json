@@ -10,13 +10,13 @@
      "portions": [{"unit": "piece", "gram_weight": 50.0, "modifier": "large", "is_default": true}]}
   ],
   "recipes": [
-    {"name": "Oatmeal", "servings": 1, "category": "breakfast", "instructions": "Cook oats in water.",
+    {"name": "Oatmeal", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "breakfast", "instructions": "Cook oats in water.",
      "calories": 500, "protein": 15.0, "carbs": 80.0, "fats": 10.0, "breakfast_weight": 1.0,
      "ingredients": [{"ingredient_key": "1", "quantity": 100.0, "unit": "g"}]},
-    {"name": "Chicken Plate", "servings": 1, "category": "lunch", "instructions": "Grill the chicken.",
+    {"name": "Chicken Plate", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "lunch", "instructions": "Grill the chicken.",
      "calories": 700, "protein": 50.0, "carbs": 20.0, "fats": 20.0, "lunch_weight": 1.0,
      "ingredients": [{"ingredient_key": "2", "quantity": 250.0, "unit": "g"}]},
-    {"name": "Egg Scramble", "servings": 1, "category": "dinner", "instructions": "Scramble the eggs.",
+    {"name": "Egg Scramble", "servings": 1, "prep_time": 5, "cook_time": 10, "category": "dinner", "instructions": "Scramble the eggs.",
      "calories": 800, "protein": 30.0, "carbs": 10.0, "fats": 50.0, "dinner_weight": 1.0,
      "ingredients": [{"ingredient_key": "3", "quantity": 4.0, "unit": "piece"}]}
   ]

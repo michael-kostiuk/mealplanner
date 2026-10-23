@@ -5,21 +5,12 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from .. import models, schemas
+from ..auth.current_user import get_current_user
 from ..database import get_db
 from ..services import MealPlanGenerator
 from .shopping_lists import generate_shopping_list
 
 logger = logging.getLogger(__name__)
-
-
-def get_user(db: Session = Depends(get_db)):
-    usr = db.query(models.User).filter(models.User.id == 1).first()
-    if not usr:
-        usr = models.User(id=1, email="test@example.com")
-        db.add(usr)
-        db.commit()
-        db.refresh(usr)
-    return usr
 
 
 def _entry_fields(entry: schemas.MealPlanEntryCreate, previous: dict) -> dict:
@@ -36,22 +27,32 @@ def _leftover_flags(entries: list[models.MealPlanEntry]) -> dict:
     return {(e.date.date(), e.meal_type, e.recipe_id): e.is_leftover for e in entries}
 
 
-router = APIRouter(
-    prefix="/meal-plans",
-    tags=["meal-plans"],
-    dependencies=[Depends(get_user)],
-)
+router = APIRouter(prefix="/meal-plans", tags=["meal-plans"])
+
+
+def _get_owned_plan(db: Session, meal_plan_id: int, user: models.User) -> models.MealPlan:
+    """The plan, or 404 when it doesn't exist or belongs to someone else."""
+    plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
+    if plan is None or plan.user_id != user.id:
+        raise HTTPException(status_code=404, detail="Meal plan not found")
+    return plan
 
 
 @router.get("/", response_model=list[schemas.MealPlan])
-async def list_meal_plans(user_id: int, db: Session = Depends(get_db)):
-    return db.query(models.MealPlan).filter(models.MealPlan.user_id == user_id).all()
+async def list_meal_plans(
+    db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+):
+    return db.query(models.MealPlan).filter(models.MealPlan.user_id == user.id).all()
 
 
 @router.post("/", response_model=schemas.MealPlan)
-async def create_meal_plan(meal_plan: schemas.MealPlanCreate, db: Session = Depends(get_db)):
+async def create_meal_plan(
+    meal_plan: schemas.MealPlanCreate,
+    db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
+):
     db_meal_plan = models.MealPlan(
-        user_id=1,
+        user_id=user.id,
         start_date=meal_plan.start_date,
         end_date=meal_plan.end_date,
         people_count=meal_plan.people_count,
@@ -79,9 +80,9 @@ async def auto_generate_meal_plan(
     target_calories: int | None = None,
     people_count: int | None = None,
     dietary_preferences: list[str] = Query([]),
-    user_id: int | None = Query(None),
     meal_plan_id: int | None = Query(None, alias="id"),
     db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
 ):
     # Get all available recipes
     if db.query(models.Recipe.id).first() is None:
@@ -89,9 +90,7 @@ async def auto_generate_meal_plan(
 
     planner = MealPlanGenerator(db)
     if meal_plan_id is not None:
-        meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-        if meal_plan is None:
-            raise HTTPException(status_code=404, detail="Meal plan not found")
+        meal_plan = _get_owned_plan(db, meal_plan_id, user)
         try:
             db_meal_plan = planner.regenerate_meal_plan(meal_plan)
         except ValueError as exc:
@@ -107,7 +106,6 @@ async def auto_generate_meal_plan(
             "days": days,
             "target_calories": target_calories,
             "people_count": people_count,
-            "user_id": user_id,
         }.items()
         if value is None
     ]
@@ -124,7 +122,7 @@ async def auto_generate_meal_plan(
             target_calories=target_calories,
             people_count=people_count,
             dietary_preferences=dietary_preferences,
-            user_id=user_id,
+            user_id=user.id,
         )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -155,20 +153,22 @@ async def suggest_meal(req: schemas.MealSuggestRequest, db: Session = Depends(ge
 
 
 @router.get("/{meal_plan_id}", response_model=schemas.MealPlan)
-async def get_meal_plan(meal_plan_id: int, db: Session = Depends(get_db)):
-    meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-    if meal_plan is None:
-        raise HTTPException(status_code=404, detail="Meal plan not found")
-    return meal_plan
+async def get_meal_plan(
+    meal_plan_id: int,
+    db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
+):
+    return _get_owned_plan(db, meal_plan_id, user)
 
 
 @router.put("/{meal_plan_id}", response_model=schemas.MealPlan)
 async def update_meal_plan(
-    meal_plan_id: int, meal_plan: schemas.MealPlanCreate, db: Session = Depends(get_db)
+    meal_plan_id: int,
+    meal_plan: schemas.MealPlanCreate,
+    db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
 ):
-    db_meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-    if db_meal_plan is None:
-        raise HTTPException(status_code=404, detail="Meal plan not found")
+    db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
     # Update meal plan attributes
     for key, value in meal_plan.model_dump(exclude={"entries"}).items():
@@ -190,10 +190,12 @@ async def update_meal_plan(
 
 
 @router.delete("/{meal_plan_id}")
-async def delete_meal_plan(meal_plan_id: int, db: Session = Depends(get_db)):
-    db_meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-    if db_meal_plan is None:
-        raise HTTPException(status_code=404, detail="Meal plan not found")
+async def delete_meal_plan(
+    meal_plan_id: int,
+    db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
+):
+    db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
     db.delete(db_meal_plan)
     db.commit()
@@ -206,7 +208,9 @@ async def update_meal(
     meal_id: int,
     meal: schemas.MealPlanEntryCreate,
     db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
 ):
+    _get_owned_plan(db, meal_plan_id, user)
     db_meal = (
         db.query(models.MealPlanEntry)
         .filter(
@@ -231,11 +235,10 @@ async def add_meal(
     meal_plan_id: int,
     meal: schemas.MealPlanEntryCreate,
     db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
 ):
     """Add a new meal to a meal plan."""
-    meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-    if meal_plan is None:
-        raise HTTPException(status_code=404, detail="Meal plan not found")
+    _get_owned_plan(db, meal_plan_id, user)
 
     # Verify recipe exists
     recipe = db.query(models.Recipe).filter(models.Recipe.id == meal.recipe_id).first()
@@ -254,8 +257,10 @@ async def delete_meal(
     meal_plan_id: int,
     meal_id: int,
     db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
 ):
     """Remove a meal from a meal plan."""
+    _get_owned_plan(db, meal_plan_id, user)
     db_meal = (
         db.query(models.MealPlanEntry)
         .filter(
@@ -274,9 +279,10 @@ async def delete_meal(
 
 # Add this endpoint to the meal_plans router
 @router.get("/{meal_plan_id}/shopping-list", response_model=schemas.ShoppingList)
-async def create_shopping_list(meal_plan_id: int, db: Session = Depends(get_db)):
-    meal_plan = db.query(models.MealPlan).filter(models.MealPlan.id == meal_plan_id).first()
-    if not meal_plan:
-        raise HTTPException(status_code=404, detail="Meal plan not found")
-
+async def create_shopping_list(
+    meal_plan_id: int,
+    db: Session = Depends(get_db),
+    user: models.User = Depends(get_current_user),
+):
+    meal_plan = _get_owned_plan(db, meal_plan_id, user)
     return generate_shopping_list(meal_plan, db)

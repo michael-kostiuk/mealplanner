@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
 
 from .. import models, schemas
+from ..auth.current_user import get_current_user
 from ..database import get_db
 
 logger = logging.getLogger(__name__)
@@ -11,19 +12,10 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/favorites", tags=["favorites"])
 
 
-def get_user(db: Session = Depends(get_db)):
-    """Get the current user (hardcoded to user_id=1 for demo)."""
-    usr = db.query(models.User).filter(models.User.id == 1).first()
-    if not usr:
-        usr = models.User(id=1, email="test@example.com")
-        db.add(usr)
-        db.commit()
-        db.refresh(usr)
-    return usr
-
-
 @router.get("/", response_model=list[schemas.Favorite])
-async def list_favorites(db: Session = Depends(get_db), user: models.User = Depends(get_user)):
+async def list_favorites(
+    db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
+):
     """List all favorites for the current user."""
     favorites = (
         db.query(models.Favorite)
@@ -42,7 +34,7 @@ async def list_favorites(db: Session = Depends(get_db), user: models.User = Depe
 async def add_favorite(
     favorite: schemas.FavoriteCreate,
     db: Session = Depends(get_db),
-    user: models.User = Depends(get_user),
+    user: models.User = Depends(get_current_user),
 ):
     """Add a recipe to favorites."""
     # Check if recipe exists
@@ -68,7 +60,7 @@ async def add_favorite(
 
 @router.delete("/recipe/{recipe_id}")
 async def remove_favorite(
-    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_user)
+    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
 ):
     """Remove a recipe from favorites by recipe ID."""
     favorite = (
@@ -86,7 +78,7 @@ async def remove_favorite(
 
 @router.get("/recipe/{recipe_id}", response_model=dict)
 async def check_favorite(
-    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_user)
+    recipe_id: int, db: Session = Depends(get_db), user: models.User = Depends(get_current_user)
 ):
     """Check if a recipe is in the user's favorites."""
     favorite = (

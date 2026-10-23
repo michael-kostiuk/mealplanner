@@ -29,7 +29,7 @@ def test_me_without_cookie_is_demo(client):
     assert response.json() == {"mode": "demo", "login_locked_for": 0}
 
 
-def test_login_correct_pin_sets_cookie(client):
+def test_login_correct_pin_sets_cookie(client, owner_db):
     response = _login(client, "1234")
     assert response.status_code == 200
     assert response.json() == {"mode": "owner", "login_locked_for": 0}
@@ -70,7 +70,7 @@ def test_tampered_cookie_is_demo(client):
     assert response.json()["mode"] == "demo"
 
 
-def test_logout_clears_cookie(client):
+def test_logout_clears_cookie(client, owner_db):
     _login(client, "1234")
     assert client.get("/auth/me").json()["mode"] == "owner"
 
