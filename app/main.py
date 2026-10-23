@@ -10,6 +10,7 @@ from alembic.config import Config
 
 from .config import get_settings
 from .database import engine
+from .demo.lifecycle import rebuild_demo_db
 from .logging_setup import setup_logging
 from .routers import (
     auth,
@@ -95,6 +96,7 @@ def run_migrations():
 def startup_event():
     get_settings()  # fail at boot if secrets are missing
     run_migrations()
+    rebuild_demo_db()
     # Re-apply logging setup in case Alembic or Uvicorn messed it up
     setup_logging()
     logger.info("Application startup completed. Logging verified.")
