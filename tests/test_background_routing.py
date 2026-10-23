@@ -2,6 +2,7 @@ import time
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import object_session
 
 from app.main import app
 from app.routers import ingredients as ingredients_router
@@ -17,23 +18,34 @@ def client(owner_db):
 def test_demo_ingredient_background_tasks_use_demo_db(client, monkeypatch):
     seen = {}
 
-    def record(name):
-        def fake_sync(ingredient_id, session_factory):
-            with session_factory() as db:
-                seen[name] = str(db.get_bind().url)
+    def record(name, ingredient):
+        session = object_session(ingredient)
+        seen[name] = (str(session.get_bind().url), ingredient.id, ingredient.name)
 
-        return fake_sync
+    def fake_lookup(ingredient):
+        record("nut", ingredient)
 
-    monkeypatch.setattr(ingredients_router, "_link_fdc_background_sync", record("fdc"))
-    monkeypatch.setattr(ingredients_router, "_estimate_nutrition_background_sync", record("nut"))
+    async def fake_link(ingredient, db):
+        record("fdc", ingredient)
+        return False
+
+    def no_estimator():
+        raise ValueError("no AI in tests")
+
+    monkeypatch.setattr(ingredients_router, "_lookup_fdc_macros_sync", fake_lookup)
+    monkeypatch.setattr(ingredients_router, "link_ingredient_to_fdc_async", fake_link)
+    monkeypatch.setattr(ingredients_router, "get_nutrition_estimator", no_estimator)
 
     response = client.post(
         "/ingredients/", json={"name": "Demo Thing", "category": "pantry", "base_unit": "g"}
     )
 
     assert response.status_code == 200, response.text
+    created_id = response.json()["id"]
     assert set(seen) == {"fdc", "nut"}
-    assert all(url.startswith("sqlite") for url in seen.values()), seen
+    for url, ing_id, name in seen.values():
+        assert url.startswith("sqlite"), seen
+        assert (ing_id, name) == (created_id, "Demo Thing")
 
 
 def test_demo_import_job_uses_demo_db(client, monkeypatch):
