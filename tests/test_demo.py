@@ -116,3 +116,13 @@ def test_rebuild_keeps_in_flight_session_valid(demo_env):
             assert fresh.query(models.Recipe).count() == 3
     finally:
         old.close()
+
+
+def test_real_seed_has_27_recipes_and_varied_week(demo_env, monkeypatch):
+    monkeypatch.setenv("DEMO_SEED_PATH", "app/demo/seed.json")
+    get_settings.cache_clear()
+    rebuild_demo_db()
+    with get_demo_session_factory()() as db:
+        assert db.query(models.Recipe).count() == 27
+        plan = db.query(models.MealPlan).one()
+        assert len({e.recipe_id for e in plan.entries if e.recipe_id}) >= 10
