@@ -417,3 +417,79 @@ class TestEdgeCases:
         assert result.main_unit == "g"
         assert len(result.unconvertible) == 1
         assert result.unconvertible[0].unit == "as needed"
+
+
+def _ingredient(db_session, name, base_unit, portions=()):
+    ingredient = models.Ingredient(
+        name=name, category="Other", base_unit=base_unit, calories=0, protein=0, carbs=0, fats=0
+    )
+    db_session.add(ingredient)
+    db_session.commit()
+    for unit, gram_weight in portions:
+        db_session.add(
+            models.IngredientPortion(
+                ingredient_id=ingredient.id, unit=unit, gram_weight=gram_weight, is_default=True
+            )
+        )
+    db_session.commit()
+    db_session.refresh(ingredient)
+    return ingredient
+
+
+class TestMassAndVolume:
+    """Mass and volume of one ingredient merge into a single line."""
+
+    def test_ml_and_grams_without_fdc_use_water_density(self, db_session):
+        """Соєвий соус 100 g + 20 ml = 120 g (1 g/ml fallback)."""
+        soy = _ingredient(db_session, "Соєвий соус", "g")
+        items = [QuantityUnit(quantity=100, unit="g"), QuantityUnit(quantity=20, unit="ml")]
+
+        result = aggregate_quantities(items, soy)
+
+        assert (result.main_quantity, result.main_unit) == (120, "g")
+        assert result.unconvertible == []
+
+    def test_ml_uses_density_from_fdc_spoon_portion(self, db_session):
+        """1 tbsp = 18 g gives 1.217 g/ml, so 100 ml honey = 122 g."""
+        honey = _ingredient(db_session, "Honey", "g", [("tbsp", 18.0)])
+        items = [QuantityUnit(quantity=100, unit="ml"), QuantityUnit(quantity=10, unit="g")]
+
+        result = aggregate_quantities(items, honey)
+
+        assert (result.main_quantity, result.main_unit) == (132, "g")
+
+    def test_volume_base_unit_is_shown_in_ml(self, db_session):
+        milk = _ingredient(db_session, "Milk", "ml")
+        items = [QuantityUnit(quantity=0.5, unit="l"), QuantityUnit(quantity=200, unit="g")]
+
+        result = aggregate_quantities(items, milk)
+
+        assert (result.main_quantity, result.main_unit) == (700, "ml")
+
+
+class TestCountBaseUnit:
+    """Ingredients bought by count (eggs) are shown in pieces when FDC knows the weight."""
+
+    def test_pieces_and_grams_merge_into_pieces(self, db_session):
+        eggs = _ingredient(db_session, "Яйця", "unit", [("piece", 50.0)])
+        items = [QuantityUnit(quantity=2, unit="piece"), QuantityUnit(quantity=100, unit="g")]
+
+        result = aggregate_quantities(items, eggs)
+
+        assert (result.main_quantity, result.main_unit) == (4, "piece")
+
+    def test_grams_only_convert_to_pieces(self, db_session):
+        eggs = _ingredient(db_session, "Яйця", "piece", [("piece", 50.0)])
+
+        result = aggregate_quantities([QuantityUnit(quantity=125, unit="g")], eggs)
+
+        assert (result.main_quantity, result.main_unit) == (2.5, "piece")
+
+    def test_pieces_without_weight_stay_separate(self, db_session):
+        eggs = _ingredient(db_session, "Яйця", "piece")
+        items = [QuantityUnit(quantity=2, unit="piece"), QuantityUnit(quantity=100, unit="g")]
+
+        result = aggregate_quantities(items, eggs)
+
+        assert (result.main_quantity, result.main_unit) == (100, "g")
+        assert [(u.quantity, u.unit) for u in result.unconvertible] == [(2, "piece")]

@@ -121,8 +121,14 @@ def generate_shopping_list(meal_plan: models.MealPlan, db: Session):
 
 
 @router.get("/", response_model=list[schemas.ShoppingList])
-async def list_shopping_lists(db: Session = Depends(get_db)):
-    return db.query(models.ShoppingList).all()
+async def list_shopping_lists(meal_plan_id: int | None = None, db: Session = Depends(get_db)):
+    """List shopping lists newest first, optionally only those of one meal plan."""
+    query = db.query(models.ShoppingList).options(joinedload(models.ShoppingList.meal_plan))
+    if meal_plan_id is not None:
+        query = query.filter(models.ShoppingList.meal_plan_id == meal_plan_id)
+    return query.order_by(
+        models.ShoppingList.created_at.desc(), models.ShoppingList.id.desc()
+    ).all()
 
 
 @router.get("/{shopping_list_id}", response_model=schemas.ShoppingList)
@@ -230,3 +236,36 @@ async def update_shopping_list_item(
     db.commit()
     db.refresh(item)
     return item
+
+
+@router.patch("/{shopping_list_id}/items", response_model=list[schemas.ShoppingListItemStatus])
+async def update_shopping_list_items_status(
+    shopping_list_id: int,
+    update: schemas.ShoppingListItemsStatusUpdate,
+    db: Session = Depends(get_db),
+):
+    """
+    Set the status of several items of one list in a single request.
+
+    The frontend batches checkbox toggles here. Last write wins; ids that do not
+    belong to this list are ignored so a stale client cannot touch other lists.
+    """
+    shopping_list = (
+        db.query(models.ShoppingList).filter(models.ShoppingList.id == shopping_list_id).first()
+    )
+    if not shopping_list:
+        raise HTTPException(status_code=404, detail="Shopping list not found")
+
+    statuses = {entry.id: entry.status for entry in update.items}
+    items = (
+        db.query(models.ShoppingListItem)
+        .filter(
+            models.ShoppingListItem.shopping_list_id == shopping_list_id,
+            models.ShoppingListItem.id.in_(statuses),
+        )
+        .all()
+    )
+    for item in items:
+        item.status = statuses[item.id]
+    db.commit()
+    return [schemas.ShoppingListItemStatus(id=item.id, status=item.status) for item in items]
