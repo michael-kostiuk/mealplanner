@@ -10,12 +10,26 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from app.services.fdc_linker import get_gram_weight
-from app.units import COUNT_UNITS, MASS_UNITS, UNCONVERTIBLE_UNITS
+from app.units import (
+    COUNT_UNITS,
+    MASS_UNITS,
+    SPOON_CUP_ML,
+    UNCONVERTIBLE_UNITS,
+    VOLUME_UNITS,
+    BaseUnit,
+    normalize_unit,
+)
 
 if TYPE_CHECKING:
     from app import models
 
 logger = logging.getLogger(__name__)
+
+# Millilitres in each volume unit (metric and spoon/cup)
+ML_PER_UNIT = {**VOLUME_UNITS, **SPOON_CUP_ML}
+
+# Density used when the ingredient has no FDC volume portion (water-like)
+DEFAULT_GRAMS_PER_ML = 1.0
 
 
 @dataclass
@@ -85,6 +99,32 @@ def _to_grams_via_fdc(
     return None
 
 
+def grams_per_ml(ingredient: "models.Ingredient") -> float:
+    """
+    Density of the ingredient, derived from any FDC spoon/cup portion.
+
+    FDC rarely lists ml portions, but tbsp/tsp/cup weights give the density.
+    Falls back to water density when no volume portion exists.
+    """
+    for portion in ingredient.portions or []:
+        ml = SPOON_CUP_ML.get(portion.unit) or VOLUME_UNITS.get(portion.unit)
+        if ml and portion.gram_weight:
+            return portion.gram_weight / ml
+    return DEFAULT_GRAMS_PER_ML
+
+
+def _to_grams_via_volume(
+    quantity: float,
+    unit: str,
+    ingredient: "models.Ingredient",
+) -> float | None:
+    """Convert a volume unit to grams through the ingredient's density."""
+    ml = ML_PER_UNIT.get(unit)
+    if ml is None:
+        return None
+    return quantity * ml * grams_per_ml(ingredient)
+
+
 def convert_to_grams(
     quantity: float,
     unit: str,
@@ -96,7 +136,8 @@ def convert_to_grams(
     Conversion strategy:
     1. Static mass conversion (g, kg)
     2. FDC portion lookup (piece, cup, tbsp, etc.)
-    3. Return None if cannot convert
+    3. Volume via density (ml, l, spoons, cups; FDC-derived or 1 g/ml)
+    4. Return None if cannot convert
 
     Args:
         quantity: The quantity to convert
@@ -120,7 +161,7 @@ def convert_to_grams(
     if grams is not None:
         return grams
 
-    return None
+    return _to_grams_via_volume(quantity, unit, ingredient)
 
 
 def format_quantity(grams: float) -> tuple[float, str]:
@@ -134,18 +175,42 @@ def format_quantity(grams: float) -> tuple[float, str]:
     Returns:
         Tuple of (quantity, unit)
     """
-    if grams >= 1000:
-        kg = grams / 1000
-        # Round to 1 decimal place
-        kg = round(kg, 1)
-        # Remove trailing .0
-        if kg == int(kg):
-            kg = int(kg)
-        return float(kg), "kg"
-    else:
-        # Round to nearest integer for display
-        g = round(grams)
-        return float(g), "g"
+    return _format_metric(grams, "g", "kg")
+
+
+def _format_metric(amount: float, small_unit: str, large_unit: str) -> tuple[float, str]:
+    """Format g/kg or ml/l: whole small units, or large units with one decimal."""
+    if amount >= 1000:
+        large = round(amount / 1000, 1)
+        return float(large), large_unit
+    return float(round(amount)), small_unit
+
+
+def _target_unit(ingredient: "models.Ingredient") -> str:
+    """The unit an ingredient is bought in: its base unit, normalized."""
+    return normalize_unit(ingredient.base_unit) or BaseUnit.G.value
+
+
+def _format_for_ingredient(grams: float, ingredient: "models.Ingredient") -> tuple[float, str]:
+    """
+    Express a gram total in the ingredient's base unit when it can be reached.
+
+    - count base unit (eggs -> piece): needs an FDC portion for that unit
+    - volume base unit (ml/l): uses the ingredient's density
+    - anything else: g/kg
+    """
+    target = _target_unit(ingredient)
+
+    if target in COUNT_UNITS:
+        piece_weight = get_gram_weight(ingredient, target)
+        if piece_weight:
+            return round(grams / piece_weight, 1), target
+
+    if target in VOLUME_UNITS:
+        ml = grams / grams_per_ml(ingredient)
+        return _format_metric(ml, BaseUnit.ML.value, BaseUnit.L.value)
+
+    return format_quantity(grams)
 
 
 def aggregate_quantities(
@@ -156,9 +221,11 @@ def aggregate_quantities(
     Aggregate multiple quantities of the same ingredient into a single result.
 
     Aggregation strategy:
-    1. If all items use the same count unit: sum directly, keep as count
-    2. If all can convert to grams: convert all and sum
-    3. If some cannot convert: sum convertible to grams, keep others separate
+    1. If all items use the same unit: sum directly and keep that unit
+       (unless the ingredient is bought by count and can be converted to it)
+    2. Otherwise convert everything possible to grams and sum
+    3. Express the total in the ingredient's base unit where possible
+    4. Keep anything that cannot be converted as separate lines
 
     Args:
         items: List of (quantity, unit) pairs for the same ingredient
@@ -167,99 +234,59 @@ def aggregate_quantities(
     Returns:
         AggregatedItem with main quantity/unit and any unconvertible items
     """
-    if not items:
+
+    def result(quantity: float, unit: str, unconvertible: list[QuantityUnit]) -> AggregatedItem:
         return AggregatedItem(
             ingredient_id=ingredient.id,
             ingredient_name=ingredient.name,
             category=ingredient.category,
-            main_quantity=0,
-            main_unit="g",
-        )
-
-    # Separate items by convertibility
-    convertible_to_grams: list[tuple[float, str]] = []  # (original_qty, unit)
-    count_items: dict[str, float] = {}  # unit -> total quantity
-    unconvertible: list[QuantityUnit] = []
-
-    for item in items:
-        unit = item.unit
-        qty = item.quantity
-
-        # Check if unconvertible
-        if unit in UNCONVERTIBLE_UNITS:
-            unconvertible.append(item)
-            continue
-
-        # Check if it's a count unit
-        if unit in COUNT_UNITS:
-            count_items[unit] = count_items.get(unit, 0) + qty
-            continue
-
-        # Check if we can convert to grams
-        grams = convert_to_grams(qty, unit, ingredient)
-        if grams is not None:
-            convertible_to_grams.append((grams, unit))
-        else:
-            unconvertible.append(item)
-
-    # Determine aggregation strategy
-
-    # Combine unconvertible items with identical units to avoid duplicate lines
-    # (e.g., 1 tsp + 1 tsp should become a single 2 tsp item if we can't convert).
-    unconvertible = _combine_same_units(unconvertible)
-
-    # Case 1: All items are the same count unit
-    if len(count_items) == 1 and not convertible_to_grams:
-        unit, total = list(count_items.items())[0]
-        return AggregatedItem(
-            ingredient_id=ingredient.id,
-            ingredient_name=ingredient.name,
-            category=ingredient.category,
-            main_quantity=total,
+            main_quantity=quantity,
             main_unit=unit,
             unconvertible=unconvertible,
         )
 
-    # Case 2: Mix of count and mass/volume - try to convert count to grams
-    total_grams = sum(g for g, _ in convertible_to_grams)
+    if not items:
+        return result(0, BaseUnit.G.value, [])
 
-    for unit, qty in count_items.items():
-        grams = _to_grams_via_fdc(qty, unit, ingredient)
-        if grams is not None:
-            total_grams += grams
-        else:
-            # Cannot convert this count unit - keep separate
-            unconvertible.append(QuantityUnit(quantity=qty, unit=unit))
+    # Pinch / to taste / as needed are never summed with anything else
+    measurable = _combine_same_units([i for i in items if i.unit not in UNCONVERTIBLE_UNITS])
+    unconvertible = _combine_same_units([i for i in items if i.unit in UNCONVERTIBLE_UNITS])
 
-    # Format the result
-    if total_grams > 0:
-        display_qty, display_unit = format_quantity(total_grams)
-        return AggregatedItem(
-            ingredient_id=ingredient.id,
-            ingredient_name=ingredient.name,
-            category=ingredient.category,
-            main_quantity=display_qty,
-            main_unit=display_unit,
-            unconvertible=unconvertible,
-        )
-
-    # No grams at all - return first unconvertible item as main
-    if unconvertible:
+    if not measurable:
         first = unconvertible.pop(0)
-        return AggregatedItem(
-            ingredient_id=ingredient.id,
-            ingredient_name=ingredient.name,
-            category=ingredient.category,
-            main_quantity=first.quantity,
-            main_unit=first.unit,
-            unconvertible=unconvertible,
-        )
+        return result(first.quantity, first.unit, unconvertible)
 
-    # Edge case: no items at all
-    return AggregatedItem(
-        ingredient_id=ingredient.id,
-        ingredient_name=ingredient.name,
-        category=ingredient.category,
-        main_quantity=0,
-        main_unit="g",
-    )
+    target = _target_unit(ingredient)
+
+    # Case 1: a single non-mass unit - keep it, it is the most readable form
+    # (2 tsp, 3 cans). Count-bought ingredients still convert: 2 tbsp eggs -> piece.
+    # Mass goes through grams so it is shown as g/kg or in the base unit.
+    if len(measurable) == 1:
+        only = measurable[0]
+        converts = only.unit in MASS_UNITS or (
+            target in COUNT_UNITS
+            and only.unit != target
+            and get_gram_weight(ingredient, target) is not None
+        )
+        grams = convert_to_grams(only.quantity, only.unit, ingredient) if converts else None
+        if grams is None:
+            return result(only.quantity, only.unit, unconvertible)
+        quantity, unit = _format_for_ingredient(grams, ingredient)
+        return result(quantity, unit, unconvertible)
+
+    # Case 2: mixed units - sum in grams, keep what cannot convert separate
+    total_grams = 0.0
+    leftovers: list[QuantityUnit] = []
+    for item in measurable:
+        grams = convert_to_grams(item.quantity, item.unit, ingredient)
+        if grams is None:
+            leftovers.append(item)
+        else:
+            total_grams += grams
+
+    if total_grams <= 0:
+        first = leftovers.pop(0)
+        return result(first.quantity, first.unit, leftovers + unconvertible)
+
+    quantity, unit = _format_for_ingredient(total_grams, ingredient)
+    return result(quantity, unit, leftovers + unconvertible)

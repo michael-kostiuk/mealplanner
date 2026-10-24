@@ -247,3 +247,55 @@ def test_saving_plan_with_changed_recipe_clears_leftover(client, db_session):
     db_session.commit()
 
     assert _put_plan(client, [1, 2]) == [False, False]
+
+
+def _generate_two_lists(client, db_session):
+    _plan_with_entries(db_session, 4, [(0, "dinner", False)])
+    first = client.get("/meal-plans/1/shopping-list").json()
+    second = client.get("/meal-plans/1/shopping-list").json()
+    return first, second
+
+
+def test_shopping_lists_are_newest_first_and_filter_by_meal_plan(client, db_session):
+    first, second = _generate_two_lists(client, db_session)
+
+    lists = client.get("/shopping-lists/").json()
+    assert [sl["id"] for sl in lists] == [second["id"], first["id"]]
+    assert lists[0]["meal_plan"]["id"] == 1
+    assert lists[0]["meal_plan"]["start_date"].startswith("2026-10-05")
+
+    assert len(client.get("/shopping-lists/?meal_plan_id=1").json()) == 2
+    assert client.get("/shopping-lists/?meal_plan_id=999").json() == []
+
+
+def test_batch_status_update_only_touches_own_items(client, db_session):
+    first, second = _generate_two_lists(client, db_session)
+    own_id = first["items"][0]["id"]
+    foreign_id = second["items"][0]["id"]
+
+    resp = client.patch(
+        f"/shopping-lists/{first['id']}/items",
+        json={
+            "items": [
+                {"id": own_id, "status": "purchased"},
+                {"id": foreign_id, "status": "purchased"},
+            ]
+        },
+    )
+
+    assert resp.status_code == 200
+    assert resp.json() == [{"id": own_id, "status": "purchased"}]
+    assert client.get(f"/shopping-lists/{first['id']}").json()["items"][0]["status"] == "purchased"
+    assert client.get(f"/shopping-lists/{second['id']}").json()["items"][0]["status"] == "pending"
+
+
+def test_batch_status_update_rejects_unknown_status(client, db_session):
+    first, _ = _generate_two_lists(client, db_session)
+    item_id = first["items"][0]["id"]
+
+    resp = client.patch(
+        f"/shopping-lists/{first['id']}/items", json={"items": [{"id": item_id, "status": "done"}]}
+    )
+
+    assert resp.status_code == 422
+    assert client.patch("/shopping-lists/999/items", json={"items": []}).status_code == 404

@@ -126,3 +126,14 @@ def test_real_seed_has_27_recipes_and_varied_week(demo_env, monkeypatch):
         assert db.query(models.Recipe).count() == 27
         plan = db.query(models.MealPlan).one()
         assert len({e.recipe_id for e in plan.entries if e.recipe_id}) >= 10
+
+
+def test_deleting_a_shopping_list_removes_its_items(demo_env):
+    # Without SQLite foreign keys the items stayed and a reused list id picked them up
+    rebuild_demo_db()
+    with get_demo_session_factory()() as db:
+        shopping_list = db.query(models.ShoppingList).first()
+        assert shopping_list.items
+        db.delete(shopping_list)
+        db.commit()
+        assert db.query(models.ShoppingListItem).count() == 0

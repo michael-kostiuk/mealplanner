@@ -48,6 +48,13 @@ VOLUME_UNITS = {
     BaseUnit.L.value: 1000.0,
 }
 
+# Spoon/cup volumes in ml (US customary, as used by FDC portions)
+SPOON_CUP_ML = {
+    BaseUnit.TSP.value: 4.929,
+    BaseUnit.TBSP.value: 14.787,
+    BaseUnit.CUP.value: 236.588,
+}
+
 
 _UNIT_ALIASES = {
     # Mass

@@ -187,10 +187,18 @@ class ShoppingListCreate(ShoppingListBase):
     pass
 
 
+class MealPlanSummary(BaseModel):
+    id: int
+    start_date: datetime
+    end_date: datetime
+    model_config = ConfigDict(from_attributes=True)
+
+
 class ShoppingList(ShoppingListBase):
     id: int
     created_at: datetime
     items: list[ShoppingListItem]
+    meal_plan: MealPlanSummary | None = None
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -228,6 +236,18 @@ class Favorite(FavoriteBase):
 
 class ShoppingListItemUpdate(BaseModel):
     status: str | None = None
+
+
+ShoppingListItemStatusValue = Literal["pending", "purchased"]
+
+
+class ShoppingListItemStatus(BaseModel):
+    id: int
+    status: ShoppingListItemStatusValue
+
+
+class ShoppingListItemsStatusUpdate(BaseModel):
+    items: list[ShoppingListItemStatus] = Field(max_length=500)
 
 
 from app.services.recipe_import.schemas import (
