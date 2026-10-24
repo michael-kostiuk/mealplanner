@@ -3,7 +3,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import sessionmaker
 
@@ -54,7 +54,17 @@ def new_generation() -> Generation:
     path = base.with_name(f"{base.stem}-{time.time_ns()}{base.suffix}")
     # Requests are served from a thread pool, so connections are shared across threads
     engine = create_engine(f"sqlite:///{path}", connect_args={"check_same_thread": False})
+    event.listen(engine, "connect", _enable_foreign_keys)
     return Generation(path, engine, sessionmaker(autocommit=False, autoflush=False, bind=engine))
+
+
+def _enable_foreign_keys(dbapi_connection, _connection_record) -> None:
+    """SQLite ignores foreign keys unless asked per connection. The models rely on
+    ON DELETE CASCADE (passive_deletes), so without this deleting a shopping list
+    leaves its items behind and a reused id picks them up."""
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
 def install_generation(gen: Generation) -> None:
