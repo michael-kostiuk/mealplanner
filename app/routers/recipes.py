@@ -70,6 +70,8 @@ async def list_recipes(
     if max_calories:
         query = query.filter(models.Recipe.calories <= max_calories)
 
+    # A fixed order keeps pages stable: without it "Load more" can repeat or skip recipes
+    query = query.order_by(models.Recipe.created_at.desc(), models.Recipe.id.desc())
     return query.offset(skip).limit(limit).all()
 
 

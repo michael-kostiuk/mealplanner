@@ -6,6 +6,7 @@ and aggregate shopping list items using FDC portion data.
 """
 
 import logging
+import math
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
@@ -213,6 +214,20 @@ def _format_for_ingredient(grams: float, ingredient: "models.Ingredient") -> tup
     return format_quantity(grams)
 
 
+def _as_count(
+    grams: float, items: list[QuantityUnit], ingredient: "models.Ingredient"
+) -> tuple[float, str] | None:
+    """The gram total in the first count unit among `items`, when its piece weight is known."""
+    if _target_unit(ingredient) in VOLUME_UNITS:
+        return None
+    for item in items:
+        if item.unit in COUNT_UNITS:
+            piece_weight = get_gram_weight(ingredient, item.unit)
+            if piece_weight:
+                return math.ceil(grams / piece_weight * 2) / 2, item.unit
+    return None
+
+
 def aggregate_quantities(
     items: list[QuantityUnit],
     ingredient: "models.Ingredient",
@@ -287,6 +302,12 @@ def aggregate_quantities(
     if total_grams <= 0:
         first = leftovers.pop(0)
         return result(first.quantity, first.unit, leftovers + unconvertible)
+
+    # A product some recipe counts in pieces (1 banana + 140 g banana) is bought in pieces:
+    # round up to half a piece so the list says "2.5 pcs", not "258 g"
+    count = _as_count(total_grams, measurable, ingredient)
+    if count is not None:
+        return result(count[0], count[1], leftovers + unconvertible)
 
     quantity, unit = _format_for_ingredient(total_grams, ingredient)
     return result(quantity, unit, leftovers + unconvertible)
