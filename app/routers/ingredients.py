@@ -381,6 +381,10 @@ async def estimate_ingredient_nutrition(
         raise HTTPException(status_code=500, detail=e.message) from e
 
 
+# Categories where an all-zero nutrition row is correct, not missing (salt, water, spice mixes)
+ZERO_CALORIE_CATEGORIES = ("spices", "beverages")
+
+
 @router.post("/estimate-missing", response_model=schemas.IngredientBulkEstimateResponse)
 async def estimate_missing_ingredients(
     db: Session = Depends(get_db),
@@ -388,11 +392,13 @@ async def estimate_missing_ingredients(
     """
     Estimate nutrition for all ingredients where all nutrition fields are zero or null.
     Processes sequentially to avoid rate limits, using FDC first then AI fallback.
+    Spices and drinks are skipped: zero is a real value for salt, water and seasoning mixes.
     """
     total_count = db.query(func.count(models.Ingredient.id)).scalar() or 0
     missing = (
         db.query(models.Ingredient)
         .filter(
+            func.lower(models.Ingredient.category).notin_(ZERO_CALORIE_CATEGORIES),
             func.coalesce(models.Ingredient.calories, 0) == 0,
             func.coalesce(models.Ingredient.protein, 0) == 0,
             func.coalesce(models.Ingredient.carbs, 0) == 0,

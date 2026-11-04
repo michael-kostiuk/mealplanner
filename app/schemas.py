@@ -14,6 +14,11 @@ def _validate_base_unit(value):
     return normalized
 
 
+def _normalize_category(value):
+    """Categories are lowercase keys the UI translates ("Dairy" and "dairy" are one category)."""
+    return value.strip().lower() if isinstance(value, str) else value
+
+
 class IngredientBase(BaseModel):
     name: str
     category: str
@@ -27,6 +32,11 @@ class IngredientBase(BaseModel):
     @classmethod
     def _normalize_base_unit(cls, value):
         return _validate_base_unit(value)
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def _normalize_category(cls, value):
+        return _normalize_category(value)
 
     @field_serializer("calories", "protein", "carbs", "fats")
     def _serialize_macros(self, value: float):
@@ -49,6 +59,11 @@ class IngredientCreate(BaseModel):
     @classmethod
     def _normalize_base_unit(cls, value):
         return _validate_base_unit(value)
+
+    @field_validator("category", mode="before")
+    @classmethod
+    def _normalize_category(cls, value):
+        return _normalize_category(value)
 
 
 class Ingredient(IngredientBase):
@@ -101,6 +116,11 @@ class RecipeBase(BaseModel):
     dinner_weight: float
     image_url: str | None = None
 
+    @field_validator("category", mode="before")
+    @classmethod
+    def _normalize_category(cls, value):
+        return _normalize_category(value)
+
 
 class RecipeCreate(RecipeBase):
     ingredients: list[RecipeIngredientCreate]
@@ -134,6 +154,7 @@ class MealPlanEntry(MealPlanEntryBase):
 
 
 class MealPlanBase(BaseModel):
+    name: str | None = Field(default=None, max_length=100)
     start_date: datetime
     end_date: datetime
     people_count: int

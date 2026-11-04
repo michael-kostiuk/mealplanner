@@ -97,6 +97,8 @@ class MealPlan(Base):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
+    # Optional label to tell plans for the same week apart ("Light week", "Guests")
+    name = Column(String(100), nullable=True)
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     people_count = Column(Integer, default=1)

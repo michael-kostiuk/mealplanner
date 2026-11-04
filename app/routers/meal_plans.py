@@ -56,6 +56,7 @@ async def create_meal_plan(
 ):
     db_meal_plan = models.MealPlan(
         user_id=user.id,
+        name=meal_plan.name,
         start_date=meal_plan.start_date,
         end_date=meal_plan.end_date,
         people_count=meal_plan.people_count,
@@ -176,7 +177,8 @@ async def update_meal_plan(
     db_meal_plan = _get_owned_plan(db, meal_plan_id, user)
 
     # Update meal plan attributes
-    for key, value in meal_plan.model_dump(exclude={"entries"}).items():
+    # exclude_unset: a client that doesn't send `name` keeps the plan's current name
+    for key, value in meal_plan.model_dump(exclude={"entries"}, exclude_unset=True).items():
         setattr(db_meal_plan, key, value)
 
     # Update entries
