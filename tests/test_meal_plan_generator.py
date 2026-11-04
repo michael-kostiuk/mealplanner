@@ -623,11 +623,21 @@ def test_recipe_overflowing_plan_end_by_more_than_one_meal_is_excluded(db_sessio
     assert generator._overflowing_recipe_ids([big], 0, "dinner") == set()
 
 
-def test_no_leftovers_when_servings_match_people(db_session, test_user):
-    r = _batch_recipe(db_session, "Pair", 3, {"dinner": 1.0})
+def test_dinner_is_cooked_for_two_meals_even_for_small_recipes(db_session, test_user):
+    """A 1-serving dinner for 2 people is still cooked once for this and the next dinner."""
+    r = _batch_recipe(db_session, "Single", 1, {"dinner": 1.0})
     generator = _generator_for(db_session, people_count=2, days=3)
 
     generator._pick_meal("dinner", [r], 1000, 0.25, 0, set())
+
+    assert generator.leftover_slots == {(1, "dinner"): r}
+
+
+def test_no_breakfast_leftovers_when_servings_match_people(db_session, test_user):
+    r = _batch_recipe(db_session, "Pair", 3, {"breakfast": 1.0})
+    generator = _generator_for(db_session, people_count=2, days=3)
+
+    generator._pick_meal("breakfast", [r], 500, 0.2, 0, set())
 
     assert generator.leftover_slots == {}
 
@@ -649,7 +659,10 @@ def test_generated_plan_marks_leftover_entries(db_session, test_user):
     dinners = sorted((e for e in plan.entries if e.meal_type == "dinner"), key=lambda e: e.date)
     assert [e.recipe_id for e in dinners] == [plov.id] * 4
     assert [e.is_leftover for e in dinners] == [False, True, False, True]
-    assert not any(e.is_leftover for e in plan.entries if e.meal_type != "dinner")
+    assert not any(e.is_leftover for e in plan.entries if e.meal_type == "breakfast")
+    # Lunches are cooked for two days too, the second day being leftovers
+    lunches = sorted((e for e in plan.entries if e.meal_type == "lunch"), key=lambda e: e.date)
+    assert [e.is_leftover for e in lunches] == [False, True, False, True]
 
 
 def test_breakfast_leftovers_stay_at_breakfast(db_session, test_user):

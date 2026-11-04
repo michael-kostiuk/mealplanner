@@ -21,6 +21,9 @@ class MealPlanGenerator:
     }
     # How many meals' worth of leftovers may spill past the end of the plan.
     MAX_LEFTOVER_OVERFLOW = 1
+    # Lunches and dinners are cooked for at least this many meals, so one dish covers a
+    # couple of days (the extra portions become leftovers; the shopping list buys for them)
+    MIN_BATCH_MEALS = {"lunch": 2, "dinner": 2}
 
     def __init__(self, db: Session):
         self.db = db
@@ -169,20 +172,22 @@ class MealPlanGenerator:
 
             current_date += timedelta(days=1)
 
-    def _leftover_meal_count(self, recipe: models.Recipe) -> int:
-        """Whole meals for the group left over after the first one is eaten."""
-        return max(recipe.servings // self.people_count - 1, 0)
+    def _leftover_meal_count(self, recipe: models.Recipe, meal_type: str) -> int:
+        """Whole meals for the group left over after the first one is eaten: what the
+        recipe yields, but at least the minimum batch for lunches and dinners."""
+        from_servings = max(recipe.servings // self.people_count - 1, 0)
+        return max(from_servings, self.MIN_BATCH_MEALS.get(meal_type, 1) - 1)
 
     def _find_leftover_slots(
         self, recipe: models.Recipe, day: int, meal_type: str
     ) -> list[tuple[int, str]]:
-        """Next free slots after (day, meal_type), in date order, where the leftovers can be
-        eaten: its own meal type, or a compatible one the recipe has a weight for."""
-        needed = self._leftover_meal_count(recipe)
+        """Next free slots from the following day on, in date order, where the leftovers can
+        be eaten: its own meal type, or a compatible one the recipe has a weight for. The
+        same dish is never eaten twice on one day."""
+        needed = self._leftover_meal_count(recipe, meal_type)
         slots: list[tuple[int, str]] = []
-        start = self.DAILY_MEAL_TYPES.index(meal_type) + 1
-        for d in range(day, self.days):
-            for mt in self.DAILY_MEAL_TYPES[start if d == day else 0 :]:
+        for d in range(day + 1, self.days):
+            for mt in self.DAILY_MEAL_TYPES:
                 if len(slots) == needed:
                     return slots
                 fits = mt == meal_type or (
@@ -200,7 +205,8 @@ class MealPlanGenerator:
         return {
             r.id
             for r in recipes
-            if self._leftover_meal_count(r) - len(self._find_leftover_slots(r, day, meal_type))
+            if self._leftover_meal_count(r, meal_type)
+            - len(self._find_leftover_slots(r, day, meal_type))
             > self.MAX_LEFTOVER_OVERFLOW
         }
 
@@ -228,8 +234,11 @@ class MealPlanGenerator:
         recipe = self._select_recipe(
             meal_type, recipes, target_calories, max_deviation, exclude_ids=exclude_ids
         )
-        for slot in self._find_leftover_slots(recipe, day, meal_type):
+        slots = self._find_leftover_slots(recipe, day, meal_type)
+        for slot in slots:
             self.leftover_slots[slot] = recipe
+        # Leftover meals count as uses, so a dish isn't cooked again while others are left
+        self.used_recipes[recipe.id] += len(slots)
         return recipe
 
     def _load_recent_recipe_ids(self, user_id: int, start_date: datetime) -> set[int]:

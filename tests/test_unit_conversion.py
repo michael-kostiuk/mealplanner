@@ -238,7 +238,8 @@ class TestScenario2CountToMass:
     """Scenario 2: Count unit to mass via FDC."""
 
     def test_piece_plus_grams(self, ingredient_with_portions):
-        """1 piece tomato + 300g tomato = 423g (medium tomato = 123g)."""
+        """1 piece tomato + 300g tomato = 423g = 3.4 tomatoes (123 g each): bought in
+        pieces, rounded up to half a piece."""
         items = [
             QuantityUnit(quantity=1, unit="piece"),
             QuantityUnit(quantity=300, unit="g"),
@@ -246,9 +247,9 @@ class TestScenario2CountToMass:
 
         result = aggregate_quantities(items, ingredient_with_portions)
 
-        # 1 * 123g + 300g = 423g
-        assert result.main_quantity == 423
-        assert result.main_unit == "g"
+        # 1 * 123g + 300g = 423g -> 3.44 pieces -> 3.5
+        assert result.main_quantity == 3.5
+        assert result.main_unit == "piece"
         assert len(result.unconvertible) == 0
 
 
@@ -294,7 +295,7 @@ class TestScenario4bMixedCountAndMass:
     """Scenario 4b: Mixed count and mass converts via FDC."""
 
     def test_cans_plus_grams(self, ingredient_with_can_portion):
-        """2 cans + 400g = 1.2kg (1 can = 400g)."""
+        """2 cans + 400g = 1.2kg = 3 cans (1 can = 400g): bought in cans."""
         items = [
             QuantityUnit(quantity=2, unit="can"),
             QuantityUnit(quantity=400, unit="g"),
@@ -302,9 +303,9 @@ class TestScenario4bMixedCountAndMass:
 
         result = aggregate_quantities(items, ingredient_with_can_portion)
 
-        # 2 * 400g + 400g = 1200g = 1.2kg
-        assert result.main_quantity == 1.2
-        assert result.main_unit == "kg"
+        # 2 * 400g + 400g = 1200g = 3 cans
+        assert result.main_quantity == 3
+        assert result.main_unit == "can"
         assert len(result.unconvertible) == 0
 
 

@@ -201,12 +201,18 @@ def test_shopping_list_buys_leftover_without_cooked_batch(client, db_session):
     assert _rice_quantity(client, db_session) == 400
 
 
-def test_shopping_list_leftovers_beyond_batch_are_bought(client, db_session):
-    # 4 servings cover the cooked meal + 1 leftover; the 2nd leftover needs a new batch
+def test_shopping_list_batch_grows_for_planned_leftovers(client, db_session):
+    # 4 servings cover the cooked meal + 1 leftover; a 2nd leftover makes the pot 1.5x
     _plan_with_entries(
         db_session, 4, [(0, "dinner", False), (1, "dinner", True), (2, "dinner", True)]
     )
-    assert _rice_quantity(client, db_session) == 800
+    assert _rice_quantity(client, db_session) == 600
+
+
+def test_shopping_list_small_recipe_cooked_for_its_leftover(client, db_session):
+    # 1-serving recipe for 2 people, eaten twice: one pot of 4 portions (1.6 kg of rice)
+    _plan_with_entries(db_session, 1, [(0, "dinner", False), (1, "lunch", True)])
+    assert _rice_quantity(client, db_session) == 1.6
 
 
 def _put_plan(client, recipe_ids):
