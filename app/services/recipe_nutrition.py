@@ -22,14 +22,22 @@ from app.units import (
 if TYPE_CHECKING:
     from app import models
 
-# A piece of something with no known weight (no FDC portion) counts as a medium one
+# A piece of something with no known weight (no FDC portion) counts as a medium one; a
+# piece of a spice (a peppercorn, a cinnamon stick) weighs next to nothing
 DEFAULT_PIECE_GRAMS = 100.0
+SPICE_PIECE_GRAMS = 1.0
+
+
+def _default_piece_grams(ingredient: "models.Ingredient") -> float:
+    if (ingredient.category or "").strip().lower() == "spices":
+        return SPICE_PIECE_GRAMS
+    return DEFAULT_PIECE_GRAMS
 
 
 def _grams(quantity: float, unit: str, ingredient: "models.Ingredient") -> float:
     grams = convert_to_grams(quantity, unit, ingredient)
     if grams is None and unit in COUNT_UNITS:
-        grams = quantity * DEFAULT_PIECE_GRAMS
+        grams = quantity * _default_piece_grams(ingredient)
     return grams or 0.0
 
 
@@ -44,7 +52,7 @@ def _in_base_units(quantity: float, unit: str, ingredient: "models.Ingredient") 
             ml = _grams(quantity, unit, ingredient) / grams_per_ml(ingredient)
         return ml / VOLUME_UNITS[base]
     if base in COUNT_UNITS:
-        piece = get_gram_weight(ingredient, base) or DEFAULT_PIECE_GRAMS
+        piece = get_gram_weight(ingredient, base) or _default_piece_grams(ingredient)
         return _grams(quantity, unit, ingredient) / piece
     return _grams(quantity, unit, ingredient) / MASS_UNITS.get(base, 1.0)
 

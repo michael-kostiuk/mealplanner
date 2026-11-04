@@ -1,11 +1,15 @@
 from app import models
-from app.services.recipe_nutrition import DEFAULT_PIECE_GRAMS, compute_recipe_nutrition
+from app.services.recipe_nutrition import (
+    DEFAULT_PIECE_GRAMS,
+    SPICE_PIECE_GRAMS,
+    compute_recipe_nutrition,
+)
 
 
-def _ingredient(name, calories, base_unit="g"):
+def _ingredient(name, calories, base_unit="g", category="vegetables"):
     return models.Ingredient(
         name=name,
-        category="vegetables",
+        category=category,
         base_unit=base_unit,
         calories=calories,
         protein=10,
@@ -43,3 +47,10 @@ def test_volume_ingredient_counts_millilitres():
 def test_nothing_to_compute_from():
     salt = _ingredient("Salt", 0)
     assert compute_recipe_nutrition([_line(salt, 0, "to taste")], servings=4) is None
+
+
+def test_spice_piece_weighs_a_gram():
+    """3 peppercorns are a few grams of pepper, not 300 g."""
+    pepper = _ingredient("Black pepper", 250, category="spices")
+    nutrition = compute_recipe_nutrition([_line(pepper, 3, "piece")], servings=1)
+    assert nutrition["calories"] == round(3 * SPICE_PIECE_GRAMS * 250 / 100)
