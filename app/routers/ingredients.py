@@ -325,6 +325,28 @@ async def create_ingredient(
     return db_ingredient
 
 
+@router.put("/{ingredient_id}", response_model=schemas.Ingredient)
+async def update_ingredient(
+    ingredient_id: int,
+    ingredient_update: schemas.IngredientBase,
+    db: Session = Depends(get_db),
+):
+    """Edit an ingredient's name, category, base unit and nutrition (per 100 base_unit).
+
+    The FDC link and its portions are kept, so unit conversion keeps working after a rename.
+    """
+    ingredient = db.query(models.Ingredient).filter(models.Ingredient.id == ingredient_id).first()
+    if not ingredient:
+        raise HTTPException(status_code=404, detail="Ingredient not found")
+
+    for field, value in ingredient_update.model_dump(mode="json").items():
+        setattr(ingredient, field, value)
+
+    db.commit()
+    db.refresh(ingredient)
+    return ingredient
+
+
 @router.post("/{ingredient_id}/estimate-nutrition", response_model=schemas.Ingredient)
 async def estimate_ingredient_nutrition(
     ingredient_id: int,
