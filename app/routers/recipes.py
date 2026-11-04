@@ -2,7 +2,7 @@ import logging
 import time
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
+from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy import or_
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -11,6 +11,8 @@ from ..auth.deps import AuthContext, get_auth
 from ..config import get_settings
 from ..database import get_db, get_session_factory
 from ..services.recipe_from_image import recipe_from_image_service
+from ..services.recipe_image_generator import generate_recipe_image
+from ..services.recipe_nutrition import compute_recipe_nutrition
 
 logger = logging.getLogger(__name__)
 
@@ -75,8 +77,27 @@ async def list_recipes(
     return query.offset(skip).limit(limit).all()
 
 
+def _apply_computed_nutrition(db: Session, db_recipe: models.Recipe) -> None:
+    """Per-serving nutrition follows the ingredients and servings, so it is never stale.
+    The values sent by the client stay when nothing can be computed, e.g. when none of the
+    ingredients has nutrition data yet."""
+    nutrition = compute_recipe_nutrition(db_recipe.ingredients, db_recipe.servings)
+    if nutrition is None or nutrition["calories"] <= 0:
+        return
+    for key, value in nutrition.items():
+        setattr(db_recipe, key, value)
+    db.commit()
+    db.refresh(db_recipe)
+
+
 @router.post("/", response_model=schemas.Recipe)
-async def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_db)):
+async def create_recipe(
+    recipe: schemas.RecipeCreate,
+    background_tasks: BackgroundTasks,
+    auth: Annotated[AuthContext, Depends(get_auth)],
+    session_factory: Annotated[sessionmaker, Depends(get_session_factory)],
+    db: Session = Depends(get_db),
+):
     db_recipe = models.Recipe(
         name=recipe.name,
         servings=recipe.servings,
@@ -106,6 +127,12 @@ async def create_recipe(recipe: schemas.RecipeCreate, db: Session = Depends(get_
 
     db.commit()
     db.refresh(db_recipe)
+    _apply_computed_nutrition(db, db_recipe)
+
+    # A recipe saved without a photo gets one drawn in the style of the others (not in the
+    # demo, where it would spend the AI quota for visitors)
+    if not db_recipe.image_url and auth.mode != "demo":
+        background_tasks.add_task(generate_recipe_image, db_recipe.id, session_factory)
     return db_recipe
 
 
@@ -222,6 +249,7 @@ async def update_recipe(
 
     db.commit()
     db.refresh(db_recipe)
+    _apply_computed_nutrition(db, db_recipe)
     return db_recipe
 
 
